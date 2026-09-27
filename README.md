@@ -22,8 +22,9 @@ not Bluetooth LE, so the app talks to them through **Web Serial** (Chrome 117+),
 Pair the printer in the OS first, then click **Bluetooth** and pick it.
 
 - Verified: Android Chrome prints over Bluetooth.
-- macOS: Chrome currently fails to open the Bluetooth serial channel ("Failed to open serial port")
-  after the first session following pairing; use USB there for now.
+- macOS: works right after pairing (connect + print confirmed), but later reconnects fail with
+  "Failed to open serial port" until the printer is forgotten and paired again. Looks like a macOS
+  Bluetooth serial issue (unresolved); use USB on the Mac, or re-pair.
 - Protocol (from the Katasymbol Android app): `7E 5A` framed commands and replies, 512-byte data
   frames, START argument 0, up to 8 buffers per LZMA chunk. See `src/lib/printer/families/t5080-bt.ts`.
 - Add `?debug` to the URL to see a copyable protocol log.
