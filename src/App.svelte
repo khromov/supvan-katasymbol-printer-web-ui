@@ -5,6 +5,9 @@
 	import Stage from './lib/components/Stage.svelte';
 	import Inspector from './lib/components/Inspector.svelte';
 	import PrintPanel from './lib/components/PrintPanel.svelte';
+	import QuickMode from './lib/components/QuickMode.svelte';
+	import ModeChooser from './lib/components/ModeChooser.svelte';
+	import { mode } from './lib/stores/mode.svelte';
 	import { printer } from './lib/stores/printer.svelte';
 	import { editor } from './lib/stores/editor.svelte';
 
@@ -18,18 +21,26 @@
 	});
 </script>
 
-<div class="app">
-	<Header />
-	<main>
-		<AddPanel />
-		<Stage />
-		<aside class="right">
-			<Inspector />
-			<hr />
-			<PrintPanel />
-		</aside>
-	</main>
-</div>
+{#if mode.mode === 'quick'}
+	<QuickMode />
+{:else}
+	<div class="app">
+		<Header />
+		<main>
+			<AddPanel />
+			<Stage />
+			<aside class="right">
+				<Inspector />
+				<hr />
+				<PrintPanel />
+			</aside>
+		</main>
+	</div>
+{/if}
+
+{#if mode.choosing}
+	<ModeChooser />
+{/if}
 
 <style>
 	.app {

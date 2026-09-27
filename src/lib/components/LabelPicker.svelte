@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Check, ScanLine, Search, X } from 'lucide-static';
+	import { Check, ChevronDown, ScanLine, Search, X } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import { editor } from '../stores/editor.svelte';
 	import { printer } from '../stores/printer.svelte';
@@ -12,6 +12,7 @@
 	let query = $state('');
 	let customW = $state(40);
 	let customH = $state(30);
+	let showManual = $state(false);
 
 	const family = $derived(printer.family);
 
@@ -92,33 +93,44 @@
 	}
 </script>
 
-{#if !printer.connected}
-	<label class="field family">
-		<span>Designing for</span>
-		<select class="input" value={printer.family} onchange={(e) => printer.setPreferredFamily(e.currentTarget.value as Family)}>
-			{#each Object.entries(FAMILY_NAMES) as [value, name]}<option {value}>{name}</option>{/each}
-		</select>
-	</label>
-{/if}
-<div class="current">
-	<div class="swatch-box">
-		<div class="swatch" class:rounded={labelShape(editor.label) === 'rounded'} class:round={labelShape(editor.label) === 'round'} style={swatch(editor.label, 36)}></div>
-	</div>
-	<div class="info">
-		<div class="title">{labelTitle(editor.label)}</div>
-		<div class="sub">
-			{typeName(editor.label)}{editor.label.gap ? ` · ${editor.label.gap} mm gap` : ''}
-			{#if detected && detected.id === editor.label.id}
-				<span class="pill ok tiny"><Icon svg={ScanLine} size={12} /> In printer</span>
-			{/if}
+{#if printer.connected}
+	<div class="current">
+		<div class="swatch-box">
+			<div class="swatch" class:rounded={labelShape(editor.label) === 'rounded'} class:round={labelShape(editor.label) === 'round'} style={swatch(editor.label, 36)}></div>
 		</div>
+		<div class="info">
+			<div class="title">{labelTitle(editor.label)}</div>
+			<div class="sub">
+				{typeName(editor.label)}{editor.label.gap ? ` · ${editor.label.gap} mm gap` : ''}
+				{#if detected && detected.id === editor.label.id}
+					<span class="pill ok tiny"><Icon svg={ScanLine} size={12} /> In printer</span>
+				{/if}
+			</div>
+		</div>
+		<button class="btn sm" onclick={open}>Change</button>
 	</div>
-	<button class="btn sm" onclick={open}>Change</button>
-</div>
-{#if detected && detected.id !== editor.label.id}
-	<button class="detected" onclick={() => editor.setLabel($state.snapshot(detected) as LabelSpec, true)}>
-		<Icon svg={ScanLine} size={14} /> Printer has <b>{labelTitle(detected)}</b> loaded. Use it
+	{#if detected && detected.id !== editor.label.id}
+		<button class="detected" onclick={() => editor.setLabel($state.snapshot(detected) as LabelSpec, true)}>
+			<Icon svg={ScanLine} size={14} /> Printer has <b>{labelTitle(detected)}</b> loaded. Use it
+		</button>
+	{/if}
+{:else}
+	<!-- Before connecting the label is only a starting point (connecting detects it), so it stays folded. -->
+	<button class="summary" onclick={() => (showManual = !showManual)} aria-expanded={showManual} title={labelTitle(editor.label)}>
+		<span class="summary-text">Label: <b>{editor.label.lengthMm} × {editor.label.widthMm} mm</b> · auto-detected on connect</span>
+		<span class="chev" class:open={showManual}><Icon svg={ChevronDown} size={13} /></span>
 	</button>
+	{#if showManual}
+		<div class="manual">
+			<label class="field">
+				<span>Printer type</span>
+				<select class="input" value={printer.family} onchange={(e) => printer.setPreferredFamily(e.currentTarget.value as Family)}>
+					{#each Object.entries(FAMILY_NAMES) as [value, name]}<option {value}>{name}</option>{/each}
+				</select>
+			</label>
+			<button class="btn sm" onclick={open}>Choose label size…</button>
+		</div>
+	{/if}
 {/if}
 
 <dialog bind:this={dialog} onclick={(e) => e.target === dialog && dialog.close()}>
@@ -158,8 +170,54 @@
 </dialog>
 
 <style>
-	.family {
-		margin-bottom: 10px;
+	.summary {
+		display: inline-flex;
+		align-items: center;
+		gap: 3px;
+		max-width: 100%;
+		border: 0;
+		background: none;
+		padding: 2px 0;
+		font-size: 12px;
+		color: var(--muted);
+		text-align: left;
+	}
+
+	.summary:hover {
+		color: var(--text);
+	}
+
+	.summary-text {
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.summary-text b {
+		font-weight: 600;
+		color: var(--text);
+	}
+
+	.chev {
+		display: inline-flex;
+		color: var(--muted);
+		transition: transform 0.15s;
+	}
+
+	.chev.open {
+		transform: rotate(180deg);
+	}
+
+	.manual {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		margin-top: 8px;
+	}
+
+	.manual .btn {
+		align-self: flex-start;
 	}
 
 	.current {

@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { Battery, BatteryFull, BatteryLow, BatteryMedium, BatteryCharging, Bluetooth, CircleAlert, Loader, Tag, Unplug, TriangleAlert, Usb, X } from 'lucide-static';
+	import { Battery, BatteryFull, BatteryLow, BatteryMedium, BatteryCharging, Bluetooth, CircleAlert, Loader, Tag, Unplug, TriangleAlert, Usb, X, Zap } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import { printer } from '../stores/printer.svelte';
+	import { mode } from '../stores/mode.svelte';
 	import { detectPlatform } from '../platform';
 
 	const platform = detectPlatform();
@@ -36,6 +37,9 @@
 	</div>
 
 	<div class="conn">
+		{#if mode.isPhone}
+			<button class="btn sm" onclick={() => mode.choose('quick')} title="Switch to the quick label maker"><Icon svg={Zap} size={14} /> Quick label</button>
+		{/if}
 		{#if !printer.supported && !printer.bluetoothSupported}
 			<span class="pill err unsupported" title="USB and Bluetooth printing need Chrome or Edge (or Bluefy on iPhone/iPad)">
 				<Icon svg={TriangleAlert} size={14} /> {unsupportedHint}
