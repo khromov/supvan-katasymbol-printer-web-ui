@@ -27,7 +27,7 @@
 
 	<div class="conn">
 		{#if !printer.supported && !printer.bluetoothSupported}
-			<span class="pill err" title="WebHID and Web Serial are available in Chrome, Edge and other Chromium browsers">
+			<span class="pill err" title="USB and Bluetooth printing need Chrome or Edge (or Bluefy on iPhone/iPad)">
 				<Icon svg={TriangleAlert} size={14} /> This browser can't talk to printers (use Chrome or Edge)
 			</span>
 		{:else if printer.state === 'connecting'}
@@ -53,7 +53,7 @@
 				</button>
 			{/if}
 			{#if printer.bluetoothSupported}
-				<button class="btn" class:primary={!printer.supported} onclick={() => printer.connectBluetooth()} title="Connect a paired T50/T80 printer over Bluetooth">
+				<button class="btn" class:primary={!printer.supported} onclick={() => printer.connectBluetooth()} title={printer.bleSupported ? 'Connect a T50/T80 printer over Bluetooth' : 'Connect a paired T50/T80 printer over Bluetooth'}>
 					<Icon svg={Bluetooth} size={16} /> Bluetooth
 				</button>
 			{/if}

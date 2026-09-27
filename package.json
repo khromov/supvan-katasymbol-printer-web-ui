@@ -19,6 +19,7 @@
     "@types/node": "^24.19.0",
     "@types/w3c-web-hid": "^1.0.7",
     "@types/w3c-web-serial": "^1.0.8",
+    "@types/web-bluetooth": "^0.0.21",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "node-hid": "^3.4.0",
     "svelte": "^5.57.0",

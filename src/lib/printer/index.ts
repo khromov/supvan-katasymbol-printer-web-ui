@@ -1,4 +1,5 @@
-import { findModel, HID_FILTERS, type DeviceModel } from './devices';
+import { findModel, HID_FILTERS, modelNameFromBluetoothName, type DeviceModel } from './devices';
+import { WebBluetoothTransport } from './ble';
 import { GDriver } from './families/g';
 import { probeSpInterface, SpDriver } from './families/sp';
 import { T5080Driver } from './families/t5080';
@@ -94,6 +95,37 @@ export async function openBluetoothPrinter(port: SerialPort, debug = false): Pro
 		await driver.handshake();
 		const devName = await driver.readDeviceName().catch(() => '');
 		const name = /pro/i.test(devName) ? 'T50M Pro' : devName || 'T50 series';
+		const model: DeviceModel = { productId: 0, name: `${name} (Bluetooth)`, family: 't5080', dpmm: 8, headDots: 384, listed: false };
+		return { model, driver, transport };
+	} catch (e) {
+		await transport.close();
+		throw e;
+	}
+}
+
+// ---- Bluetooth LE (Web Bluetooth) ----
+
+export const webBluetoothSupported = () => typeof navigator !== 'undefined' && 'bluetooth' in navigator;
+
+/** False when the browser knows Bluetooth is off/unavailable (undefined if it can't tell). */
+export async function bluetoothAvailable(): Promise<boolean | undefined> {
+	try {
+		return await navigator.bluetooth.getAvailability();
+	} catch {
+		return undefined;
+	}
+}
+
+export const requestBlePrinter = () => WebBluetoothTransport.request();
+
+/** Open a T50/T80 printer over BLE. The printer doesn't answer data frames there. */
+export async function openBlePrinter(device: BluetoothDevice, debug = false): Promise<{ model: DeviceModel; driver: T5080BtDriver; transport: WebBluetoothTransport }> {
+	const transport = await WebBluetoothTransport.open(device);
+	try {
+		const driver = new T5080BtDriver(transport, 384, { acksDataFrames: false, commandTimeoutMs: 4000 });
+		driver.channel.debug = debug;
+		await driver.handshake();
+		const name = modelNameFromBluetoothName(device.name) ?? 'T50 series';
 		const model: DeviceModel = { productId: 0, name: `${name} (Bluetooth)`, family: 't5080', dpmm: 8, headDots: 384, listed: false };
 		return { model, driver, transport };
 	} catch (e) {

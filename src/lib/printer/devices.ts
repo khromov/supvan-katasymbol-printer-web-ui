@@ -65,3 +65,24 @@ export function findModel(productId: number): DeviceModel | undefined {
 
 /** WebHID request filters: every known Supvan model on its vendor-defined collection. */
 export const HID_FILTERS: HIDDeviceFilter[] = [{ vendorId: SUPVAN_VENDOR_ID, usagePage: 0xff00 }, { vendorId: SUPVAN_VENDOR_ID }];
+
+/**
+ * Bluetooth name prefixes of the T50/T80 printers, from the Katasymbol Android app's device
+ * tables (TENDevice.getT50MProDevice, T50ProDevice, A50ProDevice; the Kata build renames
+ * T0112A/T0101A to "T50M Pro"). The name is the prefix plus a serial, e.g. "T0148B2507018663".
+ */
+const BT_NAME_PREFIXES: [string, string][] = [
+	...['T0096A', 'T0117A', 'T0118A', 'T0129A', 'T0147B', 'T0148', 'T0170', 'T0178', 'T0205', 'T0211', 'T0212', 'T0213', 'T0221', 'T0162B', 'T0163B', 'T0112A', 'T0101A'].map(
+		(p) => [p, 'T50M Pro'] as [string, string]
+	),
+	...['T0046A', 'T0149B', 'T0159B', 'T0200', 'T0100A', 'T0145B', 'T0150B', 'T0201', 'T0151B', 'T0113A', 'T0152B', 'T0160B', 'T0202'].map(
+		(p) => [p, 'T50 Pro'] as [string, string]
+	),
+	...['T0097A', 'T0153B', 'T0161B', 'T0206', 'T0154B', 'T0114A', 'T0146B', 'T0155B', 'T0115A', 'T0156B'].map((p) => [p, 'A50 Pro'] as [string, string])
+];
+
+/** Model name for a Bluetooth device name, or undefined if it isn't a known prefix. */
+export function modelNameFromBluetoothName(name: string | undefined): string | undefined {
+	if (!name) return undefined;
+	return BT_NAME_PREFIXES.find(([p]) => name.startsWith(p))?.[1];
+}

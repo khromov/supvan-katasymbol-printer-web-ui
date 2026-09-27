@@ -64,6 +64,13 @@ export function btDataFrames(stream: Uint8Array): Uint8Array[] {
 	return frames;
 }
 
+export interface FrameChannelOptions {
+	/** Default true (classic Bluetooth); false for BLE. */
+	acksDataFrames?: boolean;
+	/** Reply timeout for commands (default 2000 ms like the app over SPP; the app uses 4 s on BLE). */
+	commandTimeoutMs?: number;
+}
+
 /**
  * Request/response channel over the Bluetooth byte stream. Replies are reassembled from the
  * length field (u16 LE at [2..3], plus 4) and matched to their request by the echoed command
@@ -79,8 +86,20 @@ export class FrameChannel {
 	debug = false;
 	/** Where debug lines go (defaults to console.debug). */
 	log: (line: string) => void = (line) => console.debug(line);
+	/**
+	 * Whether the printer answers every 512-byte data frame. It does over classic Bluetooth, where
+	 * the app reads one reply per frame; over BLE it doesn't (BasePrint.transferSplitData never
+	 * waits there), so waiting would stall each frame for the full timeout.
+	 */
+	readonly acksDataFrames: boolean;
+	readonly commandTimeoutMs: number;
 
-	constructor(readonly transport: ByteTransport) {
+	constructor(
+		readonly transport: ByteTransport,
+		opts: FrameChannelOptions = {}
+	) {
+		this.acksDataFrames = opts.acksDataFrames ?? true;
+		this.commandTimeoutMs = opts.commandTimeoutMs ?? 2000;
 		this.unsubscribe = transport.onData((chunk) => this.receive(chunk));
 	}
 
@@ -150,7 +169,7 @@ export class FrameChannel {
 	}
 
 	/** Send a command and wait for the reply echoing it. Retries once, like BasePrint.sendCmd. */
-	command(cmd: number, a = 0, b = 0, timeoutMs = 2000, retry = true): Promise<Uint8Array> {
+	command(cmd: number, a = 0, b = 0, timeoutMs = this.commandTimeoutMs, retry = true): Promise<Uint8Array> {
 		return this.serialize(async () => {
 			for (let attempt = 0; attempt < (retry ? 2 : 1); attempt++) {
 				this.clear();
@@ -165,7 +184,8 @@ export class FrameChannel {
 
 	/**
 	 * Send one LZMA chunk: 0x5C(512, packets), then each 512-byte frame as 4 writes of 128 bytes
-	 * about 10 ms apart, reading (and ignoring) one reply per frame, as T50PlusPrint.transfer does.
+	 * about 10 ms apart, as T50PlusPrint.transfer does. Over classic Bluetooth one reply per frame
+	 * is read (and ignored); over BLE the printer sends none.
 	 */
 	sendChunk(stream: Uint8Array, signal?: AbortSignal): Promise<void> {
 		return this.serialize(async () => {
@@ -173,7 +193,7 @@ export class FrameChannel {
 			this.clear();
 			await this.write(btCommandFrame(CMD.NEXTFRM_BULK, 512, frames.length));
 			await sleep(10);
-			await this.next(() => true, 2000);
+			await this.next((f) => f[7] === CMD.NEXTFRM_BULK, this.commandTimeoutMs);
 			for (const f of frames) {
 				if (signal?.aborted) throw new PrinterError('Cancelled', 'cancelled');
 				this.clear();
@@ -181,7 +201,7 @@ export class FrameChannel {
 					await this.write(f.subarray(o, o + 128));
 					await sleep(10);
 				}
-				await this.next(() => true, 2000);
+				if (this.acksDataFrames) await this.next(() => true, 2000);
 			}
 		});
 	}
@@ -222,9 +242,10 @@ export class T5080BtDriver implements PrinterDriver {
 
 	constructor(
 		transport: ByteTransport,
-		readonly headDots = 384
+		readonly headDots = 384,
+		channelOptions: FrameChannelOptions = {}
 	) {
-		this.channel = new FrameChannel(transport);
+		this.channel = new FrameChannel(transport, channelOptions);
 	}
 
 	canvasSize(label: LabelSpec) {
@@ -246,7 +267,7 @@ export class T5080BtDriver implements PrinterDriver {
 
 	/** Label info (RETURN_MAT). Data starts at [22], i.e. USB report offset + 21. */
 	async readMedia(): Promise<MediaInfo | null> {
-		const f = await this.channel.command(BT_CMD.RETURN_MAT, 0, 0, 2000, false);
+		const f = await this.channel.command(BT_CMD.RETURN_MAT, 0, 0, undefined, false);
 		const at = (usbOffset: number) => f[usbOffset + 21] ?? 0;
 		const labelId = at(16) | (at(17) << 8);
 		const uuidBytes: number[] = [];

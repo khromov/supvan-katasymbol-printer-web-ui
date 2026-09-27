@@ -17,17 +17,20 @@ automatically. The printer's loaded label is detected (T50/T80 and G series) and
 
 ## Bluetooth (T50/T80 series)
 
-The T50M Pro and its siblings also print wirelessly. They use **classic Bluetooth serial (SPP)**,
-not Bluetooth LE, so the app talks to them through **Web Serial** (Chrome 117+), not Web Bluetooth.
-Pair the printer in the OS first, then click **Bluetooth** and pick it.
+The T50M Pro and its siblings also print wirelessly. Their Bluetooth chip is dual-mode, and the app
+can use either side:
 
-- Verified: Android Chrome prints over Bluetooth.
-- macOS: works right after pairing (connect + print confirmed), but later reconnects fail with
-  "Failed to open serial port" until the printer is forgotten and paired again. Looks like a macOS
-  Bluetooth serial issue (unresolved); use USB on the Mac, or re-pair.
-- Protocol (from the Katasymbol Android app): `7E 5A` framed commands and replies, 512-byte data
-  frames, START argument 0, up to 8 buffers per LZMA chunk. See `src/lib/printer/families/t5080-bt.ts`.
-- Add `?debug` to the URL to see a copyable protocol log.
+- **Bluetooth LE via Web Bluetooth** (default where available: desktop Chrome/Edge, Android Chrome,
+  and **Bluefy on iPhone/iPad**, since Safari has no Web Bluetooth). No pairing needed: click
+  **Bluetooth** and pick the printer (`T0…`). GATT service `0000e0ff-3c17-d293-8e48-14fe2e4da212`,
+  write `ffe9`, notify `ffe1`.
+- **Classic Bluetooth (SPP) via Web Serial**, used when Web Bluetooth isn't available, or forced with
+  `?bt=serial`. Pair the printer in the OS first. Verified from Android Chrome. On macOS it only works
+  in the first session after pairing (later opens fail until the printer is re-paired).
+
+Both carry the same `7E 5A` frames (ported from the Katasymbol Android app; see
+`src/lib/printer/families/t5080-bt.ts` and `ble.ts`). Over LE the printer doesn't acknowledge data
+frames. Add `?debug` to the URL to see a copyable protocol log.
 
 ## Browser support
 

@@ -1,7 +1,11 @@
 import {
+	bluetoothAvailable,
 	grantedBluetoothPort,
 	grantedPrinter,
+	openBlePrinter,
 	openBluetoothPrinter,
+	requestBlePrinter,
+	webBluetoothSupported,
 	openPrinter,
 	PrinterError,
 	requestBluetoothPort,
@@ -23,11 +27,15 @@ const LINK_KEY = 'katasymbol-web:link';
 /** Protocol logging (Bluetooth frames) when the page URL has ?debug. */
 const DEBUG = typeof location !== 'undefined' && new URLSearchParams(location.search).has('debug');
 
-type Link = 'usb' | 'bluetooth';
+/** usb = WebHID, ble = Web Bluetooth (GATT), bluetooth = classic SPP over Web Serial. */
+type Link = 'usb' | 'ble' | 'bluetooth';
+/** ?bt=serial forces classic Bluetooth (Web Serial) instead of Bluetooth LE. */
+const FORCE_SERIAL_BT = typeof location !== 'undefined' && new URLSearchParams(location.search).get('bt') === 'serial';
 
 function readLink(): Link {
 	try {
-		return localStorage.getItem(LINK_KEY) === 'bluetooth' ? 'bluetooth' : 'usb';
+		const l = localStorage.getItem(LINK_KEY);
+		return l === 'bluetooth' || l === 'ble' ? l : 'usb';
 	} catch {
 		return 'usb';
 	}
@@ -65,6 +73,21 @@ function bluetoothErrorMessage(e: unknown): string {
 	return `Couldn't connect over Bluetooth: ${trimDots(raw)}.`;
 }
 
+/** Plain-language message for a failed Bluetooth LE (Web Bluetooth) connection. */
+function bleErrorMessage(e: unknown): string {
+	const err = e as Error & { code?: string };
+	const raw = err?.message ?? String(e);
+	if (/adapter|bluetooth is (off|disabled)|not available/i.test(raw))
+		return 'Bluetooth is turned off or unavailable on this device. Turn it on and try again.';
+	if (err?.name === 'NotFoundError' || /no services matching/i.test(raw))
+		return "This printer doesn't offer the Bluetooth LE service the app needs. Make sure it's a T50/T80-series printer, or try USB.";
+	if (err?.name === 'NetworkError' || /gatt|connect/i.test(raw))
+		return "Couldn't connect to the printer over Bluetooth. Check that it's switched on, close the Katasymbol app on other phones or tablets, and try again.";
+	if (err?.code === 'timeout')
+		return "The printer didn't answer over Bluetooth. Switch it off and on again, then retry.";
+	return `Couldn't connect over Bluetooth: ${trimDots(raw)}.`;
+}
+
 /** Plain-language message for a failed USB connection. */
 function usbErrorMessage(e: unknown): string {
 	const raw = (e as Error)?.message ?? String(e);
@@ -78,7 +101,11 @@ const MEDIA_INTERVAL = 6000;
 
 class PrinterStore {
 	supported = webHidSupported();
-	bluetoothSupported = webSerialSupported();
+	/** Web Bluetooth (BLE): desktop Chrome/Edge, Android Chrome, Bluefy on iOS. */
+	bleSupported = webBluetoothSupported();
+	/** Web Serial (classic Bluetooth SPP): desktop Chrome/Edge, Android Chrome. */
+	serialBtSupported = webSerialSupported();
+	bluetoothSupported = this.bleSupported || this.serialBtSupported;
 	debug = DEBUG;
 	/** Connection used by the current printer. */
 	link = $state<Link | null>(null);
@@ -100,6 +127,7 @@ class PrinterStore {
 	private transport: { close(): Promise<void> } | null = null;
 	private device: HIDDevice | null = null;
 	private port: SerialPort | null = null;
+	private bleDevice: BluetoothDevice | null = null;
 	private pollTimer: ReturnType<typeof setTimeout> | null = null;
 	private lastMediaAt = 0;
 	private polling = false;
@@ -147,7 +175,7 @@ class PrinterStore {
 	}
 
 	init() {
-		if (this.bluetoothSupported) {
+		if (this.serialBtSupported) {
 			navigator.serial.addEventListener('disconnect', (e) => {
 				if (e.target === this.port) this.teardown('Bluetooth printer disconnected');
 			});
@@ -166,7 +194,13 @@ class PrinterStore {
 	/** Reconnect to an already-granted printer, preferring the link used last time. */
 	async autoConnect() {
 		try {
-			if (readLink() === 'bluetooth' && this.bluetoothSupported) {
+			const link = readLink();
+			if (link === 'ble' && this.bleSupported && 'getDevices' in navigator.bluetooth) {
+				// Only where the browser lets pages reuse granted devices (not every Chrome has it).
+				const known = (await navigator.bluetooth.getDevices()).find((d) => d.name?.startsWith('T0'));
+				if (known) return await this.openBle(known, true);
+			}
+			if (link === 'bluetooth' && this.serialBtSupported) {
 				const port = await grantedBluetoothPort();
 				if (port) return await this.openBluetooth(port, true);
 			}
@@ -178,7 +212,9 @@ class PrinterStore {
 		}
 	}
 
+	/** Connect over Bluetooth: LE (Web Bluetooth) where available, else classic (Web Serial). */
 	async connectBluetooth() {
+		if (this.bleSupported && !FORCE_SERIAL_BT) return this.connectBle();
 		this.setError(null);
 		try {
 			await this.openBluetooth(await requestBluetoothPort());
@@ -186,6 +222,53 @@ class PrinterStore {
 			if ((e as Error)?.name === 'NotFoundError') return; // chooser dismissed
 			this.setError((e as Error).message);
 			this.state = 'disconnected';
+		}
+	}
+
+	async connectBle() {
+		this.setError(null);
+		let device: BluetoothDevice;
+		try {
+			// Called straight from the click so the chooser keeps its user gesture.
+			device = await requestBlePrinter();
+		} catch (e) {
+			const err = e as Error;
+			if (err?.name === 'NotFoundError' && !/adapter|not available/i.test(err.message)) {
+				// Chooser dismissed, unless the reason is that Bluetooth is off.
+				if ((await bluetoothAvailable()) === false) this.setError(bleErrorMessage(new Error('Bluetooth adapter not available')));
+				return;
+			}
+			this.setError(bleErrorMessage(e), err?.message);
+			return;
+		}
+		await this.openBle(device);
+	}
+
+	private async openBle(device: BluetoothDevice, quiet = false) {
+		if (this.connected) await this.disconnect();
+		this.state = 'connecting';
+		this.setError(null);
+		this.addLog(`connecting over Bluetooth LE to ${device.name ?? device.id}`);
+		try {
+			const { model, driver, transport } = await openBlePrinter(device, this.debug);
+			driver.channel.log = (line) => this.addLog(line);
+			device.addEventListener('gattserverdisconnected', () => {
+				if (this.bleDevice === device) this.teardown('Bluetooth printer disconnected');
+			});
+			this.bleDevice = device;
+			this.model = model;
+			this.driver = driver;
+			this.transport = transport;
+			this.link = 'ble';
+			saveLink('ble');
+			this.state = 'ready';
+			this.lastMediaAt = 0;
+			await this.poll();
+		} catch (e) {
+			this.addLog(`connect failed: ${(e as Error).message}`);
+			this.state = 'disconnected';
+			this.model = null;
+			if (!quiet) this.setError(bleErrorMessage(e), (e as Error).message);
 		}
 	}
 
@@ -262,6 +345,7 @@ class PrinterStore {
 		this.transport = null;
 		this.device = null;
 		this.port = null;
+		this.bleDevice = null;
 		this.link = null;
 		this.model = null;
 		this.status = null;
