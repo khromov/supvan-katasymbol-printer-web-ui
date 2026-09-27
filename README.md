@@ -23,7 +23,7 @@ can use either side:
 - **Bluetooth LE via Web Bluetooth** (default where available: desktop Chrome/Edge, Android Chrome,
   and **Bluefy on iPhone/iPad**, since Safari has no Web Bluetooth). No pairing needed: click
   **Bluetooth** and pick the printer (`T0…`). GATT service `0000e0ff-3c17-d293-8e48-14fe2e4da212`,
-  write `ffe9`, notify `ffe1`.
+  write `ffe9`, notify `ffe1`. Verified printing from desktop Chrome on macOS and from Bluefy on iOS.
 - **Classic Bluetooth (SPP) via Web Serial**, used when Web Bluetooth isn't available, or forced with
   `?bt=serial`. Pair the printer in the OS first. Verified from Android Chrome. On macOS it only works
   in the first session after pairing (later opens fail until the printer is re-paired).
