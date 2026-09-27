@@ -1,6 +1,6 @@
 # Katasymbol Web
 
-**Live: https://khromov.github.io/katasymbol-printer-web-ui/** (open in Chrome or Edge)
+**Live: https://khromov.github.io/supvan-katasymbol-printer-web-ui/** (open in Chrome or Edge)
 
 Design and print labels on Katasymbol / Supvan label printers straight from the browser, over USB.
 A web replacement for the KatasymbolEditor desktop app: add text, icons (all ~1,850 Lucide icons,
@@ -51,7 +51,7 @@ Every model KatasymbolEditor 1.1.1 knows about (`src/lib/printer/devices.ts`):
 
 Every push to `main` builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`
 (Pages source: GitHub Actions). The build uses relative asset paths (`base: './'`), so it works under
-the `/katasymbol-printer-web-ui/` subpath.
+the `/supvan-katasymbol-printer-web-ui/` subpath.
 
 ## Hardware scripts (Node, node-hid)
 
