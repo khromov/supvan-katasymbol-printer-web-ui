@@ -100,3 +100,7 @@ the `/supvan-katasymbol-printer-web-ui/` subpath.
 npm run probe        # read-only: status and loaded label
 npm run print-test   # prints an orientation test pattern on the loaded label
 ```
+
+## License
+
+[MIT](LICENSE)
