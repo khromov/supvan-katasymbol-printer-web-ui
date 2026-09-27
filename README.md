@@ -1,8 +1,10 @@
-# Katasymbol Web
+# Supvan & Katasymbol web print studio
 
-**Live: https://khromov.github.io/supvan-katasymbol-printer-web-ui/** (open in Chrome or Edge)
+**[Click here to open the app](https://khromov.github.io/supvan-katasymbol-printer-web-ui/)**
 
-Design and print labels on Katasymbol / Supvan label printers straight from the browser, over USB.
+![Katasymbol Web: a 50 × 80 mm label with text and a globe icon in the editor, showing the printed dots](.github/workflows/screenshot.png)
+
+Design and print labels on Katasymbol / Supvan label printers straight from the browser, over USB or Bluetooth.
 A web replacement for the KatasymbolEditor desktop app: add text, icons (all ~1,850 Lucide icons,
 searchable), QR codes, shapes and images, see exactly which dots will print, and print.
 
@@ -14,6 +16,18 @@ npm run dev:lan    # HTTPS on the LAN (self-signed) for testing on a phone
 
 Click **Connect printer** and pick the SUPVAN "USB Device". After the first time the app reconnects
 automatically. The printer's loaded label is detected (T50/T80 and G series) and the design follows it.
+
+## Connecting your printer
+
+| Device        | Browser                                                                  | How to connect                                                                                                                                                         |
+| ------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mac / Windows | Chrome or Edge                                                           | **USB cable:** plug the printer in and click **Connect USB**.<br>**Wireless:** turn on Bluetooth, click **Bluetooth** and pick the printer (`T0…`). No pairing needed. |
+| Android       | Chrome                                                                   | Turn on Bluetooth, tap **Bluetooth** and pick the printer (`T0…`).                                                                                                     |
+| iPhone / iPad | [Bluefy](https://apps.apple.com/app/bluefy-web-ble-browser/id1492822055) | Safari can't connect to printers. Open the site in Bluefy, tap **Bluetooth** and pick the printer (`T0…`).                                                             |
+
+The printer takes one connection at a time, so close the Katasymbol app on your other devices
+first. USB only works on computers: Android Chrome has no WebHID, and iOS browsers have no USB
+access at all.
 
 ## Bluetooth (T50/T80 series)
 
@@ -43,12 +57,12 @@ browsers (Chrome, Edge, Opera, Arc). Designing works everywhere; only printing n
 
 Every model KatasymbolEditor 1.1.1 knows about (`src/lib/printer/devices.ts`):
 
-| Family | Models | Status |
-| --- | --- | --- |
-| T50/T80 (`t5080`) | T50M, T50M Plus, T50M Pro, T50S, T50i, T50 Max, T80M, T80M Pro | Encoder byte-identical to the official app; printed on a real T50M Pro (USB `1820:2076`) |
-| SP (`sp`) | SP650 | Byte-identical encoder; not hardware-tested |
-| TP (`tp`, `tp86a`) | TP76i, TP80A, TP86A | Byte-identical encoders and full-job report streams in simulation; not hardware-tested |
-| G (`g`) | G11 Pro, G15 Pro, G15 MPro, G18 Pro, G21, G25, G28 | Byte-identical at 203 dpi; 300 dpi (G25/G28) geometry is a best effort because the official code crashes there |
+| Family             | Models                                                         | Status                                                                                                         |
+| ------------------ | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| T50/T80 (`t5080`)  | T50M, T50M Plus, T50M Pro, T50S, T50i, T50 Max, T80M, T80M Pro | Encoder byte-identical to the official app; printed on a real T50M Pro (USB `1820:2076`)                       |
+| SP (`sp`)          | SP650                                                          | Byte-identical encoder; not hardware-tested                                                                    |
+| TP (`tp`, `tp86a`) | TP76i, TP80A, TP86A                                            | Byte-identical encoders and full-job report streams in simulation; not hardware-tested                         |
+| G (`g`)            | G11 Pro, G15 Pro, G15 MPro, G18 Pro, G21, G25, G28             | Byte-identical at 203 dpi; 300 dpi (G25/G28) geometry is a best effort because the official code crashes there |
 
 ## How it works
 

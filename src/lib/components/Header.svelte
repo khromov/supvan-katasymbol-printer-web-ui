@@ -2,6 +2,16 @@
 	import { Battery, BatteryFull, BatteryLow, BatteryMedium, BatteryCharging, Bluetooth, CircleAlert, Loader, Tag, Unplug, TriangleAlert, Usb, X } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import { printer } from '../stores/printer.svelte';
+	import { detectPlatform } from '../platform';
+
+	const platform = detectPlatform();
+	/** What to do when this browser can't reach printers at all. */
+	const unsupportedHint =
+		platform === 'ios'
+			? "Safari can't connect to printers. Open this page in the Bluefy browser to print."
+			: platform === 'android'
+				? 'This browser can\'t connect to printers. Open this page in Chrome to print.'
+				: 'This browser can\'t connect to printers. Use Chrome or Edge to print.';
 
 	const batteryIcon = $derived.by(() => {
 		const l = printer.status?.batteryLevel ?? 0;
@@ -27,8 +37,8 @@
 
 	<div class="conn">
 		{#if !printer.supported && !printer.bluetoothSupported}
-			<span class="pill err" title="USB and Bluetooth printing need Chrome or Edge (or Bluefy on iPhone/iPad)">
-				<Icon svg={TriangleAlert} size={14} /> This browser can't talk to printers (use Chrome or Edge)
+			<span class="pill err unsupported" title="USB and Bluetooth printing need Chrome or Edge (or Bluefy on iPhone/iPad)">
+				<Icon svg={TriangleAlert} size={14} /> {unsupportedHint}
 			</span>
 		{:else if printer.state === 'connecting'}
 			<span class="pill"><span class="spin"><Icon svg={Loader} size={14} /></span> Connecting…</span>
@@ -116,6 +126,14 @@
 		align-items: center;
 		gap: 8px;
 		flex-wrap: wrap;
+	}
+
+	.unsupported {
+		height: auto;
+		min-height: 24px;
+		padding: 4px 10px;
+		white-space: normal;
+		line-height: 1.35;
 	}
 
 	.banner {

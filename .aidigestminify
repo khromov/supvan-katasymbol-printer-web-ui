@@ -1,0 +1,3 @@
+src/lib/catalog
+src/lib/printer/lzma.js
+.vscode

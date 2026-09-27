@@ -2,6 +2,7 @@
 	import { CircleAlert, CircleCheck, Download, Minus, Move, Octagon, Plug, Plus, Printer, TriangleAlert, X } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import LabelPicker from './LabelPicker.svelte';
+	import ConnectHelp from './ConnectHelp.svelte';
 	import { editor } from '../stores/editor.svelte';
 	import { printer } from '../stores/printer.svelte';
 	import { renderBitmap, bitmapToCanvas } from '../design/render';
@@ -174,6 +175,7 @@
 		>
 			<Icon svg={Plug} size={18} /> Connect printer to print
 		</button>
+		<ConnectHelp />
 	{/if}
 	<button class="btn ghost sm" onclick={downloadPng}><Icon svg={Download} size={14} /> Download as PNG</button>
 </section>
