@@ -2,9 +2,9 @@
 
 **[Click here to open the app](https://khromov.github.io/supvan-katasymbol-printer-web-ui/)**
 
-| Full studio                                                                                                                                                          | Quick label (phone)                                                                                                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <img src=".github/workflows/screenshot.png" width="560" alt="Katasymbol Web: a 50 × 80 mm label with text and a globe icon in the editor, showing the printed dots"> | <img src=".github/workflows/katasymbol-mobile-screenshot.png" width="189" alt="Quick label on a phone: a hand icon above &quot;Hello world!&quot; on a 50 × 80 mm label, with text, icon and font controls"> |
+| Full studio                                                                                                                                                | Quick label (phone)                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img src=".github/screenshot.png" width="560" alt="Katasymbol Web: a 50 × 80 mm label with text and a globe icon in the editor, showing the printed dots"> | <img src=".github/katasymbol-combined.gif" width="376" alt="Quick label on a phone: a hand icon above &quot;Hello world!&quot; on a 50 × 80 mm label, printed on a Katasymbol T50M Pro"> |
 
 Design and print labels on Katasymbol / Supvan label printers straight from the browser, over USB or Bluetooth.
 A web replacement for the KatasymbolEditor desktop app: add text, icons (all ~1,850 Lucide icons,
