@@ -29,6 +29,13 @@ The printer takes one connection at a time, so close the Katasymbol app on your 
 first. USB only works on computers: Android Chrome has no WebHID, and iOS browsers have no USB
 access at all.
 
+### Install as an app
+
+The site is an installable web app: in Chrome or Edge choose **Install app** (or **Add to Home
+screen** on Android). Long-press the icon for **Quick label** and **Full studio** shortcuts. On iPhone
+you can add it to the home screen too, but home-screen apps there can't use Bluetooth, so print from
+Bluefy.
+
 ## Bluetooth (T50/T80 series)
 
 The T50M Pro and its siblings also print wirelessly. Their Bluetooth chip is dual-mode, and the app

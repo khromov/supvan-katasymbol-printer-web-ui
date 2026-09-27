@@ -41,17 +41,20 @@ export function buildQuickDesign(q: QuickLabel, label: LabelSpec): DesignElement
 	if (q.frame) {
 		const thickness = 0.8;
 		out.push({ id: newId(), type: 'shape', shape: 'rect', ...area, rotation: 0, thickness, fill: false, radius: 2 });
-		const inset = thickness + 1.2;
+		// Keep content clear of the frame's inner edge.
+		const inset = thickness + 1.8;
 		area = { x: area.x + inset, y: area.y + inset, w: area.w - inset * 2, h: area.h - inset * 2 };
 	}
 
 	const text = q.text.trim();
 	if (q.icon && text) {
-		// Icon above the text: it takes up to 45% of the height, the text the rest.
+		// Icon above the text, with a little breathing room on top: it takes up to 45% of the
+		// remaining height, the text the rest.
+		const top = Math.min(2, area.h * 0.06);
 		const gap = Math.min(2, area.h * 0.05);
-		const iconSize = Math.min(area.w, area.h * 0.45);
-		out.push({ id: newId(), type: 'icon', name: q.icon, x: area.x + (area.w - iconSize) / 2, y: area.y, w: iconSize, h: iconSize, rotation: 0, strokeWidth: 2 });
-		const ty = area.y + iconSize + gap;
+		const iconSize = Math.min(area.w, (area.h - top) * 0.45);
+		out.push({ id: newId(), type: 'icon', name: q.icon, x: area.x + (area.w - iconSize) / 2, y: area.y + top, w: iconSize, h: iconSize, rotation: 0, strokeWidth: 2 });
+		const ty = area.y + top + iconSize + gap;
 		out.push(textElement(q, area.x, ty, area.w, area.y + area.h - ty));
 	} else if (q.icon) {
 		const s = Math.min(area.w, area.h);

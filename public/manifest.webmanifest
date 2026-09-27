@@ -1,0 +1,21 @@
+{
+	"id": "./",
+	"name": "Katasymbol Web",
+	"short_name": "Katasymbol",
+	"description": "Design and print labels on Katasymbol / Supvan label printers over USB or Bluetooth.",
+	"start_url": "./",
+	"scope": "./",
+	"display": "standalone",
+	"background_color": "#f4f3ef",
+	"theme_color": "#ffffff",
+	"categories": ["productivity", "utilities"],
+	"icons": [
+		{ "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+		{ "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+		{ "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+	],
+	"shortcuts": [
+		{ "name": "Quick label", "short_name": "Quick", "description": "Text and an icon, printed in seconds", "url": "./?quick", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+		{ "name": "Full studio", "short_name": "Studio", "description": "The complete label editor", "url": "./?studio", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+	]
+}

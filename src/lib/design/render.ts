@@ -68,6 +68,19 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number): { line
 	return { lines: out, broke };
 }
 
+/**
+ * Horizontal ink extent of a line relative to the pen position. Script and display fonts draw
+ * past their advance width (e.g. Caveat's "d"), so fitting and aligning by the advance lets ink
+ * spill out of the box.
+ */
+function inkExtent(ctx: CanvasRenderingContext2D, line: string) {
+	const m = ctx.measureText(line);
+	if (!line || m.actualBoundingBoxRight === undefined) return { left: 0, right: m.width, width: m.width };
+	const left = m.actualBoundingBoxLeft;
+	const right = m.actualBoundingBoxRight;
+	return { left, right, width: Math.max(0, left + right) };
+}
+
 function layoutText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h: number, scale: number): Layout {
 	const measure = (px: number): Layout => {
 		ctx.font = fontSpec(el, px);
@@ -81,7 +94,7 @@ function layoutText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h
 	for (let i = 0; i < 18; i++) {
 		const mid = (lo + hi) / 2;
 		const l = measure(mid);
-		const widest = Math.max(...l.lines.map((s) => ctx.measureText(s).width));
+		const widest = Math.max(...l.lines.map((s) => inkExtent(ctx, s).width));
 		const fits = !l.broke && l.lines.length * l.lineH - (l.lineH - l.px) <= h && widest <= w + 0.5;
 		if (fits) {
 			best = l;
@@ -126,8 +139,9 @@ function drawText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h: 
 	y += ascent;
 	let drewTone = false;
 	for (const line of lines) {
-		const lw = ctx.measureText(line).width;
-		const x = el.align === 'left' ? 0 : el.align === 'right' ? w - lw : (w - lw) / 2;
+		// Align by ink, so overhanging glyphs stay inside the box and script fonts center visually.
+		const inkX = inkExtent(ctx, line);
+		const x = el.align === 'left' ? inkX.left : el.align === 'right' ? w - inkX.right : (w - inkX.width) / 2 + inkX.left;
 		if (tone && EMOJI.test(line)) {
 			let cx = x;
 			for (const run of emojiRuns(line)) {
@@ -138,7 +152,7 @@ function drawText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h: 
 		} else ctx.fillText(line, x, y);
 		if (el.underline && line) {
 			const t = Math.max(1, px * 0.07);
-			ctx.fillRect(x, y + px * 0.12, lw, t);
+			ctx.fillRect(x - inkX.left, y + px * 0.12, inkX.width, t);
 		}
 		y += lineH;
 	}
