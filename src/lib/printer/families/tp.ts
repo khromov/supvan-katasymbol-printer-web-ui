@@ -414,7 +414,7 @@ abstract class TpFamilyDriver implements PrinterDriver {
 	 * are written directly. An unexpected reply would be dropped by CommandChannel (no waiter).
 	 */
 	protected async bulk(data: Uint8Array) {
-		for (const r of CommandChannel.chunk(data)) await this.transport.sendReport(r);
+		await this.channel.send(CommandChannel.chunk(data));
 	}
 
 	/**
@@ -540,7 +540,8 @@ abstract class TpFamilyDriver implements PrinterDriver {
 			}
 			report('done', total);
 		} catch (e) {
-			if (e instanceof PrinterError && e.code === 'cancelled') await this.stopNow().catch(() => {});
+			// Never leave the printer mid-job ('busy' means the running job is not ours).
+			if (!(e instanceof PrinterError && e.code === 'busy')) await this.stopNow().catch(() => {});
 			throw e;
 		}
 	}

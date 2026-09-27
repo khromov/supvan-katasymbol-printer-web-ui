@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CircleAlert, CircleCheck, Download, Minus, Plug, Plus, Printer, TriangleAlert, X } from 'lucide-static';
+	import { CircleAlert, CircleCheck, Download, Minus, Move, Octagon, Plug, Plus, Printer, TriangleAlert, X } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import LabelPicker from './LabelPicker.svelte';
 	import { editor } from '../stores/editor.svelte';
@@ -46,7 +46,9 @@
 			await printer.print([bmp], label, {
 				density: opts.density ? editor.density : 4,
 				copies: editor.copies,
-				cutType: opts.cutTypes ? editor.cutType : undefined
+				cutType: opts.cutTypes ? editor.cutType : undefined,
+				offsetX: editor.offsetX,
+				offsetY: editor.offsetY
 			});
 			done = true;
 			clearTimeout(doneTimer);
@@ -70,6 +72,11 @@
 
 	const pct = $derived(printer.progress ? Math.round((Math.max(0, printer.progress.page - 0.5) / Math.max(1, printer.progress.pages)) * 100) : 0);
 	const errors = $derived(printer.status?.errors ?? []);
+	/** The printer reports a job running although we are not printing (e.g. an interrupted print). */
+	const strayJob = $derived(printer.state === 'ready' && !!printer.status?.printing);
+	let showOffsets = $state(false);
+	/** Official offset units are 4 dots. */
+	const offsetMm = (v: number) => ((v * 4) / printer.dpmm).toFixed(1);
 	const warnings = $derived(printer.status?.warnings ?? []);
 </script>
 
@@ -116,6 +123,30 @@
 	{/each}
 	{#if printer.error && printer.connected}
 		<div class="note err"><Icon svg={CircleAlert} size={15} /> {printer.error}</div>
+	{/if}
+
+	<div class="offsets">
+		<button class="btn ghost sm" class:active={showOffsets || editor.offsetX || editor.offsetY} onclick={() => (showOffsets = !showOffsets)}>
+			<Icon svg={Move} size={14} /> Position offset{editor.offsetX || editor.offsetY ? ` (${offsetMm(editor.offsetX)}, ${offsetMm(editor.offsetY)} mm)` : ''}
+		</button>
+		{#if showOffsets}
+			<label class="field">
+				<span>Horizontal · {offsetMm(editor.offsetX)} mm</span>
+				<input type="range" min="-48" max="48" step="1" bind:value={editor.offsetX} onchange={() => editor.persist()} />
+			</label>
+			<label class="field">
+				<span>Vertical · {offsetMm(editor.offsetY)} mm</span>
+				<input type="range" min="-48" max="48" step="1" bind:value={editor.offsetY} onchange={() => editor.persist()} />
+			</label>
+			<button class="btn sm" onclick={() => { editor.offsetX = 0; editor.offsetY = 0; editor.persist(); }}>Reset</button>
+		{/if}
+	</div>
+
+	{#if strayJob}
+		<div class="note warn">
+			<Icon svg={TriangleAlert} size={15} /> The printer is still running a job.
+			<button class="btn sm" onclick={() => printer.stopPrinter()}><Icon svg={Octagon} size={14} /> Stop printer</button>
+		</div>
 	{/if}
 
 	{#if printer.state === 'printing'}
@@ -221,6 +252,26 @@
 	.note.ok {
 		background: var(--ok-soft);
 		color: var(--ok);
+	}
+
+	.offsets {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		align-items: stretch;
+	}
+
+	.offsets > .btn {
+		align-self: flex-start;
+	}
+
+	input[type='range'] {
+		width: 100%;
+		accent-color: var(--accent);
+	}
+
+	.note .btn {
+		margin-left: auto;
 	}
 
 	.progress {

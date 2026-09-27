@@ -91,6 +91,8 @@ export interface PrinterDriver {
 	getStatus(): Promise<PrinterStatus>;
 	readMedia?(): Promise<MediaInfo | null>;
 	print(pages: Bitmap[], label: LabelSpec, opts: PrintOptions): Promise<void>;
+	/** Stop whatever the printer is printing (sends STOP only if it reports printing). */
+	stop?(): Promise<void>;
 	/** Design canvas size (in dots) the driver expects for a label. */
 	canvasSize(label: LabelSpec): { width: number; height: number };
 }

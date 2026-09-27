@@ -25,15 +25,25 @@ const loaders: Record<Family, () => Promise<{ default: CatalogEntry[] }>> = {
 
 const cache = new Map<Family, LabelSpec[]>();
 
+/** store/enum/paperTypeEnum.js (2 is used by the SP catalog for die-cut). */
 export const PAPER_TYPES: Record<number, string> = {
 	0: 'Continuous',
 	1: 'Die-cut',
 	2: 'Die-cut',
-	5: 'Card',
-	6: 'Black mark card',
+	3: 'Marker card',
+	4: 'Flag label',
+	5: 'Plate',
+	6: 'Tube',
+	7: 'Heat-shrink tube',
+	8: 'Marker strip',
+	9: 'Continuous with holes',
+	10: 'Reflective',
+	11: 'Laminated aluminum',
 	12: 'Black mark',
-	13: 'Black mark card',
-	14: 'Transparent'
+	13: 'Black-mark card',
+	14: 'Black-mark sticker',
+	21: 'Laminated wrap, continuous',
+	22: 'Laminated wrap, die-cut'
 };
 
 export function toLabelSpec(e: CatalogEntry): LabelSpec {

@@ -28,21 +28,35 @@ export const CMD = {
 } as const;
 
 const BUF_LENGTH = 4096;
-/** Index labels are printed upside down by the official app. */
-const ROTATE_180_LABELS = new Set(['5414', '5415']);
+/**
+ * Labels the official app prints rotated 180 degrees: 5414/5415 by ID, and the index-tab labels
+ * that matModule.buildT50PlusBook tags with ClassName1 "索引标签" at runtime (the tag is not in the
+ * catalog data, so the IDs are listed here).
+ */
+const ROTATE_180_LABELS = new Set([
+	'5414', '5415',
+	'5349', '5350', '5351', '5352', '5353', '5354', '5355', '5356', '5357', '5358', '5359', '5360',
+	'5476', '5477', '5478', '5479', '5480', '5481', '5482', '5483', '5484', '5485', '5486', '5487'
+]);
 
 export function parseT5080Status(r: Uint8Array): PrinterStatus {
 	const b = r.subarray(1, 9);
 	const errors: string[] = [];
 	const warnings: string[] = [];
-	if (b[2] & 0x08) errors.push('Label cover is open');
-	if (b[0] & 0x10) errors.push('Label roll is not installed correctly');
-	if (b[0] & 0x02) errors.push('No label detected');
-	if (b[0] & 0x04) errors.push('Out of labels');
-	if (b[1] & 0x08) errors.push('Print head is too hot');
-	if (b[0] & 0x08) warnings.push('Label not recognized');
-	if (b[0] & 0x40) warnings.push('Low battery, please charge');
-	if (b[0] & 0x20) warnings.push('Check remaining labels');
+	// Same precedence as the official devCheckErrMsg else-if chain: only the first matching
+	// condition is reported, and only some of them block printing.
+	const chain: [boolean, string, boolean][] = [
+		[!!(b[2] & 0x08), 'Label cover is open', true],
+		[!!(b[0] & 0x10), 'Label roll is not installed correctly', true],
+		[!!(b[0] & 0x02), 'No label detected', true],
+		[!!(b[0] & 0x08), 'Label not recognized', false],
+		[!!(b[0] & 0x04), 'Out of labels', true],
+		[!!(b[0] & 0x40), 'Low battery, please charge', false],
+		[!!(b[0] & 0x20), 'Check remaining labels', false],
+		[!!(b[1] & 0x08), 'Print head is too hot', true]
+	];
+	const hit = chain.find(([on]) => on);
+	if (hit) (hit[2] ? errors : warnings).push(hit[1]);
 	return {
 		raw: r,
 		bufferFull: !!(b[0] & 0x01),
@@ -169,8 +183,18 @@ export class T5080Driver implements PrinterDriver {
 	async readMedia(): Promise<MediaInfo | null> {
 		const r = await this.cmd(CMD.RETURN_MAT);
 		const labelId = r[16] | (r[17] << 8);
-		const serial = String.fromCharCode(...Array.from(r.subarray(40, 56)).filter((c) => c >= 0x20 && c < 0x7f));
-		const uuid = Array.from(r.subarray(1, 8), (b) => b.toString(16).padStart(2, '0')).join('');
+		// Like the official byteToString/bytesToString: stop at the first zero byte; the UUID is
+		// hex of bytes 1..7, right padded with '0' to 14 characters.
+		const untilZero = (from: number, len: number) => {
+			const out: number[] = [];
+			for (let i = from; i < from + len && r[i]; i++) out.push(r[i]);
+			return out;
+		};
+		const serial = String.fromCharCode(...untilZero(40, 16));
+		const uuid = untilZero(1, 7)
+			.map((b) => b.toString(16).padStart(2, '0'))
+			.join('')
+			.padEnd(14, '0');
 		return {
 			labelId,
 			paperType: r[18],
@@ -200,8 +224,9 @@ export class T5080Driver implements PrinterDriver {
 			encodeT5080Page(p, label, { density, headDots: this.headDots, printEnd, offsetX: opts.offsetX, offsetY: opts.offsetY });
 		const encodedPages = pages.map((p) => encode(p, false));
 		const lastPage = encode(pages[pages.length - 1], true);
+		// Collated like the official app (anyPrint): every page of a set, then the next copy.
 		const sequence: EncodedPage[] = [];
-		for (let i = 0; i < pages.length; i++) for (let c = 0; c < copies; c++) sequence.push(encodedPages[i]);
+		for (let c = 0; c < copies; c++) sequence.push(...encodedPages);
 		sequence[sequence.length - 1] = lastPage;
 
 		// 1. Check device, then wait for the main CPU to finish the USB command.
@@ -217,7 +242,10 @@ export class T5080Driver implements PrinterDriver {
 		this.assertOk(s);
 		if (s.printing) throw new PrinterError('Printer is already printing, try again shortly', 'busy');
 
-		// 2. Start print job.
+		// 2. Start print job. The chip write (0x5d SET_RFID_DATA) the official app attempts for
+		// labels whose UUID looks app-written is deliberately not ported: its payload builder
+		// (getT50PlusRFIDData) dereferences a null Cipertext and throws on every call in
+		// KatasymbolEditor 1.1.1, so the official app never actually sends it.
 		await this.cmd(CMD.START_PRINT, 1);
 
 		try {
@@ -244,6 +272,7 @@ export class T5080Driver implements PrinterDriver {
 						await sleep(20, signal);
 					}
 					await this.cmd(CMD.NEXTFRM_BULK, chunk.length);
+					await sleep(100, signal);
 					await this.channel.request(CommandChannel.chunk(chunk), 10000);
 					await sleep(100, signal);
 					await this.cmd(CMD.BUF_FULL, chunk.length, speed);
@@ -262,13 +291,20 @@ export class T5080Driver implements PrinterDriver {
 			}
 			report('done', total);
 		} catch (e) {
-			if (e instanceof PrinterError && e.code === 'cancelled') await this.stop().catch(() => {});
+			// Never leave the printer mid-job: stop it on cancel and on any other failure.
+			await this.stop().catch(() => {});
 			throw e;
 		}
 	}
 
+	/** Stop a running job (if any) and wait for the printer to finish stopping. */
 	async stop() {
-		const s = await this.getStatus();
-		if (s.printing) await this.cmd(CMD.STOP_PRINT);
+		let s = await this.getStatus();
+		if (!s.printing) return;
+		await this.cmd(CMD.STOP_PRINT);
+		for (let i = 0; i < 20 && s.printing; i++) {
+			await sleep(200);
+			s = await this.getStatus();
+		}
 	}
 }

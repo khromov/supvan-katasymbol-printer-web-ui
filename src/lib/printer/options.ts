@@ -21,19 +21,16 @@ export function familyOptions(family: Family, label?: LabelSpec): FamilyOptions 
 		case 'tp86a':
 			return { density: { ...TP_DENSITY }, cutTypes: TP_CUT_TYPES.map((c) => ({ ...c })) };
 		case 'g': {
-			// G offers a dotted line or full cut on continuous tape, and a full cut on sign labels.
-			if (label && G_SIGN_LABELS.has(label.id))
-				return { density: DENSITY_1_9, cutTypes: [{ value: 0, label: 'None' }, { value: 3, label: 'Full cut' }] };
-			if (label?.paperType === 0)
-				return {
-					density: DENSITY_1_9,
-					cutTypes: [
-						{ value: 0, label: 'None' },
-						{ value: 1, label: 'Dotted line' },
-						{ value: 3, label: 'Full cut' }
-					]
-				};
-			return { density: DENSITY_1_9 };
+			// PcEdit's G branch: sign labels offer None/Full, then the paper type wins: gap (1) only
+			// None, continuous (0) and heat-shrink tube (7) None/Line/Full.
+			const none = { value: 0, label: 'None' };
+			const line = { value: 1, label: 'Dotted line' };
+			const full = { value: 3, label: 'Full cut' };
+			let cutTypes: FamilyOptions['cutTypes'];
+			if (label && G_SIGN_LABELS.has(label.id)) cutTypes = [none, full];
+			if (label?.paperType === 1) cutTypes = [none];
+			if (label?.paperType === 0 || label?.paperType === 7) cutTypes = [none, line, full];
+			return { density: DENSITY_1_9, cutTypes };
 		}
 	}
 }

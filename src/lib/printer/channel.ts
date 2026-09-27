@@ -24,6 +24,8 @@ export class CommandChannel {
 	private queue: Promise<unknown> = Promise.resolve();
 	private waiter: ((d: Uint8Array) => void) | null = null;
 	private unsubscribe: () => void;
+	/** Set after a timeout: a late reply may still arrive and must not answer the next request. */
+	private drainBeforeNext = false;
 	debug = false;
 
 	constructor(readonly transport: Transport) {
@@ -31,6 +33,7 @@ export class CommandChannel {
 			if (this.debug) console.debug('[hid <-]', hex(d));
 			const w = this.waiter;
 			this.waiter = null;
+			if (!w && this.debug) console.debug('[hid] dropped unsolicited report');
 			w?.(d);
 		});
 	}
@@ -40,11 +43,18 @@ export class CommandChannel {
 	}
 
 	/** Send `reports` back to back, then wait for one response report. */
-	request(reports: Uint8Array[], timeoutMs = 3000): Promise<Uint8Array> {
+	request(reports: Uint8Array[], timeoutMs = 5000): Promise<Uint8Array> {
 		const run = async () => {
+			if (this.drainBeforeNext) {
+				// Give a late reply to the timed-out request time to arrive; it's dropped (no waiter).
+				this.drainBeforeNext = false;
+				await sleep(300);
+			}
+			let timer: ReturnType<typeof setTimeout> | undefined;
 			const response = new Promise<Uint8Array>((resolve, reject) => {
-				const timer = setTimeout(() => {
+				timer = setTimeout(() => {
 					this.waiter = null;
+					this.drainBeforeNext = true;
 					reject(new PrinterError('Printer did not respond', 'timeout'));
 				}, timeoutMs);
 				this.waiter = (d) => {
@@ -58,10 +68,22 @@ export class CommandChannel {
 					await this.transport.sendReport(r);
 				}
 			} catch (e) {
+				clearTimeout(timer);
 				this.waiter = null;
+				response.catch(() => {});
 				throw e;
 			}
 			return response;
+		};
+		const p = this.queue.then(run, run);
+		this.queue = p.catch(() => {});
+		return p;
+	}
+
+	/** Send reports without waiting for a reply (for firmware that doesn't answer bulk data). */
+	send(reports: Uint8Array[]): Promise<void> {
+		const run = async () => {
+			for (const r of reports) await this.transport.sendReport(r);
 		};
 		const p = this.queue.then(run, run);
 		this.queue = p.catch(() => {});

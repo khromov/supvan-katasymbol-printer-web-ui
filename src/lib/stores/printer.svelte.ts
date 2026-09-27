@@ -184,7 +184,22 @@ class PrinterStore {
 		}
 	}
 
-	async print(pages: Bitmap[], label: LabelSpec, opts: { density: number; copies: number; cutType?: number }) {
+	/** Stop a job the printer is still running (e.g. left over from an interrupted print). */
+	async stopPrinter() {
+		const driver = this.driver;
+		if (!driver?.stop || this.state !== 'ready') return;
+		this.stopPolling();
+		while (this.polling) await new Promise((r) => setTimeout(r, 20));
+		try {
+			await driver.stop();
+		} catch (e) {
+			this.error = (e as Error).message;
+		} finally {
+			void this.poll();
+		}
+	}
+
+	async print(pages: Bitmap[], label: LabelSpec, opts: { density: number; copies: number; cutType?: number; offsetX?: number; offsetY?: number }) {
 		const driver = this.driver;
 		if (!driver) throw new PrinterError('Connect a printer first', 'disconnected');
 		if (this.state === 'printing') throw new PrinterError('Already printing', 'busy');

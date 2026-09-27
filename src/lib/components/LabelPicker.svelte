@@ -31,6 +31,9 @@
 		const m = printer.media;
 		if (!m?.labelId) return null;
 		const hit = catalog.find((l) => l.id === String(m.labelId));
+		// Like MatCtrlFunc.waitForIdentifyMat (T50/T80 only), the chip's paper type and gap replace
+		// the catalog's for printing. The catalog value stays in extra.PaperType for display.
+		if (hit && family === 't5080') return { ...hit, paperType: m.paperType ?? hit.paperType, gap: m.gap ?? hit.gap };
 		if (hit) return hit;
 		if (m.widthMm && m.lengthMm) return { ...customLabel(m.widthMm, m.lengthMm, family, m.paperType ?? 1, m.gap ?? 3), name: `Label ${m.labelId}` };
 		return null;
@@ -39,7 +42,9 @@
 	// Follow the printer's label while auto mode is on.
 	$effect(() => {
 		const d = detected;
-		if (d && editor.labelAuto && (d.id !== editor.label.id || d.lengthMm !== editor.label.lengthMm || d.widthMm !== editor.label.widthMm)) {
+		const cur = editor.label;
+		const differs = d && (d.id !== cur.id || d.lengthMm !== cur.lengthMm || d.widthMm !== cur.widthMm || d.paperType !== cur.paperType || d.gap !== cur.gap);
+		if (d && editor.labelAuto && differs) {
 			editor.setLabel($state.snapshot(d) as LabelSpec, true);
 		}
 	});
@@ -49,7 +54,7 @@
 		const words = q.split(/\s+/).filter(Boolean);
 		const list = catalog.filter((l) => {
 			if (!words.length) return true;
-			const hay = `${l.name} ${l.id} ${l.text ?? ''} ${l.lengthMm} ${l.widthMm} ${l.lengthMm}x${l.widthMm} ${PAPER_TYPES[l.paperType] ?? ''}`.toLowerCase();
+			const hay = `${l.name} ${l.id} ${l.text ?? ''} ${l.lengthMm} ${l.widthMm} ${l.lengthMm}x${l.widthMm} ${typeName(l)}`.toLowerCase();
 			return words.every((w) => hay.includes(w));
 		});
 		return list.sort((a, b) => a.lengthMm - b.lengthMm || a.widthMm - b.widthMm || a.name.localeCompare(b.name));
@@ -65,6 +70,12 @@
 		const h = Math.max(5, Math.min(200, Math.round(customH)));
 		editor.setLabel(customLabel(w, h, family), false);
 		dialog.close();
+	}
+
+	/** Paper type name from the catalog entry (chip codes differ from catalog codes). */
+	function typeName(l: LabelSpec) {
+		const t = Number(l.extra?.PaperType ?? l.paperType);
+		return PAPER_TYPES[t] ?? 'Label';
 	}
 
 	/** Fit a label outline into a `box` px square, keeping its aspect ratio. */
@@ -96,7 +107,7 @@
 	<div class="info">
 		<div class="title">{labelTitle(editor.label)}</div>
 		<div class="sub">
-			{PAPER_TYPES[editor.label.paperType] ?? 'Label'}{editor.label.gap ? ` · ${editor.label.gap} mm gap` : ''}
+			{typeName(editor.label)}{editor.label.gap ? ` · ${editor.label.gap} mm gap` : ''}
 			{#if detected && detected.id === editor.label.id}
 				<span class="pill ok tiny"><Icon svg={ScanLine} size={12} /> In printer</span>
 			{/if}
@@ -135,7 +146,7 @@
 					<span class="mini-box"><span class="mini" class:rounded={labelShape(l) === 'rounded'} class:round={labelShape(l) === 'round'} style={swatch(l, 22)}></span></span>
 					<span class="size">{l.lengthMm} × {l.widthMm}</span>
 					<span class="code">{l.name}</span>
-					<span class="type">{PAPER_TYPES[l.paperType] ?? ''}</span>
+					<span class="type">{typeName(l)}</span>
 					{#if detected?.id === l.id}<span class="pill ok tiny">In printer</span>{/if}
 					{#if l.id === editor.label.id}<Icon svg={Check} size={15} />{/if}
 				</button>

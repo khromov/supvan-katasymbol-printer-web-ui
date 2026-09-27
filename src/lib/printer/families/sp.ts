@@ -455,8 +455,9 @@ export class SpDriver implements PrinterDriver {
 		try {
 			await this.runJob(sequence, mat, total, report, signal);
 		} catch (e) {
-			// stop() only sends STOP_PRINT if the printer reports it is printing.
-			if (e instanceof PrinterError && e.code === 'cancelled') await this.stop().catch(() => {});
+			// Never leave the printer mid-job. stop() only sends STOP_PRINT if the printer reports it is
+			// printing; a 'busy' error means the job running is not ours, so leave it alone.
+			if (!(e instanceof PrinterError && e.code === 'busy')) await this.stop().catch(() => {});
 			throw e;
 		}
 	}

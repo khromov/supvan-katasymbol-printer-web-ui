@@ -631,7 +631,8 @@ export class GDriver implements PrinterDriver {
 			this.assertOk(s);
 			report('done', total);
 		} catch (e) {
-			if (e instanceof PrinterError && e.code === 'cancelled') await this.stop().catch(() => {});
+			// Never leave the printer mid-job ('busy' means the running job is not ours).
+			if (!(e instanceof PrinterError && e.code === 'busy')) await this.stop().catch(() => {});
 			throw e;
 		}
 	}

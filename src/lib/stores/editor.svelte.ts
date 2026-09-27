@@ -9,6 +9,8 @@ interface Saved {
 	elements: DesignElement[];
 	density: number;
 	copies: number;
+	offsetX?: number;
+	offsetY?: number;
 }
 
 /** T53116, a common 40 x 30 mm T50 label, until the printer reports what is loaded. */
@@ -47,6 +49,9 @@ class EditorStore {
 	density = $state(4);
 	copies = $state(1);
 	cutType = $state(0);
+	/** Print position offsets in the official dialog's units (4 dots per step, -48..48). */
+	offsetX = $state(0);
+	offsetY = $state(0);
 	/** Bumped when the text field for a new element should grab focus. */
 	focusRequest = $state(0);
 	/** When set, the next icon picked replaces this icon element instead of adding one. */
@@ -65,6 +70,8 @@ class EditorStore {
 		if (Array.isArray(s.elements)) this.elements = s.elements;
 		if (s.density) this.density = s.density;
 		if (s.copies) this.copies = s.copies;
+		if (typeof s.offsetX === 'number') this.offsetX = s.offsetX;
+		if (typeof s.offsetY === 'number') this.offsetY = s.offsetY;
 	}
 
 	get selected(): DesignElement | undefined {
@@ -79,7 +86,9 @@ class EditorStore {
 				labelAuto: this.labelAuto,
 				elements: $state.snapshot(this.elements) as DesignElement[],
 				density: this.density,
-				copies: this.copies
+				copies: this.copies,
+				offsetX: this.offsetX,
+				offsetY: this.offsetY
 			};
 			try {
 				localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
