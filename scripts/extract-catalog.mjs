@@ -10,11 +10,15 @@ const src = fs.readFileSync(bundle, 'utf8');
 const outDir = path.join(import.meta.dirname, '../src/lib/catalog');
 fs.mkdirSync(outDir, { recursive: true });
 
+// Only the fields the app reads (src/lib/catalog/index.ts, the SP driver's hole margins, the T50/T80
+// driver's ClassName1 check); everything else in an entry is dropped.
 const KEEP = [
 	'ID', 'Name', 'Text', 'TapeLength', 'TapeWidth', 'PaperDirection', 'PaperType', 'DieCutGap', 'Padding',
-	'ShapeType', 'BlackMarkLength', 'BlackMarkHigh', 'BasePaperMargin', 'VCount', 'HCount', 'VSpace', 'HSpace',
-	'HoleStyle', 'HoleWidth', 'HoleHeight', 'LabelWidth', 'LabelUlWidth', 'LabelHeight', 'ClassName1', 'BackgroundImg'
+	'ShapeType', 'HoleStyle', 'HoleWidth', 'HoleHeight', 'ClassName1'
 ];
+// Values the app assumes when a field is missing, so they are left out too.
+const DEFAULTS = { Text: '', ShapeType: 1, HoleStyle: 0, HoleWidth: 0, HoleHeight: 0, ClassName1: '' };
+const slim = (it) => Object.fromEntries(KEEP.filter((k) => it[k] !== undefined && it[k] !== DEFAULTS[k]).map((k) => [k, it[k]]));
 
 // Webpack JSON modules look like `abcd:function(A){A.exports=JSON.parse('...')}`.
 const re = /([0-9a-f]{4}):function\(A\)\{A\.exports=JSON\.parse\('/g;
@@ -31,7 +35,7 @@ while ((m = re.exec(src))) {
 	}
 	const items = Array.isArray(data) ? data : Object.values(data);
 	if (items[0]?.TapeWidth === undefined) continue;
-	found.push(items.map((it) => Object.fromEntries(KEEP.filter((k) => it[k] !== undefined).map((k) => [k, it[k]]))));
+	found.push(items.map(slim));
 }
 
 // Identify each catalog by characteristic IDs.
@@ -42,6 +46,6 @@ for (const [family, probe] of Object.entries(families)) {
 		console.warn(`no catalog found for ${family}`);
 		continue;
 	}
-	fs.writeFileSync(path.join(outDir, `${family}.json`), JSON.stringify(cat));
+	fs.writeFileSync(path.join(outDir, `${family}.json`), `${JSON.stringify(cat, null, '\t')}\n`);
 	console.log(family, cat.length, 'labels');
 }

@@ -1,1 +1,407 @@
-[{"ID":"11001","Name":"6mm","Text":"","TapeLength":50,"TapeWidth":6,"PaperDirection":0,"PaperType":0,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11002","Name":"9mm","Text":"","TapeLength":50,"TapeWidth":9,"PaperDirection":0,"PaperType":0,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11003","Name":"12mm","Text":"","TapeLength":50,"TapeWidth":12,"PaperDirection":0,"PaperType":0,"DieCutGap":0,"Padding":{"Top":2,"Bottom":2,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11004","Name":"1.0平方","Text":"","TapeLength":50,"TapeWidth":5,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11005","Name":"4.0平方","Text":"","TapeLength":50,"TapeWidth":7,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11006","Name":"6.0平方","Text":"","TapeLength":50,"TapeWidth":9,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11010","Name":"4.0mm","Text":"","TapeLength":20,"TapeWidth":4,"PaperDirection":0,"PaperType":8,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11011","Name":"8.9mm","Text":"","TapeLength":25,"TapeWidth":8.9,"PaperDirection":0,"PaperType":8,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11012","Name":"10.8mm","Text":"","TapeLength":25,"TapeWidth":10.8,"PaperDirection":0,"PaperType":8,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11004-1","Name":"0.5平方","Text":"","TapeLength":50,"TapeWidth":4,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11004-2","Name":"0.75平方","Text":"","TapeLength":50,"TapeWidth":4,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11004-1506","Name":"1.5平方","Text":"","TapeLength":50,"TapeWidth":6,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11004-2507","Name":"2.5平方","Text":"","TapeLength":50,"TapeWidth":7,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11004-8","Name":"7.0平方","Text":"","TapeLength":50,"TapeWidth":10,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11004-9","Name":"8.0平方","Text":"","TapeLength":50,"TapeWidth":11,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":2,"Bottom":2,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11004-10","Name":"10.0平方","Text":"","TapeLength":50,"TapeWidth":12,"PaperDirection":0,"PaperType":6,"DieCutGap":0,"Padding":{"Top":2,"Bottom":2,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11007-0","Name":"Φ1","Text":"","TapeLength":50,"TapeWidth":3.6,"PaperDirection":0,"PaperType":7,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11007-1","Name":"Φ2","Text":"","TapeLength":50,"TapeWidth":4,"PaperDirection":0,"PaperType":7,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11007-2","Name":"Φ3","Text":"","TapeLength":50,"TapeWidth":5,"PaperDirection":0,"PaperType":7,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11007-3","Name":"Φ4","Text":"","TapeLength":50,"TapeWidth":7,"PaperDirection":0,"PaperType":7,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11007-4","Name":"Φ5","Text":"","TapeLength":50,"TapeWidth":9,"PaperDirection":0,"PaperType":7,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11007-5","Name":"Φ6","Text":"","TapeLength":50,"TapeWidth":10,"PaperDirection":0,"PaperType":7,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11007-6","Name":"Φ7","Text":"","TapeLength":50,"TapeWidth":12,"PaperDirection":0,"PaperType":7,"DieCutGap":0,"Padding":{"Top":2,"Bottom":2,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11010-7","Name":"Φ4.8","Text":"","TapeLength":20,"TapeWidth":9,"PaperDirection":0,"PaperType":15,"DieCutGap":0,"Padding":{"Top":1,"Bottom":1,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11010-1","Name":"4.6mm","Text":"","TapeLength":20,"TapeWidth":4.6,"PaperDirection":0,"PaperType":8,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11010-2","Name":"8.9mm","Text":"","TapeLength":20,"TapeWidth":8.9,"PaperDirection":0,"PaperType":8,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""},{"ID":"11010-3","Name":"10.8mm","Text":"","TapeLength":20,"TapeWidth":10.8,"PaperDirection":0,"PaperType":8,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":2,"Right":2},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":""}]
+[
+	{
+		"ID": "11001",
+		"Name": "6mm",
+		"TapeLength": 50,
+		"TapeWidth": 6,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11002",
+		"Name": "9mm",
+		"TapeLength": 50,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11003",
+		"Name": "12mm",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 2,
+			"Bottom": 2,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11004",
+		"Name": "1.0平方",
+		"TapeLength": 50,
+		"TapeWidth": 5,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11005",
+		"Name": "4.0平方",
+		"TapeLength": 50,
+		"TapeWidth": 7,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11006",
+		"Name": "6.0平方",
+		"TapeLength": 50,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11010",
+		"Name": "4.0mm",
+		"TapeLength": 20,
+		"TapeWidth": 4,
+		"PaperDirection": 0,
+		"PaperType": 8,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11011",
+		"Name": "8.9mm",
+		"TapeLength": 25,
+		"TapeWidth": 8.9,
+		"PaperDirection": 0,
+		"PaperType": 8,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11012",
+		"Name": "10.8mm",
+		"TapeLength": 25,
+		"TapeWidth": 10.8,
+		"PaperDirection": 0,
+		"PaperType": 8,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11004-1",
+		"Name": "0.5平方",
+		"TapeLength": 50,
+		"TapeWidth": 4,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11004-2",
+		"Name": "0.75平方",
+		"TapeLength": 50,
+		"TapeWidth": 4,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11004-1506",
+		"Name": "1.5平方",
+		"TapeLength": 50,
+		"TapeWidth": 6,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11004-2507",
+		"Name": "2.5平方",
+		"TapeLength": 50,
+		"TapeWidth": 7,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11004-8",
+		"Name": "7.0平方",
+		"TapeLength": 50,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11004-9",
+		"Name": "8.0平方",
+		"TapeLength": 50,
+		"TapeWidth": 11,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 2,
+			"Bottom": 2,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11004-10",
+		"Name": "10.0平方",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 6,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 2,
+			"Bottom": 2,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11007-0",
+		"Name": "Φ1",
+		"TapeLength": 50,
+		"TapeWidth": 3.6,
+		"PaperDirection": 0,
+		"PaperType": 7,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11007-1",
+		"Name": "Φ2",
+		"TapeLength": 50,
+		"TapeWidth": 4,
+		"PaperDirection": 0,
+		"PaperType": 7,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11007-2",
+		"Name": "Φ3",
+		"TapeLength": 50,
+		"TapeWidth": 5,
+		"PaperDirection": 0,
+		"PaperType": 7,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11007-3",
+		"Name": "Φ4",
+		"TapeLength": 50,
+		"TapeWidth": 7,
+		"PaperDirection": 0,
+		"PaperType": 7,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11007-4",
+		"Name": "Φ5",
+		"TapeLength": 50,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 7,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11007-5",
+		"Name": "Φ6",
+		"TapeLength": 50,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 7,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11007-6",
+		"Name": "Φ7",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 7,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 2,
+			"Bottom": 2,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11010-7",
+		"Name": "Φ4.8",
+		"TapeLength": 20,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 15,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11010-1",
+		"Name": "4.6mm",
+		"TapeLength": 20,
+		"TapeWidth": 4.6,
+		"PaperDirection": 0,
+		"PaperType": 8,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11010-2",
+		"Name": "8.9mm",
+		"TapeLength": 20,
+		"TapeWidth": 8.9,
+		"PaperDirection": 0,
+		"PaperType": 8,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	},
+	{
+		"ID": "11010-3",
+		"Name": "10.8mm",
+		"TapeLength": 20,
+		"TapeWidth": 10.8,
+		"PaperDirection": 0,
+		"PaperType": 8,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 2,
+			"Right": 2
+		}
+	}
+]

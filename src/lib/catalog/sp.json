@@ -1,1 +1,3113 @@
-[{"ID":"1827","Name":"18mm*27mm","Text":"","TapeLength":27,"TapeWidth":18,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":"1827.png"},{"ID":"1842","Name":"18mm*42mm","Text":"","TapeLength":42,"TapeWidth":18,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":"1842.png"},{"ID":"11021","Name":"SP-L50050S","Text":"","TapeLength":100,"TapeWidth":50,"PaperDirection":0,"PaperType":0,"DieCutGap":0,"Padding":{"Top":0,"Bottom":0,"Left":0,"Right":0},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":"11021.png"},{"ID":"11022","Name":"SP-L70050S","Text":"","TapeLength":100,"TapeWidth":70,"PaperDirection":0,"PaperType":0,"DieCutGap":0,"Padding":{"Top":8,"Bottom":8,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":"11022.png"},{"ID":"11023","Name":"32mm*68mm","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":6,"HoleHeight":0,"ClassName1":"","BackgroundImg":"11023.png"},{"ID":"11024","Name":"32mm*68mm (C-32682)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":13,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":10,"HoleHeight":0,"ClassName1":"","BackgroundImg":"11024.png"},{"ID":"1040-1","Name":"10mm*40mm","Text":"","TapeLength":40,"TapeWidth":10,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1040-1.png"},{"ID":"1040-2","Name":"10mm*40mm","Text":"","TapeLength":40,"TapeWidth":10,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1040-2.png"},{"ID":"1050-1","Name":"10mm*50mm-1","Text":"","TapeLength":50,"TapeWidth":10,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1050-1.png"},{"ID":"1050-2","Name":"10mm*50mm","Text":"","TapeLength":50,"TapeWidth":10,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1050-2.png"},{"ID":"1050-3","Name":"10mm*50mm-2","Text":"","TapeLength":50,"TapeWidth":10,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1050-3.png"},{"ID":"1054-1","Name":"10mm*54mm","Text":"","TapeLength":54,"TapeWidth":10,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1054-1.png"},{"ID":"1054-2","Name":"10mm*54mm","Text":"","TapeLength":54,"TapeWidth":10,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":13},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1054-2.png"},{"ID":"1352-1","Name":"13mm*52mm","Text":"","TapeLength":52,"TapeWidth":13,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1352-1.png"},{"ID":"1352-2","Name":"13mm*52mm","Text":"","TapeLength":52,"TapeWidth":13,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1352-2.png"},{"ID":"1550-1","Name":"15mm*50mm","Text":"","TapeLength":50,"TapeWidth":15,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1550-1.png"},{"ID":"1550-2","Name":"15mm*50mm","Text":"","TapeLength":50,"TapeWidth":15,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1550-2.png"},{"ID":"1560-1","Name":"15mm*60mm","Text":"","TapeLength":60,"TapeWidth":15,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1560-1.png"},{"ID":"1560-2","Name":"15mm*60mm","Text":"","TapeLength":60,"TapeWidth":15,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1560-2.png"},{"ID":"1660-1","Name":"16mm*60mm","Text":"","TapeLength":60,"TapeWidth":16,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1660-1.png"},{"ID":"1660-2","Name":"16mm*60mm","Text":"","TapeLength":60,"TapeWidth":16,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"1660-2.png"},{"ID":"2050-1","Name":"20mm*50mm","Text":"","TapeLength":50,"TapeWidth":20,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2050-1.png"},{"ID":"2050-2","Name":"20mm*50mm","Text":"","TapeLength":50,"TapeWidth":20,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2050-2.png"},{"ID":"2060-1","Name":"20mm*60mm","Text":"","TapeLength":60,"TapeWidth":20,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2060-1.png"},{"ID":"2060-2","Name":"20mm*60mm","Text":"","TapeLength":60,"TapeWidth":20,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2060-2.png"},{"ID":"2080-1","Name":"20mm*80mm","Text":"","TapeLength":80,"TapeWidth":20,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":2,"Bottom":2,"Left":12,"Right":12},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":8,"HoleHeight":4,"ClassName1":"","BackgroundImg":"2080-1.png"},{"ID":"2550-1","Name":"25mm*50mm-1","Text":"","TapeLength":50,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":14,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2550-1.png"},{"ID":"2550-2","Name":"25mm*50mm-2","Text":"","TapeLength":50,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2550-2.png"},{"ID":"2550-3","Name":"25mm*50mm-1","Text":"","TapeLength":50,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2550-3.png"},{"ID":"2550-4","Name":"25mm*50mm-2","Text":"","TapeLength":50,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2550-4.png"},{"ID":"2570-1","Name":"25mm*70mm-1","Text":"","TapeLength":70,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2570-1.png"},{"ID":"2570-2","Name":"25mm*70mm","Text":"","TapeLength":70,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2570-2.png"},{"ID":"2570-3","Name":"25mm*70mm-2","Text":"","TapeLength":70,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2570-3.png"},{"ID":"2570-4","Name":"25mm*70mm-3","Text":"","TapeLength":70,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"2570-4.png"},{"ID":"2570-5","Name":"25mm*70mm","Text":"","TapeLength":70,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"2570-5.png"},{"ID":"2570-6","Name":"25mm*70mm","Text":"","TapeLength":70,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"2570-6.png"},{"ID":"30100-1","Name":"30mm*100mm","Text":"","TapeLength":100,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"30100-1.png"},{"ID":"30100-2","Name":"30mm*100mm","Text":"","TapeLength":100,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"30100-2.png"},{"ID":"3045-22","Name":"30mm*45mm-2","Text":"","TapeLength":28,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":"3045-22.png"},{"ID":"3045-23","Name":"30mm*45mm-1","Text":"","TapeLength":28,"TapeWidth":45,"PaperDirection":1,"PaperType":5,"DieCutGap":0,"Padding":{"Top":26,"Bottom":3,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":5,"ClassName1":"","BackgroundImg":"3045-23.png"},{"ID":"3045-29","Name":"30mm*45mm-3","Text":"","TapeLength":45,"TapeWidth":28,"PaperDirection":0,"PaperType":2,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":4,"Right":27},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":"3045-29.png"},{"ID":"3048-1","Name":"30mm*48mm-1","Text":"","TapeLength":48,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3048-1.png"},{"ID":"3048-2","Name":"30mm*48mm-1","Text":"","TapeLength":48,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":14,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3048-2.png"},{"ID":"3048-3","Name":"30mm*48mm-2","Text":"","TapeLength":48,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"3048-3.png"},{"ID":"3048-4","Name":"30mm*48mm-2","Text":"","TapeLength":48,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"3048-4.png"},{"ID":"3060-1","Name":"30mm*60mm-1","Text":"","TapeLength":60,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"3060-1.png"},{"ID":"3060-2","Name":"30mm*60mm-2","Text":"","TapeLength":60,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3060-2.png"},{"ID":"3060-3","Name":"30mm*60mm (C-30602)","Text":"","TapeLength":60,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3060-3.png"},{"ID":"3070-1","Name":"30mm*70mm","Text":"","TapeLength":70,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"3070-1.png"},{"ID":"3070-2","Name":"30mm*70mm","Text":"","TapeLength":70,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":12},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3070-2.png"},{"ID":"3070-3","Name":"30mm*70mm","Text":"","TapeLength":70,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3070-3.png"},{"ID":"3080-1","Name":"30mm*80mm","Text":"","TapeLength":80,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3080-1.png"},{"ID":"3080-2","Name":"30mm*80mm","Text":"","TapeLength":80,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3080-2.png"},{"ID":"3090-1","Name":"30mm*90mm","Text":"","TapeLength":90,"TapeWidth":30,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":28,"Right":28},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":22,"HoleHeight":22,"ClassName1":"","BackgroundImg":"3090-1.png"},{"ID":"3268-1","Name":"32mm*68mm-1 (C-32681)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"3268-1.png"},{"ID":"3268-2","Name":"32mm*68mm-2","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3268-2.png"},{"ID":"3268-3","Name":"32mm*68mm-3","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3268-3.png"},{"ID":"3268-4","Name":"32mm*68mm-1","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"3268-4.png"},{"ID":"3268-5","Name":"32mm*68mm-2","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3268-5.png"},{"ID":"3268-6","Name":"32mm*68mm","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":12},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3268-6.png"},{"ID":"3268-7","Name":"32mm*68mm-3","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"3268-7.png"},{"ID":"32688-1","Name":"32mm*68mm 八连牌","Text":"","TapeLength":256,"TapeWidth":68,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":11,"Bottom":6,"Left":5,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":"32688-1.png"},{"ID":"40100-2","Name":"40mm*100mm-1","Text":"","TapeLength":100,"TapeWidth":40,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"40100-2.png"},{"ID":"40100-3","Name":"40mm*100mm-2","Text":"","TapeLength":100,"TapeWidth":40,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"40100-3.png"},{"ID":"40100-4","Name":"40mm*100mm","Text":"","TapeLength":100,"TapeWidth":40,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"40100-4.png"},{"ID":"45125-1","Name":"45mm*125mm-1","Text":"","TapeLength":125,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"45125-1.png"},{"ID":"45125-2","Name":"45mm*125mm-2","Text":"","TapeLength":125,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"45125-2.png"},{"ID":"45125-3","Name":"45mm*125mm","Text":"","TapeLength":125,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"45125-3.png"},{"ID":"45180-1","Name":"45mm*180mm","Text":"","TapeLength":180,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"45180-1.png"},{"ID":"45180-2","Name":"45mm*180mm","Text":"","TapeLength":180,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"45180-2.png"},{"ID":"4550-1","Name":"45mm*50mm-1","Text":"","TapeLength":50,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"4550-1.png"},{"ID":"4550-2","Name":"45mm*50mm-2","Text":"","TapeLength":50,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4550-2.png"},{"ID":"4550-3","Name":"45mm*50mm","Text":"","TapeLength":50,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4550-3.png"},{"ID":"4563-1","Name":"45mm*63mm-1","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4563-1.png"},{"ID":"4563-2","Name":"45mm*63mm-2","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4563-2.png"},{"ID":"4563-3","Name":"45mm*63mm","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4563-3.png"},{"ID":"4580-1","Name":"45mm*80mm-1","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"4580-1.png"},{"ID":"4580-10","Name":"45mm*80mm-3","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"4580-10.png"},{"ID":"4580-2","Name":"45mm*80mm-1","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"4580-2.png"},{"ID":"4580-3","Name":"45mm*80mm-2","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4580-3.png"},{"ID":"4580-4","Name":"45mm*80mm-2","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4580-4.png"},{"ID":"4580-5","Name":"45mm*80mm-1","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4580-5.png"},{"ID":"4580-6","Name":"45mm*80mm-3","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4580-6.png"},{"ID":"4580-7","Name":"45mm*80mm-4","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4580-7.png"},{"ID":"4580-8","Name":"45mm*80mm-2","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":12},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"4580-8.png"},{"ID":"4580-9","Name":"45mm*80mm-5","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"4580-9.png"},{"ID":"50100-1","Name":"50mm*100mm-1","Text":"","TapeLength":100,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"50100-1.png"},{"ID":"50100-2","Name":"50mm*100mm-2","Text":"","TapeLength":100,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"50100-2.png"},{"ID":"50100-3","Name":"50mm*100mm-1","Text":"","TapeLength":100,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"50100-3.png"},{"ID":"50100-4","Name":"50mm*100mm-2","Text":"","TapeLength":100,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"50100-4.png"},{"ID":"5080-1","Name":"50mm*80mm","Text":"","TapeLength":80,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"5080-1.png"},{"ID":"5080-2","Name":"50mm*80mm-3","Text":"","TapeLength":80,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5080-2.png"},{"ID":"5080-20","Name":"50mm*80mm-1","Text":"","TapeLength":80,"TapeWidth":70,"PaperDirection":1,"PaperType":5,"DieCutGap":0,"Padding":{"Top":21,"Bottom":3,"Left":15,"Right":15},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":"5080-20.png"},{"ID":"5080-3","Name":"50mm*80mm-2","Text":"","TapeLength":80,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5080-3.png"},{"ID":"5080-4","Name":"50mm*80mm","Text":"","TapeLength":80,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5080-4.png"},{"ID":"5090-1","Name":"50mm*90mm","Text":"","TapeLength":90,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":12},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5090-1.png"},{"ID":"5090-2","Name":"50mm*90mm-1","Text":"","TapeLength":90,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5090-2.png"},{"ID":"5090-3","Name":"50mm*90mm-1","Text":"","TapeLength":90,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5090-3.png"},{"ID":"5090-4","Name":"50mm*90mm-2","Text":"","TapeLength":90,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"5090-4.png"},{"ID":"5090-5","Name":"50mm*90mm-3","Text":"","TapeLength":90,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5090-5.png"},{"ID":"5090-6","Name":"50mm*90mm-2","Text":"","TapeLength":90,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"5090-6.png"},{"ID":"5171-1","Name":"51mm*71mm","Text":"","TapeLength":51,"TapeWidth":71,"PaperDirection":1,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5171-1.png"},{"ID":"5486-1","Name":"54mm*86mm-1","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5486-1.png"},{"ID":"5486-2","Name":"54mm*86mm-2","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5486-2.png"},{"ID":"5486-3","Name":"54mm*86mm-3","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5486-3.png"},{"ID":"5486-4","Name":"54mm*86mm-4","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"5486-4.png"},{"ID":"5486-5","Name":"54mm*86mm-1","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"5486-5.png"},{"ID":"5486-6","Name":"54mm*86mm-2","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5486-6.png"},{"ID":"5486-7","Name":"54mm*86mm-3","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5486-7.png"},{"ID":"5486-8","Name":"54mm*86mm-4","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"5486-8.png"},{"ID":"60100-1","Name":"60mm*100mm-1","Text":"","TapeLength":100,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":4,"Bottom":4,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"60100-1.png"},{"ID":"60100-2","Name":"60mm*100mm-2","Text":"","TapeLength":100,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"60100-2.png"},{"ID":"60100-3","Name":"60mm*100mm-1","Text":"","TapeLength":100,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"60100-3.png"},{"ID":"60100-4","Name":"60mm*100mm-2","Text":"","TapeLength":100,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":4,"Bottom":4,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"60100-4.png"},{"ID":"6080-1","Name":"60mm*80mm","Text":"","TapeLength":80,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":4,"Bottom":4,"Left":12,"Right":12},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"6080-1.png"},{"ID":"6080-2","Name":"60mm*80mm-1","Text":"","TapeLength":80,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"6080-2.png"},{"ID":"6080-3","Name":"60mm*80mm-2","Text":"","TapeLength":80,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":4,"Bottom":4,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"6080-3.png"},{"ID":"6080-4","Name":"60mm*80mm-3","Text":"","TapeLength":80,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":4,"Bottom":4,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"6080-4.png"},{"ID":"6080-5","Name":"60mm*80mm-1","Text":"","TapeLength":80,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":9,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"6080-5.png"},{"ID":"6080-6","Name":"60mm*80mm-2","Text":"","TapeLength":80,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":4,"Bottom":4,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"6080-6.png"},{"ID":"6090-1","Name":"60mm*90mm-1","Text":"","TapeLength":90,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":4,"Bottom":4,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"6090-1.png"},{"ID":"6090-2","Name":"60mm*90mm-2","Text":"","TapeLength":90,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"6090-2.png"},{"ID":"6090-3","Name":"60mm*90mm-1","Text":"","TapeLength":90,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"6090-3.png"},{"ID":"6090-4","Name":"60mm*90mm-2","Text":"","TapeLength":90,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":4,"Bottom":4,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"6090-4.png"},{"ID":"70120-1","Name":"70mm*120mm-1","Text":"","TapeLength":120,"TapeWidth":70,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":9,"Bottom":9,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"70120-1.png"},{"ID":"70120-2","Name":"70mm*120mm-2","Text":"","TapeLength":120,"TapeWidth":70,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":9,"Bottom":9,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"70120-2.png"},{"ID":"70120-3","Name":"70mm*120mm","Text":"","TapeLength":120,"TapeWidth":70,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":9,"Bottom":9,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"70120-3.png"},{"ID":"70120-4","Name":"70mm*120mm","Text":"","TapeLength":120,"TapeWidth":70,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":9,"Bottom":9,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"70120-4.png"},{"ID":"7025-1","Name":"70mm*25mm","Text":"","TapeLength":70,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":14,"Right":14},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":0,"HoleWidth":0,"HoleHeight":0,"ClassName1":"","BackgroundImg":"7025-1.png"},{"ID":"80120-1","Name":"80mm*120mm-1","Text":"","TapeLength":120,"TapeWidth":80,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":14,"Bottom":14,"Left":12,"Right":12},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"80120-1.png"},{"ID":"80120-2","Name":"80mm*120mm-2","Text":"","TapeLength":120,"TapeWidth":80,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":14,"Bottom":14,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"80120-2.png"},{"ID":"80120-3","Name":"80mm*120mm-3","Text":"","TapeLength":120,"TapeWidth":80,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":14,"Bottom":14,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"80120-3.png"},{"ID":"80120-4","Name":"80mm*120mm-4","Text":"","TapeLength":120,"TapeWidth":80,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":14,"Bottom":14,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"80120-4.png"},{"ID":"8090-1","Name":"80mm*90mm","Text":"","TapeLength":90,"TapeWidth":80,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":14,"Bottom":14,"Left":12,"Right":12},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"8090-1.png"},{"ID":"8090-2","Name":"80mm*90mm-1","Text":"","TapeLength":90,"TapeWidth":80,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":14,"Bottom":14,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"8090-2.png"},{"ID":"8090-3","Name":"80mm*90mm-2","Text":"","TapeLength":90,"TapeWidth":80,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":12,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"8090-3.png"},{"ID":"sp-chinamobile-1","Name":"光缆标签(25*70mm)","Text":"","TapeLength":70,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinamobile-1.png"},{"ID":"sp-chinamobile-10","Name":"项目标签(45*80mm)","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinamobile-10.png"},{"ID":"sp-chinamobile-2","Name":"线缆标签(45*80mm)","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinamobile-2.png"},{"ID":"sp-chinamobile-3","Name":"光缆标牌(50*80mm)","Text":"","TapeLength":80,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinamobile-3.png"},{"ID":"sp-chinamobile-4","Name":"光缆标签(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinamobile-4.png"},{"ID":"sp-chinamobile-5","Name":"光缆标牌(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinamobile-5.png"},{"ID":"sp-chinamobile-6","Name":"光缆标签(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinamobile-6.png"},{"ID":"sp-chinamobile-7","Name":"高铁公网(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":13,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":10,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-chinamobile-7.png"},{"ID":"sp-chinamobile-8","Name":"光缆标牌(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinamobile-8.png"},{"ID":"sp-chinamobile-9","Name":"光缆标牌(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinamobile-9.png"},{"ID":"sp-chinatelecom-1","Name":"光缆标牌(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinatelecom-1.png"},{"ID":"sp-chinatelecom-2","Name":"光缆标签(45*80mm)","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinatelecom-2.png"},{"ID":"sp-chinatelecom-3","Name":"光缆挂牌(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":13,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":10,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-chinatelecom-3.png"},{"ID":"sp-chinatelecom-4","Name":"迳头接入(45*80mm)","Text":"","TapeLength":80,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinatelecom-4.png"},{"ID":"sp-chinatelecom-5","Name":"庭院绿化(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinatelecom-5.png"},{"ID":"sp-chinatelecom-6","Name":"警告标牌(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinatelecom-6.png"},{"ID":"sp-chinatelecom-7","Name":"线缆标牌(54*86mm)","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinatelecom-7.png"},{"ID":"sp-chinaunicom-1","Name":"线缆标牌(60*90mm)","Text":"","TapeLength":90,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinaunicom-1.png"},{"ID":"sp-chinaunicom-2","Name":"光缆标牌(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinaunicom-2.png"},{"ID":"sp-chinaunicom-3","Name":"光缆标牌(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinaunicom-3.png"},{"ID":"sp-chinaunicom-4","Name":"警告标牌(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinaunicom-4.png"},{"ID":"sp-chinaunicom-5","Name":"设备标牌(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-chinaunicom-5.png"},{"ID":"sp-common-1","Name":"变电站(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":13,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":10,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-common-1.png"},{"ID":"sp-common-10","Name":"通信机房(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":6,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-common-10.png"},{"ID":"sp-common-11","Name":"通讯箱(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":13,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":10,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-common-11.png"},{"ID":"sp-common-12","Name":"智能控制柜(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":6,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-common-12.png"},{"ID":"sp-common-13","Name":"电缆去向牌(32x68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":13,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":10,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-common-13.png"},{"ID":"sp-common-2","Name":"光纤到户(60*100mm)","Text":"","TapeLength":100,"TapeWidth":60,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-common-2.png"},{"ID":"sp-common-3","Name":"接入光线(25*70mm)","Text":"","TapeLength":70,"TapeWidth":25,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":8},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":11,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-common-3.png"},{"ID":"sp-common-4","Name":"宽带光缆(54*86mm)","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":8,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"sp-common-4.png"},{"ID":"sp-common-5","Name":"光缆标牌(54*86mm)","Text":"","TapeLength":86,"TapeWidth":54,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":2,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-common-5.png"},{"ID":"sp-common-6","Name":"线缆标牌(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":4,"ClassName1":"","BackgroundImg":"sp-common-6.png"},{"ID":"sp-common-7","Name":"花木场(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":6,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-common-7.png"},{"ID":"sp-common-8","Name":"绿植园林(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":5,"HoleWidth":6,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-common-8.png"},{"ID":"sp-common-9","Name":"配电房线缆(50*80mm)","Text":"","TapeLength":80,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-common-9.png"},{"ID":"sp-stategrid-1","Name":"电缆标签(45*63mm)","Text":"","TapeLength":63,"TapeWidth":45,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-stategrid-1.png"},{"ID":"sp-stategrid-2","Name":"电缆挂牌(50*80mm)","Text":"","TapeLength":80,"TapeWidth":50,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":7,"Bottom":4,"Left":4,"Right":4},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":7,"HoleWidth":8,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-stategrid-2.png"},{"ID":"sp-stategrid-3","Name":"警告标牌(20*50mm)","Text":"","TapeLength":50,"TapeWidth":20,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":6},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":4,"HoleHeight":2,"ClassName1":"","BackgroundImg":"sp-stategrid-3.png"},{"ID":"sp-stategrid-4","Name":"电力局标签(32*68mm)","Text":"","TapeLength":68,"TapeWidth":32,"PaperDirection":0,"PaperType":5,"DieCutGap":0,"Padding":{"Top":3,"Bottom":3,"Left":10,"Right":5},"ShapeType":1,"BlackMarkLength":0,"BlackMarkHigh":3,"BasePaperMargin":2,"VCount":1,"HCount":1,"VSpace":0,"HSpace":0,"HoleStyle":1,"HoleWidth":6,"HoleHeight":0,"ClassName1":"","BackgroundImg":"sp-stategrid-4.png"}]
+[
+	{
+		"ID": "1827",
+		"Name": "18mm*27mm",
+		"TapeLength": 27,
+		"TapeWidth": 18,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 4,
+			"Right": 4
+		}
+	},
+	{
+		"ID": "1842",
+		"Name": "18mm*42mm",
+		"TapeLength": 42,
+		"TapeWidth": 18,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 4,
+			"Right": 4
+		}
+	},
+	{
+		"ID": "11021",
+		"Name": "SP-L50050S",
+		"TapeLength": 100,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 0,
+			"Bottom": 0,
+			"Left": 0,
+			"Right": 0
+		}
+	},
+	{
+		"ID": "11022",
+		"Name": "SP-L70050S",
+		"TapeLength": 100,
+		"TapeWidth": 70,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 8,
+			"Bottom": 8,
+			"Left": 4,
+			"Right": 4
+		}
+	},
+	{
+		"ID": "11023",
+		"Name": "32mm*68mm",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 5
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 6
+	},
+	{
+		"ID": "11024",
+		"Name": "32mm*68mm (C-32682)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 13,
+			"Right": 6
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 10
+	},
+	{
+		"ID": "1040-1",
+		"Name": "10mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1040-2",
+		"Name": "10mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1050-1",
+		"Name": "10mm*50mm-1",
+		"TapeLength": 50,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1050-2",
+		"Name": "10mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1050-3",
+		"Name": "10mm*50mm-2",
+		"TapeLength": 50,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1054-1",
+		"Name": "10mm*54mm",
+		"TapeLength": 54,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1054-2",
+		"Name": "10mm*54mm",
+		"TapeLength": 54,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 13
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1352-1",
+		"Name": "13mm*52mm",
+		"TapeLength": 52,
+		"TapeWidth": 13,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1352-2",
+		"Name": "13mm*52mm",
+		"TapeLength": 52,
+		"TapeWidth": 13,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1550-1",
+		"Name": "15mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1550-2",
+		"Name": "15mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1560-1",
+		"Name": "15mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1560-2",
+		"Name": "15mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1660-1",
+		"Name": "16mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 16,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "1660-2",
+		"Name": "16mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 16,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2050-1",
+		"Name": "20mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2050-2",
+		"Name": "20mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2060-1",
+		"Name": "20mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2060-2",
+		"Name": "20mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2080-1",
+		"Name": "20mm*80mm",
+		"TapeLength": 80,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 2,
+			"Bottom": 2,
+			"Left": 12,
+			"Right": 12
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 8,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "2550-1",
+		"Name": "25mm*50mm-1",
+		"TapeLength": 50,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 14,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2550-2",
+		"Name": "25mm*50mm-2",
+		"TapeLength": 50,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2550-3",
+		"Name": "25mm*50mm-1",
+		"TapeLength": 50,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2550-4",
+		"Name": "25mm*50mm-2",
+		"TapeLength": 50,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2570-1",
+		"Name": "25mm*70mm-1",
+		"TapeLength": 70,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2570-2",
+		"Name": "25mm*70mm",
+		"TapeLength": 70,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2570-3",
+		"Name": "25mm*70mm-2",
+		"TapeLength": 70,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "2570-4",
+		"Name": "25mm*70mm-3",
+		"TapeLength": 70,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "2570-5",
+		"Name": "25mm*70mm",
+		"TapeLength": 70,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "2570-6",
+		"Name": "25mm*70mm",
+		"TapeLength": 70,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "30100-1",
+		"Name": "30mm*100mm",
+		"TapeLength": 100,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "30100-2",
+		"Name": "30mm*100mm",
+		"TapeLength": 100,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3045-22",
+		"Name": "30mm*45mm-2",
+		"TapeLength": 28,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 4,
+			"Right": 4
+		}
+	},
+	{
+		"ID": "3045-23",
+		"Name": "30mm*45mm-1",
+		"TapeLength": 28,
+		"TapeWidth": 45,
+		"PaperDirection": 1,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 26,
+			"Bottom": 3,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 5
+	},
+	{
+		"ID": "3045-29",
+		"Name": "30mm*45mm-3",
+		"TapeLength": 45,
+		"TapeWidth": 28,
+		"PaperDirection": 0,
+		"PaperType": 2,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 4,
+			"Right": 27
+		}
+	},
+	{
+		"ID": "3048-1",
+		"Name": "30mm*48mm-1",
+		"TapeLength": 48,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3048-2",
+		"Name": "30mm*48mm-1",
+		"TapeLength": 48,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 14,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3048-3",
+		"Name": "30mm*48mm-2",
+		"TapeLength": 48,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "3048-4",
+		"Name": "30mm*48mm-2",
+		"TapeLength": 48,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "3060-1",
+		"Name": "30mm*60mm-1",
+		"TapeLength": 60,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "3060-2",
+		"Name": "30mm*60mm-2",
+		"TapeLength": 60,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3060-3",
+		"Name": "30mm*60mm (C-30602)",
+		"TapeLength": 60,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 6
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3070-1",
+		"Name": "30mm*70mm",
+		"TapeLength": 70,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "3070-2",
+		"Name": "30mm*70mm",
+		"TapeLength": 70,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 12
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3070-3",
+		"Name": "30mm*70mm",
+		"TapeLength": 70,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3080-1",
+		"Name": "30mm*80mm",
+		"TapeLength": 80,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3080-2",
+		"Name": "30mm*80mm",
+		"TapeLength": 80,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3090-1",
+		"Name": "30mm*90mm",
+		"TapeLength": 90,
+		"TapeWidth": 30,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 28,
+			"Right": 28
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 22,
+		"HoleHeight": 22
+	},
+	{
+		"ID": "3268-1",
+		"Name": "32mm*68mm-1 (C-32681)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "3268-2",
+		"Name": "32mm*68mm-2",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3268-3",
+		"Name": "32mm*68mm-3",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3268-4",
+		"Name": "32mm*68mm-1",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "3268-5",
+		"Name": "32mm*68mm-2",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3268-6",
+		"Name": "32mm*68mm",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 12
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "3268-7",
+		"Name": "32mm*68mm-3",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "32688-1",
+		"Name": "32mm*68mm 八连牌",
+		"TapeLength": 256,
+		"TapeWidth": 68,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 11,
+			"Bottom": 6,
+			"Left": 5,
+			"Right": 5
+		}
+	},
+	{
+		"ID": "40100-2",
+		"Name": "40mm*100mm-1",
+		"TapeLength": 100,
+		"TapeWidth": 40,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "40100-3",
+		"Name": "40mm*100mm-2",
+		"TapeLength": 100,
+		"TapeWidth": 40,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "40100-4",
+		"Name": "40mm*100mm",
+		"TapeLength": 100,
+		"TapeWidth": 40,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "45125-1",
+		"Name": "45mm*125mm-1",
+		"TapeLength": 125,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "45125-2",
+		"Name": "45mm*125mm-2",
+		"TapeLength": 125,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "45125-3",
+		"Name": "45mm*125mm",
+		"TapeLength": 125,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "45180-1",
+		"Name": "45mm*180mm",
+		"TapeLength": 180,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "45180-2",
+		"Name": "45mm*180mm",
+		"TapeLength": 180,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4550-1",
+		"Name": "45mm*50mm-1",
+		"TapeLength": 50,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "4550-2",
+		"Name": "45mm*50mm-2",
+		"TapeLength": 50,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4550-3",
+		"Name": "45mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4563-1",
+		"Name": "45mm*63mm-1",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4563-2",
+		"Name": "45mm*63mm-2",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4563-3",
+		"Name": "45mm*63mm",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4580-1",
+		"Name": "45mm*80mm-1",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "4580-10",
+		"Name": "45mm*80mm-3",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "4580-2",
+		"Name": "45mm*80mm-1",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "4580-3",
+		"Name": "45mm*80mm-2",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4580-4",
+		"Name": "45mm*80mm-2",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4580-5",
+		"Name": "45mm*80mm-1",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4580-6",
+		"Name": "45mm*80mm-3",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4580-7",
+		"Name": "45mm*80mm-4",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4580-8",
+		"Name": "45mm*80mm-2",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 12
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "4580-9",
+		"Name": "45mm*80mm-5",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "50100-1",
+		"Name": "50mm*100mm-1",
+		"TapeLength": 100,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "50100-2",
+		"Name": "50mm*100mm-2",
+		"TapeLength": 100,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "50100-3",
+		"Name": "50mm*100mm-1",
+		"TapeLength": 100,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "50100-4",
+		"Name": "50mm*100mm-2",
+		"TapeLength": 100,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "5080-1",
+		"Name": "50mm*80mm",
+		"TapeLength": 80,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "5080-2",
+		"Name": "50mm*80mm-3",
+		"TapeLength": 80,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5080-20",
+		"Name": "50mm*80mm-1",
+		"TapeLength": 80,
+		"TapeWidth": 70,
+		"PaperDirection": 1,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 21,
+			"Bottom": 3,
+			"Left": 15,
+			"Right": 15
+		}
+	},
+	{
+		"ID": "5080-3",
+		"Name": "50mm*80mm-2",
+		"TapeLength": 80,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5080-4",
+		"Name": "50mm*80mm",
+		"TapeLength": 80,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5090-1",
+		"Name": "50mm*90mm",
+		"TapeLength": 90,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 12
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5090-2",
+		"Name": "50mm*90mm-1",
+		"TapeLength": 90,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5090-3",
+		"Name": "50mm*90mm-1",
+		"TapeLength": 90,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5090-4",
+		"Name": "50mm*90mm-2",
+		"TapeLength": 90,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "5090-5",
+		"Name": "50mm*90mm-3",
+		"TapeLength": 90,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5090-6",
+		"Name": "50mm*90mm-2",
+		"TapeLength": 90,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "5171-1",
+		"Name": "51mm*71mm",
+		"TapeLength": 51,
+		"TapeWidth": 71,
+		"PaperDirection": 1,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5486-1",
+		"Name": "54mm*86mm-1",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5486-2",
+		"Name": "54mm*86mm-2",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5486-3",
+		"Name": "54mm*86mm-3",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5486-4",
+		"Name": "54mm*86mm-4",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "5486-5",
+		"Name": "54mm*86mm-1",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "5486-6",
+		"Name": "54mm*86mm-2",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5486-7",
+		"Name": "54mm*86mm-3",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "5486-8",
+		"Name": "54mm*86mm-4",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "60100-1",
+		"Name": "60mm*100mm-1",
+		"TapeLength": 100,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 4,
+			"Bottom": 4,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "60100-2",
+		"Name": "60mm*100mm-2",
+		"TapeLength": 100,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "60100-3",
+		"Name": "60mm*100mm-1",
+		"TapeLength": 100,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "60100-4",
+		"Name": "60mm*100mm-2",
+		"TapeLength": 100,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 4,
+			"Bottom": 4,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "6080-1",
+		"Name": "60mm*80mm",
+		"TapeLength": 80,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 4,
+			"Bottom": 4,
+			"Left": 12,
+			"Right": 12
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "6080-2",
+		"Name": "60mm*80mm-1",
+		"TapeLength": 80,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "6080-3",
+		"Name": "60mm*80mm-2",
+		"TapeLength": 80,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 4,
+			"Bottom": 4,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "6080-4",
+		"Name": "60mm*80mm-3",
+		"TapeLength": 80,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 4,
+			"Bottom": 4,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "6080-5",
+		"Name": "60mm*80mm-1",
+		"TapeLength": 80,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 9,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "6080-6",
+		"Name": "60mm*80mm-2",
+		"TapeLength": 80,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 4,
+			"Bottom": 4,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "6090-1",
+		"Name": "60mm*90mm-1",
+		"TapeLength": 90,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 4,
+			"Bottom": 4,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "6090-2",
+		"Name": "60mm*90mm-2",
+		"TapeLength": 90,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "6090-3",
+		"Name": "60mm*90mm-1",
+		"TapeLength": 90,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "6090-4",
+		"Name": "60mm*90mm-2",
+		"TapeLength": 90,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 4,
+			"Bottom": 4,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "70120-1",
+		"Name": "70mm*120mm-1",
+		"TapeLength": 120,
+		"TapeWidth": 70,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 9,
+			"Bottom": 9,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "70120-2",
+		"Name": "70mm*120mm-2",
+		"TapeLength": 120,
+		"TapeWidth": 70,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 9,
+			"Bottom": 9,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "70120-3",
+		"Name": "70mm*120mm",
+		"TapeLength": 120,
+		"TapeWidth": 70,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 9,
+			"Bottom": 9,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "70120-4",
+		"Name": "70mm*120mm",
+		"TapeLength": 120,
+		"TapeWidth": 70,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 9,
+			"Bottom": 9,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "7025-1",
+		"Name": "70mm*25mm",
+		"TapeLength": 70,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 14,
+			"Right": 14
+		}
+	},
+	{
+		"ID": "80120-1",
+		"Name": "80mm*120mm-1",
+		"TapeLength": 120,
+		"TapeWidth": 80,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 14,
+			"Bottom": 14,
+			"Left": 12,
+			"Right": 12
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "80120-2",
+		"Name": "80mm*120mm-2",
+		"TapeLength": 120,
+		"TapeWidth": 80,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 14,
+			"Bottom": 14,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "80120-3",
+		"Name": "80mm*120mm-3",
+		"TapeLength": 120,
+		"TapeWidth": 80,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 14,
+			"Bottom": 14,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "80120-4",
+		"Name": "80mm*120mm-4",
+		"TapeLength": 120,
+		"TapeWidth": 80,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 14,
+			"Bottom": 14,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "8090-1",
+		"Name": "80mm*90mm",
+		"TapeLength": 90,
+		"TapeWidth": 80,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 14,
+			"Bottom": 14,
+			"Left": 12,
+			"Right": 12
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "8090-2",
+		"Name": "80mm*90mm-1",
+		"TapeLength": 90,
+		"TapeWidth": 80,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 14,
+			"Bottom": 14,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "8090-3",
+		"Name": "80mm*90mm-2",
+		"TapeLength": 90,
+		"TapeWidth": 80,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 12,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinamobile-1",
+		"Name": "光缆标签(25*70mm)",
+		"TapeLength": 70,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinamobile-10",
+		"Name": "项目标签(45*80mm)",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinamobile-2",
+		"Name": "线缆标签(45*80mm)",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinamobile-3",
+		"Name": "光缆标牌(50*80mm)",
+		"TapeLength": 80,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinamobile-4",
+		"Name": "光缆标签(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinamobile-5",
+		"Name": "光缆标牌(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinamobile-6",
+		"Name": "光缆标签(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinamobile-7",
+		"Name": "高铁公网(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 13,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 10
+	},
+	{
+		"ID": "sp-chinamobile-8",
+		"Name": "光缆标牌(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinamobile-9",
+		"Name": "光缆标牌(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinatelecom-1",
+		"Name": "光缆标牌(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinatelecom-2",
+		"Name": "光缆标签(45*80mm)",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinatelecom-3",
+		"Name": "光缆挂牌(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 13,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 10
+	},
+	{
+		"ID": "sp-chinatelecom-4",
+		"Name": "迳头接入(45*80mm)",
+		"TapeLength": 80,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinatelecom-5",
+		"Name": "庭院绿化(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinatelecom-6",
+		"Name": "警告标牌(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinatelecom-7",
+		"Name": "线缆标牌(54*86mm)",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinaunicom-1",
+		"Name": "线缆标牌(60*90mm)",
+		"TapeLength": 90,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinaunicom-2",
+		"Name": "光缆标牌(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinaunicom-3",
+		"Name": "光缆标牌(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinaunicom-4",
+		"Name": "警告标牌(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-chinaunicom-5",
+		"Name": "设备标牌(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-common-1",
+		"Name": "变电站(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 13,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 10
+	},
+	{
+		"ID": "sp-common-10",
+		"Name": "通信机房(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 5
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 6
+	},
+	{
+		"ID": "sp-common-11",
+		"Name": "通讯箱(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 13,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 10
+	},
+	{
+		"ID": "sp-common-12",
+		"Name": "智能控制柜(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 5
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 6
+	},
+	{
+		"ID": "sp-common-13",
+		"Name": "电缆去向牌(32x68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 13,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 10
+	},
+	{
+		"ID": "sp-common-2",
+		"Name": "光纤到户(60*100mm)",
+		"TapeLength": 100,
+		"TapeWidth": 60,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-common-3",
+		"Name": "接入光线(25*70mm)",
+		"TapeLength": 70,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 8
+		},
+		"HoleStyle": 11,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-common-4",
+		"Name": "宽带光缆(54*86mm)",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 8,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "sp-common-5",
+		"Name": "光缆标牌(54*86mm)",
+		"TapeLength": 86,
+		"TapeWidth": 54,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 2,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-common-6",
+		"Name": "线缆标牌(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 4
+	},
+	{
+		"ID": "sp-common-7",
+		"Name": "花木场(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 5
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 6
+	},
+	{
+		"ID": "sp-common-8",
+		"Name": "绿植园林(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 5
+		},
+		"HoleStyle": 5,
+		"HoleWidth": 6
+	},
+	{
+		"ID": "sp-common-9",
+		"Name": "配电房线缆(50*80mm)",
+		"TapeLength": 80,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-stategrid-1",
+		"Name": "电缆标签(45*63mm)",
+		"TapeLength": 63,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-stategrid-2",
+		"Name": "电缆挂牌(50*80mm)",
+		"TapeLength": 80,
+		"TapeWidth": 50,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 7,
+			"Bottom": 4,
+			"Left": 4,
+			"Right": 4
+		},
+		"HoleStyle": 7,
+		"HoleWidth": 8,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-stategrid-3",
+		"Name": "警告标牌(20*50mm)",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 6
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 4,
+		"HoleHeight": 2
+	},
+	{
+		"ID": "sp-stategrid-4",
+		"Name": "电力局标签(32*68mm)",
+		"TapeLength": 68,
+		"TapeWidth": 32,
+		"PaperDirection": 0,
+		"PaperType": 5,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 3,
+			"Bottom": 3,
+			"Left": 10,
+			"Right": 5
+		},
+		"HoleStyle": 1,
+		"HoleWidth": 6
+	}
+]

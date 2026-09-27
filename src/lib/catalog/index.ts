@@ -1,5 +1,9 @@
 import type { Family, LabelSpec } from '../printer/types';
 
+/**
+ * A label from the official app's catalog, trimmed by scripts/extract-catalog.mjs to the fields
+ * used here. Optional fields are left out when they hold their default ('' or 0, ShapeType 1).
+ */
 interface CatalogEntry {
 	ID: string | number;
 	Name: string;
@@ -11,6 +15,10 @@ interface CatalogEntry {
 	DieCutGap: number;
 	Padding: { Top: number; Bottom: number; Left: number; Right: number };
 	ShapeType?: number;
+	/** SP plate hole layout (read by the SP driver through LabelSpec.extra). */
+	HoleStyle?: number;
+	HoleWidth?: number;
+	HoleHeight?: number;
 	ClassName1?: string;
 	[k: string]: unknown;
 }
