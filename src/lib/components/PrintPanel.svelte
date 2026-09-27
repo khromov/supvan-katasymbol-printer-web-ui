@@ -24,11 +24,14 @@
 		done: 'Done'
 	};
 
-	$effect(() => {
+	/** Stored settings this printer and label don't offer fall back to the family default. */
+	const density = $derived.by(() => {
 		const d = opts.density;
-		if (d && (editor.density < d.min || editor.density > d.max)) editor.density = d.default;
+		return d && (editor.density < d.min || editor.density > d.max) ? d.default : editor.density;
+	});
+	const cutType = $derived.by(() => {
 		const cuts = opts.cutTypes;
-		if (cuts && !cuts.some((c) => c.value === editor.cutType)) editor.cutType = cuts[0].value;
+		return cuts && !cuts.some((c) => c.value === editor.cutType) ? cuts[0].value : editor.cutType;
 	});
 
 	async function render() {
@@ -45,9 +48,9 @@
 			const { label, bmp } = await render();
 			rendering = false;
 			await printer.print([bmp], label, {
-				density: opts.density ? editor.density : 4,
+				density: opts.density ? density : 4,
 				copies: editor.copies,
-				cutType: opts.cutTypes ? editor.cutType : undefined,
+				cutType: opts.cutTypes ? cutType : undefined,
 				offsetX: editor.offsetX,
 				offsetY: editor.offsetY
 			});
@@ -91,10 +94,10 @@
 	{#if opts.density}
 		{@const range = opts.density}
 		<div class="field">
-			<span>Darkness · {editor.density}</span>
+			<span>Darkness · {density}</span>
 			<div class="density">
-				{#each Array.from({ length: range.max - range.min + 1 }, (_, i) => i + range.min) as d}
-					<button class:on={editor.density === d} onclick={() => (editor.density = d)} title="Darkness {d}">{d}</button>
+				{#each Array.from({ length: range.max - range.min + 1 }, (_, i) => i + range.min) as d (d)}
+					<button class:on={density === d} onclick={() => (editor.density = d)} title="Darkness {d}">{d}</button>
 				{/each}
 			</div>
 		</div>
@@ -102,8 +105,8 @@
 	{#if opts.cutTypes}
 		<label class="field">
 			<span>Cut</span>
-			<select class="input" value={editor.cutType} onchange={(e) => (editor.cutType = Number(e.currentTarget.value))}>
-				{#each opts.cutTypes as c}<option value={c.value}>{c.label}</option>{/each}
+			<select class="input" value={cutType} onchange={(e) => (editor.cutType = Number(e.currentTarget.value))}>
+				{#each opts.cutTypes as c (c.value)}<option value={c.value}>{c.label}</option>{/each}
 			</select>
 		</label>
 	{/if}
@@ -116,10 +119,10 @@
 		</div>
 	</div>
 
-	{#each errors as msg}
+	{#each errors as msg (msg)}
 		<div class="note err"><Icon svg={CircleAlert} size={15} /> {msg}</div>
 	{/each}
-	{#each warnings as msg}
+	{#each warnings as msg (msg)}
 		<div class="note warn"><Icon svg={TriangleAlert} size={15} /> {msg}</div>
 	{/each}
 	{#if printer.error && printer.connected}

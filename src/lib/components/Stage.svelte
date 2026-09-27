@@ -240,7 +240,6 @@
 
 <div class="stage" bind:clientWidth={cw} bind:clientHeight={ch}>
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<div class="viewport" onpointerdown={() => (editor.selectedId = null)}>
 		<div
 			class="paper"
@@ -275,8 +274,8 @@
 						<rect x="0" y={H - deadZones.mm} width={W} height={deadZones.mm} fill="url(#hatch)" />
 					{/if}
 				{/if}
-				{#each guides.v as gx}<line x1={gx} x2={gx} y1="0" y2={H} class="snap" vector-effect="non-scaling-stroke" />{/each}
-				{#each guides.h as gy}<line y1={gy} y2={gy} x1="0" x2={W} class="snap" vector-effect="non-scaling-stroke" />{/each}
+				{#each guides.v as gx (gx)}<line x1={gx} x2={gx} y1="0" y2={H} class="snap" vector-effect="non-scaling-stroke" />{/each}
+				{#each guides.h as gy (gy)}<line y1={gy} y2={gy} x1="0" x2={W} class="snap" vector-effect="non-scaling-stroke" />{/each}
 			</svg>
 
 			<div class="overlay" onpointermove={onMove} onpointerup={endDrag} onpointercancel={endDrag}>
@@ -295,7 +294,7 @@
 						aria-label="{el.type} element"
 					>
 						{#if el.id === editor.selectedId}
-							{#each HANDLES as hd}
+							{#each HANDLES as hd (hd)}
 								<span class="handle {hd}" onpointerdown={(e) => startDrag(e, el, hd)}></span>
 							{/each}
 						{/if}

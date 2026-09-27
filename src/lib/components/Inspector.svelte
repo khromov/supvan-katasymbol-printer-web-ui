@@ -96,7 +96,7 @@
 			<label class="field">
 				<span>Font</span>
 				<select class="input" value={t.font} onchange={(e) => set({ font: e.currentTarget.value })}>
-					{#each FONTS as f}<option value={f.family} style:font-family={f.family}>{f.label}</option>{/each}
+					{#each FONTS as f (f.family)}<option value={f.family} style:font-family={f.family}>{f.label}</option>{/each}
 				</select>
 			</label>
 			<div class="row">

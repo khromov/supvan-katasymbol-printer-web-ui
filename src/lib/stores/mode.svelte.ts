@@ -15,21 +15,16 @@ function readChoice(): AppMode | null {
 }
 
 class ModeStore {
-	/** Small upright screen right now (drives the mode switch shown in the studio header). */
-	isPhone = $state(false);
 	mode = $state<AppMode>('studio');
 	/** The Quick label / Full studio chooser is showing. */
 	choosing = $state(false);
 
 	constructor() {
 		if (typeof window === 'undefined') return;
-		const query = window.matchMedia(PHONE_QUERY);
-		this.isPhone = query.matches;
-		query.addEventListener('change', (e) => (this.isPhone = e.matches));
 		const params = new URLSearchParams(location.search);
 		if (params.has('quick')) this.mode = 'quick';
 		else if (params.has('studio')) this.mode = 'studio';
-		else if (this.isPhone) {
+		else if (window.matchMedia(PHONE_QUERY).matches) {
 			// Ask once per visit on phones; a reload keeps the choice.
 			const saved = readChoice();
 			if (saved) this.mode = saved;

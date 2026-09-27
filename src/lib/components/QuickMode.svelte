@@ -276,8 +276,8 @@
 
 	<!-- 7. Print -->
 	<footer>
-		{#each errors as msg}<div class="note err"><Icon svg={CircleAlert} size={15} /> {msg}</div>{/each}
-		{#each warnings as msg}<div class="note warn"><Icon svg={TriangleAlert} size={15} /> {msg}</div>{/each}
+		{#each errors as msg (msg)}<div class="note err"><Icon svg={CircleAlert} size={15} /> {msg}</div>{/each}
+		{#each warnings as msg (msg)}<div class="note warn"><Icon svg={TriangleAlert} size={15} /> {msg}</div>{/each}
 		{#if printer.error && printer.connected}<div class="note err"><Icon svg={CircleAlert} size={15} /> {printer.error}</div>{/if}
 		{#if printer.state === 'printing'}
 			<button class="btn big print" onclick={() => printer.cancel()}>

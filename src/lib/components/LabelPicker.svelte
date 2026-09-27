@@ -125,7 +125,7 @@
 			<label class="field">
 				<span>Printer type</span>
 				<select class="input" value={printer.family} onchange={(e) => printer.setPreferredFamily(e.currentTarget.value as Family)}>
-					{#each Object.entries(FAMILY_NAMES) as [value, name]}<option {value}>{name}</option>{/each}
+					{#each Object.entries(FAMILY_NAMES) as [value, name] (value)}<option {value}>{name}</option>{/each}
 				</select>
 			</label>
 			<button class="btn sm" onclick={open}>Choose label size…</button>

@@ -37,9 +37,7 @@
 	</div>
 
 	<div class="conn">
-		{#if mode.isPhone}
-			<button class="btn sm" onclick={() => mode.choose('quick')} title="Switch to the quick label maker"><Icon svg={Zap} size={14} /> Quick label</button>
-		{/if}
+		<button class="btn sm" onclick={() => mode.choose('quick')} title="Switch to the quick label maker"><Icon svg={Zap} size={14} /> Quick label</button>
 		{#if !printer.supported && !printer.bluetoothSupported}
 			<span class="pill err unsupported" title="USB and Bluetooth printing need Chrome or Edge (or Bluefy on iPhone/iPad)">
 				<Icon svg={TriangleAlert} size={14} /> {unsupportedHint}

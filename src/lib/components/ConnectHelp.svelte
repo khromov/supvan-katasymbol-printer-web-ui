@@ -110,7 +110,7 @@
 					<div class="method-head"><Icon svg={m.icon} size={13} /> {m.label}</div>
 				{/if}
 				<ol>
-					{#each m.steps as step}<li>{step}</li>{/each}
+					{#each m.steps as step (step)}<li>{step}</li>{/each}
 				</ol>
 				{#if m.bluefy}
 					<div class="actions">

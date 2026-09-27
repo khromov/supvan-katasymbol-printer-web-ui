@@ -8,7 +8,11 @@
 
 	let query = $state('');
 	let ready = $state(false);
-	let limit = $state(96);
+	/** Back to the first page whenever the query changes; "Show more" raises it. */
+	let limit = $derived.by(() => {
+		void query;
+		return 96;
+	});
 	let input: HTMLInputElement;
 
 	const all = $derived(ready ? searchIcons(query, 5000) : []);
@@ -17,11 +21,6 @@
 
 	onMount(() => {
 		loadIcons().then(() => (ready = true));
-	});
-
-	$effect(() => {
-		void query;
-		limit = 96;
 	});
 
 	export function focus() {
