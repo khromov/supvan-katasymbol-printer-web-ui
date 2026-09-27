@@ -1,7 +1,12 @@
 <script lang="ts">
-	import { BatteryCharging, Loader, Plug, Tag, Unplug, TriangleAlert } from 'lucide-static';
+	import { Battery, BatteryFull, BatteryLow, BatteryMedium, BatteryCharging, Bluetooth, Loader, Tag, Unplug, TriangleAlert, Usb } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import { printer } from '../stores/printer.svelte';
+
+	const batteryIcon = $derived.by(() => {
+		const l = printer.status?.batteryLevel ?? 0;
+		return l >= 4 ? BatteryFull : l >= 2 ? BatteryMedium : l >= 1 ? BatteryLow : Battery;
+	});
 
 	const statusTone = $derived.by(() => {
 		if (printer.state === 'printing') return 'warn';
@@ -21,9 +26,9 @@
 	</div>
 
 	<div class="conn">
-		{#if !printer.supported}
-			<span class="pill err" title="WebHID is available in Chrome, Edge and other Chromium browsers on desktop">
-				<Icon svg={TriangleAlert} size={14} /> This browser can't talk to USB printers (use Chrome or Edge)
+		{#if !printer.supported && !printer.bluetoothSupported}
+			<span class="pill err" title="WebHID and Web Serial are available in Chrome, Edge and other Chromium browsers">
+				<Icon svg={TriangleAlert} size={14} /> This browser can't talk to printers (use Chrome or Edge)
 			</span>
 		{:else if printer.state === 'connecting'}
 			<span class="pill"><span class="spin"><Icon svg={Loader} size={14} /></span> Connecting…</span>
@@ -35,15 +40,24 @@
 			</span>
 			{#if printer.status?.charging}
 				<span class="pill" title="Charging over USB"><Icon svg={BatteryCharging} size={14} /> Charging</span>
+			{:else if printer.status?.batteryVolts}
+				<span class="pill" title="Battery {printer.status.batteryVolts.toFixed(2)} V"><Icon svg={batteryIcon} size={14} /> {Math.round(((printer.status.batteryLevel ?? 0) / 4) * 100)}%</span>
 			{/if}
 			<button class="btn ghost sm" onclick={() => printer.disconnect()} title="Disconnect printer">
 				<Icon svg={Unplug} size={15} /> Disconnect
 			</button>
 		{:else}
-			{#if printer.error}<span class="pill err">{printer.error}</span>{/if}
-			<button class="btn primary" onclick={() => printer.connect()}>
-				<Icon svg={Plug} size={16} /> Connect printer
-			</button>
+			{#if printer.error}<span class="pill err error-msg" title={printer.error}>{printer.error}</span>{/if}
+			{#if printer.supported}
+				<button class="btn primary" onclick={() => printer.connect()} title="Connect a printer over USB">
+					<Icon svg={Usb} size={16} /> Connect USB
+				</button>
+			{/if}
+			{#if printer.bluetoothSupported}
+				<button class="btn" class:primary={!printer.supported} onclick={() => printer.connectBluetooth()} title="Connect a paired T50/T80 printer over Bluetooth">
+					<Icon svg={Bluetooth} size={16} /> Bluetooth
+				</button>
+			{/if}
 		{/if}
 	</div>
 </header>
@@ -92,6 +106,13 @@
 		align-items: center;
 		gap: 8px;
 		flex-wrap: wrap;
+	}
+
+	.error-msg {
+		max-width: 360px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.spin {

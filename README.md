@@ -9,10 +9,24 @@ searchable), QR codes, shapes and images, see exactly which dots will print, and
 ```sh
 npm install
 npm run dev        # http://localhost:5173, open in Chrome or Edge
+npm run dev:lan    # HTTPS on the LAN (self-signed) for testing on a phone
 ```
 
 Click **Connect printer** and pick the SUPVAN "USB Device". After the first time the app reconnects
 automatically. The printer's loaded label is detected (T50/T80 and G series) and the design follows it.
+
+## Bluetooth (T50/T80 series)
+
+The T50M Pro and its siblings also print wirelessly. They use **classic Bluetooth serial (SPP)**,
+not Bluetooth LE, so the app talks to them through **Web Serial** (Chrome 117+), not Web Bluetooth.
+Pair the printer in the OS first, then click **Bluetooth** and pick it.
+
+- Verified: Android Chrome prints over Bluetooth.
+- macOS: Chrome currently fails to open the Bluetooth serial channel ("Failed to open serial port")
+  after the first session following pairing; use USB there for now.
+- Protocol (from the Katasymbol Android app): `7E 5A` framed commands and replies, 512-byte data
+  frames, START argument 0, up to 8 buffers per LZMA chunk. See `src/lib/printer/families/t5080-bt.ts`.
+- Add `?debug` to the URL to see a copyable protocol log.
 
 ## Browser support
 
@@ -56,6 +70,7 @@ the `/supvan-katasymbol-printer-web-ui/` subpath.
 ## Hardware scripts (Node, node-hid)
 
 ```sh
-npm run probe        # read-only: status and loaded label
-npm run print-test   # prints an orientation test pattern on the loaded label
+npm run probe                  # read-only: status and loaded label (USB)
+npx tsx scripts/bt-probe.ts    # read-only over the paired Bluetooth serial port (/dev/cu.T0…)
+npm run print-test [-- --bt]   # prints an orientation test pattern on the loaded label
 ```

@@ -69,6 +69,9 @@ export interface PrinterStatus {
 	warnings: string[];
 	charging?: boolean;
 	coverOpen?: boolean;
+	/** Battery voltage and 0..4 bars, when the connection reports them (Bluetooth). */
+	batteryVolts?: number;
+	batteryLevel?: number;
 }
 
 export interface MediaInfo {

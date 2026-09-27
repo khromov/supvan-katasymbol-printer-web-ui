@@ -1,19 +1,25 @@
-// Prints an orientation test pattern on the loaded label using the T5080 driver over node-hid.
-// Usage: npx tsx scripts/print-test.ts [lengthMm widthMm paperDirection]
+// Prints an orientation test pattern on the loaded label with the T50/T80 driver, over USB
+// (node-hid) or, with --bt, over the paired Bluetooth serial port.
+// Usage: npx tsx scripts/print-test.ts [--bt] [lengthMm widthMm paperDirection]
 import { NodeHidTransport } from './node-transport.ts';
+import { NodeSerialTransport } from './node-serial.ts';
 import { T5080Driver } from '../src/lib/printer/families/t5080.ts';
+import { T5080BtDriver } from '../src/lib/printer/families/t5080-bt.ts';
 import type { LabelSpec } from '../src/lib/printer/types.ts';
 
-const t = await NodeHidTransport.openFirst();
-const driver = new T5080Driver(t);
+const bt = process.argv.includes('--bt');
+const t = bt ? await NodeSerialTransport.open() : await NodeHidTransport.openFirst();
+const driver = bt ? new T5080BtDriver(t as NodeSerialTransport) : new T5080Driver(t as NodeHidTransport);
 driver.channel.debug = process.env.DEBUG === '1';
+console.log('connected via', bt ? `Bluetooth (${(t as NodeSerialTransport).name})` : 'USB');
+if (driver instanceof T5080BtDriver) await driver.handshake();
 
 const media = await driver.readMedia();
 console.log('media', { ...media, raw: undefined });
 const status = await driver.getStatus();
 console.log('status', { ...status, raw: undefined });
 
-const [len, wid, dir] = process.argv.slice(2).map(Number);
+const [len, wid, dir] = process.argv.slice(2).filter((a) => a !== '--bt').map(Number);
 const label: LabelSpec = {
 	id: String(media?.labelId ?? 'custom'),
 	name: 'test',

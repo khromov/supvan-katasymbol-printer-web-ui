@@ -10,14 +10,18 @@
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
     "probe": "tsx scripts/probe.ts",
     "print-test": "tsx scripts/print-test.ts",
-    "catalog": "node scripts/extract-catalog.mjs"
+    "catalog": "node scripts/extract-catalog.mjs",
+    "dev:lan": "HTTPS=1 vite --host"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.0",
     "@tsconfig/svelte": "^5.0.8",
     "@types/node": "^24.19.0",
     "@types/w3c-web-hid": "^1.0.7",
+    "@types/w3c-web-serial": "^1.0.8",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
     "node-hid": "^3.4.0",
+    "serialport": "^13.0.0",
     "svelte": "^5.57.0",
     "svelte-check": "^4.7.6",
     "tsx": "^4.23.15",

@@ -101,11 +101,19 @@ export function t5080Raster(page: Bitmap, label: LabelSpec, headDots: number, op
 	return cropRowsCentered(g, headDots);
 }
 
-export function encodeT5080Page(
+export interface T5080Buffers {
+	/** Raw 4096-byte buffers (header + column data) for one page. */
+	buffers: Uint8Array[];
+	columns: number;
+	bytesPerColumn: number;
+}
+
+/** Rasterize a page and split it into checksummed 4096-byte print buffers. */
+export function buildT5080Buffers(
 	page: Bitmap,
 	label: LabelSpec,
 	opts: { density: number; headDots: number; printEnd: boolean; offsetX?: number; offsetY?: number }
-): EncodedPage {
+): T5080Buffers {
 	const g = t5080Raster(page, label, opts.headDots, opts);
 	const { bytes, bytesPerColumn } = packColumns(g);
 	const columns = g.cols;
@@ -142,18 +150,54 @@ export function encodeT5080Page(
 		buf[1] = (sum >> 8) & 0xff;
 		buffers.push(buf);
 	}
+	return { buffers, columns, bytesPerColumn };
+}
 
+const concat = (buffers: Uint8Array[]) => {
+	const all = new Uint8Array(BUF_LENGTH * buffers.length);
+	buffers.forEach((b, i) => all.set(b, i * BUF_LENGTH));
+	return all;
+};
+
+/** USB (KatasymbolEditor) chunking of one page. */
+export function encodeT5080Page(
+	page: Bitmap,
+	label: LabelSpec,
+	opts: { density: number; headDots: number; printEnd: boolean; offsetX?: number; offsetY?: number }
+): EncodedPage {
+	const { buffers, columns, bytesPerColumn } = buildT5080Buffers(page, label, opts);
 	// Small pages go out as one LZMA stream holding all buffers; big ones one stream per buffer.
 	const separate = buffers.map(compress);
 	const total = separate.reduce((n, c) => n + c.length, 0);
 	let chunks = separate;
 	if (total <= 4000) {
-		const all = new Uint8Array(BUF_LENGTH * buffers.length);
-		buffers.forEach((b, i) => all.set(b, i * BUF_LENGTH));
-		const combined = compress(all);
+		const combined = compress(concat(buffers));
 		if (combined.length <= BUF_LENGTH) chunks = [combined];
 	}
 	return { chunks, buffers, columns, bytesPerColumn };
+}
+
+/**
+ * Bluetooth (Katasymbol Android app, T50PlusPrint.multiCompression) chunking of one page: the
+ * next min(8, remaining) buffers are compressed together, dropping one buffer at a time until
+ * the stream fits in 4096 bytes. Chunks never span pages. The print speed is fixed by the first
+ * chunk: 51 when it holds the whole page, otherwise buffers * 6 + 3.
+ */
+export function btChunkT5080Page(buffers: Uint8Array[], maxBuffers = 8): { chunks: Uint8Array[]; speed: number } {
+	const chunks: Uint8Array[] = [];
+	let firstN = 0;
+	for (let i = 0; i < buffers.length; ) {
+		let n = Math.min(maxBuffers, buffers.length - i);
+		let stream = compress(concat(buffers.slice(i, i + n)));
+		while (stream.length > BUF_LENGTH && n > 1) {
+			n--;
+			stream = compress(concat(buffers.slice(i, i + n)));
+		}
+		if (!chunks.length) firstN = n;
+		chunks.push(stream);
+		i += n;
+	}
+	return { chunks, speed: firstN >= buffers.length ? 51 : firstN * 6 + 3 };
 }
 
 export class T5080Driver implements PrinterDriver {

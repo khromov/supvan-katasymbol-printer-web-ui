@@ -1,9 +1,13 @@
 import {
+	grantedBluetoothPort,
 	grantedPrinter,
+	openBluetoothPrinter,
 	openPrinter,
 	PrinterError,
+	requestBluetoothPort,
 	requestPrinter,
 	webHidSupported,
+	webSerialSupported,
 	type Bitmap,
 	type DeviceModel,
 	type LabelSpec,
@@ -12,10 +16,30 @@ import {
 	type PrinterDriver,
 	type PrinterStatus
 } from '../printer';
-import type { WebHidTransport } from '../printer/transport';
 import type { Family } from '../printer/types';
 
 const FAMILY_KEY = 'katasymbol-web:family';
+const LINK_KEY = 'katasymbol-web:link';
+/** Protocol logging (Bluetooth frames) when the page URL has ?debug. */
+const DEBUG = typeof location !== 'undefined' && new URLSearchParams(location.search).has('debug');
+
+type Link = 'usb' | 'bluetooth';
+
+function readLink(): Link {
+	try {
+		return localStorage.getItem(LINK_KEY) === 'bluetooth' ? 'bluetooth' : 'usb';
+	} catch {
+		return 'usb';
+	}
+}
+
+function saveLink(link: Link) {
+	try {
+		localStorage.setItem(LINK_KEY, link);
+	} catch {
+		// ignore
+	}
+}
 const DEFAULT_DPMM: Record<Family, number> = { t5080: 8, sp: 11.8, tp: 11.3, tp86a: 11.3, g: 8 };
 
 function readFamily(): Family {
@@ -34,6 +58,12 @@ const MEDIA_INTERVAL = 6000;
 
 class PrinterStore {
 	supported = webHidSupported();
+	bluetoothSupported = webSerialSupported();
+	debug = DEBUG;
+	/** Connection used by the current printer. */
+	link = $state<Link | null>(null);
+	/** Recent protocol lines (only collected with ?debug). */
+	log = $state<string[]>([]);
 	state = $state<ConnState>('disconnected');
 	model = $state<DeviceModel | null>(null);
 	status = $state<PrinterStatus | null>(null);
@@ -45,8 +75,9 @@ class PrinterStore {
 	preferredFamily = $state<Family>(readFamily());
 
 	private driver: PrinterDriver | null = null;
-	private transport: WebHidTransport | null = null;
+	private transport: { close(): Promise<void> } | null = null;
 	private device: HIDDevice | null = null;
+	private port: SerialPort | null = null;
 	private pollTimer: ReturnType<typeof setTimeout> | null = null;
 	private lastMediaAt = 0;
 	private polling = false;
@@ -82,23 +113,78 @@ class PrinterStore {
 		);
 	}
 
+	addLog(line: string) {
+		if (!this.debug) return;
+		const t = new Date().toISOString().slice(11, 23);
+		this.log = [...this.log.slice(-299), `${t} ${line}`];
+	}
+
 	init() {
-		if (!this.supported) return;
-		navigator.hid.addEventListener('disconnect', (e) => {
-			if (e.device === this.device) this.teardown('Printer disconnected');
-		});
-		navigator.hid.addEventListener('connect', () => {
-			if (this.state === 'disconnected') void this.autoConnect();
-		});
+		if (this.bluetoothSupported) {
+			navigator.serial.addEventListener('disconnect', (e) => {
+				if (e.target === this.port) this.teardown('Bluetooth printer disconnected');
+			});
+		}
+		if (this.supported) {
+			navigator.hid.addEventListener('disconnect', (e) => {
+				if (e.device === this.device) this.teardown('Printer disconnected');
+			});
+			navigator.hid.addEventListener('connect', () => {
+				if (this.state === 'disconnected') void this.autoConnect();
+			});
+		}
 		void this.autoConnect();
 	}
 
+	/** Reconnect to an already-granted printer, preferring the link used last time. */
 	async autoConnect() {
 		try {
+			if (readLink() === 'bluetooth' && this.bluetoothSupported) {
+				const port = await grantedBluetoothPort();
+				if (port) return await this.openBluetooth(port, true);
+			}
+			if (!this.supported) return;
 			const d = await grantedPrinter();
 			if (d) await this.open(d);
 		} catch (e) {
 			console.warn('auto connect failed', e);
+		}
+	}
+
+	async connectBluetooth() {
+		this.error = null;
+		try {
+			await this.openBluetooth(await requestBluetoothPort());
+		} catch (e) {
+			if ((e as Error)?.name === 'NotFoundError') return; // chooser dismissed
+			this.error = (e as Error).message;
+			this.state = 'disconnected';
+		}
+	}
+
+	private async openBluetooth(port: SerialPort, quiet = false) {
+		if (this.connected) await this.disconnect();
+		this.state = 'connecting';
+		this.error = null;
+		this.addLog('opening Bluetooth serial port');
+		try {
+			const { model, driver, transport } = await openBluetoothPrinter(port, this.debug);
+			driver.channel.log = (line) => this.addLog(line);
+			this.port = port;
+			this.model = model;
+			this.driver = driver;
+			this.transport = transport;
+			this.link = 'bluetooth';
+			saveLink('bluetooth');
+			this.state = 'ready';
+			this.lastMediaAt = 0;
+			await this.poll();
+		} catch (e) {
+			this.addLog(`connect failed: ${(e as Error).message}`);
+			this.state = 'disconnected';
+			this.model = null;
+			if (!quiet)
+				this.error = `${(e as Error).message}. Make sure the printer is on, paired with this computer and not connected to a phone.`;
 		}
 	}
 
@@ -124,6 +210,8 @@ class PrinterStore {
 			this.model = model;
 			this.driver = driver;
 			this.transport = transport;
+			this.link = 'usb';
+			saveLink('usb');
 			this.state = 'ready';
 			this.lastMediaAt = 0;
 			await this.poll();
@@ -147,6 +235,8 @@ class PrinterStore {
 		this.driver = null;
 		this.transport = null;
 		this.device = null;
+		this.port = null;
+		this.link = null;
 		this.model = null;
 		this.status = null;
 		this.media = null;

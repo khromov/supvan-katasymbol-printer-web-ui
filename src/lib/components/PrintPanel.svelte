@@ -167,12 +167,26 @@
 			{editor.copies > 1 ? `Print ${editor.copies} labels` : 'Print label'}
 		</button>
 	{:else}
-		<button class="btn primary big" onclick={() => printer.connect()} disabled={!printer.supported}>
+		<button
+			class="btn primary big"
+			onclick={() => (printer.supported ? printer.connect() : printer.connectBluetooth())}
+			disabled={!printer.supported && !printer.bluetoothSupported}
+		>
 			<Icon svg={Plug} size={18} /> Connect printer to print
 		</button>
 	{/if}
 	<button class="btn ghost sm" onclick={downloadPng}><Icon svg={Download} size={14} /> Download as PNG</button>
 </section>
+
+{#if printer.debug}
+	<section class="block">
+		<div class="log-head">
+			<h3 class="section-title">Connection log</h3>
+			<button class="btn ghost sm" onclick={() => navigator.clipboard.writeText(printer.log.join('\n'))}>Copy</button>
+		</div>
+		<pre class="log">{printer.log.slice(-80).join('\n') || 'No traffic yet'}</pre>
+	</section>
+{/if}
 
 <style>
 	.block {
@@ -272,6 +286,26 @@
 
 	.note .btn {
 		margin-left: auto;
+	}
+
+	.log-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.log {
+		margin: 0;
+		max-height: 240px;
+		overflow: auto;
+		font-size: 10.5px;
+		line-height: 1.35;
+		background: var(--panel-2);
+		border: 1px solid var(--line);
+		border-radius: 8px;
+		padding: 8px;
+		white-space: pre-wrap;
+		word-break: break-all;
 	}
 
 	.progress {
