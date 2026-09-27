@@ -53,6 +53,26 @@ function readFamily(): Family {
 
 type ConnState = 'disconnected' | 'connecting' | 'ready' | 'printing';
 
+const trimDots = (m: string) => m.replace(/\.+$/, '');
+
+/** Plain-language message for a failed Bluetooth connection. */
+function bluetoothErrorMessage(e: unknown): string {
+	const raw = (e as Error)?.message ?? String(e);
+	if (/open/i.test(raw) && /serial port/i.test(raw))
+		return "Couldn't open a Bluetooth connection to the printer. Check that it's switched on, paired with this computer and not connected to a phone. On a Mac, forgetting the printer in Bluetooth settings and pairing it again usually helps.";
+	if ((e as PrinterError)?.code === 'timeout')
+		return "The printer didn't answer over Bluetooth. Check that it's switched on and not connected to another device, then try again.";
+	return `Couldn't connect over Bluetooth: ${trimDots(raw)}.`;
+}
+
+/** Plain-language message for a failed USB connection. */
+function usbErrorMessage(e: unknown): string {
+	const raw = (e as Error)?.message ?? String(e);
+	if (/failed to open/i.test(raw))
+		return "Couldn't open the printer over USB. Close other apps that might be using it (like KatasymbolEditor), then reconnect the cable and try again.";
+	return `Couldn't connect over USB: ${trimDots(raw)}.`;
+}
+
 const STATUS_INTERVAL = 2500;
 const MEDIA_INTERVAL = 6000;
 
@@ -70,6 +90,8 @@ class PrinterStore {
 	media = $state<MediaInfo | null>(null);
 	progress = $state<PrintProgress | null>(null);
 	error = $state<string | null>(null);
+	/** Technical detail behind `error` (the raw browser/driver message), if different. */
+	errorDetail = $state<string | null>(null);
 	lastPrintOk = $state(false);
 	/** Family to design for while no printer is connected. */
 	preferredFamily = $state<Family>(readFamily());
@@ -113,6 +135,11 @@ class PrinterStore {
 		);
 	}
 
+	setError(message: string | null, detail: string | null = null) {
+		this.error = message;
+		this.errorDetail = message && detail && detail !== message ? detail : null;
+	}
+
 	addLog(line: string) {
 		if (!this.debug) return;
 		const t = new Date().toISOString().slice(11, 23);
@@ -152,12 +179,12 @@ class PrinterStore {
 	}
 
 	async connectBluetooth() {
-		this.error = null;
+		this.setError(null);
 		try {
 			await this.openBluetooth(await requestBluetoothPort());
 		} catch (e) {
 			if ((e as Error)?.name === 'NotFoundError') return; // chooser dismissed
-			this.error = (e as Error).message;
+			this.setError((e as Error).message);
 			this.state = 'disconnected';
 		}
 	}
@@ -165,7 +192,7 @@ class PrinterStore {
 	private async openBluetooth(port: SerialPort, quiet = false) {
 		if (this.connected) await this.disconnect();
 		this.state = 'connecting';
-		this.error = null;
+		this.setError(null);
 		this.addLog('opening Bluetooth serial port');
 		try {
 			const { model, driver, transport } = await openBluetoothPrinter(port, this.debug);
@@ -183,19 +210,18 @@ class PrinterStore {
 			this.addLog(`connect failed: ${(e as Error).message}`);
 			this.state = 'disconnected';
 			this.model = null;
-			if (!quiet)
-				this.error = `${(e as Error).message}. Make sure the printer is on, paired with this computer and not connected to a phone.`;
+			if (!quiet) this.setError(bluetoothErrorMessage(e), (e as Error).message);
 		}
 	}
 
 	async connect() {
-		this.error = null;
+		this.setError(null);
 		try {
 			const d = await requestPrinter();
 			if (d) await this.open(d);
 		} catch (e) {
 			if ((e as Error)?.name === 'NotFoundError') return; // chooser dismissed
-			this.error = (e as Error).message;
+			this.setError((e as Error).message);
 			this.state = 'disconnected';
 		}
 	}
@@ -203,7 +229,7 @@ class PrinterStore {
 	private async open(device: HIDDevice) {
 		if (this.connected) await this.disconnect();
 		this.state = 'connecting';
-		this.error = null;
+		this.setError(null);
 		try {
 			const { model, driver, transport } = await openPrinter(device);
 			this.device = device;
@@ -216,7 +242,7 @@ class PrinterStore {
 			this.lastMediaAt = 0;
 			await this.poll();
 		} catch (e) {
-			this.error = (e as Error).message;
+			this.setError(usbErrorMessage(e), (e as Error).message);
 			this.state = 'disconnected';
 			this.model = null;
 		}
@@ -242,7 +268,7 @@ class PrinterStore {
 		this.media = null;
 		this.progress = null;
 		this.state = 'disconnected';
-		this.error = error;
+		this.setError(error);
 	}
 
 	private stopPolling() {
@@ -283,7 +309,7 @@ class PrinterStore {
 		try {
 			await driver.stop();
 		} catch (e) {
-			this.error = (e as Error).message;
+			this.setError((e as Error).message);
 		} finally {
 			void this.poll();
 		}
@@ -297,7 +323,7 @@ class PrinterStore {
 		// Let an in-flight poll finish so no status request interleaves with the print job.
 		while (this.polling) await new Promise((r) => setTimeout(r, 20));
 		this.state = 'printing';
-		this.error = null;
+		this.setError(null);
 		this.lastPrintOk = false;
 		this.abort = new AbortController();
 		try {
@@ -309,7 +335,7 @@ class PrinterStore {
 			this.lastPrintOk = true;
 		} catch (e) {
 			const err = e as PrinterError;
-			this.error = err.code === 'cancelled' ? 'Printing cancelled' : err.message;
+			this.setError(err.code === 'cancelled' ? 'Printing cancelled' : err.message);
 			throw e;
 		} finally {
 			this.abort = null;

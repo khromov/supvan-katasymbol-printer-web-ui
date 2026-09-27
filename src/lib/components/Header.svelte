@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Battery, BatteryFull, BatteryLow, BatteryMedium, BatteryCharging, Bluetooth, Loader, Tag, Unplug, TriangleAlert, Usb } from 'lucide-static';
+	import { Battery, BatteryFull, BatteryLow, BatteryMedium, BatteryCharging, Bluetooth, CircleAlert, Loader, Tag, Unplug, TriangleAlert, Usb, X } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import { printer } from '../stores/printer.svelte';
 
@@ -47,7 +47,6 @@
 				<Icon svg={Unplug} size={15} /> Disconnect
 			</button>
 		{:else}
-			{#if printer.error}<span class="pill err error-msg" title={printer.error}>{printer.error}</span>{/if}
 			{#if printer.supported}
 				<button class="btn primary" onclick={() => printer.connect()} title="Connect a printer over USB">
 					<Icon svg={Usb} size={16} /> Connect USB
@@ -61,6 +60,17 @@
 		{/if}
 	</div>
 </header>
+
+{#if printer.error && !printer.connected}
+	<div class="banner" role="alert">
+		<Icon svg={CircleAlert} size={16} />
+		<div class="banner-text">
+			<div>{printer.error}</div>
+			{#if printer.errorDetail}<div class="detail">Details: {printer.errorDetail}</div>{/if}
+		</div>
+		<button class="btn sm icon ghost" onclick={() => printer.setError(null)} aria-label="Dismiss"><Icon svg={X} size={14} /></button>
+	</div>
+{/if}
 
 <style>
 	header {
@@ -108,11 +118,37 @@
 		flex-wrap: wrap;
 	}
 
-	.error-msg {
-		max-width: 360px;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
+	.banner {
+		display: flex;
+		align-items: flex-start;
+		gap: 10px;
+		padding: 10px 16px;
+		background: var(--err-soft);
+		color: var(--err);
+		border-bottom: 1px solid color-mix(in oklab, var(--err), transparent 75%);
+		font-size: 13px;
+		line-height: 1.45;
+	}
+
+	.banner > :global(.icon) {
+		margin-top: 1px;
+	}
+
+	.banner-text {
+		flex: 1;
+		min-width: 0;
+		overflow-wrap: anywhere;
+	}
+
+	.detail {
+		margin-top: 2px;
+		font-size: 12px;
+		opacity: 0.75;
+	}
+
+	.banner .btn {
+		color: inherit;
+		margin: -4px -6px -4px 0;
 	}
 
 	.spin {
