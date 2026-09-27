@@ -71,7 +71,6 @@ the `/supvan-katasymbol-printer-web-ui/` subpath.
 ## Hardware scripts (Node, node-hid)
 
 ```sh
-npm run probe                  # read-only: status and loaded label (USB)
-npx tsx scripts/bt-probe.ts    # read-only over the paired Bluetooth serial port (/dev/cu.T0…)
-npm run print-test [-- --bt]   # prints an orientation test pattern on the loaded label
+npm run probe        # read-only: status and loaded label
+npm run print-test   # prints an orientation test pattern on the loaded label
 ```

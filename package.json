@@ -21,7 +21,6 @@
     "@types/w3c-web-serial": "^1.0.8",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "node-hid": "^3.4.0",
-    "serialport": "^13.0.0",
     "svelte": "^5.57.0",
     "svelte-check": "^4.7.6",
     "tsx": "^4.23.15",
