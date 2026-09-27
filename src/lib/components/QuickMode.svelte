@@ -11,7 +11,7 @@
 	import { editor } from '../stores/editor.svelte';
 	import { mode } from '../stores/mode.svelte';
 	import { quick, saveQuick } from '../stores/quick.svelte';
-	import { buildQuickDesign, quickRotated } from '../design/quick';
+	import { buildQuickDesign, gridLines, GRID_SIZES, quickRotated } from '../design/quick';
 	import { bitmapToCanvas, renderBitmap } from '../design/render';
 	import { iconSvg, iconsLoaded, loadIcons } from '../design/icons';
 	import { labelShape, labelTitle } from '../catalog';
@@ -42,6 +42,8 @@
 	const rotated = $derived(quickRotated(quick, label));
 	const elements = $derived(buildQuickDesign($state.snapshot(quick), $state.snapshot(editor.label) as LabelSpec));
 	const hasContent = $derived(!!quick.text.trim() || !!quick.icon);
+	const cells = $derived(quick.grid * quick.grid);
+	const lineCount = $derived(gridLines(quick).length);
 	const errors = $derived(printer.status?.errors ?? []);
 	const warnings = $derived(printer.status?.warnings ?? []);
 	const shape = $derived(labelShape(label));
@@ -196,16 +198,38 @@
 				{#if !hasContent}<div class="empty">Your label appears here</div>{/if}
 			</div>
 			<div class="caption">
-				{labelTitle(label)}{rotated ? ' · printed turned to fit the label' : ''}
+				{labelTitle(label)}{quick.grid > 1 ? ` · ${quick.grid}×${quick.grid} grid` : ''}{rotated ? ' · printed turned to fit the label' : ''}
 			</div>
 		</section>
 
-		<!-- 1. Text -->
+		<!-- 1. Text, optionally split into a grid of small labels to cut apart -->
 		<section class="card">
 			<label class="field">
-				<span>Text</span>
-				<textarea class="input" rows="2" bind:value={quick.text} placeholder="What should the label say?"></textarea>
+				<span>{quick.grid > 1 ? 'Labels · one per line' : 'Text'}</span>
+				<textarea
+					class="input"
+					rows={quick.grid > 1 ? 4 : 2}
+					bind:value={quick.text}
+					placeholder={quick.grid > 1 ? 'Salt\nPepper\nCumin' : 'What should the label say?'}
+				></textarea>
 			</label>
+			<div class="field">
+				<span class="label-sm">Grid · a sheet of small labels to cut apart</span>
+				<div class="segmented">
+					{#each GRID_SIZES as n (n)}
+						<button class:on={quick.grid === n} aria-pressed={quick.grid === n} onclick={() => (quick.grid = n)}>{n === 1 ? 'Off' : `${n}×${n}`}</button>
+					{/each}
+				</div>
+			</div>
+			{#if quick.grid > 1}
+				<span class="label-sm grid-hint" class:over={lineCount > cells}>
+					{#if lineCount > cells}
+						{lineCount} lines, but a {quick.grid}×{quick.grid} grid holds {cells}. The rest won't print.
+					{:else}
+						{lineCount} of {cells} cells · a blank line leaves a cell empty
+					{/if}
+				</span>
+			{/if}
 		</section>
 
 		<!-- 2. Icon -->
@@ -459,6 +483,10 @@
 	textarea.input {
 		font-size: 17px;
 		min-height: 72px;
+	}
+
+	.grid-hint.over {
+		color: var(--warn);
 	}
 
 	.chosen {

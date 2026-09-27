@@ -253,7 +253,11 @@ function drawElement(ctx: CanvasRenderingContext2D, el: DesignElement, scale: nu
 			ctx.fillStyle = ink;
 			ctx.strokeStyle = ink;
 			ctx.lineWidth = t;
-			if (el.shape === 'line') {
+			if (el.shape === 'line' && el.dashed) {
+				// Dashes twice the thickness (at least 0.6 mm) with equal gaps.
+				const dash = Math.max(t * 2, 0.6 * scale);
+				for (let x = 0; x < w; x += dash * 2) ctx.fillRect(x, (h - t) / 2, Math.min(dash, w - x), t);
+			} else if (el.shape === 'line') {
 				ctx.fillRect(0, (h - t) / 2, w, t);
 			} else {
 				const p = new Path2D();

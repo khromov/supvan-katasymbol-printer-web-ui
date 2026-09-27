@@ -49,6 +49,8 @@ export interface ShapeElement extends Base {
 	thickness: number;
 	fill: boolean;
 	radius: number;
+	/** Lines only: draw dashed, e.g. as a cut guide. */
+	dashed?: boolean;
 }
 
 export interface QrElement extends Base {
