@@ -1,5 +1,5 @@
 {
-	"id": "./",
+	"id": "/supvan-katasymbol-printer-web-ui/",
 	"name": "Katasymbol Web",
 	"short_name": "Katasymbol",
 	"description": "Design and print labels on Katasymbol / Supvan label printers over USB or Bluetooth.",
