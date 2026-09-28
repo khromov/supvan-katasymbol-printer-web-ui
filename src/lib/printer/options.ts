@@ -1,4 +1,5 @@
 import { G_SIGN_LABELS } from './families/g';
+import { T15_DENSITY } from './families/t15';
 import { TP_CUT_TYPES, TP_DENSITY } from './families/tp';
 import type { Family, LabelSpec } from './types';
 
@@ -15,6 +16,8 @@ export function familyOptions(family: Family, label?: LabelSpec): FamilyOptions 
 	switch (family) {
 		case 't5080':
 			return { density: DENSITY_1_9 };
+		case 't15':
+			return { density: { ...T15_DENSITY } };
 		case 'sp':
 			return {};
 		case 'tp':

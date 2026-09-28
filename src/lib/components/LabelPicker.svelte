@@ -36,7 +36,7 @@
 		// the catalog's for printing. The catalog value stays in extra.PaperType for display.
 		if (hit && family === 't5080') return { ...hit, paperType: m.paperType ?? hit.paperType, gap: m.gap ?? hit.gap };
 		if (hit) return hit;
-		if (m.widthMm && m.lengthMm) return { ...customLabel(m.widthMm, m.lengthMm, family, m.paperType ?? 1, m.gap ?? 3), name: `Label ${m.labelId}` };
+		if (m.widthMm && m.lengthMm) return { ...customLabel(m.lengthMm, m.widthMm, family, m.paperType ?? 1, m.gap ?? 3), name: `Label ${m.labelId}` };
 		return null;
 	});
 

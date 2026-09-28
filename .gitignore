@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Raw catalog downloads (scripts/download-catalog.mjs)
+catalog-cache/

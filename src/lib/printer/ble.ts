@@ -1,16 +1,29 @@
 import type { ByteTransport } from './serial';
 
 /**
- * Bluetooth LE (GATT) byte transport for the T50/T80 printers, via Web Bluetooth. The printers
- * are dual-mode: next to classic SPP they expose one vendor service carrying the same `7E 5A`
- * frames. It advertises no service UUIDs, so it is found by name. This is also the only way to
- * reach them from iOS (in a Web Bluetooth browser such as Bluefy).
+ * Bluetooth LE (GATT) byte transport for the Bluetooth printers, via Web Bluetooth. The T50/T80
+ * printers are dual-mode: next to classic SPP they expose one vendor service carrying the same
+ * `7E 5A` frames. It advertises no service UUIDs, so it is found by name. This is also the only way
+ * to reach them from iOS (in a Web Bluetooth browser such as Bluefy).
  */
-export const BLE_SERVICE = '0000e0ff-3c17-d293-8e48-14fe2e4da212';
-/** Commands and data are written here. */
-export const BLE_WRITE = '0000ffe9-0000-1000-8000-00805f9b34fb';
-/** Replies arrive as notifications here. */
-export const BLE_NOTIFY = '0000ffe1-0000-1000-8000-00805f9b34fb';
+interface BleService {
+	service: string;
+	/** Commands and data are written here. */
+	write: string;
+	/** Replies arrive as notifications here. */
+	notify: string;
+}
+
+/**
+ * The vendor services the Supvan apps know (SUPRINT BLEUtils.getService), in the order they are
+ * tried. The T50/T80 use the first; which one (if any) the E10/T10 series offer is not known yet.
+ */
+const BLE_SERVICES: BleService[] = [
+	{ service: '0000e0ff-3c17-d293-8e48-14fe2e4da212', write: '0000ffe9-0000-1000-8000-00805f9b34fb', notify: '0000ffe1-0000-1000-8000-00805f9b34fb' },
+	{ service: '0000a002-0000-1000-8000-00805f9b34fb', write: '0000c302-0000-1000-8000-00805f9b34fb', notify: '0000c305-0000-1000-8000-00805f9b34fb' },
+	{ service: '0000fee7-0000-1000-8000-00805f9b34fb', write: '0000fec1-0000-1000-8000-00805f9b34fb', notify: '0000fec1-0000-1000-8000-00805f9b34fb' },
+	{ service: '0000ff00-0000-1000-8000-00805f9b34fb', write: '0000ff02-0000-1000-8000-00805f9b34fb', notify: '0000ff01-0000-1000-8000-00805f9b34fb' }
+];
 /** Bluetooth names start with T0 (e.g. "T0148B2507018663"). */
 export const BLE_NAME_PREFIXES = ['T0'];
 
@@ -43,16 +56,29 @@ export class WebBluetoothTransport implements ByteTransport {
 	static request(): Promise<BluetoothDevice> {
 		return navigator.bluetooth.requestDevice({
 			filters: BLE_NAME_PREFIXES.map((namePrefix) => ({ namePrefix })),
-			optionalServices: [BLE_SERVICE]
+			optionalServices: BLE_SERVICES.map((s) => s.service)
 		});
 	}
 
 	static async open(device: BluetoothDevice): Promise<WebBluetoothTransport> {
 		if (!device.gatt) throw new Error('This device has no GATT server');
 		const server = await device.gatt.connect();
-		const service = await server.getPrimaryService(BLE_SERVICE);
-		const writeChar = await service.getCharacteristic(BLE_WRITE);
-		const notifyChar = await service.getCharacteristic(BLE_NOTIFY);
+		// Take the first known service the device has (the T50/T80's is tried first, as before).
+		let service: BluetoothRemoteGATTService | undefined;
+		let known: BleService | undefined;
+		let lastError: unknown;
+		for (const k of BLE_SERVICES) {
+			try {
+				service = await server.getPrimaryService(k.service);
+				known = k;
+				break;
+			} catch (e) {
+				lastError = e;
+			}
+		}
+		if (!service || !known) throw lastError;
+		const writeChar = await service.getCharacteristic(known.write);
+		const notifyChar = await service.getCharacteristic(known.notify);
 		await notifyChar.startNotifications();
 		return new WebBluetoothTransport(device, writeChar, notifyChar);
 	}

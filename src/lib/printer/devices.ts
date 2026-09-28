@@ -56,7 +56,8 @@ export const FAMILY_NAMES: Record<Family, string> = {
 	sp: 'SP sign printers',
 	tp: 'TP wire marker printers',
 	tp86a: 'TP86A / TP80A wire marker printers',
-	g: 'G series label printers'
+	g: 'G series label printers',
+	t15: 'E10 / T10 label makers (Bluetooth)'
 };
 
 export function findModel(productId: number): DeviceModel | undefined {
@@ -81,8 +82,34 @@ const BT_NAME_PREFIXES: [string, string][] = [
 	...['T0097A', 'T0153B', 'T0161B', 'T0206', 'T0154B', 'T0114A', 'T0146B', 'T0155B', 'T0115A', 'T0156B'].map((p) => [p, 'A50 Pro'] as [string, string])
 ];
 
+/**
+ * Bluetooth name prefixes of the T10/T15-series label makers, which all use the T15 protocol
+ * (SUPRINT 1.5.0 EDevice.getE10Device and T10Device, printing process 15). Prefixes both list are
+ * named E10, as the app checks the E10 first.
+ */
+const T15_NAME_PREFIXES: [string, string][] = [
+	...['T0010', 'T0026', 'T0035', 'T0039', 'T0043', 'T0065', 'T0060', 'T0126', 'T0127', 'T0011', 'T0028', 'T0059', 'T0066', 'T0036', 'T0040', 'T0044',
+		'T0071', 'T0075', 'T0012', 'T0027', 'T0058', 'T0067', 'T0037', 'T0041', 'T0045', 'T0061', 'T0068', 'T0078', 'T0073', 'T0077', 'T0007', 'T0025',
+		'T0034', 'T0038', 'T0042', 'T0057', 'T0064', 'T0017', 'T0072', 'T0082', 'T0087', 'T0092', 'T0131', 'T0135', 'T0144', 'T0177', 'T0180', 'T0207',
+		'T0208', 'T0222', 'T0081', 'T0086', 'T0091', 'T0124', 'T0125', 'T0132', 'T0136', 'T0143', 'T0176', 'T0179', 'T0209', 'T0210', 'T0223', 'T0084',
+		'T0089', 'T0094', 'T0085', 'T0090', 'T0095', 'T0098', 'T0133', 'T0137', 'T0083', 'T0088', 'T0093', 'T0130', 'T0134'].map((p) => [p, 'E10'] as [string, string]),
+	['T0006', 'T11'],
+	['T0032', 'T12'],
+	['T0232', 'T1'],
+	['T0236', 'T10'],
+	['T0070', 'T10 Plus'],
+	['T0076', 'T10 Pro'],
+	['T0140', 'T10 Pro'],
+	...['T0001', 'T0002', 'T0003', 'T0004', 'T0005', 'T0008', 'T0009', 'T0074'].map((p) => [p, 'T10'] as [string, string])
+];
+
 /** Model name for a Bluetooth device name, or undefined if it isn't a known prefix. */
 export function modelNameFromBluetoothName(name: string | undefined): string | undefined {
 	if (!name) return undefined;
-	return BT_NAME_PREFIXES.find(([p]) => name.startsWith(p))?.[1];
+	return (T15_NAME_PREFIXES.find(([p]) => name.startsWith(p)) ?? BT_NAME_PREFIXES.find(([p]) => name.startsWith(p)))?.[1];
+}
+
+/** Family of a Bluetooth printer by its name: the T10/T15 series, else the T50/T80 series. */
+export function familyFromBluetoothName(name: string | undefined): Family {
+	return name && T15_NAME_PREFIXES.some(([p]) => name.startsWith(p)) ? 't15' : 't5080';
 }

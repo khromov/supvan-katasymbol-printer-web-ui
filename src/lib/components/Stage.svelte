@@ -6,6 +6,7 @@
 	import { printer } from '../stores/printer.svelte';
 	import { bitmapToCanvas, prepareAssets, renderBitmap, renderDesign } from '../design/render';
 	import { labelShape } from '../catalog';
+	import { T15_PRINT_DOTS } from '../printer/families/t15';
 	import type { DesignElement } from '../design/model';
 
 	type Mode = 'dots' | 'smooth';
@@ -45,12 +46,15 @@
 	const shape = $derived(labelShape(editor.label));
 	const pad = $derived(editor.label.padding);
 
-	/** Strips the print head cannot reach (T50/T80 crop the across-head axis to the head width). */
+	/**
+	 * Strips the print head cannot reach (T50/T80 crop the across-head axis to the head width, the
+	 * E10/T10 series print the middle 88 dots of their 96-dot head).
+	 */
 	const deadZones = $derived.by(() => {
 		const model = printer.model;
-		const family = model?.family ?? 't5080';
-		const headDots = model?.headDots ?? 384;
-		if (family !== 't5080' || !headDots) return null;
+		const family = printer.family;
+		const headDots = family === 't15' ? T15_PRINT_DOTS : family === 't5080' ? (model?.headDots ?? 384) : 0;
+		if (!headDots) return null;
 		const dpmm = model?.dpmm ?? 8;
 		const acrossX = editor.label.paperDirection !== 0;
 		const acrossMm = acrossX ? W : H;

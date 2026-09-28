@@ -1,4 +1,4 @@
-export type Family = 't5080' | 'sp' | 'tp' | 'tp86a' | 'g';
+export type Family = 't5080' | 'sp' | 'tp' | 'tp86a' | 'g' | 't15';
 
 /** 1 byte per pixel, row-major, 1 = black dot. Rendered at the printer's dots-per-mm. */
 export interface Bitmap {
@@ -80,6 +80,7 @@ export interface MediaInfo {
 	gap?: number;
 	uuid?: string;
 	deviceSerial?: string;
+	/** Label size as the printer reports it: across the tape (TapeWidth) and along it (TapeLength). */
 	widthMm?: number;
 	lengthMm?: number;
 	raw: Uint8Array;

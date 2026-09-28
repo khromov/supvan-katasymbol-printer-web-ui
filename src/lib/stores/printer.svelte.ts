@@ -48,7 +48,7 @@ function saveLink(link: Link) {
 		// ignore
 	}
 }
-const DEFAULT_DPMM: Record<Family, number> = { t5080: 8, sp: 11.8, tp: 11.3, tp86a: 11.3, g: 8 };
+const DEFAULT_DPMM: Record<Family, number> = { t5080: 8, sp: 11.8, tp: 11.3, tp86a: 11.3, g: 8, t15: 8 };
 
 function readFamily(): Family {
 	try {
@@ -80,9 +80,9 @@ function bleErrorMessage(e: unknown): string {
 	if (/adapter|bluetooth is (off|disabled)|not available/i.test(raw))
 		return 'Bluetooth is turned off or unavailable on this device. Turn it on and try again.';
 	if (err?.name === 'NotFoundError' || /no services matching/i.test(raw))
-		return "This printer doesn't offer the Bluetooth LE service the app needs. Make sure it's a T50/T80-series printer, or try USB.";
+		return "This printer doesn't offer a Bluetooth LE service the app knows. Make sure it's a T50/T80 or E10/T10-series printer, or try USB.";
 	if (err?.name === 'NetworkError' || /gatt|connect/i.test(raw))
-		return "Couldn't connect to the printer over Bluetooth. Check that it's switched on, close the Katasymbol app on other phones or tablets, and try again.";
+		return "Couldn't connect to the printer over Bluetooth. Check that it's switched on, close the Katasymbol or SUPRINT app on other phones or tablets, and try again.";
 	if (err?.code === 'timeout')
 		return "The printer didn't answer over Bluetooth. Switch it off and on again, then retry.";
 	return `Couldn't connect over Bluetooth: ${trimDots(raw)}.`;

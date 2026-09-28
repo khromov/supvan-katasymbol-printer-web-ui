@@ -17,8 +17,8 @@ const [len, wid, dir] = process.argv.slice(2).map(Number);
 const label: LabelSpec = {
 	id: String(media?.labelId ?? 'custom'),
 	name: 'test',
-	lengthMm: len || media?.widthMm || 50,
-	widthMm: wid || media?.lengthMm || 80,
+	lengthMm: len || media?.lengthMm || 50,
+	widthMm: wid || media?.widthMm || 80,
 	paperDirection: Number.isFinite(dir) ? dir : 1,
 	paperType: 1,
 	gap: media?.gap ?? 3,

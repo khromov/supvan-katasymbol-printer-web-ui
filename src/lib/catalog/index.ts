@@ -28,7 +28,9 @@ const loaders: Record<Family, () => Promise<{ default: CatalogEntry[] }>> = {
 	sp: () => import('./sp.json') as Promise<{ default: CatalogEntry[] }>,
 	tp: () => import('./tp.json') as Promise<{ default: CatalogEntry[] }>,
 	tp86a: () => import('./tp.json') as Promise<{ default: CatalogEntry[] }>,
-	g: () => import('./g.json') as Promise<{ default: CatalogEntry[] }>
+	g: () => import('./g.json') as Promise<{ default: CatalogEntry[] }>,
+	// From Supvan's template server (scripts/download-catalog.mjs); KatasymbolEditor has none.
+	t15: () => import('./t15.json') as Promise<{ default: CatalogEntry[] }>
 };
 
 const cache = new Map<Family, LabelSpec[]>();
