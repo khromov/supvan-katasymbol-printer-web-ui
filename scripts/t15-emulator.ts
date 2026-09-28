@@ -29,6 +29,10 @@ export class T15Emulator implements ByteTransport {
 	extra = [0, 0, 0, 0];
 	batteryMv = 4000;
 	material: Uint8Array | null = null;
+	/** Commands to ignore, without a reply (fault injection). */
+	silent = new Set<number>();
+	/** Answer every data frame (both apps expect it). */
+	ackData = true;
 	private listeners = new Set<(chunk: Uint8Array) => void>();
 	private pending = new Uint8Array(0);
 	private stream: number[] = [];
@@ -70,6 +74,7 @@ export class T15Emulator implements ByteTransport {
 		const a = u16(f, 12);
 		const b = f.length >= 16 ? u16(f, 14) : 0;
 		this.events.push(`cmd ${cmd.toString(16).padStart(2, '0')} ${a} ${b}`);
+		if (this.silent.has(cmd)) return;
 		switch (cmd) {
 			case 0x11:
 				return this.reply(cmd, this.status());
@@ -131,7 +136,7 @@ export class T15Emulator implements ByteTransport {
 		if (f[10] !== this.gotFrames || f[11] !== this.expectFrames) throw new Error(`frame index ${f[10]}/${f[11]}`);
 		this.stream.push(...f.subarray(12, 512));
 		this.gotFrames++;
-		this.reply(0xbb, new Uint8Array(16));
+		if (this.ackData) this.reply(0xbb, new Uint8Array(16));
 	}
 
 	private commit() {

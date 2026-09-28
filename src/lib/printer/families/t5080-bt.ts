@@ -69,6 +69,11 @@ export interface FrameChannelOptions {
 	acksDataFrames?: boolean;
 	/** Reply timeout for commands (default 2000 ms like the app over SPP; the app uses 4 s on BLE). */
 	commandTimeoutMs?: number;
+	/**
+	 * Fail the transfer when a data frame gets no reply within 2 s, taking any received bytes as
+	 * the reply (the E10/T10 apps do both; the T50/T80 driver carries on).
+	 */
+	strictAcks?: boolean;
 }
 
 /**
@@ -93,6 +98,9 @@ export class FrameChannel {
 	 */
 	readonly acksDataFrames: boolean;
 	readonly commandTimeoutMs: number;
+	readonly strictAcks: boolean;
+	/** Bytes received so far (never reset), to tell whether anything arrived. */
+	private received = 0;
 
 	constructor(
 		readonly transport: ByteTransport,
@@ -100,6 +108,7 @@ export class FrameChannel {
 	) {
 		this.acksDataFrames = opts.acksDataFrames ?? true;
 		this.commandTimeoutMs = opts.commandTimeoutMs ?? 2000;
+		this.strictAcks = opts.strictAcks ?? false;
 		this.unsubscribe = transport.onData((chunk) => this.receive(chunk));
 	}
 
@@ -108,6 +117,7 @@ export class FrameChannel {
 	}
 
 	private receive(chunk: Uint8Array) {
+		this.received += chunk.length;
 		const buf = new Uint8Array(this.pending.length + chunk.length);
 		buf.set(this.pending);
 		buf.set(chunk, this.pending.length);
@@ -211,13 +221,34 @@ export class FrameChannel {
 		for (const f of frames) {
 			if (signal?.aborted) throw new PrinterError('Cancelled', 'cancelled');
 			this.clear();
+			const before = this.received;
 			for (let o = 0; o < f.length; o += pieceSize) {
 				if (o && pauseMs) await sleep(pauseMs);
 				await this.write(f.subarray(o, o + pieceSize));
 				await sleep(10);
 			}
-			if (this.acksDataFrames) await this.next(() => true, 2000);
+			if (this.strictAcks) {
+				if (!(await this.input(before, 2000))) throw new PrinterError('Printer did not acknowledge the print data', 'timeout');
+			} else if (this.acksDataFrames) await this.next(() => true, 2000);
 		}
+	}
+
+	/** Wait until more than `since` bytes have been received in total; false on timeout. */
+	private async input(since: number, timeoutMs: number): Promise<boolean> {
+		const deadline = Date.now() + timeoutMs;
+		while (this.received <= since) {
+			const left = deadline - Date.now();
+			if (left <= 0) return false;
+			await new Promise<void>((resolve) => {
+				const t = setTimeout(resolve, left);
+				this.wake = () => {
+					clearTimeout(t);
+					resolve();
+				};
+			});
+			this.wake = null;
+		}
+		return true;
 	}
 }
 

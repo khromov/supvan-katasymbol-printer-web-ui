@@ -1,4 +1,4 @@
-import { familyFromBluetoothName, findModel, HID_FILTERS, modelNameFromBluetoothName, type DeviceModel } from './devices';
+import { familyFromBluetoothName, findModel, HID_FILTERS, modelNameFromBluetoothName, unsupportedBluetoothModel, type DeviceModel } from './devices';
 import { WebBluetoothTransport } from './ble';
 import { GDriver } from './families/g';
 import { probeSpInterface, SpDriver } from './families/sp';
@@ -32,6 +32,12 @@ export function createDriver(model: DeviceModel, transport: Transport): PrinterD
 
 /** A driver for a printer on a Bluetooth link. */
 export type BluetoothDriver = T5080BtDriver | T15BtDriver;
+
+/** Refuse Supvan printers whose protocol this app doesn't speak, rather than drive them as a T50/T80. */
+function assertSupported(devName: string | undefined) {
+	const model = unsupportedBluetoothModel(devName);
+	if (model) throw new PrinterError(`The ${model} isn't supported yet.`, 'unsupported');
+}
 
 const t15Model = (devName: string): DeviceModel => ({
 	productId: 0,
@@ -110,6 +116,7 @@ export async function openBluetoothPrinter(port: SerialPort, debug = false): Pro
 		driver.channel.debug = debug;
 		await driver.handshake();
 		const devName = await driver.readDeviceName().catch(() => '');
+		assertSupported(devName);
 		if (familyFromBluetoothName(devName) === 't15') {
 			driver.channel.dispose();
 			const t15 = new T15BtDriver(transport, devName);
@@ -142,13 +149,16 @@ export const requestBlePrinter = () => WebBluetoothTransport.request();
 
 /**
  * Open a printer over BLE, by its advertised name: E10/T10 series or T50/T80. The T50/T80 doesn't
- * answer data frames there; the E10/T10 driver assumes the same (the app only uses SPP for them).
+ * answer data frames there. The E10/T10 are driven like the iOS app drives them: writes without
+ * response where the printer allows it, and a reply expected for every data frame.
  */
 export async function openBlePrinter(device: BluetoothDevice, debug = false): Promise<{ model: DeviceModel; driver: BluetoothDriver; transport: WebBluetoothTransport }> {
-	const transport = await WebBluetoothTransport.open(device);
+	assertSupported(device.name);
+	const isT15 = familyFromBluetoothName(device.name) === 't15';
+	const transport = await WebBluetoothTransport.open(device, { preferWithoutResponse: isT15 });
 	try {
-		if (familyFromBluetoothName(device.name) === 't15') {
-			const t15 = new T15BtDriver(transport, device.name ?? '', { acksDataFrames: false, commandTimeoutMs: 4000 });
+		if (isT15) {
+			const t15 = new T15BtDriver(transport, device.name ?? '', 'ble');
 			t15.channel.debug = debug;
 			await t15.handshake();
 			return { model: t15Model(device.name ?? ''), driver: t15, transport };

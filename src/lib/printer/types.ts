@@ -41,7 +41,10 @@ export interface PrintOptions {
 	/** 1..9 on the T50/T80 family. */
 	density: number;
 	copies: number;
-	/** Horizontal/vertical offset in the official dialog's slider units (4 dots each, -48..48). */
+	/**
+	 * Horizontal/vertical offset in the official dialog's units: 4 dots each, -48..48 (1 dot,
+	 * -9..9 on the E10/T10 series; see familyOptions).
+	 */
 	offsetX?: number;
 	offsetY?: number;
 	/** Family specific (e.g. SP/TP cut mode). */

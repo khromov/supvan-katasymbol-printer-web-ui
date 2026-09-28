@@ -8,6 +8,9 @@
 // different matches) the printer must decode exactly the same buffers. That run's writes are then
 // recorded as digests in scripts/fixtures/t15-golden.json, which the plain run checks.
 //
+// Scenarios the oracle can't cover (BLE, which only the iOS app uses, and injected faults) are
+// checked by their own assertions instead, plus a few unit checks.
+//
 //   npx tsx scripts/test-t15.ts                    run the tests
 //   npx tsx scripts/test-t15.ts --scenarios <dir>  write the scenarios for the oracle
 //   npx tsx scripts/test-t15.ts --oracle <dir>     compare with the oracle's output in <dir> and
@@ -15,7 +18,8 @@
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
-import { encodeT15Job, t15Compress, t15Raster, T15BtDriver } from '../src/lib/printer/families/t15.ts';
+import { familyFromBluetoothName, modelNameFromBluetoothName, unsupportedBluetoothModel } from '../src/lib/printer/devices.ts';
+import { encodeT15Job, t15Compress, t15HeadRate, t15Raster, T15BtDriver, T15_OFFSET, type T15Link } from '../src/lib/printer/families/t15.ts';
 import type { Bitmap, LabelSpec, PrinterStatus } from '../src/lib/printer/types.ts';
 import { T15Emulator } from './t15-emulator.ts';
 
@@ -30,9 +34,21 @@ interface PrintScenario {
 	cut?: number;
 	dieCut?: boolean;
 	paperGap?: number;
-	/** Print dialog offsets in 4-dot steps. */
+	/** Print dialog offsets, in dots for these printers (-9..9). */
 	offsetX?: number;
 	offsetY?: number;
+	/** Link to drive (default classic Bluetooth, the one the Android oracle covers). */
+	link?: T15Link;
+	/** Fault injection: commands the printer ignores, no data frame replies, extra status bits. */
+	silent?: number[];
+	noAcks?: boolean;
+	status?: number[];
+	/** The job must fail with this message. */
+	expectError?: string;
+	/** Leave out of the oracle (behaviour that deliberately differs from the app's). */
+	oracle?: false;
+	/** Extra checks on what was sent. */
+	check?: (o: Outcome) => void;
 }
 interface MediaScenario {
 	kind: 'media';
@@ -62,6 +78,7 @@ function page(lengthMm: number, ink: (x: number, y: number) => boolean): Bitmap 
 }
 const frame = (from: number) => (x: number, y: number, w: number) => x >= from && x < w - from && (y === 6 || y === 89 || x === from || x === w - from - 1 || (x + y) % 9 === 0);
 const framed = (lengthMm: number, from: number) => page(lengthMm, (x, y) => frame(from)(x, y, lengthMm * 8));
+const page0 = () => framed(40, 10);
 /** Pseudo-random dots from column `from`, which LZMA can't shrink (multi-frame streams). */
 function noise(lengthMm: number, from: number, seed: number) {
 	let s = seed;
@@ -88,7 +105,7 @@ const SCENARIOS: Scenario[] = [
 	{ kind: 'print', name: 'long-copies-no-e', device: 'T0010A2409000001', lengthMm: 100, pages: [framed(100, 60)], copies: 2, density: 7 },
 	{ kind: 'print', name: 'two-pages-cut-2', device: E, lengthMm: 30, pages: [framed(30, 0), noise(30, 5, 7)], copies: 2, density: 1, cut: 2 },
 	{ kind: 'print', name: 'noise-multi-frame', device: 'T0071E2311020003', lengthMm: 60, pages: [noise(60, 0, 42)], density: 5 },
-	{ kind: 'print', name: 'die-cut-offsets', device: E, lengthMm: 40, pages: [framed(40, 0)], density: 6, dieCut: true, paperGap: 2, offsetX: 2, offsetY: -1 },
+	{ kind: 'print', name: 'die-cut-offsets', device: E, lengthMm: 40, pages: [framed(40, 0)], density: 6, dieCut: true, paperGap: 2, offsetX: 8, offsetY: -4 },
 	{ kind: 'print', name: 'blank', device: E, lengthMm: 30, pages: [page(30, () => false)], density: 3 },
 	{ kind: 'print', name: 'two-full-buffers', device: E, lengthMm: 83, pages: [framed(83, 0)], density: 2 },
 	{ kind: 'print', name: 'g-name-density', device: 'T0126G2507010001', lengthMm: 20, pages: [framed(20, 3)], density: 5 },
@@ -102,8 +119,40 @@ const SCENARIOS: Scenario[] = [
 	{ kind: 'state', name: 'state-no-label', device: 'T0126D2507010001', extra: [0, 0, 0, 0x01], batteryMv: 7000 },
 	{ kind: 'state', name: 'state-used-up-charging', device: E, extra: [0x04, 0, 0x10, 0], batteryMv: 3951 },
 	{ kind: 'state', name: 'state-one-bar', device: E, extra: [0, 0, 0, 0], batteryMv: 3805 },
-	{ kind: 'state', name: 'state-2v', device: E, extra: [0, 0, 0, 0], batteryMv: 2000 }
+	{ kind: 'state', name: 'state-2v', device: E, extra: [0, 0, 0, 0], batteryMv: 2000 },
+	// Not in the Android oracle: BLE (as the iOS app drives it) and fault handling.
+	{ kind: 'print', name: 'ble-basic', link: 'ble', device: E, lengthMm: 40, pages: [framed(40, 10)], density: 4, check: blePacing },
+	{ kind: 'print', name: 'ble-noise', link: 'ble', device: 'T0071E2311020003', lengthMm: 60, pages: [noise(60, 0, 42)], copies: 2, density: 5, check: blePacing },
+	{ kind: 'print', name: 'ble-no-acks', link: 'ble', device: E, lengthMm: 40, pages: [framed(40, 10)], density: 4, noAcks: true, expectError: 'Printer did not acknowledge the print data', check: stopped },
+	{ kind: 'print', name: 'spp-no-acks', device: E, lengthMm: 40, pages: [framed(40, 10)], density: 4, noAcks: true, expectError: 'Printer did not acknowledge the print data', check: stopped },
+	{ kind: 'print', name: 'ble-silent-density', link: 'ble', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 3, silent: [0xc9, 0xba], check: sent({ c9: 1, ba: 1 }) },
+	{ kind: 'print', name: 'spp-silent-density', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 3, silent: [0xc9, 0xba], check: sent({ c9: 2, ba: 2 }) },
+	{ kind: 'print', name: 'cover-open', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 4, status: [0, 0, 0x08, 0], expectError: 'Cover is open', check: sent({ 13: 0 }) },
+	// The app would take any offset; the print settings only offer -9..9, so the driver clamps.
+	{ kind: 'print', name: 'offset-clamp', device: E, lengthMm: 30, pages: [framed(30, 12)], density: 4, offsetX: 20, offsetY: -30, oracle: false }
 ];
+
+/** In the oracle: classic Bluetooth without faults. */
+const inOracle = (s: Scenario) => s.kind !== 'print' || (s.oracle !== false && (s.link ?? 'spp') === 'spp' && !s.silent && !s.noAcks && !s.status && !s.expectError);
+
+/** BLE: commands are single 16-byte writes, data frames four 128-byte ones. */
+function blePacing(o: Outcome) {
+	const bad = o.writes.filter((w) => w.length !== 16 && w.length !== 128);
+	if (bad.length) throw new Error(`BLE write of ${bad[0].length} bytes`);
+}
+/** After a failed transfer the job must be stopped (STOP_PRINT, 0x14). */
+function stopped(o: Outcome) {
+	if (!o.events.some((e) => e.startsWith('cmd 14'))) throw new Error('printer was not stopped');
+}
+/** How often each command (hex) was sent. */
+function sent(counts: Record<string, number>) {
+	return (o: Outcome) => {
+		for (const [cmd, n] of Object.entries(counts)) {
+			const got = o.events.filter((e) => e.startsWith(`cmd ${cmd} `)).length;
+			if (got !== n) throw new Error(`command ${cmd} sent ${got} times, expected ${n}`);
+		}
+	};
+}
 
 // ---- Running the driver ----
 
@@ -116,6 +165,8 @@ interface Outcome {
 	buffers: Uint8Array[];
 	media?: Record<string, unknown>;
 	state?: PrinterStatus;
+	/** The error the job failed with. */
+	error?: string;
 }
 
 const label = (s: PrintScenario): LabelSpec => ({
@@ -131,12 +182,22 @@ const label = (s: PrintScenario): LabelSpec => ({
 
 async function run(s: Scenario, compress?: (buf: Uint8Array) => Uint8Array): Promise<Outcome> {
 	const emu = new T15Emulator(s.device);
-	const driver = new T15BtDriver(emu, s.device);
+	const driver = new T15BtDriver(emu, s.device, s.kind === 'print' ? s.link : 'spp');
 	if (compress) driver.compress = compress;
 	const out: Outcome = { writes: emu.writes, events: emu.events, buffers: emu.buffers };
 	if (s.kind === 'print') {
-		await driver.print(s.pages, label(s), { density: s.density, copies: s.copies ?? 1, cutType: s.cut, offsetX: s.offsetX, offsetY: s.offsetY });
+		emu.silent = new Set(s.silent);
+		emu.ackData = !s.noAcks;
+		if (s.status) emu.extra = s.status;
+		try {
+			await driver.print(s.pages, label(s), { density: s.density, copies: s.copies ?? 1, cutType: s.cut, offsetX: s.offsetX, offsetY: s.offsetY });
+		} catch (e) {
+			if (!s.expectError) throw e;
+			out.error = (e as Error).message;
+		}
+		if (s.expectError && out.error !== s.expectError) throw new Error(`expected "${s.expectError}", got ${out.error ? `"${out.error}"` : 'no error'}`);
 		if (emu.printing) throw new Error('printer still printing after the job');
+		s.check?.(out);
 	} else if (s.kind === 'media') {
 		emu.material = s.material;
 		const m = await driver.readMedia();
@@ -152,10 +213,11 @@ async function run(s: Scenario, compress?: (buf: Uint8Array) => Uint8Array): Pro
 
 /** Rebuild what each label prints from the decoded buffers and compare it with the intended dots. */
 function checkPrinted(s: PrintScenario, o: Outcome) {
-	const adjust = { left: (s.offsetX ?? 0) * 4, top: (s.offsetY ?? 0) * 4 };
+	const clamp = (v = 0) => Math.max(-T15_OFFSET.max, Math.min(T15_OFFSET.max, v));
+	const adjust = { left: clamp(s.offsetX), top: clamp(s.offsetY) };
 	const labels = Array.from({ length: s.copies ?? 1 }, () => s.pages).flat();
 	const rasters = labels.map((p) => t15Raster(p, adjust));
-	const job = encodeT15Job(rasters, { density: s.density, dieCut: s.dieCut, paperGap: s.paperGap ?? 3, cutMode: s.cut ?? 0 });
+	const job = encodeT15Job(rasters, { density: s.density, dieCut: s.dieCut, paperGap: s.paperGap ?? 3, cutMode: s.cut ?? 0, avoidFrameMarkers: s.link === 'ble' });
 	if (job.buffers.length !== o.buffers.length) throw new Error(`printer got ${o.buffers.length} buffers, expected ${job.buffers.length}`);
 	job.buffers.forEach((b, i) => {
 		if (hex(b) !== hex(o.buffers[i])) throw new Error(`buffer ${i} differs from the encoder's`);
@@ -194,7 +256,7 @@ function scenarioFile(s: Scenario): string {
 	const lines = [`mode ${s.kind}`, `name ${s.device}`];
 	if (s.kind === 'print') {
 		lines.push(`length ${s.lengthMm}`, 'height 12', `copies ${s.copies ?? 1}`, `density ${s.density}`, `cut ${s.cut ?? 0}`);
-		lines.push(`dieCut ${s.dieCut ? 1 : 0}`, `paperGap ${s.paperGap ?? 3}`, `adjustLeft ${(s.offsetX ?? 0) * 4}`, `adjustTop ${(s.offsetY ?? 0) * 4}`, 'threshold 204');
+		lines.push(`dieCut ${s.dieCut ? 1 : 0}`, `paperGap ${s.paperGap ?? 3}`, `adjustLeft ${s.offsetX ?? 0}`, `adjustTop ${s.offsetY ?? 0}`, 'threshold 204');
 		// The app draws its bitmap scaled into the 88-dot band; give it exactly those 88 rows.
 		for (const p of s.pages) {
 			let bits = '';
@@ -264,7 +326,7 @@ function expectedFromOracle(s: Scenario, result: string): Record<string, unknown
 }
 
 function actual(s: Scenario, o: Outcome): Record<string, unknown> {
-	if (s.kind === 'print') return { result: 'RESULT true 0' };
+	if (s.kind === 'print') return o.error ? { error: o.error } : { result: 'RESULT true 0' };
 	if (s.kind === 'media') {
 		const m = o.media!;
 		return { labelId: m.labelId, paperType: m.paperType, widthMm: m.widthMm, lengthMm: m.lengthMm, gap: m.gap, uuid: m.uuid };
@@ -282,8 +344,9 @@ const flag = (f: string) => (args.includes(f) ? args[args.indexOf(f) + 1] : unde
 const scenarioDir = flag('--scenarios');
 if (scenarioDir) {
 	fs.mkdirSync(scenarioDir, { recursive: true });
-	for (const s of SCENARIOS) fs.writeFileSync(path.join(scenarioDir, `${s.name}.txt`), scenarioFile(s));
-	console.log(`wrote ${SCENARIOS.length} scenarios to ${scenarioDir}`);
+	const oracled = SCENARIOS.filter(inOracle);
+	for (const s of oracled) fs.writeFileSync(path.join(scenarioDir, `${s.name}.txt`), scenarioFile(s));
+	console.log(`wrote ${oracled.length} scenarios to ${scenarioDir}`);
 	process.exit(0);
 }
 
@@ -291,13 +354,82 @@ const oracleDir = flag('--oracle');
 const golden: Record<string, { writes: number; sha256: string; expect: Record<string, unknown> }> = fs.existsSync(GOLDEN) ? JSON.parse(fs.readFileSync(GOLDEN, 'utf8')) : {};
 const only = flag('--only');
 let failed = 0;
+
+// ---- Unit checks ----
+
+const UNITS: [string, () => void][] = [
+	[
+		'frame-marker workaround',
+		() => {
+			// A stream with AA BB where the 2nd 128-byte write of the first frame starts its marker.
+			const marked = new Uint8Array(600);
+			marked[0x7a] = 0xaa;
+			marked[0x7b] = 0xbb;
+			const clean = new Uint8Array(600);
+			const page = t15Raster(page0(), {});
+			let calls = 0;
+			const job = encodeT15Job([page], { density: 4, avoidFrameMarkers: true }, () => (calls++ ? clean : marked));
+			if (calls !== 2 || job.streams[0] !== clean) throw new Error('marked stream was not re-encoded once');
+			const plain = encodeT15Job([page], { density: 4 }, () => marked);
+			if (job.buffers[0][0x7a] !== ((plain.buffers[0][0x7a] + 1) & 0xff)) throw new Error('buffer byte 0x7a was not bumped');
+			if (job.buffers[0].some((b, i) => i !== 0x7a && b !== plain.buffers[0][i])) throw new Error('more than one byte changed');
+			let n = 0;
+			encodeT15Job([page], { density: 4, avoidFrameMarkers: true }, () => (n++, clean));
+			if (n !== 1) throw new Error('clean stream was re-encoded');
+		}
+	],
+	[
+		'name routing',
+		() => {
+			const cases: [string, string, string | undefined, string | undefined][] = [
+				['T0126E2507010001', 't15', 'E10', undefined],
+				['T0079A2401010001', 't15', 'A10 Plus', undefined],
+				['T0141B2401010001', 't15', 'A10 Pro', undefined],
+				['T0140A2401010001', 't15', 'T10 Pro', undefined],
+				['T0053B2408080014', 't5080', undefined, 'E16'],
+				['T0138A2401010001', 't5080', undefined, 'E11'],
+				['T0148B2507018663', 't5080', 'T50M Pro', undefined]
+			];
+			for (const [name, family, model, unsupported] of cases) {
+				const got = [familyFromBluetoothName(name), modelNameFromBluetoothName(name), unsupportedBluetoothModel(name)];
+				if (JSON.stringify(got) !== JSON.stringify([family, model, unsupported])) throw new Error(`${name}: ${JSON.stringify(got)}`);
+			}
+		}
+	],
+	[
+		'head rate',
+		() => {
+			const got = [1, 2, 3, 4, 5, 6, 7].map((d) => t15HeadRate(d));
+			if (got.join() !== '80,90,100,110,120,130,140') throw new Error(got.join());
+		}
+	]
+];
+for (const [name, check] of UNITS) {
+	if (only && name !== only) continue;
+	try {
+		check();
+		console.log(`ok   unit: ${name}`);
+	} catch (e) {
+		failed++;
+		console.log(`FAIL unit: ${name}: ${(e as Error).message}`);
+	}
+}
+
+// ---- Scenarios ----
+
 for (const s of SCENARIOS) {
 	if (only && s.name !== only) continue;
 	const t0 = Date.now();
 	try {
 		const o = await run(s);
-		if (s.kind === 'print') checkPrinted(s, o);
+		if (s.kind === 'print' && !o.error) checkPrinted(s, o);
 		let note = '';
+		if (!inOracle(s)) {
+			const want = JSON.stringify(s.kind === 'print' && s.expectError ? { error: s.expectError } : { result: 'RESULT true 0' });
+			if (JSON.stringify(actual(s, o)) !== want) throw new Error(`unexpected result ${JSON.stringify(actual(s, o))}`);
+			console.log(`ok   ${s.name} (${o.writes.length} writes, own checks, ${((Date.now() - t0) / 1000).toFixed(1)} s)`);
+			continue;
+		}
 		if (oracleDir) {
 			const ref = readOracle(oracleDir, s.name);
 			// 1. With the app's LZMA streams, every write must be the app's.

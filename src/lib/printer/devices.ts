@@ -84,8 +84,8 @@ const BT_NAME_PREFIXES: [string, string][] = [
 
 /**
  * Bluetooth name prefixes of the T10/T15-series label makers, which all use the T15 protocol
- * (SUPRINT 1.5.0 EDevice.getE10Device and T10Device, printing process 15). Prefixes both list are
- * named E10, as the app checks the E10 first.
+ * (SUPRINT 1.5.0 EDevice.getE10Device, T10Device and A10PlusDevice, printing process 15). Prefixes
+ * both the E10 and T10 lists have are named E10, as the app checks the E10 first.
  */
 const T15_NAME_PREFIXES: [string, string][] = [
 	...['T0010', 'T0026', 'T0035', 'T0039', 'T0043', 'T0065', 'T0060', 'T0126', 'T0127', 'T0011', 'T0028', 'T0059', 'T0066', 'T0036', 'T0040', 'T0044',
@@ -100,8 +100,31 @@ const T15_NAME_PREFIXES: [string, string][] = [
 	['T0070', 'T10 Plus'],
 	['T0076', 'T10 Pro'],
 	['T0140', 'T10 Pro'],
-	...['T0001', 'T0002', 'T0003', 'T0004', 'T0005', 'T0008', 'T0009', 'T0074'].map((p) => [p, 'T10'] as [string, string])
+	...['T0001', 'T0002', 'T0003', 'T0004', 'T0005', 'T0008', 'T0009', 'T0074'].map((p) => [p, 'T10'] as [string, string]),
+	['T0079', 'A10 Plus'],
+	['T0080', 'A10 Pro'],
+	['T0141', 'A10 Pro']
 ];
+
+/**
+ * Supvan Bluetooth printers with other protocols this app doesn't speak yet, so they aren't taken
+ * for a T50/T80: the E11/E12 (SUPRINT printing process 4) and the E16/T16/A16 (process 16).
+ */
+const UNSUPPORTED_NAME_PREFIXES: [string, string][] = [
+	...['T0138', 'T0139', 'T0181', 'T0182', 'T0183', 'T0184', 'T0224', 'T0225', 'T0216', 'T0217', 'T0218', 'T0219', 'T0226', 'T0227'].map(
+		(p) => [p, 'E11'] as [string, string]
+	),
+	...['T0187', 'T0188', 'T0189', 'T0190', 'T0228', 'T0229', 'T0194', 'T0195', 'T0196', 'T0197', 'T0230', 'T0231'].map((p) => [p, 'E12'] as [string, string]),
+	...['T0053', 'T0105', 'T0054', 'T0107', 'T0055', 'T0106', 'T0122', 'T0123'].map((p) => [p, 'E16'] as [string, string]),
+	...['T0047', 'T0052'].map((p) => [p, 'T16'] as [string, string]),
+	...['T0056', 'T0069'].map((p) => [p, 'A16'] as [string, string])
+];
+
+/** Model name of a Bluetooth printer this app can't drive yet, if the name is one. */
+export function unsupportedBluetoothModel(name: string | undefined): string | undefined {
+	if (!name) return undefined;
+	return UNSUPPORTED_NAME_PREFIXES.find(([p]) => name.startsWith(p))?.[1];
+}
 
 /** Model name for a Bluetooth device name, or undefined if it isn't a known prefix. */
 export function modelNameFromBluetoothName(name: string | undefined): string | undefined {

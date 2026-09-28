@@ -51,8 +51,8 @@
 				density: opts.density ? density : 4,
 				copies: editor.copies,
 				cutType: opts.cutTypes ? cutType : undefined,
-				offsetX: editor.offsetX,
-				offsetY: editor.offsetY
+				offsetX,
+				offsetY
 			});
 			done = true;
 			clearTimeout(doneTimer);
@@ -79,8 +79,11 @@
 	/** The printer reports a job running although we are not printing (e.g. an interrupted print). */
 	const strayJob = $derived(printer.state === 'ready' && !!printer.status?.printing);
 	let showOffsets = $state(false);
-	/** Official offset units are 4 dots. */
-	const offsetMm = (v: number) => ((v * 4) / printer.dpmm).toFixed(1);
+	/** Offsets in the family's units, limited to its range (a stored value may come from another family). */
+	const clampOffset = (v: number) => Math.max(-opts.offset.max, Math.min(opts.offset.max, v));
+	const offsetX = $derived(clampOffset(editor.offsetX));
+	const offsetY = $derived(clampOffset(editor.offsetY));
+	const offsetMm = (v: number) => ((v * opts.offset.dots) / printer.dpmm).toFixed(1);
 	const warnings = $derived(printer.status?.warnings ?? []);
 </script>
 
@@ -130,17 +133,17 @@
 	{/if}
 
 	<div class="offsets">
-		<button class="btn ghost sm" class:active={showOffsets || editor.offsetX || editor.offsetY} onclick={() => (showOffsets = !showOffsets)}>
-			<Icon svg={Move} size={14} /> Position offset{editor.offsetX || editor.offsetY ? ` (${offsetMm(editor.offsetX)}, ${offsetMm(editor.offsetY)} mm)` : ''}
+		<button class="btn ghost sm" class:active={showOffsets || offsetX || offsetY} onclick={() => (showOffsets = !showOffsets)}>
+			<Icon svg={Move} size={14} /> Position offset{offsetX || offsetY ? ` (${offsetMm(offsetX)}, ${offsetMm(offsetY)} mm)` : ''}
 		</button>
 		{#if showOffsets}
 			<label class="field">
-				<span>Horizontal · {offsetMm(editor.offsetX)} mm</span>
-				<input type="range" min="-48" max="48" step="1" bind:value={editor.offsetX} onchange={() => editor.persist()} />
+				<span>Horizontal · {offsetMm(offsetX)} mm</span>
+				<input type="range" min={-opts.offset.max} max={opts.offset.max} step="1" bind:value={editor.offsetX} onchange={() => editor.persist()} />
 			</label>
 			<label class="field">
-				<span>Vertical · {offsetMm(editor.offsetY)} mm</span>
-				<input type="range" min="-48" max="48" step="1" bind:value={editor.offsetY} onchange={() => editor.persist()} />
+				<span>Vertical · {offsetMm(offsetY)} mm</span>
+				<input type="range" min={-opts.offset.max} max={opts.offset.max} step="1" bind:value={editor.offsetY} onchange={() => editor.persist()} />
 			</label>
 			<button class="btn sm" onclick={() => { editor.offsetX = 0; editor.offsetY = 0; editor.persist(); }}>Reset</button>
 		{/if}

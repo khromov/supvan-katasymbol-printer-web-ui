@@ -17,7 +17,7 @@ import { cropRowsCentered, fromBitmap, type Grid } from '../bitmap';
 import LZMA from '../lzma.js';
 import type { ByteTransport } from '../serial';
 import { CMD } from './t5080';
-import { FrameChannel, type FrameChannelOptions } from './t5080-bt';
+import { FrameChannel } from './t5080-bt';
 import {
 	PrinterError,
 	type Bitmap,
@@ -34,6 +34,8 @@ export const T15_HEAD_DOTS = 96;
 /** Rows the app draws the design into, centered on the head (T15Print.initImageData scales to 88). */
 export const T15_PRINT_DOTS = 88;
 export const T15_DENSITY = { min: 1, max: 7, default: 4 };
+/** Position offsets in dots, as both apps' print settings allow (BaseDevice position min/max). */
+export const T15_OFFSET = { max: 9, dots: 1 };
 const BUF_LENGTH = 4000;
 const MAX_COLUMNS = 332;
 const BYTES_PER_COLUMN = T15_HEAD_DOTS / 8;
@@ -89,6 +91,11 @@ export interface T15JobOptions {
 	paperGap?: number;
 	/** 0 (the app's default): cut flag on the last label; 1: never; 2: on every label. */
 	cutMode?: number;
+	/**
+	 * Re-encode a buffer whose stream would start a 128-byte write with what looks like a frame
+	 * marker (see avoidFrameMarkers), like the iOS app. Its streams only go out in such writes.
+	 */
+	avoidFrameMarkers?: boolean;
 }
 
 export interface T15Job {
@@ -108,6 +115,22 @@ export interface T15Job {
  * but decode to the same bytes.
  */
 export const t15Compress = (buf: Uint8Array): Uint8Array => Uint8Array.from(LZMA.compress(buf, 9) as number[], (b) => b & 0xff);
+
+/**
+ * Stream offsets that land 6 bytes into the 2nd, 3rd and 4th 128-byte write of the first data
+ * frame, where a frame has its AA <cmd> marker, and the command bytes the iOS app avoids there
+ * (T15Transfer @0x1002d851c): it bumps that byte of the buffer, a single dot, and compresses again,
+ * apparently so the firmware can't take the write for a new frame.
+ */
+const MARKER_OFFSETS = [0x7a, 0xfa, 0x17a];
+const MARKER_COMMANDS = new Set([0xbb, 0x06, 0xc7, 0x07]);
+
+function avoidFrameMarkers(buf: Uint8Array, stream: Uint8Array, compress: (buf: Uint8Array) => Uint8Array): Uint8Array {
+	const hits = MARKER_OFFSETS.filter((i) => stream[i] === 0xaa && MARKER_COMMANDS.has(stream[i + 1]));
+	if (!hits.length) return stream;
+	for (const i of hits) buf[i] = (buf[i] + 1) & 0xff;
+	return compress(buf);
+}
 
 /**
  * Encode every label of a job (copies already expanded, in print order) like
@@ -193,8 +216,10 @@ export function encodeT15Job(labels: Grid[], opts: T15JobOptions, compress = t15
 			for (let k = 1; k <= Math.floor(len / 256); k++) sum += buf[k * 256 - 1];
 			buf[0] = sum & 0xff;
 			buf[1] = (sum >> 8) & 0xff;
+			let stream = compress(buf);
+			if (opts.avoidFrameMarkers) stream = avoidFrameMarkers(buf, stream, compress);
 			job.buffers.push(buf.slice());
-			job.streams.push(compress(buf));
+			job.streams.push(stream);
 			count++;
 		}
 		job.perLabel.push(count);
@@ -291,17 +316,33 @@ export function parseT15Status(f: Uint8Array, deviceName = ''): PrinterStatus {
 	return s;
 }
 
-/** T15Print.devCheckErrMsg(true): what stops a running job. */
-function printError(s: PrinterStatus): string | null {
+/**
+ * T15Print.devCheckErrMsg: what stops a job. Before the job only the label and cover checks
+ * apply; while sending, the printer also must not have dropped out of printing.
+ */
+function printError(s: PrinterStatus, running: boolean): string | null {
 	const b = s.raw.subarray(14, 20);
 	if (b[2] & 0x08) return 'Cover is open';
 	if (b[3] & 0x01) return 'No label detected';
 	if (b[0] & 0x02) return 'No label detected';
 	if (b[0] & 0x04) return 'Labels used up';
 	if (b[0] & 0x10) return 'Label tape is not installed';
-	if (!s.busy && !s.printing) return 'Printing was stopped on the device';
+	if (running && !s.busy && !s.printing) return 'Printing was stopped on the device';
 	return null;
 }
+
+/**
+ * How each link is driven. Classic Bluetooth follows SUPRINT (Android), BLE the iOS app, the only
+ * official client that reaches these printers over BLE: it retries only status requests, waits up
+ * to 6 s for the printer, and sends each data frame as four 128-byte writes 10 ms apart. Both apps
+ * abort a transfer when a data frame gets no reply.
+ */
+const LINKS = {
+	spp: { channel: { acksDataFrames: true, strictAcks: true }, polls: 20, pollMs: 100 },
+	ble: { channel: { acksDataFrames: true, strictAcks: true, commandTimeoutMs: 4000 }, polls: 30, pollMs: 200 }
+} as const;
+
+export type T15Link = keyof typeof LINKS;
 
 export class T15BtDriver implements PrinterDriver {
 	readonly family = 't15' as const;
@@ -317,17 +358,27 @@ export class T15BtDriver implements PrinterDriver {
 		transport: ByteTransport,
 		/** Bluetooth name (e.g. "T0126…"): picks the battery scale and how data frames are written. */
 		readonly deviceName = '',
-		channelOptions: FrameChannelOptions = {}
+		readonly link: T15Link = 'spp'
 	) {
-		this.channel = new FrameChannel(transport, channelOptions);
+		this.channel = new FrameChannel(transport, LINKS[link].channel);
 	}
 
 	canvasSize(label: LabelSpec) {
 		return { width: Math.round(label.lengthMm * this.dpmm), height: Math.round(label.widthMm * this.dpmm) };
 	}
 
+	/**
+	 * Send a command and wait for its reply. SUPRINT retries every command once (BasePrint.sendCmd);
+	 * over BLE only status requests are retried, so a late reply can't make START or BUF_FULL run
+	 * twice.
+	 */
+	private cmd(command: number, a = 0, b = 0, timeoutMs?: number) {
+		const retry = this.link === 'spp' || command === T15_CMD.INQUIRY_STA;
+		return this.channel.command(command, a, b, timeoutMs, retry);
+	}
+
 	async getStatus(): Promise<PrinterStatus> {
-		return parseT15Status(await this.channel.command(T15_CMD.INQUIRY_STA), this.deviceName);
+		return parseT15Status(await this.cmd(T15_CMD.INQUIRY_STA), this.deviceName);
 	}
 
 	/** Poll status until the link carries replies (the first command after connecting is often lost). */
@@ -346,7 +397,7 @@ export class T15BtDriver implements PrinterDriver {
 
 	/**
 	 * Loaded tape (T15Print.getMaterial): skipped while the printer is busy. The app asks the
-	 * printer to read the label again (STRD_MAT) after every read.
+	 * printer to read the label again (STRD_MAT) after every read; the iOS app doesn't need a reply.
 	 */
 	async readMedia(): Promise<MediaInfo | null> {
 		const s = await this.getStatus();
@@ -357,7 +408,7 @@ export class T15BtDriver implements PrinterDriver {
 		const gap = f[42] ?? 0;
 		const media = { dieCut: type === 1 || type === 129, gap: gap > 8 ? 3 : gap };
 		this.media = media;
-		await this.channel.command(T15_CMD.STRD_MAT).catch(() => {});
+		await this.channel.command(T15_CMD.STRD_MAT, 0, 0, 1000, false).catch(() => {});
 		return {
 			labelId: (f[37] ?? 0) | ((f[38] ?? 0) << 8),
 			paperType: media.dieCut ? 1 : 0,
@@ -370,17 +421,17 @@ export class T15BtDriver implements PrinterDriver {
 	}
 
 	/**
-	 * One stream (T15Print.transfer): announce the frames, send them, then BUF_FULL(0). Names with an
-	 * E get each frame as four 128-byte writes 50 ms apart, others as one 512-byte write; over BLE
-	 * the 128-byte pieces are used as well.
+	 * One stream (T15Print.transfer): announce the frames, send them, then BUF_FULL(0). Over BLE each
+	 * frame goes out as four 128-byte writes 10 ms apart (iOS). Over classic Bluetooth, names with an
+	 * E get the same with 50 ms pauses between the writes, others one 512-byte write (SUPRINT).
 	 */
 	private async transfer(stream: Uint8Array, signal?: AbortSignal) {
 		const frames = t15DataFrames(stream);
 		await this.channel.command(T15_CMD.NEXTFRM_BULK, 512, frames.length, undefined, false);
-		const split = this.deviceName.includes('E') || !this.channel.acksDataFrames;
-		await this.channel.sendFrames(frames, split ? { pieceSize: 128, pauseMs: 50 } : { pieceSize: 512 }, signal);
+		const pacing = this.link === 'ble' ? { pieceSize: 128 } : this.deviceName.includes('E') ? { pieceSize: 128, pauseMs: 50 } : { pieceSize: 512 };
+		await this.channel.sendFrames(frames, pacing, signal);
 		await sleep(50, signal);
-		await this.channel.command(T15_CMD.BUF_FULL, 0);
+		await this.cmd(T15_CMD.BUF_FULL, 0);
 	}
 
 	async print(pages: Bitmap[], label: LabelSpec, opts: PrintOptions) {
@@ -390,39 +441,43 @@ export class T15BtDriver implements PrinterDriver {
 		const density = Math.min(T15_DENSITY.max, Math.max(T15_DENSITY.min, Math.round(opts.density) || T15_DENSITY.default));
 		const report = (phase: Parameters<NonNullable<PrintOptions['onProgress']>>[0]['phase'], page: number) =>
 			onProgress?.({ phase, page, pages: total });
+		const { polls, pollMs } = LINKS[this.link];
 
 		report('preparing', 0);
-		// Offsets are in the print dialog's 4-dot steps; the app's adjustments are in dots.
-		const adjust = { left: Math.round((opts.offsetX ?? 0) * 4), top: Math.round((opts.offsetY ?? 0) * 4) };
-		const rasters = pages.map((p) => t15Raster(p, adjust));
+		// Offsets are in dots here, within the apps' -9..9.
+		const clamp = (v = 0) => Math.max(-T15_OFFSET.max, Math.min(T15_OFFSET.max, Math.round(v)));
+		const rasters = pages.map((p) => t15Raster(p, { left: clamp(opts.offsetX), top: clamp(opts.offsetY) }));
 		// Collated copies, like the app with "copy print" on.
 		const labels: Grid[] = [];
 		for (let c = 0; c < copies; c++) labels.push(...rasters);
 		// Like the app, the loaded tape decides die-cut and gap; without a reading, the chosen label.
 		const dieCut = this.media ? this.media.dieCut : label.paperType === 1 || label.paperType === 2;
 		const paperGap = this.media ? this.media.gap : label.gap || 3;
-		const job = encodeT15Job(labels, { density, dieCut, paperGap, cutMode: opts.cutType ?? 0 }, this.compress);
+		const job = encodeT15Job(labels, { density, dieCut, paperGap, cutMode: opts.cutType ?? 0, avoidFrameMarkers: this.link === 'ble' }, this.compress);
 
-		// 1. Up to 20 status polls 100 ms apart for the printer to be idle (the app goes on regardless).
+		// 1. Wait for the printer to be idle (the apps go on regardless), then check it can print.
 		report('checking', 0);
 		let s: PrinterStatus | undefined;
-		for (let i = 0; i < 20; i++) {
-			await sleep(100, signal);
+		for (let i = 0; i < polls; i++) {
+			await sleep(pollMs, signal);
 			s = await this.getStatus();
 			if (!s.busy) break;
 		}
+		const err = s && printError(s, false);
+		if (err) throw new PrinterError(err, 'device');
 
-		// 2. Density, then start and wait (up to 2 s) for the printing bit.
-		await this.channel.command(T15_CMD.SET_HEADRATE, t15HeadRate(density, this.deviceName));
-		await this.channel.command(T15_CMD.START_PRINT, 0);
+		// 2. Density and start. Neither app minds a missing reply to the density command.
+		await this.cmd(T15_CMD.SET_HEADRATE, t15HeadRate(density, this.deviceName)).catch(() => {});
+		await this.cmd(T15_CMD.START_PRINT, 0);
 		try {
-			for (let i = 0; i < 20; i++) {
-				await sleep(100, signal);
+			for (let i = 0; i < polls; i++) {
+				await sleep(pollMs, signal);
 				s = await this.getStatus();
 				if (s.printing) break;
 			}
 			if (!s?.printing) throw new PrinterError('Printer did not start printing', 'timeout');
-			await this.channel.command(T15_CMD.PAPER_BACK, job.backFrames);
+			// Neither app checks the reply to PAPER_BACK either.
+			await this.cmd(T15_CMD.PAPER_BACK, job.backFrames).catch(() => {});
 
 			// 3. Every 20 ms: status, then the next buffer once the printer has room.
 			let n = 0;
@@ -432,7 +487,7 @@ export class T15BtDriver implements PrinterDriver {
 					for (;;) {
 						await sleep(20, signal);
 						s = await this.getStatus();
-						const err = printError(s);
+						const err = printError(s, true);
 						if (err) throw new PrinterError(err, err.startsWith('Printing was stopped') ? 'stopped' : 'device');
 						if (!s.bufferFull) break;
 					}
@@ -461,7 +516,7 @@ export class T15BtDriver implements PrinterDriver {
 	async stop() {
 		let s = await this.getStatus();
 		if (!s.printing) return;
-		await this.channel.command(T15_CMD.STOP_PRINT);
+		await this.cmd(T15_CMD.STOP_PRINT);
 		for (let i = 0; i < 50 && s.printing; i++) {
 			await sleep(20);
 			s = await this.getStatus();

@@ -66,6 +66,7 @@ const trimDots = (m: string) => m.replace(/\.+$/, '');
 /** Plain-language message for a failed Bluetooth connection. */
 function bluetoothErrorMessage(e: unknown): string {
 	const raw = (e as Error)?.message ?? String(e);
+	if ((e as PrinterError)?.code === 'unsupported') return raw;
 	if (/open/i.test(raw) && /serial port/i.test(raw))
 		return "Couldn't open a Bluetooth connection to the printer. Check that it's switched on, paired with this computer and not connected to a phone. On a Mac, forgetting the printer in Bluetooth settings and pairing it again usually helps.";
 	if ((e as PrinterError)?.code === 'timeout')
@@ -77,6 +78,7 @@ function bluetoothErrorMessage(e: unknown): string {
 function bleErrorMessage(e: unknown): string {
 	const err = e as Error & { code?: string };
 	const raw = err?.message ?? String(e);
+	if (err?.code === 'unsupported') return raw;
 	if (/adapter|bluetooth is (off|disabled)|not available/i.test(raw))
 		return 'Bluetooth is turned off or unavailable on this device. Turn it on and try again.';
 	if (err?.name === 'NotFoundError' || /no services matching/i.test(raw))
