@@ -99,6 +99,14 @@ export function rollLabel(label: LabelSpec): boolean {
 	return ROLL_PAPER_TYPES.has(label.paperType);
 }
 
+/**
+ * Whether the label's length can follow its content (auto length): only tape off a roll in a strip
+ * label maker (E10/T10 series, G series). Elsewhere a roll label keeps the length the user sets.
+ */
+export function autoLengthLabel(label: LabelSpec, family: Family): boolean {
+	return (family === 't15' || family === 'g') && rollLabel(label);
+}
+
 /** Length along the tape: the design's width, or its height when the design runs across the head. */
 export function tapeLength(label: LabelSpec): number {
 	return label.paperDirection === 1 ? label.widthMm : label.lengthMm;

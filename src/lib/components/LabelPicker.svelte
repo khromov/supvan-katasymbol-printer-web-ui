@@ -3,7 +3,7 @@
 	import Icon from './Icon.svelte';
 	import { editor } from '../stores/editor.svelte';
 	import { printer } from '../stores/printer.svelte';
-	import { customLabel, labelShape, labelTitle, loadCatalog, PAPER_TYPES, ROLL_LENGTH, rollLabel, tapeLength, withTapeLength } from '../catalog';
+	import { autoLengthLabel, customLabel, labelShape, labelTitle, loadCatalog, PAPER_TYPES, ROLL_LENGTH, rollLabel, tapeLength, withTapeLength } from '../catalog';
 	import type { Family, LabelSpec } from '../printer/types';
 	import { FAMILY_NAMES } from '../printer/devices';
 
@@ -14,7 +14,7 @@
 	}: {
 		/** Large −/+ buttons for the length, for touch screens (Quick label). */
 		touch?: boolean;
-		/** Offer Auto / Manual length for tape off a roll (Quick label); Auto sizes it to the content. */
+		/** Offer Auto / Manual length for tape off a roll in a strip label maker (Quick label); Auto sizes it to the content. */
 		auto?: boolean;
 		/** The length Auto picked, once known. */
 		autoMm?: number | null;
@@ -64,8 +64,10 @@
 		if (differs) editor.setLabel($state.snapshot(target) as LabelSpec, true);
 	});
 
+	/** Offer Auto / Manual: the caller asks for it and the label allows it (autoLengthLabel). */
+	const canAuto = $derived(auto !== undefined && autoLengthLabel(editor.label, family));
 	/** The label as it will print: with the auto length when that is on. */
-	const shown = $derived(auto && autoMm !== null && rollLabel(editor.label) ? withTapeLength(editor.label, autoMm) : editor.label);
+	const shown = $derived(canAuto && auto && autoMm !== null ? withTapeLength(editor.label, autoMm) : editor.label);
 
 	/** Switch to a manual length, starting from the one Auto picked. */
 	function toManual() {
@@ -152,13 +154,13 @@
 		{@const mm = tapeLength(editor.label)}
 		<div class="field length" class:touch>
 			<span>Length</span>
-			{#if auto !== undefined}
+			{#if canAuto}
 				<div class="segmented length-mode">
 					<button class:on={auto} aria-pressed={auto} onclick={() => (auto = true)}>Auto</button>
 					<button class:on={!auto} aria-pressed={!auto} onclick={toManual}>Manual</button>
 				</div>
 			{/if}
-			{#if auto}
+			{#if canAuto && auto}
 				<span class="auto-note">Grows with the text{autoMm !== null ? ` · ${autoMm} mm` : ''}</span>
 			{:else}
 				<div class="length-row">

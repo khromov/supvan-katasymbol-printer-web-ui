@@ -148,10 +148,12 @@ export function autoQuickLength(
 
 /**
  * The shortest length autoQuickLength may pick: at least `floor`, and at least the size across the
- * tape, so the label never turns from landscape to portrait while searching.
+ * tape, so the label never turns between landscape and portrait while searching. A square label
+ * counts as landscape (quickRotated), so when the tape runs down the design (paperDirection 1) the
+ * length has to go past the size across it.
  */
 export function autoLengthMin(label: LabelSpec, floor: number): number {
-	return Math.max(floor, label.paperDirection === 1 ? label.lengthMm : label.widthMm);
+	return Math.max(floor, label.paperDirection === 1 ? Math.floor(label.lengthMm) + 1 : label.widthMm);
 }
 
 /**

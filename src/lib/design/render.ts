@@ -83,8 +83,9 @@ function inkExtent(ctx: CanvasRenderingContext2D, line: string) {
 
 /**
  * Baseline of the first line, with lines stacked `lineH` apart and the block placed by `valign` on
- * the font's line box (ascent + descent). Also the ink's top and bottom: accents (Ö) and
- * descenders can reach past that box.
+ * the font's line box (ascent + descent). Accents (Ö) and descenders can reach past that box; when
+ * their ink crosses an edge of the element, the block moves inward as far as the other edge allows.
+ * Also the ink's top and bottom, after that move.
  */
 function verticalLayout(ctx: CanvasRenderingContext2D, lines: string[], px: number, lineH: number, h: number, valign: TextElement['valign']) {
 	const metrics = ctx.measureText('Hg');
@@ -102,7 +103,10 @@ function verticalLayout(ctx: CanvasRenderingContext2D, lines: string[], px: numb
 		inkTop = Math.min(inkTop, y - (m.actualBoundingBoxAscent ?? ascent));
 		inkBottom = Math.max(inkBottom, y + (m.actualBoundingBoxDescent ?? descent));
 	});
-	return { baseline, inkTop, inkBottom };
+	// Top- and bottom-aligned text sits on an edge, so without this a tall accent or a deep
+	// descender would stick out at every size and fitting would shrink the text to nothing.
+	const shift = inkTop < 0 ? Math.max(0, Math.min(-inkTop, h - inkBottom)) : inkBottom > h ? Math.min(0, Math.max(h - inkBottom, -inkTop)) : 0;
+	return { baseline: baseline + shift, inkTop: inkTop + shift, inkBottom: inkBottom + shift };
 }
 
 function layoutText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h: number, scale: number): Layout {

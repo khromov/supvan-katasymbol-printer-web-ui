@@ -14,7 +14,7 @@
 	import { autoLengthMin, autoQuickLength, buildQuickDesign, gridLines, GRID_SIZES, quickIconPlacement, quickRotated, type QuickLabel } from '../design/quick';
 	import { bitmapToCanvas, fittedTextSize, fittedTextWidth, prepareAssets, renderBitmap } from '../design/render';
 	import { iconSvg, iconsLoaded, loadIcons } from '../design/icons';
-	import { labelShape, labelTitle, ROLL_LENGTH, rollLabel, withTapeLength } from '../catalog';
+	import { autoLengthLabel, labelShape, labelTitle, ROLL_LENGTH, withTapeLength } from '../catalog';
 	import { FONTS, type DesignElement } from '../design/model';
 	import type { LabelSpec } from '../printer/types';
 
@@ -38,9 +38,9 @@
 	let printed = $state(false);
 	let printedTimer: ReturnType<typeof setTimeout>;
 
-	/** Auto length on tape off a roll: sized to the content, once measured (null with nothing to size by). */
+	/** Auto length on a strip label maker's roll tape: sized to the content, once measured (null with nothing to size by). */
 	let autoMm = $state<number | null>(null);
-	const autoLength = $derived(quick.autoLength && rollLabel(editor.label));
+	const autoLength = $derived(quick.autoLength && autoLengthLabel(editor.label, printer.family));
 	$effect(() => {
 		if (!autoLength) return;
 		const q = $state.snapshot(quick) as QuickLabel;
