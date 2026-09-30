@@ -81,13 +81,37 @@ function inkExtent(ctx: CanvasRenderingContext2D, line: string) {
 	return { left, right, width: Math.max(0, left + right) };
 }
 
+/**
+ * Baseline of the first line, with lines stacked `lineH` apart and the block placed by `valign` on
+ * the font's line box (ascent + descent). Also the ink's top and bottom: accents (Ö) and
+ * descenders can reach past that box.
+ */
+function verticalLayout(ctx: CanvasRenderingContext2D, lines: string[], px: number, lineH: number, h: number, valign: TextElement['valign']) {
+	const metrics = ctx.measureText('Hg');
+	const ascent = metrics.fontBoundingBoxAscent ?? px * 0.8;
+	const descent = metrics.fontBoundingBoxDescent ?? px * 0.2;
+	const blockH = (lines.length - 1) * lineH + ascent + descent;
+	const top = valign === 'top' ? 0 : valign === 'bottom' ? h - blockH : (h - blockH) / 2;
+	const baseline = top + ascent;
+	let inkTop = Infinity;
+	let inkBottom = -Infinity;
+	lines.forEach((line, i) => {
+		if (!line) return;
+		const m = ctx.measureText(line);
+		const y = baseline + i * lineH;
+		inkTop = Math.min(inkTop, y - (m.actualBoundingBoxAscent ?? ascent));
+		inkBottom = Math.max(inkBottom, y + (m.actualBoundingBoxDescent ?? descent));
+	});
+	return { baseline, inkTop, inkBottom };
+}
+
 function layoutText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h: number, scale: number): Layout {
 	const measure = (px: number): Layout => {
 		ctx.font = fontSpec(el, px);
 		return { ...wrap(ctx, el.text, w), px, lineH: px * el.lineHeight };
 	};
 	if (!el.fit) return measure(el.size * PT_TO_MM * scale);
-	// Largest font size whose wrapped text fits the box.
+	// Largest font size whose wrapped text fits the box, ink included (accents, descenders).
 	let lo = 1,
 		hi = Math.max(2, h * 1.2),
 		best = measure(lo);
@@ -95,7 +119,8 @@ function layoutText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h
 		const mid = (lo + hi) / 2;
 		const l = measure(mid);
 		const widest = Math.max(...l.lines.map((s) => inkExtent(ctx, s).width));
-		const fits = !l.broke && l.lines.length * l.lineH - (l.lineH - l.px) <= h && widest <= w + 0.5;
+		const { inkTop, inkBottom } = verticalLayout(ctx, l.lines, l.px, l.lineH, h, el.valign);
+		const fits = !l.broke && l.lines.length * l.lineH - (l.lineH - l.px) <= h && widest <= w + 0.5 && inkTop >= -0.5 && inkBottom <= h + 0.5;
 		if (fits) {
 			best = l;
 			lo = mid;
@@ -131,12 +156,7 @@ function drawText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h: 
 		tone.fillStyle = ink;
 		tone.textBaseline = 'alphabetic';
 	}
-	const metrics = ctx.measureText('Hg');
-	const ascent = metrics.fontBoundingBoxAscent ?? px * 0.8;
-	const descent = metrics.fontBoundingBoxDescent ?? px * 0.2;
-	const blockH = (lines.length - 1) * lineH + ascent + descent;
-	let y = el.valign === 'top' ? 0 : el.valign === 'bottom' ? h - blockH : (h - blockH) / 2;
-	y += ascent;
+	let y = verticalLayout(ctx, lines, px, lineH, h, el.valign).baseline;
 	let drewTone = false;
 	for (const line of lines) {
 		// Align by ink, so overhanging glyphs stay inside the box and script fonts center visually.

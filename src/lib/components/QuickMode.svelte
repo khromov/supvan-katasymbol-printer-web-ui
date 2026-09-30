@@ -187,7 +187,7 @@
 					<button class="btn sm icon ghost" onclick={() => printer.setError(null)} aria-label="Dismiss"><Icon svg={X} size={14} /></button>
 				</div>
 			{/if}
-			<div class="label-line"><LabelPicker /></div>
+			<div class="label-line"><LabelPicker touch /></div>
 		</section>
 
 		<!-- 6. Preview: locks under the header once scrolled to, so it stays visible while editing. -->

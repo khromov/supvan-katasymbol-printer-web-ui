@@ -205,6 +205,24 @@ class EditorStore {
 		this.persist();
 	}
 
+	/**
+	 * Resize the label without scaling the design (a roll label cut to another length): the
+	 * elements keep their size and stay centered.
+	 */
+	resizeLabel(label: LabelSpec) {
+		const old = this.label;
+		if (old.lengthMm === label.lengthMm && old.widthMm === label.widthMm) return;
+		this.checkpoint();
+		const dx = (label.lengthMm - old.lengthMm) / 2;
+		const dy = (label.widthMm - old.widthMm) / 2;
+		for (const el of this.elements) {
+			el.x += dx;
+			el.y += dy;
+		}
+		this.label = label;
+		this.persist();
+	}
+
 	/** Switch label, scaling the layout uniformly so it keeps its composition. */
 	setLabel(label: LabelSpec, auto = this.labelAuto) {
 		const old = this.label;

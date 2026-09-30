@@ -83,6 +83,31 @@ export async function loadCatalog(family: Family): Promise<LabelSpec[]> {
 	return labels;
 }
 
+/**
+ * Paper types cut off a roll wherever printing stops (continuous tape, tubes, heat-shrink tube,
+ * continuous with holes, laminated wrap): their catalog length is only a starting point.
+ */
+const ROLL_PAPER_TYPES = new Set([0, 6, 7, 9, 21]);
+/**
+ * Lengths offered for roll labels, in mm. The printers take any length; the cap guards against
+ * typos that would print metres of tape (500 mm is about half a minute on an E10).
+ */
+export const ROLL_LENGTH = { min: 10, max: 500 };
+
+/** Whether the label comes off a roll, so its length along the tape can be anything. */
+export function rollLabel(label: LabelSpec): boolean {
+	return ROLL_PAPER_TYPES.has(label.paperType);
+}
+
+/** Length along the tape: the design's width, or its height when the design runs across the head. */
+export function tapeLength(label: LabelSpec): number {
+	return label.paperDirection === 1 ? label.widthMm : label.lengthMm;
+}
+
+export function withTapeLength(label: LabelSpec, mm: number): LabelSpec {
+	return label.paperDirection === 1 ? { ...label, widthMm: mm } : { ...label, lengthMm: mm };
+}
+
 /** Label outline shape from the catalog (1 rectangle, 2 rounded, 3 round). */
 export function labelShape(label: LabelSpec): 'rect' | 'rounded' | 'round' {
 	const s = Number(label.extra?.ShapeType ?? 1);

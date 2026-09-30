@@ -1,11 +1,14 @@
 <script lang="ts">
-	import { Check, ChevronDown, ScanLine, Search, X } from 'lucide-static';
+	import { Check, ChevronDown, Minus, Plus, RotateCcw, ScanLine, Search, X } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import { editor } from '../stores/editor.svelte';
 	import { printer } from '../stores/printer.svelte';
-	import { customLabel, labelShape, labelTitle, loadCatalog, PAPER_TYPES } from '../catalog';
+	import { customLabel, labelShape, labelTitle, loadCatalog, PAPER_TYPES, ROLL_LENGTH, rollLabel, tapeLength, withTapeLength } from '../catalog';
 	import type { Family, LabelSpec } from '../printer/types';
 	import { FAMILY_NAMES } from '../printer/devices';
+
+	/** Large −/+ buttons for the length, for touch screens (Quick label). */
+	let { touch = false }: { touch?: boolean } = $props();
 
 	let dialog: HTMLDialogElement;
 	let catalog = $state<LabelSpec[]>([]);
@@ -40,15 +43,47 @@
 		return null;
 	});
 
-	// Follow the printer's label while auto mode is on.
+	// Follow the printer's label while auto mode is on. Tape off a roll keeps the length chosen
+	// for it; only another tape brings back the catalog length.
 	$effect(() => {
 		const d = detected;
 		const cur = editor.label;
-		const differs = d && (d.id !== cur.id || d.lengthMm !== cur.lengthMm || d.widthMm !== cur.widthMm || d.paperType !== cur.paperType || d.gap !== cur.gap);
-		if (d && editor.labelAuto && differs) {
-			editor.setLabel($state.snapshot(d) as LabelSpec, true);
-		}
+		if (!d || !editor.labelAuto) return;
+		const target = d.id === cur.id && rollLabel(d) ? withTapeLength(d, tapeLength(cur)) : d;
+		const differs = target.id !== cur.id || target.lengthMm !== cur.lengthMm || target.widthMm !== cur.widthMm || target.paperType !== cur.paperType || target.gap !== cur.gap;
+		if (differs) editor.setLabel($state.snapshot(target) as LabelSpec, true);
 	});
+
+	/** The tape's own length (the catalog's, or what the printer reports), for resetting it. */
+	const defaultLength = $derived.by(() => {
+		const cur = editor.label;
+		const base = catalog.find((l) => l.id === cur.id) ?? (detected?.id === cur.id ? detected : null);
+		return base ? tapeLength(base) : null;
+	});
+
+	/** Set the length of a roll label, keeping the tape, whether it follows the printer, and the design's size. */
+	function applyLength(mm: number) {
+		const clamped = Math.max(ROLL_LENGTH.min, Math.min(ROLL_LENGTH.max, Math.round(mm)));
+		editor.resizeLabel(withTapeLength($state.snapshot(editor.label) as LabelSpec, clamped));
+	}
+
+	function resetLength() {
+		if (defaultLength !== null) applyLength(defaultLength);
+	}
+
+	function setLength(input: HTMLInputElement) {
+		const v = input.valueAsNumber;
+		if (Number.isFinite(v)) applyLength(v);
+		input.value = String(tapeLength(editor.label));
+	}
+
+	/** The −/+ buttons step this far, landing on multiples of it. */
+	const LENGTH_STEP = 5;
+
+	function stepLength(dir: 1 | -1) {
+		const cur = tapeLength(editor.label);
+		applyLength(dir > 0 ? Math.floor(cur / LENGTH_STEP) * LENGTH_STEP + LENGTH_STEP : Math.ceil(cur / LENGTH_STEP) * LENGTH_STEP - LENGTH_STEP);
+	}
 
 	const filtered = $derived.by(() => {
 		const q = query.trim().toLowerCase().replace(/[x×*]/g, ' ');
@@ -93,6 +128,28 @@
 	}
 </script>
 
+{#snippet lengthField()}
+	{#if rollLabel(editor.label)}
+		{@const mm = tapeLength(editor.label)}
+		<div class="field length" class:touch>
+			<span>Length</span>
+			<div class="length-row">
+				{#if touch}
+					<button class="btn icon" onclick={() => stepLength(-1)} disabled={mm <= ROLL_LENGTH.min} aria-label="Shorter"><Icon svg={Minus} size={18} /></button>
+				{/if}
+				<input class="input" type="number" min={ROLL_LENGTH.min} max={ROLL_LENGTH.max} step="1" value={mm} onchange={(e) => setLength(e.currentTarget)} aria-label="Length in mm" />
+				{#if touch}
+					<button class="btn icon" onclick={() => stepLength(1)} disabled={mm >= ROLL_LENGTH.max} aria-label="Longer"><Icon svg={Plus} size={18} /></button>
+				{/if}
+				<span class="unit">mm</span>
+				{#if defaultLength !== null && defaultLength !== mm}
+					<button class="btn sm icon ghost" onclick={resetLength} title="Back to {defaultLength} mm" aria-label="Reset length to {defaultLength} mm"><Icon svg={RotateCcw} size={14} /></button>
+				{/if}
+			</div>
+		</div>
+	{/if}
+{/snippet}
+
 {#if printer.connected}
 	<div class="current">
 		<div class="swatch-box">
@@ -109,6 +166,7 @@
 		</div>
 		<button class="btn sm" onclick={open}>Change</button>
 	</div>
+	{@render lengthField()}
 	{#if detected && detected.id !== editor.label.id}
 		<button class="detected" onclick={() => editor.setLabel($state.snapshot(detected) as LabelSpec, true)}>
 			<Icon svg={ScanLine} size={14} /> Printer has <b>{labelTitle(detected)}</b> loaded. Use it
@@ -129,6 +187,7 @@
 				</select>
 			</label>
 			<button class="btn sm" onclick={open}>Choose label size…</button>
+			{@render lengthField()}
 		</div>
 	{/if}
 {/if}
@@ -224,6 +283,36 @@
 		display: flex;
 		align-items: center;
 		gap: 12px;
+	}
+
+	.current ~ .length {
+		margin-top: 10px;
+	}
+
+	.length-row {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 12px;
+		color: var(--muted);
+	}
+
+	.length-row .input {
+		width: 96px;
+	}
+
+	/* Touch: 44 px targets, and 16 px text so iOS doesn't zoom in on focus. */
+	.touch .length-row .btn.icon,
+	.touch .length-row .btn.sm.icon {
+		width: 44px;
+		height: 44px;
+	}
+
+	.touch .length-row .input {
+		width: 80px;
+		height: 44px;
+		font-size: 16px;
+		text-align: center;
 	}
 
 	.swatch-box {
