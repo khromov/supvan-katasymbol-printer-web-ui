@@ -11,8 +11,8 @@
 	import { editor } from '../stores/editor.svelte';
 	import { mode } from '../stores/mode.svelte';
 	import { quick, saveQuick } from '../stores/quick.svelte';
-	import { autoLengthMin, autoQuickLength, buildQuickDesign, gridLines, GRID_SIZES, quickRotated, type QuickLabel } from '../design/quick';
-	import { bitmapToCanvas, fittedTextSize, prepareAssets, renderBitmap } from '../design/render';
+	import { autoLengthMin, autoQuickLength, buildQuickDesign, gridLines, GRID_SIZES, quickIconPlacement, quickRotated, type QuickLabel } from '../design/quick';
+	import { bitmapToCanvas, fittedTextSize, fittedTextWidth, prepareAssets, renderBitmap } from '../design/render';
 	import { iconSvg, iconsLoaded, loadIcons } from '../design/icons';
 	import { labelShape, labelTitle, ROLL_LENGTH, rollLabel, withTapeLength } from '../catalog';
 	import { FONTS, type DesignElement } from '../design/model';
@@ -62,7 +62,19 @@
 	/** The label as printed: with the auto length when that is on. */
 	const label = $derived(autoLength && autoMm !== null ? withTapeLength(editor.label, autoMm) : editor.label);
 	const rotated = $derived(quickRotated(quick, label));
-	const elements = $derived(buildQuickDesign($state.snapshot(quick), $state.snapshot(label) as LabelSpec, printer.unprintable(label)));
+	/** Bumped whenever a font finishes loading: the layout measures text, which needs the real font. */
+	let fontEpoch = $state(0);
+	$effect(() => {
+		const bump = () => fontEpoch++;
+		document.fonts.addEventListener('loadingdone', bump);
+		return () => document.fonts.removeEventListener('loadingdone', bump);
+	});
+	const elements = $derived.by(() => {
+		void fontEpoch;
+		const dpmm = printer.dpmm;
+		return buildQuickDesign($state.snapshot(quick), $state.snapshot(label) as LabelSpec, printer.unprintable(label), (el) => fittedTextWidth(el, dpmm));
+	});
+	const iconPlacement = $derived(quickIconPlacement(quick, label, printer.unprintable(label)));
 	const hasContent = $derived(!!quick.text.trim() || !!quick.icon);
 	const cells = $derived(quick.grid * quick.grid);
 	const lineCount = $derived(gridLines(quick).length);
@@ -258,7 +270,7 @@
 		<!-- 2. Icon -->
 		<section class="card">
 			<div class="row between">
-				<span class="label-sm">Icon (above the text)</span>
+				<span class="label-sm">Icon ({iconPlacement === 'before' ? 'before' : 'above'} the text)</span>
 				{#if quick.icon}
 					<button class="btn sm ghost" onclick={() => (quick.icon = null)}><Icon svg={X} size={13} /> Remove</button>
 				{/if}

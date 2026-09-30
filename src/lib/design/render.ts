@@ -259,6 +259,20 @@ export function fittedTextSize(el: DesignElement, dpmm: number): number {
 	return layoutText(measureCtx, el, w, h, dpmm).px / dpmm;
 }
 
+/**
+ * Width (mm) of a fitted text element's widest line, ink or advance, whichever is wider; 0 for
+ * other elements and empty text. A box this wide (plus a little) keeps the same font size.
+ */
+export function fittedTextWidth(el: DesignElement, dpmm: number): number {
+	if (el.type !== 'text' || !el.fit || !el.text.trim()) return 0;
+	measureCtx ??= document.createElement('canvas').getContext('2d')!;
+	const ctx = measureCtx;
+	const quarter = el.rotation === 90 || el.rotation === 270;
+	const { lines, px } = layoutText(ctx, el, (quarter ? el.h : el.w) * dpmm, (quarter ? el.w : el.h) * dpmm, dpmm);
+	ctx.font = fontSpec(el, px);
+	return Math.max(0, ...lines.map((l) => Math.max(inkExtent(ctx, l).width, ctx.measureText(l).width))) / dpmm;
+}
+
 function drawElement(ctx: CanvasRenderingContext2D, el: DesignElement, scale: number, tone?: CanvasRenderingContext2D): boolean {
 	const quarter = el.rotation === 90 || el.rotation === 270;
 	const w = (quarter ? el.h : el.w) * scale;
