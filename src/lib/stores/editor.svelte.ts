@@ -1,4 +1,4 @@
-import type { DesignElement } from '../design/model';
+import { newId, type DesignElement } from '../design/model';
 import type { LabelSpec } from '../printer/types';
 
 const STORAGE_KEY = 'katasymbol-web:v1';
@@ -56,6 +56,9 @@ class EditorStore {
 	focusRequest = $state(0);
 	/** When set, the next icon picked replaces this icon element instead of adding one. */
 	iconReplaceTarget = $state<string | null>(null);
+
+	/** Layer copied with Ctrl/Cmd+C, kept in memory for pasting. */
+	private clipboard: DesignElement | null = null;
 
 	private past: string[] = [];
 	private future: string[] = [];
@@ -157,12 +160,30 @@ class EditorStore {
 		this.persist();
 	}
 
+	/** A copy of `el` with a fresh id, nudged down-right but kept on the label. */
+	private offsetCopy(el: DesignElement): DesignElement {
+		const copy = { ...clone(el), id: newId() };
+		copy.x = Math.min(copy.x + 2, this.label.lengthMm - copy.w);
+		copy.y = Math.min(copy.y + 2, this.label.widthMm - copy.h);
+		return copy;
+	}
+
 	duplicate(id = this.selectedId) {
 		const el = this.elements.find((e) => e.id === id);
 		if (!el) return;
-		const copy = { ...clone($state.snapshot(el) as DesignElement), id: `${el.id}c${Date.now().toString(36)}` };
-		copy.x = Math.min(copy.x + 2, this.label.lengthMm - copy.w);
-		copy.y = Math.min(copy.y + 2, this.label.widthMm - copy.h);
+		this.add(this.offsetCopy($state.snapshot(el) as DesignElement));
+	}
+
+	copy(id = this.selectedId) {
+		const el = this.elements.find((e) => e.id === id);
+		if (el) this.clipboard = $state.snapshot(el) as DesignElement;
+	}
+
+	/** Paste the copied layer. Each paste steps further from the last, so repeats don't stack. */
+	paste() {
+		if (!this.clipboard) return;
+		const copy = this.offsetCopy(this.clipboard);
+		this.clipboard = clone(copy);
 		this.add(copy);
 	}
 

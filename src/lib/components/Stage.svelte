@@ -208,9 +208,18 @@
 			editor.redo();
 			return;
 		}
+		if (mod && e.key.toLowerCase() === 'v') {
+			e.preventDefault();
+			editor.paste();
+			return;
+		}
 		const el = editor.selected;
 		if (!el) return;
-		if (e.key === 'Delete' || e.key === 'Backspace') {
+		if (mod && e.key.toLowerCase() === 'c') {
+			// Selected page text (e.g. the print log) keeps the browser's own copy.
+			if (window.getSelection()?.isCollapsed === false) return;
+			editor.copy(el.id);
+		} else if (e.key === 'Delete' || e.key === 'Backspace') {
 			e.preventDefault();
 			editor.remove(el.id);
 		} else if (mod && e.key.toLowerCase() === 'd') {
