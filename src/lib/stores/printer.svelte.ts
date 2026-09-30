@@ -20,6 +20,7 @@ import {
 	type PrinterDriver,
 	type PrinterStatus
 } from '../printer';
+import { T15_PRINT_DOTS } from '../printer/families/t15';
 import type { Family } from '../printer/types';
 
 const FAMILY_KEY = 'katasymbol-web:family';
@@ -163,6 +164,22 @@ class PrinterStore {
 				height: Math.round(label.widthMm * this.dpmm)
 			}
 		);
+	}
+
+	/**
+	 * Strips of `label` the print head can't reach, `mm` wide on both sides of the across-head axis
+	 * (the design's x axis when `acrossX`): the T50/T80 crop that axis to the head width, the
+	 * E10/T10 series print the middle 88 dots of their 96-dot head. Null when all of it prints.
+	 */
+	unprintable(label: LabelSpec): { acrossX: boolean; mm: number } | null {
+		const family = this.family;
+		const headDots = family === 't15' ? T15_PRINT_DOTS : family === 't5080' ? (this.model?.headDots ?? 384) : 0;
+		if (!headDots) return null;
+		const dpmm = this.model?.dpmm ?? 8;
+		const acrossX = label.paperDirection !== 0;
+		const acrossMm = acrossX ? label.lengthMm : label.widthMm;
+		const mm = (acrossMm * dpmm - headDots) / dpmm / 2;
+		return mm > 0 ? { acrossX, mm } : null;
 	}
 
 	setError(message: string | null, detail: string | null = null) {

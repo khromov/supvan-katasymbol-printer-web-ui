@@ -23,6 +23,10 @@ export const DEFAULT_QUICK: QuickLabel = { text: '', icon: null, font: 'Inter', 
 export const GRID_SIZES = [1, 2, 3, 4, 5, 6];
 
 type Area = { x: number; y: number; w: number; h: number };
+/** Strips the print head can't reach, as PrinterStore.unprintable reports them. */
+export type Unprintable = { acrossX: boolean; mm: number } | null;
+/** Space kept clear beyond an unprintable strip: the tape can sit a fraction off centre. */
+const UNPRINTABLE_MARGIN = 0.5;
 /** Frame line thickness, corner radius, and the space between the frame and the content, in mm. */
 type FrameSpec = { thickness: number; radius: number; gap: number };
 
@@ -39,18 +43,28 @@ export function gridLines(q: QuickLabel): string[] {
 	return lines;
 }
 
+/** The label's padding, widened to keep clear of the strips the print head can't reach. */
+function printablePadding(p: LabelSpec['padding'], unprintable: Unprintable): LabelSpec['padding'] {
+	if (!unprintable) return p;
+	const m = unprintable.mm + UNPRINTABLE_MARGIN;
+	return unprintable.acrossX
+		? { ...p, left: Math.max(p.left, m), right: Math.max(p.right, m) }
+		: { ...p, top: Math.max(p.top, m), bottom: Math.max(p.bottom, m) };
+}
+
 /**
  * Build the design. Layout happens on a "reading" canvas (the label as the user reads it); when
  * that is turned relative to the label, each element is rotated 90 degrees clockwise onto it.
+ * Content stays inside the label's padding and out of the `unprintable` strips.
  */
-export function buildQuickDesign(q: QuickLabel, label: LabelSpec): DesignElement[] {
+export function buildQuickDesign(q: QuickLabel, label: LabelSpec, unprintable: Unprintable = null): DesignElement[] {
 	const rotated = quickRotated(q, label);
 	const W = label.lengthMm;
 	const H = label.widthMm;
 	// Reading canvas and its safe area (label padding, rotated along with the canvas).
 	const vw = rotated ? H : W;
 	const vh = rotated ? W : H;
-	const p = label.padding;
+	const p = printablePadding(label.padding, unprintable);
 	const pad = rotated ? { left: p.top, right: p.bottom, top: p.right, bottom: p.left } : p;
 
 	const out: DesignElement[] = [];

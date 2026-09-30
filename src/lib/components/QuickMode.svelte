@@ -40,7 +40,7 @@
 
 	const label = $derived(editor.label);
 	const rotated = $derived(quickRotated(quick, label));
-	const elements = $derived(buildQuickDesign($state.snapshot(quick), $state.snapshot(editor.label) as LabelSpec));
+	const elements = $derived(buildQuickDesign($state.snapshot(quick), $state.snapshot(editor.label) as LabelSpec, printer.unprintable(editor.label)));
 	const hasContent = $derived(!!quick.text.trim() || !!quick.icon);
 	const cells = $derived(quick.grid * quick.grid);
 	const lineCount = $derived(gridLines(quick).length);
@@ -169,8 +169,8 @@
 			{:else if printer.supported || printer.bluetoothSupported}
 				<div class="connect-buttons">
 					{#if printer.supported && printer.bluetoothSupported}
-						<button class="btn primary big" onclick={() => printer.connect()}><Icon svg={Usb} size={18} /> USB</button>
 						<button class="btn primary big" onclick={() => printer.connectBluetooth()}><Icon svg={Bluetooth} size={18} /> Bluetooth</button>
+						<button class="btn big" onclick={() => printer.connect()}><Icon svg={Usb} size={18} /> USB</button>
 					{:else}
 						<button class="btn primary big wide" onclick={connect}>
 							<Icon svg={printer.bluetoothSupported ? Bluetooth : Plug} size={18} /> Connect printer
