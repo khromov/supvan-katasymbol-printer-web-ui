@@ -120,10 +120,17 @@ const UNSUPPORTED_NAME_PREFIXES: [string, string][] = [
 	...['T0056', 'T0069'].map((p) => [p, 'A16'] as [string, string])
 ];
 
+/**
+ * Over classic Bluetooth the app only has the printer's own answer to RD_DEV_NAME, which on the
+ * E10/T10 series is a model name ("E10pro" from a T0179G… E10), not the Bluetooth name.
+ */
+const T15_MODEL_NAMES = /^(E10|T10|T11|T12|A10)|^T1$/i;
+const UNSUPPORTED_MODEL_NAMES = /^(E11|E12|E16|T16|A16)/i;
+
 /** Model name of a Bluetooth printer this app can't drive yet, if the name is one. */
 export function unsupportedBluetoothModel(name: string | undefined): string | undefined {
 	if (!name) return undefined;
-	return UNSUPPORTED_NAME_PREFIXES.find(([p]) => name.startsWith(p))?.[1];
+	return UNSUPPORTED_NAME_PREFIXES.find(([p]) => name.startsWith(p))?.[1] ?? (UNSUPPORTED_MODEL_NAMES.test(name) ? name : undefined);
 }
 
 /** Model name for a Bluetooth device name, or undefined if it isn't a known prefix. */
@@ -132,7 +139,10 @@ export function modelNameFromBluetoothName(name: string | undefined): string | u
 	return (T15_NAME_PREFIXES.find(([p]) => name.startsWith(p)) ?? BT_NAME_PREFIXES.find(([p]) => name.startsWith(p)))?.[1];
 }
 
-/** Family of a Bluetooth printer by its name: the T10/T15 series, else the T50/T80 series. */
+/**
+ * Family of a Bluetooth printer by its Bluetooth name or its RD_DEV_NAME model name: the T10/T15
+ * series, else the T50/T80 series.
+ */
 export function familyFromBluetoothName(name: string | undefined): Family {
-	return name && T15_NAME_PREFIXES.some(([p]) => name.startsWith(p)) ? 't15' : 't5080';
+	return name && (T15_NAME_PREFIXES.some(([p]) => name.startsWith(p)) || T15_MODEL_NAMES.test(name)) ? 't15' : 't5080';
 }

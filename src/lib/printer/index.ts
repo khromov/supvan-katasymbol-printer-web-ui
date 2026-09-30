@@ -41,7 +41,7 @@ function assertSupported(devName: string | undefined) {
 
 const t15Model = (devName: string): DeviceModel => ({
 	productId: 0,
-	name: `${modelNameFromBluetoothName(devName) ?? 'E10'} (Bluetooth)`,
+	name: `${modelNameFromBluetoothName(devName) ?? (devName || 'E10')} (Bluetooth)`,
 	family: 't15',
 	dpmm: 8,
 	headDots: T15_HEAD_DOTS,

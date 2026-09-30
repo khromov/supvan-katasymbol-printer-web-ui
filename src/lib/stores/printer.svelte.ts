@@ -197,7 +197,7 @@ class PrinterStore {
 	async autoConnect() {
 		try {
 			const link = readLink();
-			if (link === 'ble' && this.bleSupported && 'getDevices' in navigator.bluetooth) {
+			if (link === 'ble' && this.bleSupported && !FORCE_SERIAL_BT && 'getDevices' in navigator.bluetooth) {
 				// Only where the browser lets pages reuse granted devices (not every Chrome has it).
 				const known = (await navigator.bluetooth.getDevices()).find((d) => d.name?.startsWith('T0'));
 				if (known) return await this.openBle(known, true);
@@ -253,6 +253,7 @@ class PrinterStore {
 		this.addLog(`connecting over Bluetooth LE to ${device.name ?? device.id}`);
 		try {
 			const { model, driver, transport } = await openBlePrinter(device, this.debug);
+			this.addLog(`${model.name}: ${transport.summary}`);
 			driver.channel.log = (line) => this.addLog(line);
 			device.addEventListener('gattserverdisconnected', () => {
 				if (this.bleDevice === device) this.teardown('Bluetooth printer disconnected');

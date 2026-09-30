@@ -125,6 +125,8 @@ const SCENARIOS: Scenario[] = [
 	{ kind: 'print', name: 'ble-noise', link: 'ble', device: 'T0071E2311020003', lengthMm: 60, pages: [noise(60, 0, 42)], copies: 2, density: 5, check: blePacing },
 	{ kind: 'print', name: 'ble-no-acks', link: 'ble', device: E, lengthMm: 40, pages: [framed(40, 10)], density: 4, noAcks: true, expectError: 'Printer did not acknowledge the print data', check: stopped },
 	{ kind: 'print', name: 'spp-no-acks', device: E, lengthMm: 40, pages: [framed(40, 10)], density: 4, noAcks: true, expectError: 'Printer did not acknowledge the print data', check: stopped },
+	// A real T0179G… E10 printed darkness 1 and 7 alike with SUPRINT's raw G-name value; BLE uses iOS's.
+	{ kind: 'print', name: 'ble-g-name-density', link: 'ble', device: 'T0179G260517J505', lengthMm: 30, pages: [framed(30, 2)], density: 4, check: sentWith('c9', 110) },
 	{ kind: 'print', name: 'ble-silent-density', link: 'ble', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 3, silent: [0xc9, 0xba], check: sent({ c9: 1, ba: 1 }) },
 	{ kind: 'print', name: 'spp-silent-density', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 3, silent: [0xc9, 0xba], check: sent({ c9: 2, ba: 2 }) },
 	{ kind: 'print', name: 'cover-open', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 4, status: [0, 0, 0x08, 0], expectError: 'Cover is open', check: sent({ 13: 0 }) },
@@ -143,6 +145,13 @@ function blePacing(o: Outcome) {
 /** After a failed transfer the job must be stopped (STOP_PRINT, 0x14). */
 function stopped(o: Outcome) {
 	if (!o.events.some((e) => e.startsWith('cmd 14'))) throw new Error('printer was not stopped');
+}
+/** A command (hex) was sent once, with this argument. */
+function sentWith(cmd: string, a: number) {
+	return (o: Outcome) => {
+		const got = o.events.filter((e) => e.startsWith(`cmd ${cmd} `));
+		if (got.length !== 1 || got[0] !== `cmd ${cmd} ${a} 0`) throw new Error(`command ${cmd}: ${got.join(', ') || 'not sent'}, expected argument ${a}`);
+	};
 }
 /** How often each command (hex) was sent. */
 function sent(counts: Record<string, number>) {
@@ -388,7 +397,10 @@ const UNITS: [string, () => void][] = [
 				['T0140A2401010001', 't15', 'T10 Pro', undefined],
 				['T0053B2408080014', 't5080', undefined, 'E16'],
 				['T0138A2401010001', 't5080', undefined, 'E11'],
-				['T0148B2507018663', 't5080', 'T50M Pro', undefined]
+				['T0148B2507018663', 't5080', 'T50M Pro', undefined],
+				// RD_DEV_NAME over classic Bluetooth, as a T0179G… E10 answers it.
+				['E10pro', 't15', undefined, undefined],
+				['E16', 't5080', undefined, 'E16']
 			];
 			for (const [name, family, model, unsupported] of cases) {
 				const got = [familyFromBluetoothName(name), modelNameFromBluetoothName(name), unsupportedBluetoothModel(name)];

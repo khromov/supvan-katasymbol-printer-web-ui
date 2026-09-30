@@ -47,13 +47,21 @@ export class WebBluetoothTransport implements ByteTransport {
 		private writeChar: BluetoothRemoteGATTCharacteristic,
 		private notifyChar: BluetoothRemoteGATTCharacteristic,
 		/** Write without response (as the iOS app does for every printer) instead of with. */
-		private withoutResponse: boolean
+		readonly withoutResponse: boolean
 	) {
 		notifyChar.addEventListener('characteristicvaluechanged', this.onNotify);
 	}
 
 	get name() {
 		return this.device.name ?? 'Bluetooth printer';
+	}
+
+	/** Service, characteristics and write mode in use, for the debug log. */
+	get summary() {
+		const short = (uuid: string) => (/^0000[0-9a-f]{4}-0000-1000-8000-00805f9b34fb$/.test(uuid) ? uuid.slice(4, 8) : uuid);
+		const p = this.writeChar.properties;
+		const can = [p.write && 'write', p.writeWithoutResponse && 'write without response'].filter(Boolean).join(' + ');
+		return `GATT service ${short(this.writeChar.service.uuid)}, write ${short(this.writeChar.uuid)} (${can || 'no write'}; using ${this.withoutResponse ? 'write without response' : 'write'}), notify ${short(this.notifyChar.uuid)}`;
 	}
 
 	/** Show the browser's device chooser. Must be called from a user gesture (a click). */

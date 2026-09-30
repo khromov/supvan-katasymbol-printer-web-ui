@@ -44,7 +44,9 @@ const LEAD_COLUMNS = 48;
 
 /**
  * Argument of the head-rate command (0xC9) for a density of 1..7: ((d - 1) / 10 + 0.8) * 100 in
- * float arithmetic, i.e. 80..140. Printers with a G in their Bluetooth name take the density as is.
+ * float arithmetic, i.e. 80..140, apparently the print head's heat in percent. SUPRINT sends the
+ * density as is to printers with a G in their Bluetooth name; the iOS app never does (10 * d + 70
+ * for every name), and on a T0179G… E10 over BLE the raw value made darkness 1 and 7 look the same.
  */
 export function t15HeadRate(density: number, deviceName = ''): number {
 	if (deviceName.includes('G')) return density;
@@ -356,7 +358,10 @@ export class T15BtDriver implements PrinterDriver {
 
 	constructor(
 		transport: ByteTransport,
-		/** Bluetooth name (e.g. "T0126…"): picks the battery scale and how data frames are written. */
+		/**
+		 * Bluetooth name (e.g. "T0126…"), or over classic Bluetooth the RD_DEV_NAME reply (e.g.
+		 * "E10pro"): picks the battery scale, the head rate and how data frames are written.
+		 */
 		readonly deviceName = '',
 		readonly link: T15Link = 'spp'
 	) {
@@ -467,7 +472,8 @@ export class T15BtDriver implements PrinterDriver {
 		if (err) throw new PrinterError(err, 'device');
 
 		// 2. Density and start. Neither app minds a missing reply to the density command.
-		await this.cmd(T15_CMD.SET_HEADRATE, t15HeadRate(density, this.deviceName)).catch(() => {});
+		const headRate = t15HeadRate(density, this.link === 'spp' ? this.deviceName : '');
+		await this.cmd(T15_CMD.SET_HEADRATE, headRate).catch(() => {});
 		await this.cmd(T15_CMD.START_PRINT, 0);
 		try {
 			for (let i = 0; i < polls; i++) {

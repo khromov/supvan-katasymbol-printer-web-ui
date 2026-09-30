@@ -8,5 +8,7 @@ export default defineConfig({
 	base: './',
 	// `npm run dev:lan` serves over HTTPS with a self-signed certificate, because WebHID and
 	// Web Serial only work in secure contexts (HTTPS or localhost), e.g. for testing on a phone.
-	plugins: [svelte(), ...(process.env.HTTPS ? [basicSsl()] : [])]
+	plugins: [svelte(), ...(process.env.HTTPS ? [basicSsl()] : [])],
+	// Listen on all interfaces so the dev server is reachable from other devices on the LAN.
+	server: { host: true }
 });
