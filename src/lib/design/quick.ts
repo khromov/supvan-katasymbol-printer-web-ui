@@ -3,6 +3,7 @@
  * and turned to read horizontally or vertically on the loaded label. In grid mode the label
  * becomes a sheet of small labels, one per line of text, to cut apart with scissors.
  */
+import { withTapeLength } from '../catalog';
 import type { LabelSpec } from '../printer/types';
 import { newId, type DesignElement, type Rotation } from './model';
 
@@ -15,9 +16,11 @@ export interface QuickLabel {
 	frame: boolean;
 	/** Cells per side of a grid of small labels (2..6), or 1 for one label. */
 	grid: number;
+	/** On tape off a roll, size the label's length to the content (autoQuickLength). */
+	autoLength: boolean;
 }
 
-export const DEFAULT_QUICK: QuickLabel = { text: '', icon: null, font: 'Inter', orientation: 'horizontal', frame: false, grid: 1 };
+export const DEFAULT_QUICK: QuickLabel = { text: '', icon: null, font: 'Inter', orientation: 'horizontal', frame: false, grid: 1, autoLength: true };
 
 /** Grid choices: 1 (off), then 2×2 to 6×6. */
 export const GRID_SIZES = [1, 2, 3, 4, 5, 6];
@@ -84,6 +87,46 @@ export function buildQuickDesign(q: QuickLabel, label: LabelSpec, unprintable: U
 		const h = el.w;
 		return { ...el, x: W - cy - w / 2, y: cx - h / 2, w, h, rotation: ((el.rotation + 90) % 360) as Rotation };
 	});
+}
+
+/**
+ * Length for a label off a roll that fits the content: the shortest whole-mm length between `min`
+ * and `max` at which every text and icon is as large as on a `max`-long label, so the label's
+ * length squeezes nothing. `min` should keep the label landscape or portrait as it is, which the
+ * layout depends on. `textSize` is the renderer's fitted size of a text element (fittedTextSize).
+ * Null when there is nothing to size by.
+ */
+export function autoQuickLength(
+	q: QuickLabel,
+	label: LabelSpec,
+	unprintable: Unprintable,
+	textSize: (el: DesignElement) => number,
+	min: number,
+	max: number
+): number | null {
+	const sizes = (mm: number) =>
+		buildQuickDesign(q, withTapeLength(label, mm), unprintable).map((el) => (el.type === 'text' ? textSize(el) : el.type === 'icon' ? Math.min(el.w, el.h) : 0));
+	const full = sizes(max);
+	if (!full.some((s) => s > 0)) return null;
+	// Within 2% of full size: fitted text sizes come from a search and are not exact.
+	const fits = (mm: number) => sizes(mm).every((s, i) => s >= full[i] * 0.98);
+	let lo = Math.ceil(min);
+	let hi = max;
+	if (fits(lo)) return lo;
+	while (hi - lo > 1) {
+		const mid = Math.floor((lo + hi) / 2);
+		if (fits(mid)) hi = mid;
+		else lo = mid;
+	}
+	return hi;
+}
+
+/**
+ * The shortest length autoQuickLength may pick: at least `floor`, and at least the size across the
+ * tape, so the label never turns from landscape to portrait while searching.
+ */
+export function autoLengthMin(label: LabelSpec, floor: number): number {
+	return Math.max(floor, label.paperDirection === 1 ? label.lengthMm : label.widthMm);
 }
 
 /**

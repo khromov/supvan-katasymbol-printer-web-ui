@@ -244,6 +244,21 @@ function processImage(el: ImageElement, img: HTMLImageElement, wPx: number, hPx:
  * Draw one element. Continuous-tone content (emoji) goes to `tone` when given, so the caller can
  * dither it instead of thresholding. Returns true if anything was drawn to `tone`.
  */
+let measureCtx: CanvasRenderingContext2D | null = null;
+
+/**
+ * Font size (mm) a fitted text element gets in its box, as drawn at `dpmm`; 0 for other elements
+ * and empty text. For sizing a label around its text; fonts must be loaded (prepareAssets).
+ */
+export function fittedTextSize(el: DesignElement, dpmm: number): number {
+	if (el.type !== 'text' || !el.fit || !el.text.trim()) return 0;
+	measureCtx ??= document.createElement('canvas').getContext('2d')!;
+	const quarter = el.rotation === 90 || el.rotation === 270;
+	const w = (quarter ? el.h : el.w) * dpmm;
+	const h = (quarter ? el.w : el.h) * dpmm;
+	return layoutText(measureCtx, el, w, h, dpmm).px / dpmm;
+}
+
 function drawElement(ctx: CanvasRenderingContext2D, el: DesignElement, scale: number, tone?: CanvasRenderingContext2D): boolean {
 	const quarter = el.rotation === 90 || el.rotation === 270;
 	const w = (quarter ? el.h : el.w) * scale;

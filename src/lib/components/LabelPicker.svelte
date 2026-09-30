@@ -7,8 +7,18 @@
 	import type { Family, LabelSpec } from '../printer/types';
 	import { FAMILY_NAMES } from '../printer/devices';
 
-	/** Large −/+ buttons for the length, for touch screens (Quick label). */
-	let { touch = false }: { touch?: boolean } = $props();
+	let {
+		touch = false,
+		auto = $bindable(),
+		autoMm = null
+	}: {
+		/** Large −/+ buttons for the length, for touch screens (Quick label). */
+		touch?: boolean;
+		/** Offer Auto / Manual length for tape off a roll (Quick label); Auto sizes it to the content. */
+		auto?: boolean;
+		/** The length Auto picked, once known. */
+		autoMm?: number | null;
+	} = $props();
 
 	let dialog: HTMLDialogElement;
 	let catalog = $state<LabelSpec[]>([]);
@@ -53,6 +63,15 @@
 		const differs = target.id !== cur.id || target.lengthMm !== cur.lengthMm || target.widthMm !== cur.widthMm || target.paperType !== cur.paperType || target.gap !== cur.gap;
 		if (differs) editor.setLabel($state.snapshot(target) as LabelSpec, true);
 	});
+
+	/** The label as it will print: with the auto length when that is on. */
+	const shown = $derived(auto && autoMm !== null && rollLabel(editor.label) ? withTapeLength(editor.label, autoMm) : editor.label);
+
+	/** Switch to a manual length, starting from the one Auto picked. */
+	function toManual() {
+		if (auto && autoMm !== null) applyLength(autoMm);
+		auto = false;
+	}
 
 	/** The tape's own length (the catalog's, or what the printer reports), for resetting it. */
 	const defaultLength = $derived.by(() => {
@@ -133,19 +152,29 @@
 		{@const mm = tapeLength(editor.label)}
 		<div class="field length" class:touch>
 			<span>Length</span>
-			<div class="length-row">
-				{#if touch}
-					<button class="btn icon" onclick={() => stepLength(-1)} disabled={mm <= ROLL_LENGTH.min} aria-label="Shorter"><Icon svg={Minus} size={18} /></button>
-				{/if}
-				<input class="input" type="number" min={ROLL_LENGTH.min} max={ROLL_LENGTH.max} step="1" value={mm} onchange={(e) => setLength(e.currentTarget)} aria-label="Length in mm" />
-				{#if touch}
-					<button class="btn icon" onclick={() => stepLength(1)} disabled={mm >= ROLL_LENGTH.max} aria-label="Longer"><Icon svg={Plus} size={18} /></button>
-				{/if}
-				<span class="unit">mm</span>
-				{#if defaultLength !== null && defaultLength !== mm}
-					<button class="btn sm icon ghost" onclick={resetLength} title="Back to {defaultLength} mm" aria-label="Reset length to {defaultLength} mm"><Icon svg={RotateCcw} size={14} /></button>
-				{/if}
-			</div>
+			{#if auto !== undefined}
+				<div class="segmented length-mode">
+					<button class:on={auto} aria-pressed={auto} onclick={() => (auto = true)}>Auto</button>
+					<button class:on={!auto} aria-pressed={!auto} onclick={toManual}>Manual</button>
+				</div>
+			{/if}
+			{#if auto}
+				<span class="auto-note">Grows with the text{autoMm !== null ? ` · ${autoMm} mm` : ''}</span>
+			{:else}
+				<div class="length-row">
+					{#if touch}
+						<button class="btn icon" onclick={() => stepLength(-1)} disabled={mm <= ROLL_LENGTH.min} aria-label="Shorter"><Icon svg={Minus} size={18} /></button>
+					{/if}
+					<input class="input" type="number" min={ROLL_LENGTH.min} max={ROLL_LENGTH.max} step="1" value={mm} onchange={(e) => setLength(e.currentTarget)} aria-label="Length in mm" />
+					{#if touch}
+						<button class="btn icon" onclick={() => stepLength(1)} disabled={mm >= ROLL_LENGTH.max} aria-label="Longer"><Icon svg={Plus} size={18} /></button>
+					{/if}
+					<span class="unit">mm</span>
+					{#if defaultLength !== null && defaultLength !== mm}
+						<button class="btn sm icon ghost" onclick={resetLength} title="Back to {defaultLength} mm" aria-label="Reset length to {defaultLength} mm"><Icon svg={RotateCcw} size={14} /></button>
+					{/if}
+				</div>
+			{/if}
 		</div>
 	{/if}
 {/snippet}
@@ -153,10 +182,10 @@
 {#if printer.connected}
 	<div class="current">
 		<div class="swatch-box">
-			<div class="swatch" class:rounded={labelShape(editor.label) === 'rounded'} class:round={labelShape(editor.label) === 'round'} style={swatch(editor.label, 36)}></div>
+			<div class="swatch" class:rounded={labelShape(shown) === 'rounded'} class:round={labelShape(shown) === 'round'} style={swatch(shown, 36)}></div>
 		</div>
 		<div class="info">
-			<div class="title">{labelTitle(editor.label)}</div>
+			<div class="title">{labelTitle(shown)}</div>
 			<div class="sub">
 				{typeName(editor.label)}{editor.label.gap ? ` · ${editor.label.gap} mm gap` : ''}
 				{#if detected && detected.id === editor.label.id}
@@ -174,8 +203,8 @@
 	{/if}
 {:else}
 	<!-- Before connecting the label is only a starting point (connecting detects it), so it stays folded. -->
-	<button class="summary" onclick={() => (showManual = !showManual)} aria-expanded={showManual} title={labelTitle(editor.label)}>
-		<span class="summary-text">Label: <b>{editor.label.lengthMm} × {editor.label.widthMm} mm</b> · auto-detected on connect</span>
+	<button class="summary" onclick={() => (showManual = !showManual)} aria-expanded={showManual} title={labelTitle(shown)}>
+		<span class="summary-text">Label: <b>{shown.lengthMm} × {shown.widthMm} mm</b> · auto-detected on connect</span>
 		<span class="chev" class:open={showManual}><Icon svg={ChevronDown} size={13} /></span>
 	</button>
 	{#if showManual}
@@ -299,6 +328,19 @@
 
 	.length-row .input {
 		width: 96px;
+	}
+
+	.length-mode {
+		max-width: 220px;
+	}
+
+	.touch .length-mode button {
+		height: 40px;
+	}
+
+	.auto-note {
+		font-size: 12px;
+		color: var(--muted);
 	}
 
 	/* Touch: 44 px targets, and 16 px text so iOS doesn't zoom in on focus. */
