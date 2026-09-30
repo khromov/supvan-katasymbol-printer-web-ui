@@ -12,8 +12,7 @@ searchable), QR codes, shapes and images, see exactly which dots will print, and
 
 ```sh
 npm install
-npm run dev        # http://localhost:5173, open in Chrome or Edge
-npm run dev:lan    # HTTPS on the LAN (self-signed) for testing on a phone
+npm run dev        # https://localhost:5173 (self-signed, also on the LAN), open in Chrome or Edge
 ```
 
 Click **Connect printer** and pick the SUPVAN "USB Device". After the first time the app reconnects
@@ -59,7 +58,8 @@ frames. Add `?debug` to the URL to see a copyable protocol log.
 
 The E10 and the T10, T10A, T11, T12, T10 Plus, T10 Pro, T1, A10 Plus and A10 Pro are small Bluetooth
 label makers with a 96-dot head (12 mm) at 203 dpi. They are recognized by their Bluetooth name
-(`T0010…`, `T0126…` and 93 other prefixes, `src/lib/printer/devices.ts`) and driven by
+(`T0010…`, `T0126…` and 93 other prefixes, `src/lib/printer/devices.ts`), or over classic
+Bluetooth by the model name they report (an E10 answers `E10pro`), and driven by
 `src/lib/printer/families/t15.ts`,
 a port of `T15Print` from the SUPRINT Android app (`com.supvan.IPrinterEn` 1.5.0). They use the same
 `7E 5A` frames as the T50/T80 over Bluetooth, with their own job: a head-rate (density) command,
@@ -77,8 +77,16 @@ one LZMA stream per 332-column buffer, and a paper pull-back so printing starts 
   taken for a T50/T80.
 - The loaded tape is read from the printer (its RFID serial is the catalog ID), so auto-detection
   follows the tape.
+- There is no USB data connection (the port only charges).
 
-**Not yet tested on hardware.** Instead, `npm run test:t15` prints a set of jobs to an emulated
+**Tested on an E10** (Bluetooth name `T0179G…`): over Bluetooth LE from Chrome on macOS, where it
+offers the T50/T80 service (`e0ff`, write `ffe9` with and without response, notify `ffe1`) and
+answers every data frame, and over classic Bluetooth from Android Chrome (`?bt=serial`). On macOS,
+classic Bluetooth has the same trouble as with the T50/T80 (Chrome can't open the port, and only the
+first session after pairing works), so use Bluetooth LE there. Darkness 1 and 7 print almost alike on
+15 mm white tape, although the printer accepts both head rates (80 and 140).
+
+Before that, `npm run test:t15` prints a set of jobs to an emulated
 printer (`scripts/t15-emulator.ts`), decodes what it received and checks every dot. The same jobs
 also ran through SUPRINT's own print code (`scripts/suprint-oracle`, which runs the app's classes
 converted with dex2jar against a twin emulator): given the app's LZMA streams, the driver writes
@@ -110,7 +118,7 @@ series from the SUPRINT Android app:
 | SP (`sp`)          | SP650                                                          | Byte-identical encoder; not hardware-tested                                                                    |
 | TP (`tp`, `tp86a`) | TP76i, TP80A, TP86A                                            | Byte-identical encoders and full-job report streams in simulation; not hardware-tested                         |
 | G (`g`)            | G11 Pro, G15 Pro, G15 MPro, G18 Pro, G21, G25, G28             | Byte-identical at 203 dpi; 300 dpi (G25/G28) geometry is a best effort because the official code crashes there |
-| E10/T10 (`t15`)    | E10, T10, T10A, T11, T12, T10 Plus, T10 Pro, T1, A10 Plus, A10 Pro (Bluetooth only) | Ported from SUPRINT 1.5.0 (classic Bluetooth) and the iOS app (BLE); same bytes as SUPRINT in emulation (see above); not hardware-tested |
+| E10/T10 (`t15`)    | E10, T10, T10A, T11, T12, T10 Plus, T10 Pro, T1, A10 Plus, A10 Pro (Bluetooth only) | Ported from SUPRINT 1.5.0 (classic Bluetooth) and the iOS app (BLE); same bytes as SUPRINT in emulation; printed on an E10 over BLE (macOS Chrome) and classic Bluetooth (Android Chrome) |
 
 ## How it works
 

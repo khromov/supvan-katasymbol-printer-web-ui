@@ -59,14 +59,14 @@
 				<Icon svg={Unplug} size={15} /> Disconnect
 			</button>
 		{:else}
-			{#if printer.supported}
-				<button class="btn primary" onclick={() => printer.connect()} title="Connect a printer over USB">
-					<Icon svg={Usb} size={16} /> Connect USB
+			{#if printer.bluetoothSupported}
+				<button class="btn primary" onclick={() => printer.connectBluetooth()} title={printer.bleSupported ? 'Connect a T50/T80 printer over Bluetooth' : 'Connect a paired T50/T80 printer over Bluetooth'}>
+					<Icon svg={Bluetooth} size={16} /> Connect Bluetooth
 				</button>
 			{/if}
-			{#if printer.bluetoothSupported}
-				<button class="btn" class:primary={!printer.supported} onclick={() => printer.connectBluetooth()} title={printer.bleSupported ? 'Connect a T50/T80 printer over Bluetooth' : 'Connect a paired T50/T80 printer over Bluetooth'}>
-					<Icon svg={Bluetooth} size={16} /> Bluetooth
+			{#if printer.supported}
+				<button class="btn" class:primary={!printer.bluetoothSupported} onclick={() => printer.connect()} title="Connect a printer over USB">
+					<Icon svg={Usb} size={16} /> USB
 				</button>
 			{/if}
 		{/if}

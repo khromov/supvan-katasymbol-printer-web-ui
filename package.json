@@ -14,8 +14,7 @@
     "catalog": "node scripts/extract-catalog.mjs",
     "catalog:download": "node scripts/download-catalog.mjs",
     "catalog:compare": "node scripts/compare-catalog.mjs",
-    "test:t15": "tsx scripts/test-t15.ts",
-    "dev:lan": "HTTPS=1 vite --host"
+    "test:t15": "tsx scripts/test-t15.ts"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.0",
