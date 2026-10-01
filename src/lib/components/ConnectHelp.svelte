@@ -32,14 +32,14 @@
 				{
 					label: 'With a USB cable',
 					icon: Usb,
-					steps: ['Plug the printer into your computer and switch it on.', 'Click Connect USB and choose the SUPVAN "USB Device".']
+					steps: ['Plug the printer into your computer and switch it on.', 'Click USB and choose the SUPVAN "USB Device".']
 				},
 				{
 					label: 'Wirelessly (Bluetooth)',
 					icon: Bluetooth,
 					steps: [
 						'Turn on Bluetooth on your computer and switch the printer on. No pairing needed.',
-						`Click Bluetooth. ${PICK_PRINTER}`
+						`Click Connect Bluetooth. ${PICK_PRINTER}`
 					]
 				}
 			]
@@ -53,7 +53,7 @@
 				{
 					label: 'Bluetooth in Chrome',
 					icon: Bluetooth,
-					steps: ['Open this page in Chrome.', 'Turn on Bluetooth and switch the printer on.', `Tap Bluetooth. ${PICK_PRINTER}`]
+					steps: ['Open this page in Chrome.', 'Turn on Bluetooth and switch the printer on.', `Tap Connect Bluetooth. ${PICK_PRINTER}`]
 				}
 			]
 		},
@@ -69,7 +69,7 @@
 					steps: [
 						"Safari can't connect to printers, so install the free Bluefy browser.",
 						'Open this page in Bluefy, turn on Bluetooth and switch the printer on.',
-						`Tap Bluetooth. ${PICK_PRINTER}`
+						`Tap Connect Bluetooth. ${PICK_PRINTER}`
 					],
 					bluefy: true
 				}

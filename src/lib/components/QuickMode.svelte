@@ -11,10 +11,10 @@
 	import { editor } from '../stores/editor.svelte';
 	import { mode } from '../stores/mode.svelte';
 	import { quick, saveQuick } from '../stores/quick.svelte';
-	import { buildQuickDesign, gridLines, GRID_SIZES, quickRotated } from '../design/quick';
-	import { bitmapToCanvas, renderBitmap } from '../design/render';
+	import { autoLengthMin, autoQuickLength, buildQuickDesign, gridLines, GRID_SIZES, quickIconPlacement, quickRotated, type QuickLabel } from '../design/quick';
+	import { bitmapToCanvas, fittedTextSize, fittedTextWidth, prepareAssets, renderBitmap } from '../design/render';
 	import { iconSvg, iconsLoaded, loadIcons } from '../design/icons';
-	import { labelShape, labelTitle } from '../catalog';
+	import { autoLengthLabel, labelShape, labelTitle, ROLL_LENGTH, withTapeLength } from '../catalog';
 	import { FONTS, type DesignElement } from '../design/model';
 	import type { LabelSpec } from '../printer/types';
 
@@ -38,9 +38,43 @@
 	let printed = $state(false);
 	let printedTimer: ReturnType<typeof setTimeout>;
 
-	const label = $derived(editor.label);
+	/** Auto length on a strip label maker's roll tape: sized to the content, once measured (null with nothing to size by). */
+	let autoMm = $state<number | null>(null);
+	const autoLength = $derived(quick.autoLength && autoLengthLabel(editor.label, printer.family));
+	$effect(() => {
+		if (!autoLength) return;
+		const q = $state.snapshot(quick) as QuickLabel;
+		const l = $state.snapshot(editor.label) as LabelSpec;
+		const u = printer.unprintable(l);
+		const dpmm = printer.dpmm;
+		let stale = false;
+		// Measure once typing pauses, with the fonts loaded.
+		const t = setTimeout(async () => {
+			await prepareAssets({ elements: buildQuickDesign(q, l, u) });
+			if (stale) return;
+			autoMm = autoQuickLength(q, l, u, (el) => fittedTextSize(el, dpmm), autoLengthMin(l, ROLL_LENGTH.min), ROLL_LENGTH.max);
+		}, 150);
+		return () => {
+			stale = true;
+			clearTimeout(t);
+		};
+	});
+	/** The label as printed: with the auto length when that is on. */
+	const label = $derived(autoLength && autoMm !== null ? withTapeLength(editor.label, autoMm) : editor.label);
 	const rotated = $derived(quickRotated(quick, label));
-	const elements = $derived(buildQuickDesign($state.snapshot(quick), $state.snapshot(editor.label) as LabelSpec));
+	/** Bumped whenever a font finishes loading: the layout measures text, which needs the real font. */
+	let fontEpoch = $state(0);
+	$effect(() => {
+		const bump = () => fontEpoch++;
+		document.fonts.addEventListener('loadingdone', bump);
+		return () => document.fonts.removeEventListener('loadingdone', bump);
+	});
+	const elements = $derived.by(() => {
+		void fontEpoch;
+		const dpmm = printer.dpmm;
+		return buildQuickDesign($state.snapshot(quick), $state.snapshot(label) as LabelSpec, printer.unprintable(label), (el) => fittedTextWidth(el, dpmm));
+	});
+	const iconPlacement = $derived(quickIconPlacement(quick, label, printer.unprintable(label)));
 	const hasContent = $derived(!!quick.text.trim() || !!quick.icon);
 	const cells = $derived(quick.grid * quick.grid);
 	const lineCount = $derived(gridLines(quick).length);
@@ -63,7 +97,7 @@
 	let token = 0;
 	$effect(() => {
 		const els = $state.snapshot(elements) as DesignElement[];
-		const l = $state.snapshot(editor.label) as LabelSpec;
+		const l = $state.snapshot(label) as LabelSpec;
 		const turn = rotated;
 		const size = printer.canvasSize(l);
 		const dpmm = printer.dpmm;
@@ -99,7 +133,7 @@
 		printed = false;
 		rendering = true;
 		try {
-			const l = $state.snapshot(editor.label) as LabelSpec;
+			const l = $state.snapshot(label) as LabelSpec;
 			const size = printer.canvasSize(l);
 			const bmp = await renderBitmap({ elements: $state.snapshot(elements) as DesignElement[] }, l.lengthMm, l.widthMm, size.width, size.height, printer.dpmm);
 			rendering = false;
@@ -114,9 +148,10 @@
 		}
 	}
 
-	/** Continue editing this label in the full studio. */
+	/** Continue editing this label in the full studio (at its auto length, if that is on). */
 	function openInStudio() {
 		editor.checkpoint();
+		editor.label = $state.snapshot(label) as LabelSpec;
 		editor.elements = $state.snapshot(elements) as DesignElement[];
 		editor.selectedId = null;
 		editor.persist();
@@ -169,8 +204,8 @@
 			{:else if printer.supported || printer.bluetoothSupported}
 				<div class="connect-buttons">
 					{#if printer.supported && printer.bluetoothSupported}
-						<button class="btn primary big" onclick={() => printer.connect()}><Icon svg={Usb} size={18} /> USB</button>
 						<button class="btn primary big" onclick={() => printer.connectBluetooth()}><Icon svg={Bluetooth} size={18} /> Bluetooth</button>
+						<button class="btn big" onclick={() => printer.connect()}><Icon svg={Usb} size={18} /> USB</button>
 					{:else}
 						<button class="btn primary big wide" onclick={connect}>
 							<Icon svg={printer.bluetoothSupported ? Bluetooth : Plug} size={18} /> Connect printer
@@ -187,7 +222,7 @@
 					<button class="btn sm icon ghost" onclick={() => printer.setError(null)} aria-label="Dismiss"><Icon svg={X} size={14} /></button>
 				</div>
 			{/if}
-			<div class="label-line"><LabelPicker /></div>
+			<div class="label-line"><LabelPicker touch bind:auto={quick.autoLength} {autoMm} /></div>
 		</section>
 
 		<!-- 6. Preview: locks under the header once scrolled to, so it stays visible while editing. -->
@@ -235,7 +270,7 @@
 		<!-- 2. Icon -->
 		<section class="card">
 			<div class="row between">
-				<span class="label-sm">Icon (above the text)</span>
+				<span class="label-sm">Icon ({iconPlacement === 'before' ? 'before' : 'above'} the text)</span>
 				{#if quick.icon}
 					<button class="btn sm ghost" onclick={() => (quick.icon = null)}><Icon svg={X} size={13} /> Remove</button>
 				{/if}

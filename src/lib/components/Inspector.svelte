@@ -12,9 +12,12 @@
 
 	const el = $derived(editor.selected);
 	let textArea = $state<HTMLTextAreaElement>();
+	/** Only a new request focuses; the field remounting on selection (e.g. a paste) must not. */
+	let handledFocus = editor.focusRequest;
 
 	$effect(() => {
-		if (editor.focusRequest && textArea) {
+		if (editor.focusRequest !== handledFocus && textArea) {
+			handledFocus = editor.focusRequest;
 			textArea.focus();
 			textArea.select();
 		}

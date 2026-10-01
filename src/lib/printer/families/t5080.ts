@@ -242,8 +242,8 @@ export class T5080Driver implements PrinterDriver {
 		return {
 			labelId,
 			paperType: r[18],
-			widthMm: r[19],
-			lengthMm: r[20],
+			lengthMm: r[19],
+			widthMm: r[20],
 			gap: r[21],
 			uuid,
 			deviceSerial: serial,

@@ -69,6 +69,11 @@ export interface FrameChannelOptions {
 	acksDataFrames?: boolean;
 	/** Reply timeout for commands (default 2000 ms like the app over SPP; the app uses 4 s on BLE). */
 	commandTimeoutMs?: number;
+	/**
+	 * Fail the transfer when a data frame gets no reply within 2 s, taking any received bytes as
+	 * the reply (the E10/T10 apps do both; the T50/T80 driver carries on).
+	 */
+	strictAcks?: boolean;
 }
 
 /**
@@ -93,6 +98,9 @@ export class FrameChannel {
 	 */
 	readonly acksDataFrames: boolean;
 	readonly commandTimeoutMs: number;
+	readonly strictAcks: boolean;
+	/** Bytes received so far (never reset), to tell whether anything arrived. */
+	private received = 0;
 
 	constructor(
 		readonly transport: ByteTransport,
@@ -100,6 +108,7 @@ export class FrameChannel {
 	) {
 		this.acksDataFrames = opts.acksDataFrames ?? true;
 		this.commandTimeoutMs = opts.commandTimeoutMs ?? 2000;
+		this.strictAcks = opts.strictAcks ?? false;
 		this.unsubscribe = transport.onData((chunk) => this.receive(chunk));
 	}
 
@@ -108,6 +117,7 @@ export class FrameChannel {
 	}
 
 	private receive(chunk: Uint8Array) {
+		this.received += chunk.length;
 		const buf = new Uint8Array(this.pending.length + chunk.length);
 		buf.set(this.pending);
 		buf.set(chunk, this.pending.length);
@@ -194,16 +204,51 @@ export class FrameChannel {
 			await this.write(btCommandFrame(CMD.NEXTFRM_BULK, 512, frames.length));
 			await sleep(10);
 			await this.next((f) => f[7] === CMD.NEXTFRM_BULK, this.commandTimeoutMs);
-			for (const f of frames) {
-				if (signal?.aborted) throw new PrinterError('Cancelled', 'cancelled');
-				this.clear();
-				for (let o = 0; o < f.length; o += 128) {
-					await this.write(f.subarray(o, o + 128));
-					await sleep(10);
-				}
-				if (this.acksDataFrames) await this.next(() => true, 2000);
-			}
+			await this.writeFrames(frames, 128, 0, signal);
 		});
+	}
+
+	/**
+	 * Send already announced data frames, each as `pieceSize` writes 10 ms apart (plus `pauseMs`
+	 * before every piece after the first, like BasePrint.transferSplitData), reading one reply per
+	 * frame where the link acknowledges them.
+	 */
+	sendFrames(frames: Uint8Array[], opts: { pieceSize: number; pauseMs?: number }, signal?: AbortSignal): Promise<void> {
+		return this.serialize(() => this.writeFrames(frames, opts.pieceSize, opts.pauseMs ?? 0, signal));
+	}
+
+	private async writeFrames(frames: Uint8Array[], pieceSize: number, pauseMs: number, signal?: AbortSignal) {
+		for (const f of frames) {
+			if (signal?.aborted) throw new PrinterError('Cancelled', 'cancelled');
+			this.clear();
+			const before = this.received;
+			for (let o = 0; o < f.length; o += pieceSize) {
+				if (o && pauseMs) await sleep(pauseMs);
+				await this.write(f.subarray(o, o + pieceSize));
+				await sleep(10);
+			}
+			if (this.strictAcks) {
+				if (!(await this.input(before, 2000))) throw new PrinterError('Printer did not acknowledge the print data', 'timeout');
+			} else if (this.acksDataFrames) await this.next(() => true, 2000);
+		}
+	}
+
+	/** Wait until more than `since` bytes have been received in total; false on timeout. */
+	private async input(since: number, timeoutMs: number): Promise<boolean> {
+		const deadline = Date.now() + timeoutMs;
+		while (this.received <= since) {
+			const left = deadline - Date.now();
+			if (left <= 0) return false;
+			await new Promise<void>((resolve) => {
+				const t = setTimeout(resolve, left);
+				this.wake = () => {
+					clearTimeout(t);
+					resolve();
+				};
+			});
+			this.wake = null;
+		}
+		return true;
 	}
 }
 
@@ -276,8 +321,8 @@ export class T5080BtDriver implements PrinterDriver {
 		return {
 			labelId,
 			paperType: at(18),
-			widthMm: at(19),
-			lengthMm: at(20),
+			lengthMm: at(19),
+			widthMm: at(20),
 			gap: gap > 8 ? 3 : gap,
 			uuid: uuidBytes.map((b) => b.toString(16).padStart(2, '0')).join('').padEnd(14, '0'),
 			raw: f

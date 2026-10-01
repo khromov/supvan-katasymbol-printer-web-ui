@@ -1,0 +1,988 @@
+[
+	{
+		"ID": "25001",
+		"Name": "White A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25002",
+		"Name": "White 12*22mm",
+		"Text": "22mm*12mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*22mm"
+	},
+	{
+		"ID": "25003",
+		"Name": "White 12*30mm",
+		"Text": "30mm*12mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*30mm"
+	},
+	{
+		"ID": "25004",
+		"Name": "White 12*40mm",
+		"Text": "40mm*12mm",
+		"TapeLength": 40,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*40mm"
+	},
+	{
+		"ID": "25005",
+		"Name": "White 15*30mm",
+		"Text": "30mm*15mm",
+		"TapeLength": 30,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*30mm"
+	},
+	{
+		"ID": "25006",
+		"Name": "White 15*50mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*50mm"
+	},
+	{
+		"ID": "25007",
+		"Name": "Yellow A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25010",
+		"Name": "Yellow 12*40mm",
+		"Text": "40mm*12mm",
+		"TapeLength": 40,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*40mm"
+	},
+	{
+		"ID": "25011",
+		"Name": "Yellow 15*30mm",
+		"Text": "30mm*15mm",
+		"TapeLength": 30,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*30mm"
+	},
+	{
+		"ID": "25012",
+		"Name": "Yellow 15*50mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*50mm"
+	},
+	{
+		"ID": "25013",
+		"Name": "Green A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25014",
+		"Name": "Green 12*40mm",
+		"Text": "40mm*12mm",
+		"TapeLength": 40,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*40mm"
+	},
+	{
+		"ID": "25015",
+		"Name": "Green 15*30mm",
+		"Text": "30mm*15mm",
+		"TapeLength": 30,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*30mm"
+	},
+	{
+		"ID": "25016",
+		"Name": "Blue A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25017",
+		"Name": "Blue 12*40mm",
+		"Text": "40mm*12mm",
+		"TapeLength": 40,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*40mm"
+	},
+	{
+		"ID": "25018",
+		"Name": "Blue 15*30mm",
+		"Text": "30mm*15mm",
+		"TapeLength": 30,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*30mm"
+	},
+	{
+		"ID": "25019",
+		"Name": "Pink A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25020",
+		"Name": "Pink 12*40mm",
+		"Text": "40mm*12mm",
+		"TapeLength": 40,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*40mm"
+	},
+	{
+		"ID": "25021",
+		"Name": "Pink 15*30mm",
+		"Text": "30mm*15mm",
+		"TapeLength": 30,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*30mm"
+	},
+	{
+		"ID": "25022",
+		"Name": "Purple A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25023",
+		"Name": "Purple 15*30mm",
+		"Text": "30mm*15mm",
+		"TapeLength": 30,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*30mm"
+	},
+	{
+		"ID": "25024",
+		"Name": "Sports player 15*50mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*50mm"
+	},
+	{
+		"ID": "25025",
+		"Name": "Cool car 15*50mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*50mm"
+	},
+	{
+		"ID": "25026",
+		"Name": "Pretty princess 15*50mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*50mm"
+	},
+	{
+		"ID": "25027",
+		"Name": "Dessert 15*50mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*50mm"
+	},
+	{
+		"ID": "25028",
+		"Name": "Tiny animal 15*50mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*50mm"
+	},
+	{
+		"ID": "25029",
+		"Name": "Cute hamsters 15*50mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "15mm*50mm"
+	},
+	{
+		"ID": "25030",
+		"Name": "Banana leaf 12*22mm",
+		"Text": "22mm*12mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*22mm"
+	},
+	{
+		"ID": "25031",
+		"Name": "Scenery 12*22mm",
+		"Text": "22mm*12mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*22mm"
+	},
+	{
+		"ID": "25032",
+		"Name": "Ocean 12*22mm",
+		"Text": "22mm*12mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*22mm"
+	},
+	{
+		"ID": "25033",
+		"Name": "Medicine 12*22mm",
+		"Text": "22mm*12mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*22mm"
+	},
+	{
+		"ID": "25034",
+		"Name": "Be a foolish 12*22mm",
+		"Text": "22mm*12mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*22mm"
+	},
+	{
+		"ID": "25035",
+		"Name": "My masterh 12*22mm",
+		"Text": "22mm*12mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*22mm"
+	},
+	{
+		"ID": "25036",
+		"Name": "Star stripes 12*30mm",
+		"Text": "30mm*12mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*30mm"
+	},
+	{
+		"ID": "25037",
+		"Name": "Flower 12*30mm",
+		"Text": "30mm*12mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*30mm"
+	},
+	{
+		"ID": "25038",
+		"Name": "Romance of a Teenage Girl 12*30mm",
+		"Text": "30mm*12mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*30mm"
+	},
+	{
+		"ID": "25039",
+		"Name": "Stripes 12*30mm",
+		"Text": "30mm*12mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*30mm"
+	},
+	{
+		"ID": "25040",
+		"Name": "Grid 12*30mm",
+		"Text": "30mm*12mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*30mm"
+	},
+	{
+		"ID": "25041",
+		"Name": "Clouds 14*50mm",
+		"Text": "50mm*14mm",
+		"TapeLength": 50,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "14mm*50mm"
+	},
+	{
+		"ID": "25042",
+		"Name": "Chinese knot 14*50mm",
+		"Text": "50mm*14mm",
+		"TapeLength": 50,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "14mm*50mm"
+	},
+	{
+		"ID": "25043",
+		"Name": "Railings 14*50mm",
+		"Text": "50mm*14mm",
+		"TapeLength": 50,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "14mm*50mm"
+	},
+	{
+		"ID": "25044",
+		"Name": "Fruit A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25045",
+		"Name": "Cosmetics A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25046",
+		"Name": "Dots A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25048",
+		"Name": "Heart A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25049",
+		"Name": "Constellation A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25050",
+		"Name": "Starry sky A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25051",
+		"Name": "Plants A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25052",
+		"Name": "Dots A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25053",
+		"Name": "Geometric A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25054",
+		"Name": "Palace carve A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25055",
+		"Name": "Porcelain A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25056",
+		"Name": "Transparent A*15mm",
+		"Text": "50mm*15mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous"
+	},
+	{
+		"ID": "25057",
+		"Name": "Transparent 12*30mm",
+		"Text": "50mm*12mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "12mm*30mm"
+	},
+	{
+		"ID": "25058",
+		"Name": "Sports player 14*50mm",
+		"Text": "50mm*14mm",
+		"TapeLength": 50,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "14mm*50mm"
+	},
+	{
+		"ID": "25064",
+		"Name": "White 14*30mm",
+		"Text": "50mm*14mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "14mm*30mm"
+	},
+	{
+		"ID": "25077",
+		"Name": "White 12.5mm*74mm+35mm",
+		"Text": "12.5mm*74mm+35mm",
+		"TapeLength": 109,
+		"TapeWidth": 12.5,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cabel"
+	},
+	{
+		"ID": "25078",
+		"Name": "Yellow 12.5mm*74mm+35mm",
+		"Text": "12.5mm*74mm+35mm",
+		"TapeLength": 109,
+		"TapeWidth": 12.5,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 3,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cabel"
+	}
+]

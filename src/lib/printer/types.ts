@@ -1,4 +1,4 @@
-export type Family = 't5080' | 'sp' | 'tp' | 'tp86a' | 'g';
+export type Family = 't5080' | 'sp' | 'tp' | 'tp86a' | 'g' | 't15';
 
 /** 1 byte per pixel, row-major, 1 = black dot. Rendered at the printer's dots-per-mm. */
 export interface Bitmap {
@@ -41,7 +41,10 @@ export interface PrintOptions {
 	/** 1..9 on the T50/T80 family. */
 	density: number;
 	copies: number;
-	/** Horizontal/vertical offset in the official dialog's slider units (4 dots each, -48..48). */
+	/**
+	 * Horizontal/vertical offset in the official dialog's units: 4 dots each, -48..48 (1 dot,
+	 * -9..9 on the E10/T10 series; see familyOptions).
+	 */
 	offsetX?: number;
 	offsetY?: number;
 	/** Family specific (e.g. SP/TP cut mode). */
@@ -80,6 +83,7 @@ export interface MediaInfo {
 	gap?: number;
 	uuid?: string;
 	deviceSerial?: string;
+	/** Label size as the printer reports it: across the tape (TapeWidth) and along it (TapeLength). */
 	widthMm?: number;
 	lengthMm?: number;
 	raw: Uint8Array;

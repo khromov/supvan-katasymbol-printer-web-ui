@@ -56,7 +56,8 @@ export const FAMILY_NAMES: Record<Family, string> = {
 	sp: 'SP sign printers',
 	tp: 'TP wire marker printers',
 	tp86a: 'TP86A / TP80A wire marker printers',
-	g: 'G series label printers'
+	g: 'G series label printers',
+	t15: 'E10 / T10 label makers (Bluetooth)'
 };
 
 export function findModel(productId: number): DeviceModel | undefined {
@@ -81,8 +82,67 @@ const BT_NAME_PREFIXES: [string, string][] = [
 	...['T0097A', 'T0153B', 'T0161B', 'T0206', 'T0154B', 'T0114A', 'T0146B', 'T0155B', 'T0115A', 'T0156B'].map((p) => [p, 'A50 Pro'] as [string, string])
 ];
 
+/**
+ * Bluetooth name prefixes of the T10/T15-series label makers, which all use the T15 protocol
+ * (SUPRINT 1.5.0 EDevice.getE10Device, T10Device and A10PlusDevice, printing process 15). Prefixes
+ * both the E10 and T10 lists have are named E10, as the app checks the E10 first.
+ */
+const T15_NAME_PREFIXES: [string, string][] = [
+	...['T0010', 'T0026', 'T0035', 'T0039', 'T0043', 'T0065', 'T0060', 'T0126', 'T0127', 'T0011', 'T0028', 'T0059', 'T0066', 'T0036', 'T0040', 'T0044',
+		'T0071', 'T0075', 'T0012', 'T0027', 'T0058', 'T0067', 'T0037', 'T0041', 'T0045', 'T0061', 'T0068', 'T0078', 'T0073', 'T0077', 'T0007', 'T0025',
+		'T0034', 'T0038', 'T0042', 'T0057', 'T0064', 'T0017', 'T0072', 'T0082', 'T0087', 'T0092', 'T0131', 'T0135', 'T0144', 'T0177', 'T0180', 'T0207',
+		'T0208', 'T0222', 'T0081', 'T0086', 'T0091', 'T0124', 'T0125', 'T0132', 'T0136', 'T0143', 'T0176', 'T0179', 'T0209', 'T0210', 'T0223', 'T0084',
+		'T0089', 'T0094', 'T0085', 'T0090', 'T0095', 'T0098', 'T0133', 'T0137', 'T0083', 'T0088', 'T0093', 'T0130', 'T0134'].map((p) => [p, 'E10'] as [string, string]),
+	['T0006', 'T11'],
+	['T0032', 'T12'],
+	['T0232', 'T1'],
+	['T0236', 'T10'],
+	['T0070', 'T10 Plus'],
+	['T0076', 'T10 Pro'],
+	['T0140', 'T10 Pro'],
+	...['T0001', 'T0002', 'T0003', 'T0004', 'T0005', 'T0008', 'T0009', 'T0074'].map((p) => [p, 'T10'] as [string, string]),
+	['T0079', 'A10 Plus'],
+	['T0080', 'A10 Pro'],
+	['T0141', 'A10 Pro']
+];
+
+/**
+ * Supvan Bluetooth printers with other protocols this app doesn't speak yet, so they aren't taken
+ * for a T50/T80: the E11/E12 (SUPRINT printing process 4) and the E16/T16/A16 (process 16).
+ */
+const UNSUPPORTED_NAME_PREFIXES: [string, string][] = [
+	...['T0138', 'T0139', 'T0181', 'T0182', 'T0183', 'T0184', 'T0224', 'T0225', 'T0216', 'T0217', 'T0218', 'T0219', 'T0226', 'T0227'].map(
+		(p) => [p, 'E11'] as [string, string]
+	),
+	...['T0187', 'T0188', 'T0189', 'T0190', 'T0228', 'T0229', 'T0194', 'T0195', 'T0196', 'T0197', 'T0230', 'T0231'].map((p) => [p, 'E12'] as [string, string]),
+	...['T0053', 'T0105', 'T0054', 'T0107', 'T0055', 'T0106', 'T0122', 'T0123'].map((p) => [p, 'E16'] as [string, string]),
+	...['T0047', 'T0052'].map((p) => [p, 'T16'] as [string, string]),
+	...['T0056', 'T0069'].map((p) => [p, 'A16'] as [string, string])
+];
+
+/**
+ * Over classic Bluetooth the app only has the printer's own answer to RD_DEV_NAME, which on the
+ * E10/T10 series is a model name ("E10pro" from a T0179G… E10), not the Bluetooth name.
+ */
+const T15_MODEL_NAMES = /^(E10|T10|T11|T12|A10)|^T1$/i;
+const UNSUPPORTED_MODEL_NAMES = /^(E11|E12|E16|T16|A16)/i;
+
+/** Model name of a Bluetooth printer this app can't drive yet, if the name is one. */
+export function unsupportedBluetoothModel(name: string | undefined): string | undefined {
+	if (!name) return undefined;
+	return UNSUPPORTED_NAME_PREFIXES.find(([p]) => name.startsWith(p))?.[1] ?? (UNSUPPORTED_MODEL_NAMES.test(name) ? name : undefined);
+}
+
 /** Model name for a Bluetooth device name, or undefined if it isn't a known prefix. */
 export function modelNameFromBluetoothName(name: string | undefined): string | undefined {
 	if (!name) return undefined;
-	return BT_NAME_PREFIXES.find(([p]) => name.startsWith(p))?.[1];
+	return (T15_NAME_PREFIXES.find(([p]) => name.startsWith(p)) ?? BT_NAME_PREFIXES.find(([p]) => name.startsWith(p)))?.[1];
+}
+
+/**
+ * Family of a Bluetooth printer by its Bluetooth name or its RD_DEV_NAME model name: the T10/T15
+ * series, else the T50/T80 series.
+ */
+export function familyFromBluetoothName(name: string | undefined): Family {
+	return name && (T15_NAME_PREFIXES.some(([p]) => name.startsWith(p)) || T15_MODEL_NAMES.test(name)) ? 't15' : 't5080';
 }

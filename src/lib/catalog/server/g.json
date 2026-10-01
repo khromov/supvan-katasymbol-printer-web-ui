@@ -1,0 +1,5168 @@
+[
+	{
+		"ID": "118001",
+		"Name": "9mm*22mm G0501E",
+		"Text": "9mm*22mm",
+		"TapeLength": 22,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0501E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118002",
+		"Name": "9mm*22mm G0502E",
+		"Text": "9mm*22mm",
+		"TapeLength": 22,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0502E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118003",
+		"Name": "12mm*22mm G0503E",
+		"Text": "12mm*22mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0503E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118004",
+		"Name": "12mm*22mm G0504E",
+		"Text": "12mm*22mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0504E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118005",
+		"Name": "12mm*30mm G0505E",
+		"Text": "12mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0505E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118006",
+		"Name": "12mm*30mm G0506E",
+		"Text": "12mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0506E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118007",
+		"Name": "12mm*30mm G0507E",
+		"Text": "12mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0507E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118008",
+		"Name": "14mm*30mm G0508E",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0508E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118009",
+		"Name": "14mm*30mm G0509E",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0509E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118010",
+		"Name": "14mm*30mm G050AE",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G050AE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118011",
+		"Name": "14mm*30mm G050BE",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G050BE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118012",
+		"Name": "14mm*30mm G050CE",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G050CE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118013",
+		"Name": "14mm*30mm G050DE",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G050DE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118014",
+		"Name": "14mm*30mm G050EE",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G050EE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118015",
+		"Name": "14mm*30mm G050FE",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G050FE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118016",
+		"Name": "14mm*30mm G0510E",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0510E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118017",
+		"Name": "14mm*30mm G0511E",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0511E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118018",
+		"Name": "14mm*30mm G0512E",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0512E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118019",
+		"Name": "14mm*30mm G0513E",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0513E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118020",
+		"Name": "14mm*30mm G0514E",
+		"Text": "12mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0514E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118021",
+		"Name": "14mm*30mm G0515E",
+		"Text": "12mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0515E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118022",
+		"Name": "14mm*40mm G0516E",
+		"Text": "14mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0516E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118023",
+		"Name": "14mm*40mm G0517E",
+		"Text": "14mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0517E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118024",
+		"Name": "14mm*40mm G0518E",
+		"Text": "14mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0518E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118025",
+		"Name": "14mm*40mm G0519E",
+		"Text": "14mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G0519E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118026",
+		"Name": "14mm*40mm G051AE",
+		"Text": "14mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G051AE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118027",
+		"Name": "14mm*40mm G051BE",
+		"Text": "14mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G051BE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118028",
+		"Name": "14mm*50mm G051CE",
+		"Text": "14mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G051CE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118029",
+		"Name": "14mm*50mm G051DE",
+		"Text": "14mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G051DE",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118030",
+		"Name": "14mm*12mm+28mm G051EE",
+		"Text": "14mm*12mm+28mm",
+		"TapeLength": 14,
+		"TapeWidth": 40,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Wrap Label",
+		"Source": {
+			"Type": "G051EE",
+			"PaperType": 1,
+			"Rotate": 4,
+			"TailLength": 28,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118032",
+		"Name": "12.5mm*74mm+35mm G0301E",
+		"Text": "12.5mm*74mm+35mm",
+		"TapeLength": 74,
+		"TapeWidth": 12.5,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G0301E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 35,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118033",
+		"Name": "12.5mm*74mm+35mm G0302E",
+		"Text": "12.5mm*74mm+35mm",
+		"TapeLength": 74,
+		"TapeWidth": 12.5,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G0302E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 35,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118034",
+		"Name": "12.5mm*74mm+35mm G0303E",
+		"Text": "12.5mm*74mm+35mm",
+		"TapeLength": 74,
+		"TapeWidth": 12.5,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G0303E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 35,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118035",
+		"Name": "12.5mm*74mm+35mm G0304E",
+		"Text": "12.5mm*74mm+35mm",
+		"TapeLength": 74,
+		"TapeWidth": 12.5,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G0304E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 35,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118036",
+		"Name": "12.5mm*74mm+35mm G0305E",
+		"Text": "12.5mm*74mm+35mm",
+		"TapeLength": 74,
+		"TapeWidth": 12.5,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G0305E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 35,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118037",
+		"Name": "25mm*38mm+40mm G21001E",
+		"Text": "25mm*38mm+40mm",
+		"TapeLength": 38,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G21001E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 40,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118038",
+		"Name": "25mm*38mm+40mm G21002E",
+		"Text": "25mm*38mm+40mm",
+		"TapeLength": 38,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G21002E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 40,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118039",
+		"Name": "25mm*38mm+40mm G21003E",
+		"Text": "25mm*38mm+40mm",
+		"TapeLength": 38,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G21003E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 40,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118040",
+		"Name": "25mm*38mm+40mm G21004E",
+		"Text": "25mm*38mm+40mm",
+		"TapeLength": 38,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G21004E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 40,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118041",
+		"Name": "25mm*38mm+40mm G21005E",
+		"Text": "25mm*38mm+40mm",
+		"TapeLength": 38,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Cable Label",
+		"Source": {
+			"Type": "G21005E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 40,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118042",
+		"Name": "6mm*7.5m G02001E",
+		"Text": "6mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 6,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02001E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118043",
+		"Name": "6mm*7.5m G02002E",
+		"Text": "6mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 6,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02002E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118044",
+		"Name": "9mm*7.5m G02003E",
+		"Text": "9mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02003E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118045",
+		"Name": "9mm*7.5m G02004E",
+		"Text": "9mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02004E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118046",
+		"Name": "9mm*7.5m G02005E",
+		"Text": "9mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02005E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118047",
+		"Name": "9mm*7.5m G02006E",
+		"Text": "9mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02006E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118048",
+		"Name": "9mm*7.5m G02007E",
+		"Text": "9mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02007E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118049",
+		"Name": "9mm*7.5m G02008E",
+		"Text": "9mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02008E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118050",
+		"Name": "12mm*7.5m G02009E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02009E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118051",
+		"Name": "12mm*7.5m G02010E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02010E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118052",
+		"Name": "12mm*7.5m G02011E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02011E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118053",
+		"Name": "12mm*7.5m G02012E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02012E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118054",
+		"Name": "12mm*7.5m G02013E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02013E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118055",
+		"Name": "12mm*7.5m G02014E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02014E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118056",
+		"Name": "18mm*7.5m G20001E",
+		"Text": "18mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 18,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20001E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118057",
+		"Name": "18mm*7.5m G20002E",
+		"Text": "18mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 18,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20002E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118058",
+		"Name": "24mm*7.5m G20003E",
+		"Text": "24mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 24,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20003E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118059",
+		"Name": "24mm*7.5m G20004E",
+		"Text": "24mm*7.5m",
+		"TapeLength": 25,
+		"TapeWidth": 24,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20004E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118060",
+		"Name": "φ3.5 G08001E",
+		"Text": "φ3.5",
+		"TapeLength": 50,
+		"TapeWidth": 7,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G08001E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118061",
+		"Name": "φ4.8 G08002E",
+		"Text": "φ4.8",
+		"TapeLength": 50,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G08002E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118062",
+		"Name": "φ9 G08003E",
+		"Text": "φ9",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G08003E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118063",
+		"Name": "9mm*60mm G15001E",
+		"Text": "9mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G15001E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118064",
+		"Name": "15mm*60mm G15002E",
+		"Text": "15mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G15002E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118066",
+		"Name": "15mm*3m G02015E",
+		"Text": "15mm*3m",
+		"TapeLength": 25,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Iron-on label",
+		"Source": {
+			"Type": "G02015E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118067",
+		"Name": "15mm*3m G02016E",
+		"Text": "15mm*3m",
+		"TapeLength": 25,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Iron-on label",
+		"Source": {
+			"Type": "G02016E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118068",
+		"Name": "15mm*3m G02017E",
+		"Text": "15mm*3m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Iron-on label",
+		"Source": {
+			"Type": "G02017E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118069",
+		"Name": "15mm*3m G02018E",
+		"Text": "15mm*3m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Iron-on label",
+		"Source": {
+			"Type": "G02018E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118070",
+		"Name": "12mm*4m G02019E",
+		"Text": "12mm*4m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Ribbon label",
+		"Source": {
+			"Type": "G02019E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118071",
+		"Name": "12mm*4m G02020E",
+		"Text": "12mm*4m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Ribbon label",
+		"Source": {
+			"Type": "G02020E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118072",
+		"Name": "12mm*4m G02021E",
+		"Text": "12mm*4m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Ribbon label",
+		"Source": {
+			"Type": "G02021E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118073",
+		"Name": "12mm*4m G02022E",
+		"Text": "12mm*4m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Ribbon label",
+		"Source": {
+			"Type": "G02022E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118074",
+		"Name": "25mm*20mm+25mm G23002E",
+		"Text": "25mm*20mm+25mm",
+		"TapeLength": 25,
+		"TapeWidth": 45,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Wrap Label",
+		"Source": {
+			"Type": "G23002E",
+			"PaperType": 1,
+			"Rotate": 4,
+			"TailLength": 25,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118075",
+		"Name": "25mm*13mm+21mm G23003E",
+		"Text": "25mm*13mm+21mm",
+		"TapeLength": 25,
+		"TapeWidth": 34,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Wrap Label",
+		"Source": {
+			"Type": "G23003E",
+			"PaperType": 1,
+			"Rotate": 4,
+			"TailLength": 21,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118076",
+		"Name": "25mm*13mm+21mm G23004E",
+		"Text": "25mm*13mm+21mm",
+		"TapeLength": 25,
+		"TapeWidth": 34,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Wrap Label",
+		"Source": {
+			"Type": "G23004E",
+			"PaperType": 1,
+			"Rotate": 4,
+			"TailLength": 21,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118077",
+		"Name": "φ3.5 G08004E",
+		"Text": "φ3.5",
+		"TapeLength": 50,
+		"TapeWidth": 7,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G08004E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118078",
+		"Name": "φ4.8 G08005E",
+		"Text": "φ4.8",
+		"TapeLength": 50,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G08005E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118079",
+		"Name": "φ9 G08006E",
+		"Text": "φ9",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G08006E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118080",
+		"Name": "φ12 G24001E",
+		"Text": "φ12",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G24001E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118081",
+		"Name": "φ12 G24002E",
+		"Text": "φ12",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G24002E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118082",
+		"Name": "φ16 G24003E",
+		"Text": "φ16",
+		"TapeLength": 50,
+		"TapeWidth": 27,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G24003E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118083",
+		"Name": "φ16 G24004E",
+		"Text": "φ16",
+		"TapeLength": 50,
+		"TapeWidth": 27,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Shrink Tube",
+		"Source": {
+			"Type": "G24004E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118084",
+		"Name": "27mm*50mm G26001E",
+		"Text": "27mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 27,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26001E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118085",
+		"Name": "27mm*50 G26002E",
+		"Text": "27mm*50mm",
+		"TapeLength": 50,
+		"TapeWidth": 27,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26002E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118086",
+		"Name": "27mm*70mm G26003E",
+		"Text": "27mm*70mm",
+		"TapeLength": 70,
+		"TapeWidth": 27,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26003E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118087",
+		"Name": "27mm*70mm G26004E",
+		"Text": "27mm*70mm",
+		"TapeLength": 70,
+		"TapeWidth": 27,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26004E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118088",
+		"Name": "20mm*42mm G26005E",
+		"Text": "20mm*42mm",
+		"TapeLength": 42,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26005E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118089",
+		"Name": "20mm*42mm G26006E",
+		"Text": "20mm*42mm",
+		"TapeLength": 42,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26006E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118090",
+		"Name": "20mm*59mm G26007E",
+		"Text": "20mm*59mm",
+		"TapeLength": 59,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26007E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118091",
+		"Name": "20mm*59mm G26008E",
+		"Text": "20mm*59mm",
+		"TapeLength": 59,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26008E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118092",
+		"Name": "20mm*73mm G26009E",
+		"Text": "20mm*73mm",
+		"TapeLength": 73,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26009E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118093",
+		"Name": "20mm*73mm G26010E",
+		"Text": "20mm*73mm",
+		"TapeLength": 73,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G26010E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118094",
+		"Name": "6mm*7.5m G02024E",
+		"Text": "6mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 6,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02024E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118095",
+		"Name": "9mm*7.5m G02025E",
+		"Text": "9mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02025E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118096",
+		"Name": "12mm*7.5m G02026E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02026E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118097",
+		"Name": "15mm*7.5m G20005E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20005E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118098",
+		"Name": "20mm*7.5m G20006E",
+		"Text": "20mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20006E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118099",
+		"Name": "9mm*4m G02028E",
+		"Text": "9mm*4m",
+		"TapeLength": 50,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02028E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118101",
+		"Name": "12mm*4m G02029E",
+		"Text": "12mm*4m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02029E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118102",
+		"Name": "20*4m G20007E",
+		"Text": "20mm*4m",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20007E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118103",
+		"Name": "14mm*40mm G05002E",
+		"Text": "14mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Luminous labels",
+		"Source": {
+			"Type": "G05002E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118105",
+		"Name": "φ13 G05004E",
+		"Text": "φ13",
+		"TapeLength": 30,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Round label",
+		"Source": {
+			"Type": "G05004E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118106",
+		"Name": "φ13 G05005E",
+		"Text": "φ13",
+		"TapeLength": 30,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Round label",
+		"Source": {
+			"Type": "G05005E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118110",
+		"Name": "15mm*7.5m G02033E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02033E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118111",
+		"Name": "15mm*7.5m G02034E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02034E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118112",
+		"Name": "15mm*7.5m G02035E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02035E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118113",
+		"Name": "15mm G02023E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Anti-counterfeiting label",
+		"Source": {
+			"Type": "G02023E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118114",
+		"Name": "15mm*50mm+45mm G23005E",
+		"Text": "15mm*50mm+45mm",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Jewelry Tags",
+		"Source": {
+			"Type": "G23005E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"TailLength": 45,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118115",
+		"Name": "18mm*56mm G23006E",
+		"Text": "18mm*56mm",
+		"TapeLength": 56,
+		"TapeWidth": 18,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Jewelry Tags",
+		"Source": {
+			"Type": "G23006E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118116",
+		"Name": "24mm*25mm+45mm G23007E",
+		"Text": "24mm*25mm+45mm",
+		"TapeLength": 24,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Jewelry Tags",
+		"Source": {
+			"Type": "G23007E",
+			"PaperType": 1,
+			"Rotate": 4,
+			"TailLength": 45,
+			"TailDirection": 4,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118117",
+		"Name": "15mm*7.5m G02036E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02036E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118118",
+		"Name": "12mm*7.5m G02037E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02037E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118119",
+		"Name": "12mm*7.5m G02039E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02039E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118120",
+		"Name": "10mm*7.5m G02040E",
+		"Text": "10mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 10,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02040E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118121",
+		"Name": "15mm*7.5m G02041E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02041E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118122",
+		"Name": "20mm*7.5m G20008E",
+		"Text": "20mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20008E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118123",
+		"Name": "6mm*7.5m G02042E",
+		"Text": "6mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 6,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02042E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118124",
+		"Name": "6mm*6m G02043E",
+		"Text": "6mm*6m",
+		"TapeLength": 50,
+		"TapeWidth": 6,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02043E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118125",
+		"Name": "9mm*6m G02044E",
+		"Text": "9mm*6m",
+		"TapeLength": 50,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02044E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118126",
+		"Name": "15mm*7.5m G02045E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02045E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118127",
+		"Name": "20mm*7.5m G20009E",
+		"Text": "20mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20009E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118128",
+		"Name": "15mm*7.5m G02046E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02046E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118129",
+		"Name": "18mm*7.5m G20010E",
+		"Text": "18mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 18,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20010E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118130",
+		"Name": "24mm*7.5m G20011E",
+		"Text": "24mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 24,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20011E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118131",
+		"Name": "12mm*7.5m G02047E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02047E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118132",
+		"Name": "20mm*7.5m G20012E",
+		"Text": "20mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20012E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118133",
+		"Name": "15mm*7.5m G02048E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02048E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118134",
+		"Name": "15mm*7.5m G02049E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02049E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118135",
+		"Name": "24mm*7.5m G20013E",
+		"Text": "24mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 24,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20013E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118136",
+		"Name": "12mm*7.5m G02050E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02050E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118137",
+		"Name": "12mm*7.5m G02051E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02051E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118138",
+		"Name": "12mm*7.5m G02052E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02052E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118139",
+		"Name": "12mm*7.5m G02053E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02053E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118140",
+		"Name": "12mm*7.5m G02054E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02054E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118141",
+		"Name": "12mm*7.5m G02055E",
+		"Text": "12mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02055E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118142",
+		"Name": "15mm*7.5m G02056E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02056E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118143",
+		"Name": "15mm*7.5m G02057E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02057E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118144",
+		"Name": "15mm*7.5m G02058E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02058E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118145",
+		"Name": "18mm*7.5m G20014E",
+		"Text": "18mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 18,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20014E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118147",
+		"Name": "14mm*30mm G05007E",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G05007E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118148",
+		"Name": "14mm*30mm G05008E",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G05008E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118149",
+		"Name": "14mm*30mm G05009E",
+		"Text": "14mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G05009E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118150",
+		"Name": "25mm*36mm G23008E",
+		"Text": "25mm*36mm",
+		"TapeLength": 36,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Index tabs",
+		"Source": {
+			"Type": "G23008E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118151",
+		"Name": "20mm*30mm G23009E",
+		"Text": "20mm*30mm",
+		"TapeLength": 30,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G23009E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118152",
+		"Name": "20mm*40mm G23010E",
+		"Text": "20mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G23010E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118153",
+		"Name": "20mm*45mm G23011E",
+		"Text": "20mm*45mm",
+		"TapeLength": 45,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G23011E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118154",
+		"Name": "25mm*40mm G23012E",
+		"Text": "25mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G23012E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118157",
+		"Name": "15mm*7.5m G02059E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02059E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118158",
+		"Name": "15mm*7.5m G02060E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02060E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118159",
+		"Name": "15mm*7.5m G02061E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02061E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118160",
+		"Name": "15mm*7.5m G02062E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02062E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118161",
+		"Name": "15mm*7.5m G02063E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02063E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118162",
+		"Name": "15mm*7.5m G02064E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02064E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118163",
+		"Name": "15mm*60mm G15003E",
+		"Text": "15mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G15003E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118164",
+		"Name": "15mm*60mm G15004E",
+		"Text": "15mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G15004E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118165",
+		"Name": "15mm*60mm G15005E",
+		"Text": "15mm*60mm",
+		"TapeLength": 60,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Identification cards",
+		"Source": {
+			"Type": "G15005E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118166",
+		"Name": "14mm*40mm G05011E",
+		"Text": "14mm*40mm",
+		"TapeLength": 40,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Die-cut Label",
+		"Source": {
+			"Type": "G05011E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8340,
+				8341,
+				8344
+			]
+		}
+	},
+	{
+		"ID": "118228",
+		"Name": "φ13 G05012E",
+		"Text": "φ13",
+		"TapeLength": 14,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ShapeType": 3,
+		"ClassName1": "Round label",
+		"Source": {
+			"Type": "G05012E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118229",
+		"Name": "φ13 G05013E",
+		"Text": "φ13",
+		"TapeLength": 14,
+		"TapeWidth": 14,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ShapeType": 3,
+		"ClassName1": "Round label",
+		"Source": {
+			"Type": "G05013E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118230",
+		"Name": "9mm*4m G02078E",
+		"Text": "9mm*4m",
+		"TapeLength": 50,
+		"TapeWidth": 9,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Low-temperature Label",
+		"Source": {
+			"Type": "G02078E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118231",
+		"Name": "12mm*4m G02079E",
+		"Text": "12mm*4m",
+		"TapeLength": 50,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Low-temperature Label",
+		"Source": {
+			"Type": "G02079E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118232",
+		"Name": "9.5mm*25mm+φ9.5 G05014E",
+		"Text": "9.5mm*25mm+φ9.5",
+		"TapeLength": 40,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Low-temperature Label",
+		"Source": {
+			"Type": "G05014E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118255",
+		"Name": "φ9.5mm G05018E",
+		"Text": "φ9.5mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Round label",
+		"Source": {
+			"Type": "G05018E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118256",
+		"Name": "φ9.5mm G05019E",
+		"Text": "φ9.5mm",
+		"TapeLength": 22,
+		"TapeWidth": 12,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Liquid nitrogen labels",
+		"Source": {
+			"Type": "G05019E",
+			"PaperType": 1,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118265",
+		"Name": "20mm*7.5m G20015E",
+		"Text": "20mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20015E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118266",
+		"Name": "20mm*7.5m G20016E",
+		"Text": "20mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 20,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20016E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118269",
+		"Name": "24mm*7.5m G20019E",
+		"Text": "24mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 24,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20019E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118270",
+		"Name": "24mm*7.5m G20020E",
+		"Text": "24mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 24,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20020E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118271",
+		"Name": "24mm*7.5m G20021E",
+		"Text": "24mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 24,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20021E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118272",
+		"Name": "24mm*7.5m G20022E",
+		"Text": "24mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 24,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20022E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118274",
+		"Name": "15mm*7.5m G02090E",
+		"Text": "15mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 15,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G02090E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118307",
+		"Name": "18mm*7.5m G20027E",
+		"Text": "18mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 18,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20027E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118308",
+		"Name": "24mm*7.5m G20028E",
+		"Text": "24mm*7.5m",
+		"TapeLength": 50,
+		"TapeWidth": 24,
+		"PaperDirection": 0,
+		"PaperType": 0,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Continuous Label",
+		"Source": {
+			"Type": "G20028E",
+			"PaperType": 3,
+			"Rotate": 1,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118312",
+		"Name": "14mm*12mm+7mm G05026E",
+		"Text": "14mm*12mm+7mm",
+		"TapeLength": 14,
+		"TapeWidth": 19,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Wrap Label",
+		"Source": {
+			"Type": "G05026E",
+			"PaperType": 1,
+			"Rotate": 4,
+			"TailLength": 7,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	},
+	{
+		"ID": "118313",
+		"Name": "14mm*12mm+13mm G05027E",
+		"Text": "14mm*12mm+13mm",
+		"TapeLength": 14,
+		"TapeWidth": 25,
+		"PaperDirection": 0,
+		"PaperType": 1,
+		"DieCutGap": 0,
+		"Padding": {
+			"Top": 1,
+			"Bottom": 1,
+			"Left": 2,
+			"Right": 2
+		},
+		"ClassName1": "Wrap Label",
+		"Source": {
+			"Type": "G05027E",
+			"PaperType": 1,
+			"Rotate": 4,
+			"TailLength": 13,
+			"DeviceTypes": [
+				8337,
+				8340,
+				8341,
+				8344,
+				71153,
+				71154,
+				71157
+			]
+		}
+	}
+]

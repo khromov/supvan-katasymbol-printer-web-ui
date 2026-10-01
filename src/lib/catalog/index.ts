@@ -28,7 +28,9 @@ const loaders: Record<Family, () => Promise<{ default: CatalogEntry[] }>> = {
 	sp: () => import('./sp.json') as Promise<{ default: CatalogEntry[] }>,
 	tp: () => import('./tp.json') as Promise<{ default: CatalogEntry[] }>,
 	tp86a: () => import('./tp.json') as Promise<{ default: CatalogEntry[] }>,
-	g: () => import('./g.json') as Promise<{ default: CatalogEntry[] }>
+	g: () => import('./g.json') as Promise<{ default: CatalogEntry[] }>,
+	// From Supvan's template server (scripts/download-catalog.mjs); KatasymbolEditor has none.
+	t15: () => import('./t15.json') as Promise<{ default: CatalogEntry[] }>
 };
 
 const cache = new Map<Family, LabelSpec[]>();
@@ -79,6 +81,43 @@ export async function loadCatalog(family: Family): Promise<LabelSpec[]> {
 	const labels = mod.default.map(toLabelSpec).filter((l) => !seen.has(l.id) && seen.add(l.id));
 	cache.set(family, labels);
 	return labels;
+}
+
+/**
+ * Paper types cut off a roll wherever printing stops (continuous tape, tubes, heat-shrink tube,
+ * continuous with holes, laminated wrap): their catalog length is only a starting point.
+ */
+const ROLL_PAPER_TYPES = new Set([0, 6, 7, 9, 21]);
+/**
+ * Lengths offered for roll labels, in mm. The printers take any length; the cap guards against
+ * typos that would print metres of tape (500 mm is about half a minute on an E10).
+ */
+export const ROLL_LENGTH = { min: 10, max: 500 };
+
+/**
+ * Whether the label comes off a roll, so its length along the tape can be anything. Goes by the
+ * catalog's paper type where there is one: on the T50/T80, paperType is what the label's chip
+ * reports (for printing), and a die-cut label must keep its size.
+ */
+export function rollLabel(label: LabelSpec): boolean {
+	return ROLL_PAPER_TYPES.has(Number(label.extra?.PaperType ?? label.paperType));
+}
+
+/**
+ * Whether the label's length can follow its content (auto length): only tape off a roll in a strip
+ * label maker (E10/T10 series, G series). Elsewhere a roll label keeps the length the user sets.
+ */
+export function autoLengthLabel(label: LabelSpec, family: Family): boolean {
+	return (family === 't15' || family === 'g') && rollLabel(label);
+}
+
+/** Length along the tape: the design's width, or its height when the design runs across the head. */
+export function tapeLength(label: LabelSpec): number {
+	return label.paperDirection === 1 ? label.widthMm : label.lengthMm;
+}
+
+export function withTapeLength(label: LabelSpec, mm: number): LabelSpec {
+	return label.paperDirection === 1 ? { ...label, widthMm: mm } : { ...label, lengthMm: mm };
 }
 
 /** Label outline shape from the catalog (1 rectangle, 2 rounded, 3 round). */

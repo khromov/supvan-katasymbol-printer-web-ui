@@ -20,6 +20,7 @@ import {
 	type PrinterDriver,
 	type PrinterStatus
 } from '../printer';
+import { T15_PRINT_DOTS } from '../printer/families/t15';
 import type { Family } from '../printer/types';
 
 const FAMILY_KEY = 'katasymbol-web:family';
@@ -48,7 +49,7 @@ function saveLink(link: Link) {
 		// ignore
 	}
 }
-const DEFAULT_DPMM: Record<Family, number> = { t5080: 8, sp: 11.8, tp: 11.3, tp86a: 11.3, g: 8 };
+const DEFAULT_DPMM: Record<Family, number> = { t5080: 8, sp: 11.8, tp: 11.3, tp86a: 11.3, g: 8, t15: 8 };
 
 function readFamily(): Family {
 	try {
@@ -66,6 +67,7 @@ const trimDots = (m: string) => m.replace(/\.+$/, '');
 /** Plain-language message for a failed Bluetooth connection. */
 function bluetoothErrorMessage(e: unknown): string {
 	const raw = (e as Error)?.message ?? String(e);
+	if ((e as PrinterError)?.code === 'unsupported') return raw;
 	if (/open/i.test(raw) && /serial port/i.test(raw))
 		return "Couldn't open a Bluetooth connection to the printer. Check that it's switched on, paired with this computer and not connected to a phone. On a Mac, forgetting the printer in Bluetooth settings and pairing it again usually helps.";
 	if ((e as PrinterError)?.code === 'timeout')
@@ -77,12 +79,13 @@ function bluetoothErrorMessage(e: unknown): string {
 function bleErrorMessage(e: unknown): string {
 	const err = e as Error & { code?: string };
 	const raw = err?.message ?? String(e);
+	if (err?.code === 'unsupported') return raw;
 	if (/adapter|bluetooth is (off|disabled)|not available/i.test(raw))
 		return 'Bluetooth is turned off or unavailable on this device. Turn it on and try again.';
 	if (err?.name === 'NotFoundError' || /no services matching/i.test(raw))
-		return "This printer doesn't offer the Bluetooth LE service the app needs. Make sure it's a T50/T80-series printer, or try USB.";
+		return "This printer doesn't offer a Bluetooth LE service the app knows. Make sure it's a T50/T80 or E10/T10-series printer, or try USB.";
 	if (err?.name === 'NetworkError' || /gatt|connect/i.test(raw))
-		return "Couldn't connect to the printer over Bluetooth. Check that it's switched on, close the Katasymbol app on other phones or tablets, and try again.";
+		return "Couldn't connect to the printer over Bluetooth. Check that it's switched on, close the Katasymbol or SUPRINT app on other phones or tablets, and try again.";
 	if (err?.code === 'timeout')
 		return "The printer didn't answer over Bluetooth. Switch it off and on again, then retry.";
 	return `Couldn't connect over Bluetooth: ${trimDots(raw)}.`;
@@ -163,6 +166,22 @@ class PrinterStore {
 		);
 	}
 
+	/**
+	 * Strips of `label` the print head can't reach, `mm` wide on both sides of the across-head axis
+	 * (the design's x axis when `acrossX`): the T50/T80 crop that axis to the head width, the
+	 * E10/T10 series print the middle 88 dots of their 96-dot head. Null when all of it prints.
+	 */
+	unprintable(label: LabelSpec): { acrossX: boolean; mm: number } | null {
+		const family = this.family;
+		const headDots = family === 't15' ? T15_PRINT_DOTS : family === 't5080' ? (this.model?.headDots ?? 384) : 0;
+		if (!headDots) return null;
+		const dpmm = this.model?.dpmm ?? 8;
+		const acrossX = label.paperDirection !== 0;
+		const acrossMm = acrossX ? label.lengthMm : label.widthMm;
+		const mm = (acrossMm * dpmm - headDots) / dpmm / 2;
+		return mm > 0 ? { acrossX, mm } : null;
+	}
+
 	setError(message: string | null, detail: string | null = null) {
 		this.error = message;
 		this.errorDetail = message && detail && detail !== message ? detail : null;
@@ -195,7 +214,7 @@ class PrinterStore {
 	async autoConnect() {
 		try {
 			const link = readLink();
-			if (link === 'ble' && this.bleSupported && 'getDevices' in navigator.bluetooth) {
+			if (link === 'ble' && this.bleSupported && !FORCE_SERIAL_BT && 'getDevices' in navigator.bluetooth) {
 				// Only where the browser lets pages reuse granted devices (not every Chrome has it).
 				const known = (await navigator.bluetooth.getDevices()).find((d) => d.name?.startsWith('T0'));
 				if (known) return await this.openBle(known, true);
@@ -251,6 +270,7 @@ class PrinterStore {
 		this.addLog(`connecting over Bluetooth LE to ${device.name ?? device.id}`);
 		try {
 			const { model, driver, transport } = await openBlePrinter(device, this.debug);
+			this.addLog(`${model.name}: ${transport.summary}`);
 			driver.channel.log = (line) => this.addLog(line);
 			device.addEventListener('gattserverdisconnected', () => {
 				if (this.bleDevice === device) this.teardown('Bluetooth printer disconnected');

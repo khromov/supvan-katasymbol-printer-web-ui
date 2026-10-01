@@ -6,7 +6,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	// Relative asset URLs so the build works on GitHub Pages' /<repo>/ subpath (and anywhere else).
 	base: './',
-	// `npm run dev:lan` serves over HTTPS with a self-signed certificate, because WebHID and
-	// Web Serial only work in secure contexts (HTTPS or localhost), e.g. for testing on a phone.
-	plugins: [svelte(), ...(process.env.HTTPS ? [basicSsl()] : [])]
+	// Serve over HTTPS with a self-signed certificate, because WebHID, Web Serial and Web Bluetooth
+	// only work in secure contexts (HTTPS or localhost), e.g. when testing on a phone over the LAN.
+	plugins: [svelte(), basicSsl()],
+	// Listen on all interfaces so the dev server is reachable from other devices on the LAN.
+	server: { host: true }
 });

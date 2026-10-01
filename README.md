@@ -12,8 +12,7 @@ searchable), QR codes, shapes and images, see exactly which dots will print, and
 
 ```sh
 npm install
-npm run dev        # http://localhost:5173, open in Chrome or Edge
-npm run dev:lan    # HTTPS on the LAN (self-signed) for testing on a phone
+npm run dev        # https://localhost:5173 (self-signed, also on the LAN), open in Chrome or Edge
 ```
 
 Click **Connect printer** and pick the SUPVAN "USB Device". After the first time the app reconnects
@@ -27,8 +26,8 @@ automatically. The printer's loaded label is detected (T50/T80 and G series) and
 | Android       | Chrome                                                                   | Turn on Bluetooth, tap **Bluetooth** and pick the printer (`T0…`).                                                                                                     |
 | iPhone / iPad | [Bluefy](https://apps.apple.com/app/bluefy-web-ble-browser/id1492822055) | Safari can't connect to printers. Open the site in Bluefy, tap **Bluetooth** and pick the printer (`T0…`).                                                             |
 
-The printer takes one connection at a time, so close the Katasymbol app on your other devices
-first. USB only works on computers: Android Chrome has no WebHID, and iOS browsers have no USB
+The printer takes one connection at a time, so close the Katasymbol or SUPRINT app on your other
+devices first. The E10/T10 series are Bluetooth-only (see below). USB only works on computers: Android Chrome has no WebHID, and iOS browsers have no USB
 access at all.
 
 ### Install as an app
@@ -55,6 +54,52 @@ Both carry the same `7E 5A` frames (ported from the Katasymbol Android app; see
 `src/lib/printer/families/t5080-bt.ts` and `ble.ts`). Over LE the printer doesn't acknowledge data
 frames. Add `?debug` to the URL to see a copyable protocol log.
 
+## Bluetooth (E10 / T10 series)
+
+The E10 and the T10, T10A, T11, T12, T10 Plus, T10 Pro, T1, A10 Plus and A10 Pro are small Bluetooth
+label makers with a 96-dot head (12 mm) at 203 dpi. They are recognized by their Bluetooth name
+(`T0010…`, `T0126…` and 93 other prefixes, `src/lib/printer/devices.ts`), or over classic
+Bluetooth by the model name they report (an E10 answers `E10pro`), and driven by
+`src/lib/printer/families/t15.ts`,
+a port of `T15Print` from the SUPRINT Android app (`com.supvan.IPrinterEn` 1.5.0). They use the same
+`7E 5A` frames as the T50/T80 over Bluetooth, with their own job: a head-rate (density) command,
+one LZMA stream per 332-column buffer, and a paper pull-back so printing starts near the cutter.
+
+- The app prints the middle 88 dots of the head. Designs print 1:1, so on 12 mm tape the top and
+  bottom 0.5 mm (2 mm on 15 mm tape) can't be printed; the editor shades them. (SUPRINT instead
+  scales the whole design into the 88 dots.)
+- SUPRINT talks to them over **classic Bluetooth (SPP)**, which works here from Android Chrome via
+  Web Serial; that link is driven exactly like SUPRINT. Supvan's iOS app (`com.supvan.IPrinter`
+  3.9.16) only has **Bluetooth LE**, and the BLE link follows it: any of five GATT services, writes
+  without response where the printer allows them, a reply expected after every data frame, only
+  status requests retried, and the iOS app's firmware workaround for frame markers inside a write.
+- The E11/E12 and E16/T16/A16 use other protocols; they are refused with a message rather than
+  taken for a T50/T80.
+- The loaded tape is read from the printer (its RFID serial is the catalog ID), so auto-detection
+  follows the tape.
+- There is no USB data connection (the port only charges).
+
+**Tested on an E10** (Bluetooth name `T0179G…`): over Bluetooth LE from Chrome on macOS, where it
+offers the T50/T80 service (`e0ff`, write `ffe9` with and without response, notify `ffe1`) and
+answers every data frame, and over classic Bluetooth from Android Chrome (`?bt=serial`). On macOS,
+classic Bluetooth has the same trouble as with the T50/T80 (Chrome can't open the port, and only the
+first session after pairing works), so use Bluetooth LE there. Darkness 1 and 7 print almost alike on
+15 mm white tape, although the printer accepts both head rates (80 and 140).
+
+Before that, `npm run test:t15` prints a set of jobs to an emulated
+printer (`scripts/t15-emulator.ts`), decodes what it received and checks every dot. The same jobs
+also ran through SUPRINT's own print code (`scripts/suprint-oracle`, which runs the app's classes
+converted with dex2jar against a twin emulator): given the app's LZMA streams, the driver writes
+exactly the app's bytes, and with its own encoder the printer decodes exactly the app's buffers. (The
+app uses the LZMA SDK 4.x encoder, which sometimes picks different matches than LZMA-JS; both are
+valid streams, and the T50/T80 already print from LZMA-JS over Bluetooth.) The BLE link and fault
+handling (missing replies, printer errors) have their own emulator scenarios, checked against what the
+iOS app does, read from its disassembly. To redo the comparison with SUPRINT:
+
+```sh
+scripts/suprint-oracle/run.sh SUPRINT_1.5.0.xapk   # needs a JDK, dex2jar and python3
+```
+
 ## Browser support
 
 The printers expose a vendor-defined **HID** interface (usage page `0xFF00`, 64-byte reports), so the
@@ -64,7 +109,8 @@ browsers (Chrome, Edge, Opera, Arc). Designing works everywhere; only printing n
 
 ## Supported printers
 
-Every model KatasymbolEditor 1.1.1 knows about (`src/lib/printer/devices.ts`):
+Every model KatasymbolEditor 1.1.1 knows about (`src/lib/printer/devices.ts`), plus the E10/T10
+series from the SUPRINT Android app:
 
 | Family             | Models                                                         | Status                                                                                                         |
 | ------------------ | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
@@ -72,6 +118,7 @@ Every model KatasymbolEditor 1.1.1 knows about (`src/lib/printer/devices.ts`):
 | SP (`sp`)          | SP650                                                          | Byte-identical encoder; not hardware-tested                                                                    |
 | TP (`tp`, `tp86a`) | TP76i, TP80A, TP86A                                            | Byte-identical encoders and full-job report streams in simulation; not hardware-tested                         |
 | G (`g`)            | G11 Pro, G15 Pro, G15 MPro, G18 Pro, G21, G25, G28             | Byte-identical at 203 dpi; 300 dpi (G25/G28) geometry is a best effort because the official code crashes there |
+| E10/T10 (`t15`)    | E10, T10, T10A, T11, T12, T10 Plus, T10 Pro, T1, A10 Plus, A10 Pro (Bluetooth only) | Ported from SUPRINT 1.5.0 (classic Bluetooth) and the iOS app (BLE); same bytes as SUPRINT in emulation; printed on an E10 over BLE (macOS Chrome) and classic Bluetooth (Android Chrome) |
 
 ## How it works
 
@@ -87,6 +134,10 @@ Every model KatasymbolEditor 1.1.1 knows about (`src/lib/printer/devices.ts`):
   use the official 180 threshold; emoji are dithered (saturation-aware, outlined) so they keep their
   shading; images have their own threshold/dither controls.
 - `src/lib/catalog/`: label catalogs extracted from the official app (`npm run catalog <app.js>`).
+  `npm run catalog:download` fetches Supvan's server catalogs (what the Android apps show) into
+  `src/lib/catalog/server/`; the E10/T10 list comes from there, as KatasymbolEditor has none.
+  `npm run catalog:compare` writes `src/lib/catalog/server/COMPARISON.md`, a diff against the
+  KatasymbolEditor catalogs, to check before moving another family over.
 
 ## Deployment
 

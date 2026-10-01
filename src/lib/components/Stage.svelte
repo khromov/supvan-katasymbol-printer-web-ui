@@ -45,18 +45,8 @@
 	const shape = $derived(labelShape(editor.label));
 	const pad = $derived(editor.label.padding);
 
-	/** Strips the print head cannot reach (T50/T80 crop the across-head axis to the head width). */
-	const deadZones = $derived.by(() => {
-		const model = printer.model;
-		const family = model?.family ?? 't5080';
-		const headDots = model?.headDots ?? 384;
-		if (family !== 't5080' || !headDots) return null;
-		const dpmm = model?.dpmm ?? 8;
-		const acrossX = editor.label.paperDirection !== 0;
-		const acrossMm = acrossX ? W : H;
-		const extra = (acrossMm * dpmm - headDots) / dpmm / 2;
-		return extra > 0 ? { acrossX, mm: extra } : null;
-	});
+	/** Strips the print head cannot reach, shaded on the label. */
+	const deadZones = $derived(printer.unprintable(editor.label));
 
 	// Render whenever the design, label, mode or zoom changes.
 	let token = 0;
@@ -204,9 +194,18 @@
 			editor.redo();
 			return;
 		}
+		if (mod && e.key.toLowerCase() === 'v') {
+			e.preventDefault();
+			editor.paste();
+			return;
+		}
 		const el = editor.selected;
 		if (!el) return;
-		if (e.key === 'Delete' || e.key === 'Backspace') {
+		if (mod && e.key.toLowerCase() === 'c') {
+			// Selected page text (e.g. the print log) keeps the browser's own copy.
+			if (window.getSelection()?.isCollapsed === false) return;
+			editor.copy(el.id);
+		} else if (e.key === 'Delete' || e.key === 'Backspace') {
 			e.preventDefault();
 			editor.remove(el.id);
 		} else if (mod && e.key.toLowerCase() === 'd') {

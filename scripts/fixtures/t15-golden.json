@@ -1,0 +1,183 @@
+{
+	"basic": {
+		"writes": 13,
+		"sha256": "3fca3b5b8e4c584bb11e98a268f3e3c16577633f539d5a68417f2993905596bf",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"long-copies-no-e": {
+		"writes": 30,
+		"sha256": "64b2cac09be4dca4cb3fefcdc90e077bee7356723b35a98f575a3b0ae0820b64",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"two-pages-cut-2": {
+		"writes": 74,
+		"sha256": "e5fb46a6074549e7d502d9df3479fda309db3215119140f12941e2ed7d0d4225",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"noise-multi-frame": {
+		"writes": 76,
+		"sha256": "2028f6e83f9d732971fc27cb3dad2eba86d1acb32a482ee0176eea3a77d61bbc",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"die-cut-offsets": {
+		"writes": 13,
+		"sha256": "9af02e97dae825e54102f31c350a3569767da9f2b5c2b4bdef33c2edd3e8c65e",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"blank": {
+		"writes": 13,
+		"sha256": "841155139036674b0b64026588f29dda84414082c2883e1c0c58c8f47bda200c",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"two-full-buffers": {
+		"writes": 20,
+		"sha256": "5039f0dee92c34f09ed957efe854ea421df7b9accf408766ee53a63f65b6392e",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"g-name-density": {
+		"writes": 10,
+		"sha256": "01b4ec445598a6148552e14930a8a76306b2d66c1508209131c38805de9d07ef",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"no-cut": {
+		"writes": 20,
+		"sha256": "59adc947031e4629edf18439077f6b8d58d4832fe1e40db44506ce72441a6589",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"media-die-cut": {
+		"writes": 3,
+		"sha256": "bd4eb2a38cf603dfb580c05ef0d0ed632dcc766134fd9fbac68fee5f1b0570c4",
+		"expect": {
+			"labelId": 25001,
+			"paperType": 1,
+			"widthMm": 12,
+			"lengthMm": 40,
+			"gap": 3,
+			"uuid": "049A3B12C45E80"
+		}
+	},
+	"media-continuous": {
+		"writes": 3,
+		"sha256": "bd4eb2a38cf603dfb580c05ef0d0ed632dcc766134fd9fbac68fee5f1b0570c4",
+		"expect": {
+			"labelId": 15001,
+			"paperType": 0,
+			"widthMm": 15,
+			"lengthMm": 0,
+			"gap": 3,
+			"uuid": "049A3B12C45E80"
+		}
+	},
+	"state-ok": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [],
+			"warnings": [
+				"Low battery, please charge"
+			],
+			"charging": false,
+			"batteryLevel": 1
+		}
+	},
+	"state-low-battery-flag": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"Low battery, please charge"
+			],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 2
+		}
+	},
+	"state-cover-unrecognized": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"Cover is open"
+			],
+			"warnings": [
+				"Label not recognized"
+			],
+			"charging": false,
+			"batteryLevel": 3
+		}
+	},
+	"state-empty": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"Label tape is not installed"
+			],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 2
+		}
+	},
+	"state-no-label": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"No label detected"
+			],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 1
+		}
+	},
+	"state-used-up-charging": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"Labels used up"
+			],
+			"warnings": [],
+			"charging": true,
+			"batteryLevel": 3
+		}
+	},
+	"state-one-bar": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 2
+		}
+	},
+	"state-2v": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 4
+		}
+	}
+}

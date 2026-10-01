@@ -81,13 +81,41 @@ function inkExtent(ctx: CanvasRenderingContext2D, line: string) {
 	return { left, right, width: Math.max(0, left + right) };
 }
 
+/**
+ * Baseline of the first line, with lines stacked `lineH` apart and the block placed by `valign` on
+ * the font's line box (ascent + descent). Accents (Ö) and descenders can reach past that box; when
+ * their ink crosses an edge of the element, the block moves inward as far as the other edge allows.
+ * Also the ink's top and bottom, after that move.
+ */
+function verticalLayout(ctx: CanvasRenderingContext2D, lines: string[], px: number, lineH: number, h: number, valign: TextElement['valign']) {
+	const metrics = ctx.measureText('Hg');
+	const ascent = metrics.fontBoundingBoxAscent ?? px * 0.8;
+	const descent = metrics.fontBoundingBoxDescent ?? px * 0.2;
+	const blockH = (lines.length - 1) * lineH + ascent + descent;
+	const top = valign === 'top' ? 0 : valign === 'bottom' ? h - blockH : (h - blockH) / 2;
+	const baseline = top + ascent;
+	let inkTop = Infinity;
+	let inkBottom = -Infinity;
+	lines.forEach((line, i) => {
+		if (!line) return;
+		const m = ctx.measureText(line);
+		const y = baseline + i * lineH;
+		inkTop = Math.min(inkTop, y - (m.actualBoundingBoxAscent ?? ascent));
+		inkBottom = Math.max(inkBottom, y + (m.actualBoundingBoxDescent ?? descent));
+	});
+	// Top- and bottom-aligned text sits on an edge, so without this a tall accent or a deep
+	// descender would stick out at every size and fitting would shrink the text to nothing.
+	const shift = inkTop < 0 ? Math.max(0, Math.min(-inkTop, h - inkBottom)) : inkBottom > h ? Math.min(0, Math.max(h - inkBottom, -inkTop)) : 0;
+	return { baseline: baseline + shift, inkTop: inkTop + shift, inkBottom: inkBottom + shift };
+}
+
 function layoutText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h: number, scale: number): Layout {
 	const measure = (px: number): Layout => {
 		ctx.font = fontSpec(el, px);
 		return { ...wrap(ctx, el.text, w), px, lineH: px * el.lineHeight };
 	};
 	if (!el.fit) return measure(el.size * PT_TO_MM * scale);
-	// Largest font size whose wrapped text fits the box.
+	// Largest font size whose wrapped text fits the box, ink included (accents, descenders).
 	let lo = 1,
 		hi = Math.max(2, h * 1.2),
 		best = measure(lo);
@@ -95,7 +123,8 @@ function layoutText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h
 		const mid = (lo + hi) / 2;
 		const l = measure(mid);
 		const widest = Math.max(...l.lines.map((s) => inkExtent(ctx, s).width));
-		const fits = !l.broke && l.lines.length * l.lineH - (l.lineH - l.px) <= h && widest <= w + 0.5;
+		const { inkTop, inkBottom } = verticalLayout(ctx, l.lines, l.px, l.lineH, h, el.valign);
+		const fits = !l.broke && l.lines.length * l.lineH - (l.lineH - l.px) <= h && widest <= w + 0.5 && inkTop >= -0.5 && inkBottom <= h + 0.5;
 		if (fits) {
 			best = l;
 			lo = mid;
@@ -131,12 +160,7 @@ function drawText(ctx: CanvasRenderingContext2D, el: TextElement, w: number, h: 
 		tone.fillStyle = ink;
 		tone.textBaseline = 'alphabetic';
 	}
-	const metrics = ctx.measureText('Hg');
-	const ascent = metrics.fontBoundingBoxAscent ?? px * 0.8;
-	const descent = metrics.fontBoundingBoxDescent ?? px * 0.2;
-	const blockH = (lines.length - 1) * lineH + ascent + descent;
-	let y = el.valign === 'top' ? 0 : el.valign === 'bottom' ? h - blockH : (h - blockH) / 2;
-	y += ascent;
+	let y = verticalLayout(ctx, lines, px, lineH, h, el.valign).baseline;
 	let drewTone = false;
 	for (const line of lines) {
 		// Align by ink, so overhanging glyphs stay inside the box and script fonts center visually.
@@ -224,6 +248,35 @@ function processImage(el: ImageElement, img: HTMLImageElement, wPx: number, hPx:
  * Draw one element. Continuous-tone content (emoji) goes to `tone` when given, so the caller can
  * dither it instead of thresholding. Returns true if anything was drawn to `tone`.
  */
+let measureCtx: CanvasRenderingContext2D | null = null;
+
+/**
+ * Font size (mm) a fitted text element gets in its box, as drawn at `dpmm`; 0 for other elements
+ * and empty text. For sizing a label around its text; fonts must be loaded (prepareAssets).
+ */
+export function fittedTextSize(el: DesignElement, dpmm: number): number {
+	if (el.type !== 'text' || !el.fit || !el.text.trim()) return 0;
+	measureCtx ??= document.createElement('canvas').getContext('2d')!;
+	const quarter = el.rotation === 90 || el.rotation === 270;
+	const w = (quarter ? el.h : el.w) * dpmm;
+	const h = (quarter ? el.w : el.h) * dpmm;
+	return layoutText(measureCtx, el, w, h, dpmm).px / dpmm;
+}
+
+/**
+ * Width (mm) of a fitted text element's widest line, ink or advance, whichever is wider; 0 for
+ * other elements and empty text. A box this wide (plus a little) keeps the same font size.
+ */
+export function fittedTextWidth(el: DesignElement, dpmm: number): number {
+	if (el.type !== 'text' || !el.fit || !el.text.trim()) return 0;
+	measureCtx ??= document.createElement('canvas').getContext('2d')!;
+	const ctx = measureCtx;
+	const quarter = el.rotation === 90 || el.rotation === 270;
+	const { lines, px } = layoutText(ctx, el, (quarter ? el.h : el.w) * dpmm, (quarter ? el.w : el.h) * dpmm, dpmm);
+	ctx.font = fontSpec(el, px);
+	return Math.max(0, ...lines.map((l) => Math.max(inkExtent(ctx, l).width, ctx.measureText(l).width))) / dpmm;
+}
+
 function drawElement(ctx: CanvasRenderingContext2D, el: DesignElement, scale: number, tone?: CanvasRenderingContext2D): boolean {
 	const quarter = el.rotation === 90 || el.rotation === 270;
 	const w = (quarter ? el.h : el.w) * scale;
