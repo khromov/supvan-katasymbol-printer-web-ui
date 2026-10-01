@@ -94,9 +94,13 @@ const ROLL_PAPER_TYPES = new Set([0, 6, 7, 9, 21]);
  */
 export const ROLL_LENGTH = { min: 10, max: 500 };
 
-/** Whether the label comes off a roll, so its length along the tape can be anything. */
+/**
+ * Whether the label comes off a roll, so its length along the tape can be anything. Goes by the
+ * catalog's paper type where there is one: on the T50/T80, paperType is what the label's chip
+ * reports (for printing), and a die-cut label must keep its size.
+ */
 export function rollLabel(label: LabelSpec): boolean {
-	return ROLL_PAPER_TYPES.has(label.paperType);
+	return ROLL_PAPER_TYPES.has(Number(label.extra?.PaperType ?? label.paperType));
 }
 
 /**
