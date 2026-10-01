@@ -1,7 +1,7 @@
 <script lang="ts">
 	import {
-		BatteryCharging, Bluetooth, CircleAlert, CircleCheck, LayoutDashboard, Plug, Printer, RectangleHorizontal,
-		RectangleVertical, Square, Tag, TriangleAlert, Unplug, Usb, X, PencilRuler
+		BatteryCharging, Bluetooth, ChevronDown, CircleAlert, CircleCheck, LayoutDashboard, Plug, Printer, RectangleHorizontal,
+		RectangleVertical, RotateCw, SlidersHorizontal, Square, Tag, TriangleAlert, Unplug, Usb, X, PencilRuler
 	} from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import IconPicker from './IconPicker.svelte';
@@ -15,6 +15,7 @@
 	import { bitmapToCanvas, fittedTextSize, fittedTextWidth, prepareAssets, renderBitmap } from '../design/render';
 	import { iconSvg, iconsLoaded, loadIcons } from '../design/icons';
 	import { autoLengthLabel, labelShape, labelTitle, ROLL_LENGTH, withTapeLength } from '../catalog';
+	import { familyOptions } from '../printer/options';
 	import { FONTS, type DesignElement } from '../design/model';
 	import type { LabelSpec } from '../printer/types';
 
@@ -34,6 +35,7 @@
 		return () => io.disconnect();
 	});
 	let showIcons = $state(false);
+	let showAdvanced = $state(false);
 	let rendering = $state(false);
 	let printed = $state(false);
 	let printedTimer: ReturnType<typeof setTimeout>;
@@ -74,6 +76,8 @@
 		const dpmm = printer.dpmm;
 		return buildQuickDesign($state.snapshot(quick), $state.snapshot(label) as LabelSpec, printer.unprintable(label), (el) => fittedTextWidth(el, dpmm));
 	});
+	/** Flip orientation (Advanced) is offered for this printer; it applies only when printing. */
+	const flipOffered = $derived(!!familyOptions(printer.family, label).flipOrientation);
 	const iconPlacement = $derived(quickIconPlacement(quick, label, printer.unprintable(label)));
 	const hasContent = $derived(!!quick.text.trim() || !!quick.icon);
 	const cells = $derived(quick.grid * quick.grid);
@@ -327,6 +331,24 @@
 				<Icon svg={Square} size={16} /> Frame
 			</label>
 		</section>
+
+		{#if flipOffered}
+			<!-- Advanced: corrections applied only when printing -->
+			<section class="card">
+				<button class="advanced-head" onclick={() => (showAdvanced = !showAdvanced)} aria-expanded={showAdvanced}>
+					<span class="label-sm"><Icon svg={SlidersHorizontal} size={14} /> Advanced{printer.flipOrientation ? ' · orientation flipped' : ''}</span>
+					<span class="chevron" class:open={showAdvanced}><Icon svg={ChevronDown} size={16} /></span>
+				</button>
+				{#if showAdvanced}
+					<label class="toggle">
+						<input type="checkbox" checked={printer.flipOrientation} onchange={(e) => printer.setFlipOrientation(e.currentTarget.checked)} />
+						<span class="switch" aria-hidden="true"></span>
+						<Icon svg={RotateCw} size={16} /> Flip orientation (Experimental)
+					</label>
+					<p class="hint">A workaround for T50M Pro printers that print labels in the wrong orientation: turns the label 90° on the print head when printing. The preview stays as it is.</p>
+				{/if}
+			</section>
+		{/if}
 
 		<button class="btn ghost sm studio-link" onclick={openInStudio} disabled={!hasContent}>
 			<Icon svg={PencilRuler} size={14} /> Fine-tune this label in Full studio
@@ -650,6 +672,41 @@
 	.toggle input:focus-visible + .switch {
 		outline: 2px solid var(--accent);
 		outline-offset: 2px;
+	}
+
+	.advanced-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 32px;
+		padding: 0;
+		border: 0;
+		background: none;
+		color: inherit;
+		font: inherit;
+		cursor: pointer;
+	}
+
+	.advanced-head .label-sm {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.chevron {
+		display: inline-flex;
+		color: var(--muted);
+		transition: transform 0.15s;
+	}
+
+	.chevron.open {
+		transform: rotate(180deg);
+	}
+
+	.hint {
+		margin: 0;
+		font-size: 12px;
+		color: var(--muted);
 	}
 
 	.studio-link {

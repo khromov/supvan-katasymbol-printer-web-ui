@@ -9,6 +9,11 @@ export interface FamilyOptions {
 	cutTypes?: { value: number; label: string }[];
 	/** Position offset slider: -max..max steps of `dots` dots. */
 	offset: { max: number; dots: number };
+	/**
+	 * Offer "Flip orientation" (Advanced): print the design turned 90 degrees onto the head. Only
+	 * where labels go onto the head either way round (PaperDirection), so the other way still prints.
+	 */
+	flipOrientation?: boolean;
 }
 
 const DENSITY_1_9 = { min: 1, max: 9, default: 4 };
@@ -19,7 +24,7 @@ const OFFSET = { max: 48, dots: 4 };
 export function familyOptions(family: Family, label?: LabelSpec): FamilyOptions {
 	switch (family) {
 		case 't5080':
-			return { density: DENSITY_1_9, offset: OFFSET };
+			return { density: DENSITY_1_9, offset: OFFSET, flipOrientation: true };
 		case 't15':
 			return { density: { ...T15_DENSITY }, offset: { ...T15_OFFSET } };
 		case 'sp':

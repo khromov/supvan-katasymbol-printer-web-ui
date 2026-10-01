@@ -21,10 +21,12 @@ import {
 	type PrinterStatus
 } from '../printer';
 import { T15_PRINT_DOTS } from '../printer/families/t15';
+import { familyOptions } from '../printer/options';
 import type { Family } from '../printer/types';
 
 const FAMILY_KEY = 'katasymbol-web:family';
 const LINK_KEY = 'katasymbol-web:link';
+const FLIP_KEY = 'katasymbol-web:flip-orientation';
 /** Protocol logging (Bluetooth frames) when the page URL has ?debug. */
 const DEBUG = typeof location !== 'undefined' && new URLSearchParams(location.search).has('debug');
 
@@ -50,6 +52,14 @@ function saveLink(link: Link) {
 	}
 }
 const DEFAULT_DPMM: Record<Family, number> = { t5080: 8, sp: 11.8, tp: 11.3, tp86a: 11.3, g: 8, t15: 8 };
+
+function readFlip(): boolean {
+	try {
+		return localStorage.getItem(FLIP_KEY) === '1';
+	} catch {
+		return false;
+	}
+}
 
 function readFamily(): Family {
 	try {
@@ -125,6 +135,12 @@ class PrinterStore {
 	lastPrintOk = $state(false);
 	/** Family to design for while no printer is connected. */
 	preferredFamily = $state<Family>(readFamily());
+	/**
+	 * Advanced: print the design turned 90 degrees onto the head (the label's other paper direction),
+	 * to correct a printer that gets the orientation wrong. Only where familyOptions offers it; the
+	 * design and its preview stay as they are.
+	 */
+	flipOrientation = $state(readFlip());
 
 	private driver: PrinterDriver | null = null;
 	private transport: { close(): Promise<void> } | null = null;
@@ -152,6 +168,15 @@ class PrinterStore {
 		this.preferredFamily = f;
 		try {
 			localStorage.setItem(FAMILY_KEY, f);
+		} catch {
+			// ignore
+		}
+	}
+
+	setFlipOrientation(on: boolean) {
+		this.flipOrientation = on;
+		try {
+			localStorage.setItem(FLIP_KEY, on ? '1' : '0');
 		} catch {
 			// ignore
 		}
@@ -430,8 +455,11 @@ class PrinterStore {
 		this.setError(null);
 		this.lastPrintOk = false;
 		this.abort = new AbortController();
+		// Flip orientation swaps the paper direction for this job only.
+		const flip = this.flipOrientation && !!familyOptions(this.family, label).flipOrientation;
+		if (flip) this.addLog('printing with flipped orientation');
 		try {
-			await driver.print(pages, label, {
+			await driver.print(pages, flip ? { ...label, paperDirection: label.paperDirection === 0 ? 1 : 0 } : label, {
 				...opts,
 				signal: this.abort.signal,
 				onProgress: (p) => (this.progress = p)

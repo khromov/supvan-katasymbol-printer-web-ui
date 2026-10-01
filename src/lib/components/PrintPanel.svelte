@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CircleAlert, CircleCheck, Download, Minus, Move, Octagon, Plug, Plus, Printer, TriangleAlert, X } from 'lucide-static';
+	import { CircleAlert, CircleCheck, Download, Minus, Move, Octagon, Plug, Plus, Printer, SlidersHorizontal, TriangleAlert, X } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import LabelPicker from './LabelPicker.svelte';
 	import ConnectHelp from './ConnectHelp.svelte';
@@ -79,6 +79,7 @@
 	/** The printer reports a job running although we are not printing (e.g. an interrupted print). */
 	const strayJob = $derived(printer.state === 'ready' && !!printer.status?.printing);
 	let showOffsets = $state(false);
+	let showAdvanced = $state(false);
 	/** Offsets in the family's units, limited to its range (a stored value may come from another family). */
 	const clampOffset = (v: number) => Math.max(-opts.offset.max, Math.min(opts.offset.max, v));
 	const offsetX = $derived(clampOffset(editor.offsetX));
@@ -148,6 +149,21 @@
 			<button class="btn sm" onclick={() => { editor.offsetX = 0; editor.offsetY = 0; editor.persist(); }}>Reset</button>
 		{/if}
 	</div>
+
+	{#if opts.flipOrientation}
+		<div class="advanced">
+			<button class="btn ghost sm" class:active={showAdvanced || printer.flipOrientation} onclick={() => (showAdvanced = !showAdvanced)} aria-expanded={showAdvanced}>
+				<Icon svg={SlidersHorizontal} size={14} /> Advanced{printer.flipOrientation ? ' (orientation flipped)' : ''}
+			</button>
+			{#if showAdvanced}
+				<label class="check">
+					<input type="checkbox" checked={printer.flipOrientation} onchange={(e) => printer.setFlipOrientation(e.currentTarget.checked)} />
+					Flip orientation (Experimental)
+				</label>
+				<p class="hint">A workaround for T50M Pro printers that print labels in the wrong orientation: turns the label 90° on the print head when printing. The preview stays as it is.</p>
+			{/if}
+		</div>
+	{/if}
 
 	{#if strayJob}
 		<div class="note warn">
@@ -276,15 +292,30 @@
 		color: var(--ok);
 	}
 
-	.offsets {
+	.offsets,
+	.advanced {
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
 		align-items: stretch;
 	}
 
-	.offsets > .btn {
+	.offsets > .btn,
+	.advanced > .btn {
 		align-self: flex-start;
+	}
+
+	.check {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 13px;
+	}
+
+	.hint {
+		margin: 0;
+		font-size: 12px;
+		color: var(--muted);
 	}
 
 	input[type='range'] {
