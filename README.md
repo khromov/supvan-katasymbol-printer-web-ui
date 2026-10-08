@@ -73,8 +73,8 @@ one LZMA stream per 332-column buffer, and a paper pull-back so printing starts 
   3.9.16) only has **Bluetooth LE**, and the BLE link follows it: any of five GATT services, writes
   without response where the printer allows them, a reply expected after every data frame, only
   status requests retried, and the iOS app's firmware workaround for frame markers inside a write.
-- The E11/E12 and E16/T16/A16 use other protocols; they are refused with a message rather than
-  taken for a T50/T80.
+- The E12 has its own driver (see below). The E11 and E16/T16/A16 use other protocols; they are
+  refused with a message rather than taken for a T50/T80.
 - The loaded tape is read from the printer (its RFID serial is the catalog ID), so auto-detection
   follows the tape.
 - There is no USB data connection (the port only charges).
@@ -100,6 +100,30 @@ iOS app does, read from its disassembly. To redo the comparison with SUPRINT:
 scripts/suprint-oracle/run.sh SUPRINT_1.5.0.xapk   # needs a JDK, dex2jar and python3
 ```
 
+## Bluetooth LE (E12)
+
+The E12 (Bluetooth name `T0187…`–`T0197…`, `T0228…`–`T0231…`; its firmware answers `RD_DEV_NAME`
+with `G15`) is driven by `src/lib/printer/families/e12.ts`, a port of
+supvan-e12, a Python driver tested on a real E12 (`T0195A…`, 12 × 40 mm die-cut
+tape). It connects over Bluetooth LE only: GATT service `fee7`, one characteristic `fec1` that
+notifies and takes writes without response. Same `7E 5A` frames as the T50/T80, with its own job:
+
+- every label is its own job (check → start → data → wait until printed);
+- 4096-byte buffers of up to 339 columns; the first and last 1 mm of the label are fed blank rather
+  than sent; up to four buffers per LZMA stream, with a print speed from the stream size;
+- the printer acknowledges every data frame;
+- the design is turned 180° onto the head compared with the E10/T10 (its feed and dot order run the
+  other way), and all 96 dots print, so 12 mm tape has no unprintable strips;
+- the E12 has no ribbon but reports "ribbon end" after every label, so that bit is ignored;
+- tapes are the E10's (a 12 × 40 mm roll reports catalog ID 25004), so the tape list and
+  auto-detection are shared with the `t15` family.
+
+`npm run test:e12` checks the print buffers against digests of supvan-e12's own buffers for the same
+designs (`scripts/fixtures/e12-python.json`), parses replies captured from the real printer, and runs
+whole jobs against the emulated printer. Not yet tested from the browser on hardware; continuous tape
+sends material type 0 in the page register (supvan-e12 always sends 1, and was only tried on die-cut
+tape).
+
 ## Browser support
 
 The printers expose a vendor-defined **HID** interface (usage page `0xFF00`, 64-byte reports), so the
@@ -119,6 +143,7 @@ series from the SUPRINT Android app:
 | TP (`tp`, `tp86a`) | TP76i, TP80A, TP86A                                            | Byte-identical encoders and full-job report streams in simulation; not hardware-tested                         |
 | G (`g`)            | G11 Pro, G15 Pro, G15 MPro, G18 Pro, G21, G25, G28             | Byte-identical at 203 dpi; 300 dpi (G25/G28) geometry is a best effort because the official code crashes there |
 | E10/T10 (`t15`)    | E10, T10, T10A, T11, T12, T10 Plus, T10 Pro, T1, A10 Plus, A10 Pro (Bluetooth only) | Ported from SUPRINT 1.5.0 (classic Bluetooth) and the iOS app (BLE); same bytes as SUPRINT in emulation; printed on an E10 over BLE (macOS Chrome) and classic Bluetooth (Android Chrome) |
+| E12 (`e12`)        | E12 (Bluetooth LE only)                                        | Ported from supvan-e12 (Python, tested on an E12); buffers identical to it; emulated jobs pass; not yet printed from the browser |
 
 ## How it works
 

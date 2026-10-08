@@ -5,6 +5,7 @@ import { probeSpInterface, SpDriver } from './families/sp';
 import { T5080Driver } from './families/t5080';
 import { T5080BtDriver } from './families/t5080-bt';
 import { T15BtDriver, T15_HEAD_DOTS } from './families/t15';
+import { E12BtDriver, E12_HEAD_DOTS } from './families/e12';
 import { SPP_UUID, WebSerialTransport } from './serial';
 import { Tp86aDriver, TpDriver } from './families/tp';
 import { WebHidTransport, type Transport } from './transport';
@@ -26,12 +27,13 @@ export function createDriver(model: DeviceModel, transport: Transport): PrinterD
 		case 'g':
 			return new GDriver(transport, { dpmm: model.dpmm, headDots: model.headDots });
 		case 't15':
+		case 'e12':
 			throw new PrinterError(`${model.name} connects over Bluetooth only`, 'unsupported');
 	}
 }
 
 /** A driver for a printer on a Bluetooth link. */
-export type BluetoothDriver = T5080BtDriver | T15BtDriver;
+export type BluetoothDriver = T5080BtDriver | T15BtDriver | E12BtDriver;
 
 /** Refuse Supvan printers whose protocol this app doesn't speak, rather than drive them as a T50/T80. */
 function assertSupported(devName: string | undefined) {
@@ -45,6 +47,15 @@ const t15Model = (devName: string): DeviceModel => ({
 	family: 't15',
 	dpmm: 8,
 	headDots: T15_HEAD_DOTS,
+	listed: false
+});
+
+const e12Model = (): DeviceModel => ({
+	productId: 0,
+	name: 'E12 (Bluetooth)',
+	family: 'e12',
+	dpmm: 8,
+	headDots: E12_HEAD_DOTS,
 	listed: false
 });
 
@@ -117,11 +128,18 @@ export async function openBluetoothPrinter(port: SerialPort, debug = false): Pro
 		await driver.handshake();
 		const devName = await driver.readDeviceName().catch(() => '');
 		assertSupported(devName);
-		if (familyFromBluetoothName(devName) === 't15') {
+		const family = familyFromBluetoothName(devName);
+		if (family === 't15') {
 			driver.channel.dispose();
 			const t15 = new T15BtDriver(transport, devName);
 			t15.channel.debug = debug;
 			return { model: t15Model(devName), driver: t15, transport };
+		}
+		if (family === 'e12') {
+			driver.channel.dispose();
+			const e12 = new E12BtDriver(transport, devName);
+			e12.channel.debug = debug;
+			return { model: e12Model(), driver: e12, transport };
 		}
 		const name = /pro/i.test(devName) ? 'T50M Pro' : devName || 'T50 series';
 		const model: DeviceModel = { productId: 0, name: `${name} (Bluetooth)`, family: 't5080', dpmm: 8, headDots: 384, listed: false };
@@ -148,15 +166,23 @@ export async function bluetoothAvailable(): Promise<boolean | undefined> {
 export const requestBlePrinter = () => WebBluetoothTransport.request();
 
 /**
- * Open a printer over BLE, by its advertised name: E10/T10 series or T50/T80. The T50/T80 doesn't
- * answer data frames there. The E10/T10 are driven like the iOS app drives them: writes without
- * response where the printer allows it, and a reply expected for every data frame.
+ * Open a printer over BLE, by its advertised name: E10/T10 series, E12 or T50/T80. The T50/T80
+ * doesn't answer data frames there. The E10/T10 are driven like the iOS app drives them: writes
+ * without response where the printer allows it, and a reply expected for every data frame. The E12
+ * only takes writes without response and also answers every data frame.
  */
 export async function openBlePrinter(device: BluetoothDevice, debug = false): Promise<{ model: DeviceModel; driver: BluetoothDriver; transport: WebBluetoothTransport }> {
 	assertSupported(device.name);
-	const isT15 = familyFromBluetoothName(device.name) === 't15';
-	const transport = await WebBluetoothTransport.open(device, { preferWithoutResponse: isT15 });
+	const family = familyFromBluetoothName(device.name);
+	const isT15 = family === 't15';
+	const transport = await WebBluetoothTransport.open(device, { preferWithoutResponse: family !== 't5080' });
 	try {
+		if (family === 'e12') {
+			const e12 = new E12BtDriver(transport, device.name ?? '');
+			e12.channel.debug = debug;
+			await e12.handshake();
+			return { model: e12Model(), driver: e12, transport };
+		}
 		if (isT15) {
 			const t15 = new T15BtDriver(transport, device.name ?? '', 'ble');
 			t15.channel.debug = debug;

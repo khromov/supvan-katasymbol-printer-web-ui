@@ -1,5 +1,6 @@
 import { G_SIGN_LABELS } from './families/g';
 import { T15_DENSITY, T15_OFFSET } from './families/t15';
+import { E12_DENSITY, E12_OFFSET } from './families/e12';
 import { TP_CUT_TYPES, TP_DENSITY } from './families/tp';
 import type { Family, LabelSpec } from './types';
 
@@ -27,6 +28,8 @@ export function familyOptions(family: Family, label?: LabelSpec): FamilyOptions 
 			return { density: DENSITY_1_9, offset: OFFSET, flipOrientation: true };
 		case 't15':
 			return { density: { ...T15_DENSITY }, offset: { ...T15_OFFSET } };
+		case 'e12':
+			return { density: { ...E12_DENSITY }, offset: { ...E12_OFFSET } };
 		case 'sp':
 			return { offset: OFFSET };
 		case 'tp':

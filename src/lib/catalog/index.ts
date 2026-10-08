@@ -30,7 +30,9 @@ const loaders: Record<Family, () => Promise<{ default: CatalogEntry[] }>> = {
 	tp86a: () => import('./tp.json') as Promise<{ default: CatalogEntry[] }>,
 	g: () => import('./g.json') as Promise<{ default: CatalogEntry[] }>,
 	// From Supvan's template server (scripts/download-catalog.mjs); KatasymbolEditor has none.
-	t15: () => import('./t15.json') as Promise<{ default: CatalogEntry[] }>
+	t15: () => import('./t15.json') as Promise<{ default: CatalogEntry[] }>,
+	// The E12 takes the same tapes as the E10 (its 12 x 40 mm roll reports ID 25004).
+	e12: () => import('./t15.json') as Promise<{ default: CatalogEntry[] }>
 };
 
 const cache = new Map<Family, LabelSpec[]>();
@@ -105,10 +107,10 @@ export function rollLabel(label: LabelSpec): boolean {
 
 /**
  * Whether the label's length can follow its content (auto length): only tape off a roll in a strip
- * label maker (E10/T10 series, G series). Elsewhere a roll label keeps the length the user sets.
+ * label maker (E10/T10 series, E12, G series). Elsewhere a roll label keeps the length the user sets.
  */
 export function autoLengthLabel(label: LabelSpec, family: Family): boolean {
-	return (family === 't15' || family === 'g') && rollLabel(label);
+	return (family === 't15' || family === 'e12' || family === 'g') && rollLabel(label);
 }
 
 /** Length along the tape: the design's width, or its height when the design runs across the head. */

@@ -16,8 +16,9 @@ interface BleService {
 
 /**
  * The vendor services the Supvan apps know (SUPRINT BLEUtils.getService, and 18F0 from the iOS
- * app's SFBLEManager), in the order they are tried. The T50/T80 use the first; which one the
- * E10/T10 series offer is not known yet. FEE7 is a common generic service, so it goes last.
+ * app's SFBLEManager), in the order they are tried. The T50/T80 and the E10 use the first, the E12
+ * the last (FEE7, one characteristic FEC1 that notifies and takes writes without response). FEE7 is
+ * a common generic service, so it goes last.
  */
 const BLE_SERVICES: BleService[] = [
 	{ service: '0000e0ff-3c17-d293-8e48-14fe2e4da212', write: '0000ffe9-0000-1000-8000-00805f9b34fb', notify: '0000ffe1-0000-1000-8000-00805f9b34fb' },

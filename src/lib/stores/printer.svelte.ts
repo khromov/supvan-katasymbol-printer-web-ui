@@ -21,6 +21,7 @@ import {
 	type PrinterStatus
 } from '../printer';
 import { T15_PRINT_DOTS } from '../printer/families/t15';
+import { E12_HEAD_DOTS } from '../printer/families/e12';
 import { familyOptions } from '../printer/options';
 import type { Family } from '../printer/types';
 
@@ -51,7 +52,7 @@ function saveLink(link: Link) {
 		// ignore
 	}
 }
-const DEFAULT_DPMM: Record<Family, number> = { t5080: 8, sp: 11.8, tp: 11.3, tp86a: 11.3, g: 8, t15: 8 };
+const DEFAULT_DPMM: Record<Family, number> = { t5080: 8, sp: 11.8, tp: 11.3, tp86a: 11.3, g: 8, t15: 8, e12: 8 };
 
 function readFlip(): boolean {
 	try {
@@ -93,7 +94,7 @@ function bleErrorMessage(e: unknown): string {
 	if (/adapter|bluetooth is (off|disabled)|not available/i.test(raw))
 		return 'Bluetooth is turned off or unavailable on this device. Turn it on and try again.';
 	if (err?.name === 'NotFoundError' || /no services matching/i.test(raw))
-		return "This printer doesn't offer a Bluetooth LE service the app knows. Make sure it's a T50/T80 or E10/T10-series printer, or try USB.";
+		return "This printer doesn't offer a Bluetooth LE service the app knows. Make sure it's a T50/T80, E10/T10-series or E12 printer, or try USB.";
 	if (err?.name === 'NetworkError' || /gatt|connect/i.test(raw))
 		return "Couldn't connect to the printer over Bluetooth. Check that it's switched on, close the Katasymbol or SUPRINT app on other phones or tablets, and try again.";
 	if (err?.code === 'timeout')
@@ -194,11 +195,13 @@ class PrinterStore {
 	/**
 	 * Strips of `label` the print head can't reach, `mm` wide on both sides of the across-head axis
 	 * (the design's x axis when `acrossX`): the T50/T80 crop that axis to the head width, the
-	 * E10/T10 series print the middle 88 dots of their 96-dot head. Null when all of it prints.
+	 * E10/T10 series print the middle 88 dots of their 96-dot head, the E12 all 96. Null when all of
+	 * it prints.
 	 */
 	unprintable(label: LabelSpec): { acrossX: boolean; mm: number } | null {
 		const family = this.family;
-		const headDots = family === 't15' ? T15_PRINT_DOTS : family === 't5080' ? (this.model?.headDots ?? 384) : 0;
+		const headDots =
+			family === 't15' ? T15_PRINT_DOTS : family === 'e12' ? E12_HEAD_DOTS : family === 't5080' ? (this.model?.headDots ?? 384) : 0;
 		if (!headDots) return null;
 		const dpmm = this.model?.dpmm ?? 8;
 		const acrossX = label.paperDirection !== 0;
