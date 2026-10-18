@@ -21,7 +21,7 @@ import {
 	type PrinterStatus
 } from '../printer';
 import { T15_PRINT_DOTS } from '../printer/families/t15';
-import { E11_PRINT_DOTS } from '../printer/families/e11';
+import { E11_END_MARGIN_MM, E11_PRINT_DOTS } from '../printer/families/e11';
 import { E12_HEAD_DOTS } from '../printer/families/e12';
 import { familyOptions } from '../printer/options';
 import type { Family } from '../printer/types';
@@ -196,10 +196,11 @@ class PrinterStore {
 	/**
 	 * Strips of `label` the print head can't reach, `mm` wide on both sides of the across-head axis
 	 * (the design's x axis when `acrossX`): the T50/T80 crop that axis to the head width, the
-	 * E10/T10 series and the E11 print the middle 88 dots of their 96-dot head, the E12 all 96. Null
+	 * E10/T10 series and the E11 print the middle 88 dots of their 96-dot head, the E12 all 96. The
+	 * E11 also feeds the first and last `endMm` of a label blank (the ends of the other axis). Null
 	 * when all of it prints.
 	 */
-	unprintable(label: LabelSpec): { acrossX: boolean; mm: number } | null {
+	unprintable(label: LabelSpec): { acrossX: boolean; mm: number; endMm?: number } | null {
 		const family = this.family;
 		const headDots =
 			family === 't15'
@@ -215,8 +216,9 @@ class PrinterStore {
 		const dpmm = this.model?.dpmm ?? 8;
 		const acrossX = label.paperDirection !== 0;
 		const acrossMm = acrossX ? label.lengthMm : label.widthMm;
-		const mm = (acrossMm * dpmm - headDots) / dpmm / 2;
-		return mm > 0 ? { acrossX, mm } : null;
+		const mm = Math.max(0, (acrossMm * dpmm - headDots) / dpmm / 2);
+		const endMm = family === 'e11' ? E11_END_MARGIN_MM : 0;
+		return mm > 0 || endMm > 0 ? { acrossX, mm, ...(endMm ? { endMm } : {}) } : null;
 	}
 
 	setError(message: string | null, detail: string | null = null) {

@@ -156,7 +156,7 @@ export class FrameChannel {
 	}
 
 	/** Wait for the first frame accepted by `match` (others are dropped); null on timeout. */
-	private async next(match: (f: Uint8Array) => boolean, timeoutMs: number): Promise<Uint8Array | null> {
+	private async next(match: (f: Uint8Array) => boolean, timeoutMs: number, signal?: AbortSignal): Promise<Uint8Array | null> {
 		const deadline = Date.now() + timeoutMs;
 		for (;;) {
 			while (this.frames.length) {
@@ -165,15 +165,26 @@ export class FrameChannel {
 			}
 			const left = deadline - Date.now();
 			if (left <= 0) return null;
-			await new Promise<void>((resolve) => {
-				const t = setTimeout(resolve, left);
-				this.wake = () => {
-					clearTimeout(t);
-					resolve();
-				};
-			});
-			this.wake = null;
+			await this.idle(left, signal);
 		}
+	}
+
+	/** Wait up to `ms` for more input; throws if `signal` aborts meanwhile. */
+	private async idle(ms: number, signal?: AbortSignal) {
+		const cancelled = () => new PrinterError('Cancelled', 'cancelled');
+		if (signal?.aborted) throw cancelled();
+		await new Promise<void>((resolve) => {
+			const done = () => {
+				clearTimeout(t);
+				signal?.removeEventListener('abort', done);
+				resolve();
+			};
+			const t = setTimeout(done, ms);
+			this.wake = done;
+			signal?.addEventListener('abort', done, { once: true });
+		});
+		this.wake = null;
+		if (signal?.aborted) throw cancelled();
 	}
 
 	private serialize<T>(run: () => Promise<T>): Promise<T> {
@@ -232,25 +243,18 @@ export class FrameChannel {
 				await sleep(10);
 			}
 			if (this.strictAcks) {
-				if (!(await this.input(before, this.ackTimeoutMs))) throw new PrinterError('Printer did not acknowledge the print data', 'timeout');
-			} else if (this.acksDataFrames) await this.next(() => true, this.ackTimeoutMs);
+				if (!(await this.input(before, this.ackTimeoutMs, signal))) throw new PrinterError('Printer did not acknowledge the print data', 'timeout');
+			} else if (this.acksDataFrames) await this.next(() => true, this.ackTimeoutMs, signal);
 		}
 	}
 
 	/** Wait until more than `since` bytes have been received in total; false on timeout. */
-	private async input(since: number, timeoutMs: number): Promise<boolean> {
+	private async input(since: number, timeoutMs: number, signal?: AbortSignal): Promise<boolean> {
 		const deadline = Date.now() + timeoutMs;
 		while (this.received <= since) {
 			const left = deadline - Date.now();
 			if (left <= 0) return false;
-			await new Promise<void>((resolve) => {
-				const t = setTimeout(resolve, left);
-				this.wake = () => {
-					clearTimeout(t);
-					resolve();
-				};
-			});
-			this.wake = null;
+			await this.idle(left, signal);
 		}
 		return true;
 	}

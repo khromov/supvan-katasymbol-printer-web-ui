@@ -8,8 +8,8 @@
  *   - one CHECK_DEVICE / START_PRINT for the whole job; every label opens with PageSt and closes
  *     with PageEnd, and only the job's last buffer has PrtEnd;
  *   - the design is the middle 88 dots of the 96-dot head, at 1:1, not turned or mirrored;
- *   - the first and last 2 mm of a label (3 mm above 50 mm) aren't sent: the margins in each buffer
- *     header tell the printer to feed them blank;
+ *   - the first and last 2 mm of a label aren't sent: the margins in each buffer header tell the
+ *     printer to feed them blank;
  *   - every 4000-byte buffer (up to 332 columns of 12 bytes) is its own LZMA stream, announced by
  *     0x5C(512, frames) and committed by BUF_FULL(0); the printer answers every data frame;
  *   - density only goes in the buffers' page register (no head-rate command, no speed), and the
@@ -39,10 +39,16 @@ export const E11_PRINT_DOTS = 88;
 /** BaseDevice concentration 1..7, default 4 (SUPRINT's print settings; written raw into each buffer). */
 export const E11_DENSITY = { min: 1, max: 7, default: 4 };
 /**
- * BaseDevice print position -9..9, sent to the printer doubled rather than applied to the dots.
- * Two dots a step assumes the firmware counts dots (unverified; the apps show bare numbers).
+ * What a print position step is multiplied by for 0x38 / 0x39. SUPRINT's editor and Katasymbol's
+ * older editors double it, Katasymbol's main (Kata) editor sends it as is; the apps read it back
+ * halved (0x24 / 0x26). Unverified on a printer.
  */
-export const E11_OFFSET = { max: 9, dots: 2 };
+const OFFSET_SCALE = 2;
+/**
+ * BaseDevice print position -9..9, sent to the printer rather than applied to the dots. The dots
+ * per step assume the firmware counts dots (the apps show bare numbers).
+ */
+export const E11_OFFSET = { max: 9, dots: OFFSET_SCALE };
 const BUF_LENGTH = 4000;
 const MAX_COLUMNS = 332;
 const BYTES_PER_COLUMN = E11_HEAD_DOTS / 8;
@@ -53,10 +59,11 @@ const BYTES_PER_COLUMN = E11_HEAD_DOTS / 8;
 const FIRST_CUT = 3;
 
 /**
- * Blank millimetres at each end of a label that aren't sent: the apps' paint area is the label
- * length less getPaintViewMarginBetweenValue (4 mm, or 6 mm above 50 mm), split over both ends.
+ * Blank millimetres at each end of a label that aren't sent: the editors' paint area is the label
+ * length less DensityUtil.getPaintViewMarginBetweenValue, which is 4 mm at any length for the
+ * E10/T10/E11 series, centred. The same 2 mm is the margin G15Print gets for continuous tape.
  */
-export const e11EndMarginMm = (lengthMm: number) => (lengthMm > 50 ? 3 : 2);
+export const E11_END_MARGIN_MM = 2;
 
 /**
  * Place a page on the 96-dot head like G15Print.initImageData: the middle 88 rows of the design,
@@ -82,7 +89,7 @@ export function e11Raster(page: Bitmap, endDots: number): Grid {
 export function e11Margins(lengthMm: number, cols: number, continuous: boolean, dpmm = 8): [number, number] {
 	const f = Math.fround(dpmm);
 	if (continuous) {
-		const m = Math.trunc(Math.fround(e11EndMarginMm(lengthMm) * f));
+		const m = Math.trunc(Math.fround(E11_END_MARGIN_MM * f));
 		return [m, m];
 	}
 	const span = Math.fround(Math.fround(lengthMm * f) - cols);
@@ -179,8 +186,9 @@ function printError(s: PrinterStatus, sending: boolean): string | null {
 
 /**
  * INQUIRY_STA reply: status bytes at [14..19] (pages printed at [18..19]), battery millivolts at
- * [24..25]. Both apps also refuse to start on a tape the printer doesn't recognise (bit 0x08 of
- * byte 14, PrinterStateInfo.IsReal), though the job itself doesn't check it.
+ * [24..25]. A tape the printer doesn't recognise (bit 0x08 of byte 14, PrinterStateInfo.IsReal) is
+ * only a warning: the apps ask before printing on it ("Continue printing"), and the job itself
+ * doesn't check it.
  */
 export function parseE11Status(f: Uint8Array): PrinterStatus {
 	const b = f.subarray(14, 20);
@@ -197,7 +205,7 @@ export function parseE11Status(f: Uint8Array): PrinterStatus {
 	};
 	const err = printError(s, false);
 	if (err) s.errors.push(err);
-	if (b[0] & 0x08) s.errors.push('Label not recognized');
+	if (b[0] & 0x08) s.warnings.push('Label not recognized');
 	if (f.length >= 26) {
 		// Like the app, round to hundredths of a volt before comparing.
 		const volts = Math.round((f[24] | (f[25] << 8)) / 10) / 100;
@@ -325,23 +333,21 @@ export class E11BtDriver implements PrinterDriver {
 		const clamp = (v = 0) => Math.max(-E11_OFFSET.max, Math.min(E11_OFFSET.max, Math.round(v)));
 
 		report('preparing', 0);
-		const endDots = e11EndMarginMm(label.lengthMm) * this.dpmm;
+		const endDots = E11_END_MARGIN_MM * this.dpmm;
 		const rasters = pages.map((p) => e11Raster(p, endDots));
 		const continuous = label.paperType === 0;
 
-		// 1. Like the editors: read the tape, BLT control (0x37), refuse an unrecognised tape, then the
-		//    print position. SUPRINT and most Katasymbol editors send it doubled; none check the replies.
+		// 1. Like the editors: read the tape, BLT control (0x37), then the print position; none of
+		//    them check the replies.
 		report('checking', 0);
 		await this.readMedia().catch(() => null);
 		await this.cmd(E11_CMD.BLT_CONTROL).catch(() => {});
-		let s = await this.getStatus();
-		if (s.raw[14] & 0x08) throw new PrinterError('Label not recognized', 'device');
-		await this.cmd(E11_CMD.SET_H_SHIFT, clamp(opts.offsetX) * 2).catch(() => {});
-		await this.cmd(E11_CMD.SET_V_SHIFT, clamp(opts.offsetY) * 2).catch(() => {});
+		await this.cmd(E11_CMD.SET_H_SHIFT, clamp(opts.offsetX) * OFFSET_SCALE).catch(() => {});
+		await this.cmd(E11_CMD.SET_V_SHIFT, clamp(opts.offsetY) * OFFSET_SCALE).catch(() => {});
 
 		// 2. G15Print.doPrint: not while printing; CHECK_DEVICE, then up to 6 s for the printer to be
 		//    idle (stopping a job it is still running), the error checks and the dot pitch.
-		s = await this.getStatus();
+		let s = await this.getStatus();
 		if (s.printing) throw new PrinterError('The printer is busy', 'busy');
 		await this.cmd(E11_CMD.CHECK_DEVICE);
 		for (let i = 0; i < 60; i++) {

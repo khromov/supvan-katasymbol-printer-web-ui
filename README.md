@@ -115,13 +115,14 @@ like the E12). Same `7E 5A` frames as the T50/T80, with a job much like the E10'
   printer answers every data frame;
 - the design prints 1:1 in the middle 88 dots of the 96-dot head, not turned or mirrored (as on the
   E10), so on 12 mm tape the top and bottom 0.5 mm can't be printed; the editor shades them;
-- the first and last 2 mm of a label (3 mm above 50 mm) aren't sent: the buffer header's margins
-  have the printer feed them blank, as the app's editor doesn't draw there either;
+- the first and last 2 mm of a label, at any length, aren't sent: the buffer header's margins have
+  the printer feed them blank, as the apps' editors don't draw there either; the editor shades them
+  too, and quick labels keep clear of them;
 - density 1–7 goes in each buffer's page register (no head-rate command, no speed); the print
-  position goes to the printer (commands `0x38` / `0x39`, doubled like SUPRINT does) instead of
-  moving the dots;
+  position goes to the printer (commands `0x38` / `0x39`) instead of moving the dots, doubled like
+  SUPRINT and Katasymbol's older editors do (Katasymbol's main editor sends it as is);
 - the printer's dot pitch (`0x22`) adjusts the margins, as in the app; a tape the printer doesn't
-  recognise stops the job before it starts, as in both apps;
+  recognise is only a warning, as the apps ask and then print as usual;
 - tapes are the E10's: Supvan's server lists the same 58 for the E11, so the tape list and
   auto-detection are shared with the `t15` family.
 
@@ -129,12 +130,12 @@ like the E12). Same `7E 5A` frames as the T50/T80, with a job much like the E10'
 with copies, several pages, continuous tape, long labels, offsets, a non-default dot pitch and
 printer errors, plus tape and status readings. It decodes every buffer and checks every dot. The
 same scenarios also ran through SUPRINT's own `G15Print` (`scripts/suprint-oracle/run.sh`, which
-now runs the E11 scenarios after the E10 ones), called the way its editor calls it: given the
-app's LZMA streams, the driver writes exactly the app's bytes, and with its own encoder the printer
-decodes exactly the app's buffers. **Not yet tested on an E11.** To check first: which end of a
-label prints first and whether text reads upright (our E12 driver, ported from supvan-e12, turns
-the design 180°, while the apps send both the same way), the GATT service, and the print-position
-units.
+now runs the E11 scenarios after the E10 ones), called the way its editor calls it, with the blank
+ends taken from the app's own `DensityUtil`: given the app's LZMA streams, the driver writes exactly
+the app's bytes, and with its own encoder the printer decodes exactly the app's buffers. **Not yet
+tested on an E11.** To check first: which end of a label prints first and whether text reads
+upright (our E12 driver, ported from supvan-e12, turns the design 180°, while the apps send both
+the same way), the GATT service, and which way and how far the print position moves the print.
 
 ## Bluetooth LE (E12)
 

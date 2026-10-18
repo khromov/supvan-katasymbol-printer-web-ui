@@ -1,114 +1,114 @@
 {
 	"basic": {
-		"writes": 21,
-		"sha256": "14aaf682a04be363dcf7e26904a1e84269eda407d313995a4b10a341725f8686",
+		"writes": 20,
+		"sha256": "bcf80e0f2626964c9ca2198373ea0008f16c84b9ca074ba9a4a00daae0baed7c",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"long-copies": {
-		"writes": 57,
-		"sha256": "5502d19ebdff7361d28d6bc189ab994f5000148fab1ee3cd894f69c71d6a143d",
+		"writes": 56,
+		"sha256": "8ecf3011bec99663382ea05c2c616314dcb4603f3072782e56cf6b20de7274d3",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"two-pages-copies": {
-		"writes": 77,
-		"sha256": "6a6ebc8af5cbd344157d2d31846813605e8af9475423ff3b49588f3ea666d61c",
+		"writes": 76,
+		"sha256": "f0fcf6caf28bed59de59640190adb0313d0e8df88ba73909656edede2bddca4f",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"noise-multi-frame": {
-		"writes": 84,
-		"sha256": "3bb1eec9eb876db276f637b779c23341edcb49537276539db028743087c6cb5c",
+		"writes": 83,
+		"sha256": "3db5633ae31d0a6e362f1e5b37d23c7069eb0b2be27d81b9bc8584884b86d045",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"continuous": {
-		"writes": 28,
-		"sha256": "ed7bcf88aad77666238099c111a25129086b0af3070a36d72ab1da3af04676a5",
+		"writes": 27,
+		"sha256": "b365f6ba9808f7829817527c6b57a4dae5b58bb8b76154fdf38216c55b321f43",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"continuous-over-50": {
-		"writes": 28,
-		"sha256": "f140f3163faf63df193b8d63d32e0ea5c2e67d28cfc1afe67f37a26c8a861483",
+		"writes": 27,
+		"sha256": "b56cbabee2f5e76de22d887201db4d524038e96c0dd704a0fc1cd7597e7da466",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"two-full-buffers": {
-		"writes": 28,
-		"sha256": "92a22e128ad9952a25f7ca88a18393d268b9267d73c13f02c3ba4a41f726148c",
+		"writes": 27,
+		"sha256": "8cde92a0514e5909171eaf2dbf632f845766a1690b16bcd6a104a6157efe5d0d",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"offsets": {
-		"writes": 21,
-		"sha256": "319e837a7db6e55c5c1c0ad61568e04445870e70a994945eed8acdb50cd19c27",
+		"writes": 20,
+		"sha256": "0f5057f822876e0e65023a6aac38369036217d628825b1992e252d7c491fb052",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"dpi-7.9": {
-		"writes": 21,
-		"sha256": "ff405c78862d8ee25e66ed2a54ca9dce8814d6507534ae701bf09705fd864006",
+		"writes": 20,
+		"sha256": "d980824db4bc4cb6834022277cf1e2f08b557879c2cf43310046f028199fccfb",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"dpi-7.9-continuous": {
-		"writes": 21,
-		"sha256": "12559765d835def3b002e80a3547c13cd3f49079aee503c2a6c55eaafb805522",
+		"writes": 20,
+		"sha256": "cba09f6e8de0b14ec52dd66a3f40ccdcf63519cc7d3c25ef1f8b6244e5b0abed",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"blank": {
-		"writes": 21,
-		"sha256": "3fc0a06f79140893f5fcb7cdde1c3a11e56b2dcfd199a8042bbe10fd505ff51e",
+		"writes": 20,
+		"sha256": "10e6061f1bbd95e16ad8a60325addd13e8eb8073f59230d16ffbab4d3ff7132f",
 		"expect": {
 			"result": "RESULT true 0"
 		}
 	},
 	"cover-open": {
-		"writes": 9,
-		"sha256": "0d3fe6c2d515ec72cfa6f8ec1262e4debccd4a9e431023f3c037254327833403",
+		"writes": 8,
+		"sha256": "81cd052a20bc653490641b272d2053d9ca16f3d3ad5ee32febe68b1eaab433ca",
 		"expect": {
 			"error": "Cover is open"
 		}
 	},
 	"no-tape": {
-		"writes": 9,
-		"sha256": "0d3fe6c2d515ec72cfa6f8ec1262e4debccd4a9e431023f3c037254327833403",
+		"writes": 8,
+		"sha256": "81cd052a20bc653490641b272d2053d9ca16f3d3ad5ee32febe68b1eaab433ca",
 		"expect": {
 			"error": "No label tape installed"
 		}
 	},
 	"low-battery": {
-		"writes": 9,
-		"sha256": "0d3fe6c2d515ec72cfa6f8ec1262e4debccd4a9e431023f3c037254327833403",
+		"writes": 8,
+		"sha256": "81cd052a20bc653490641b272d2053d9ca16f3d3ad5ee32febe68b1eaab433ca",
 		"expect": {
 			"error": "Low battery, please charge"
 		}
 	},
 	"used-up": {
-		"writes": 9,
-		"sha256": "0d3fe6c2d515ec72cfa6f8ec1262e4debccd4a9e431023f3c037254327833403",
+		"writes": 8,
+		"sha256": "81cd052a20bc653490641b272d2053d9ca16f3d3ad5ee32febe68b1eaab433ca",
 		"expect": {
 			"error": "Labels used up"
 		}
 	},
 	"unrecognized": {
-		"writes": 4,
-		"sha256": "b874473b79d4d8bdf2fedf89d5e6473aa5092e78247b55ba00628a04b35ac7ff",
+		"writes": 20,
+		"sha256": "8398bcea0b0f625e0f215f9d7160427cb1610d4c4753a2bd1683b40559f9d91a",
 		"expect": {
-			"error": "Label not recognized"
+			"result": "RESULT true 0"
 		}
 	},
 	"media-die-cut": {
@@ -233,10 +233,10 @@
 		"writes": 1,
 		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
 		"expect": {
-			"errors": [
+			"errors": [],
+			"warnings": [
 				"Label not recognized"
 			],
-			"warnings": [],
 			"charging": false,
 			"batteryLevel": 4
 		}
@@ -249,6 +249,20 @@
 			"warnings": [],
 			"charging": false,
 			"batteryLevel": 4
+		}
+	},
+	"ends-over-50": {
+		"writes": 27,
+		"sha256": "01118a46177371bf53b9b166b401f9df0c5489672d076fb211a85ee7c7ea5295",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"ends-continuous-109": {
+		"writes": 34,
+		"sha256": "ee7cd7b67d6fdb00d35934635c346a1d47c2495cb0761324a9a003e5f9099f58",
+		"expect": {
+			"result": "RESULT true 0"
 		}
 	}
 }

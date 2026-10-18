@@ -8,6 +8,7 @@ import com.fhit.app_iprinter.communication.print.T15Print;
 import com.fhit.app_iprinter.dal.models.PrintPageData;
 import com.fhit.app_iprinter.dal.models.PrinterStateInfo;
 import com.fhit.app_iprinter.globalsingleton.PrintManager;
+import com.fhit.app_iprinter.utils.size.DensityUtil;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.nio.file.*;
@@ -94,9 +95,10 @@ public class Main {
     /**
      * The E11 (printer type 3601, printing process 4): G15Print over BLE, called like SUPRINT's
      * EditTemplateActivity does. Before the job the editor reads the tape (getMaterial), sends BLT
-     * control (0x37), checks the tape is recognised (from the status probe, getE11State) and sends the
-     * print position doubled (0x38 / 0x39); its paint area is the label less 2 mm at each end (3 mm
-     * above 50 mm), 88 rows tall.
+     * control (0x37) and the print position doubled (0x38 / 0x39). A tape the printer doesn't
+     * recognise only brings up a dialog whose "Continue printing" prints the same way. The pages
+     * come at the label's full length, 88 rows tall; the editor's paint area is narrower by the app's
+     * own DensityUtil margin, centred, and that margin halved goes to doPrint.
      */
     static void runE11(Map<String, String> kv, List<Bitmap> pages, Emu emu, String mode, StringBuilder out) throws Exception {
         PrintManager.device.setPrinterType(3601);
@@ -105,20 +107,25 @@ public class Main {
         g.bleUtils = new BLEUtils(emu);
         g.setPrintChannel(g.BLE_BLUETOOTH);
         if (mode.equals("print")) {
+            int paperType = Integer.parseInt(kv.getOrDefault("paperType", "1"));
+            int length = Integer.parseInt(kv.get("length"));
+            // EditTemplateActivity.setPaintWidth / sfPrint: margin r4 in dots off the paint view, r38 / 2 to doPrint.
+            int margin = (int) DensityUtil.getPaintViewMarginBetweenValue(length, 0f, paperType, 1, 0);
+            int cut = (int) DensityUtil.mmTpx(margin);
+            List<Bitmap> paint = new ArrayList<>();
+            for (Bitmap p : pages) {
+                int w = p.getWidth() - cut, h = p.getHeight();
+                Bitmap b = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+                for (int y = 0; y < h; y++) for (int x = 0; x < w; x++) b.setPixel(x, y, p.getPixel(x + cut / 2, y));
+                paint.add(b);
+            }
+            out.append("PAINT margin=").append(margin).append(" dots=").append(cut).append('\n');
             g.getMaterial();
             g.setBltControl();
-            PrinterStateInfo info = new PrinterStateInfo();
-            g.getE11State(info);
-            if (!info.IsReal) {
-                out.append("RESULT unrecognized\n");
-                return;
-            }
-            int paperType = Integer.parseInt(kv.getOrDefault("paperType", "1"));
             g.writeLeftRight(Integer.parseInt(kv.getOrDefault("shiftH", "0")) * 2, paperType);
             g.writeTopBottom(Integer.parseInt(kv.getOrDefault("shiftV", "0")) * 2);
             PrintPageData pd = new PrintPageData();
-            pd.getPrintBitmap().addAll(pages);
-            int length = Integer.parseInt(kv.get("length"));
+            pd.getPrintBitmap().addAll(paint);
             pd.setCopy(Integer.parseInt(kv.getOrDefault("copies", "1")));
             pd.setRepeat(1);
             pd.setOneByOne(true);
@@ -129,7 +136,7 @@ public class Main {
             // Cut type 1 (the default halfCutting) becomes Cut 0; first cut is the setting (0) minus 1.
             boolean ok = g.doPrint(false, Float.parseFloat(kv.getOrDefault("height", "12")), length, 0, 0, 0, 1, 3601,
                 Integer.parseInt(kv.getOrDefault("density", "4")), 1, 420f, 0, 0, false, -1, false, 204, 0, paperType,
-                length > 50 ? 3 : 2, 1, list);
+                margin / 2, 1, list);
             out.append("RESULT ").append(ok).append(' ').append(g.printError).append('\n');
         } else if (mode.equals("media")) {
             com.fhit.app_iprinter.dal.models.Unverified u = g.getMaterial();

@@ -272,6 +272,16 @@
 						<rect x="0" y="0" width={W} height={deadZones.mm} fill="url(#hatch)" />
 						<rect x="0" y={H - deadZones.mm} width={W} height={deadZones.mm} fill="url(#hatch)" />
 					{/if}
+					{#if deadZones.endMm}
+						<!-- Label ends the printer feeds blank, along the tape. -->
+						{#if deadZones.acrossX}
+							<rect x="0" y="0" width={W} height={deadZones.endMm} fill="url(#hatch)" />
+							<rect x="0" y={H - deadZones.endMm} width={W} height={deadZones.endMm} fill="url(#hatch)" />
+						{:else}
+							<rect x="0" y="0" width={deadZones.endMm} height={H} fill="url(#hatch)" />
+							<rect x={W - deadZones.endMm} y="0" width={deadZones.endMm} height={H} fill="url(#hatch)" />
+						{/if}
+					{/if}
 				{/if}
 				{#each guides.v as gx (gx)}<line x1={gx} x2={gx} y1="0" y2={H} class="snap" vector-effect="non-scaling-stroke" />{/each}
 				{#each guides.h as gy (gy)}<line y1={gy} y2={gy} x1="0" x2={W} class="snap" vector-effect="non-scaling-stroke" />{/each}

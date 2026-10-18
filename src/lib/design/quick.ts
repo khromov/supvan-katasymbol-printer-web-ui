@@ -27,7 +27,7 @@ export const GRID_SIZES = [1, 2, 3, 4, 5, 6];
 
 type Area = { x: number; y: number; w: number; h: number };
 /** Strips the print head can't reach, as PrinterStore.unprintable reports them. */
-export type Unprintable = { acrossX: boolean; mm: number } | null;
+export type Unprintable = { acrossX: boolean; mm: number; endMm?: number } | null;
 /** Space kept clear beyond an unprintable strip: the tape can sit a fraction off centre. */
 const UNPRINTABLE_MARGIN = 0.5;
 /** Frame line thickness, corner radius, and the space between the frame and the content, in mm. */
@@ -50,13 +50,17 @@ export function gridLines(q: QuickLabel): string[] {
 	return lines;
 }
 
-/** The label's padding, widened to keep clear of the strips the print head can't reach. */
+/**
+ * The label's padding, widened to keep clear of the strips the print head can't reach, and of the
+ * label ends the printer feeds blank (counted from the label's start, so no extra margin).
+ */
 function printablePadding(p: LabelSpec['padding'], unprintable: Unprintable): LabelSpec['padding'] {
 	if (!unprintable) return p;
-	const m = unprintable.mm + UNPRINTABLE_MARGIN;
+	const m = unprintable.mm > 0 ? unprintable.mm + UNPRINTABLE_MARGIN : 0;
+	const e = unprintable.endMm ?? 0;
 	return unprintable.acrossX
-		? { ...p, left: Math.max(p.left, m), right: Math.max(p.right, m) }
-		: { ...p, top: Math.max(p.top, m), bottom: Math.max(p.bottom, m) };
+		? { left: Math.max(p.left, m), right: Math.max(p.right, m), top: Math.max(p.top, e), bottom: Math.max(p.bottom, e) }
+		: { left: Math.max(p.left, e), right: Math.max(p.right, e), top: Math.max(p.top, m), bottom: Math.max(p.bottom, m) };
 }
 
 /** The reading canvas (the label as the user reads it) and its safe area, rotated along with it. */

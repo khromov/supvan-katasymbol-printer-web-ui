@@ -19,7 +19,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { familyFromBluetoothName, modelNameFromBluetoothName, unsupportedBluetoothModel } from '../src/lib/printer/devices.ts';
-import { E11BtDriver, E11_OFFSET, e11EndMarginMm, e11Margins, e11Raster, encodeE11Label } from '../src/lib/printer/families/e11.ts';
+import { E11BtDriver, E11_END_MARGIN_MM, E11_OFFSET, e11Margins, e11Raster, encodeE11Label } from '../src/lib/printer/families/e11.ts';
 import { t15Compress } from '../src/lib/printer/families/t15.ts';
 import type { Bitmap, LabelSpec, PrinterStatus } from '../src/lib/printer/types.ts';
 import { T15Emulator } from './t15-emulator.ts';
@@ -43,6 +43,8 @@ interface PrintScenario {
 	noAcks?: boolean;
 	status?: number[];
 	stopAfterBuffers?: number;
+	/** Cancel the job this long after it starts (with the driver's real 40 s acknowledgement wait). */
+	cancelAfterMs?: number;
 	/** The job must fail with this message. */
 	expectError?: string;
 	/** Leave out of the oracle (behaviour that deliberately differs from the app's, or faults). */
@@ -81,6 +83,12 @@ function page(lengthMm: number, ink: (x: number, y: number) => boolean): Bitmap 
 	return { width, height, data };
 }
 /** A frame with diagonals from column `from`, reaching into the blank ends and past the 88-dot band. */
+/** Ink only in the 2..3 mm next to each end of the label (inside the part that prints), and a dot in the middle. */
+const nearEnds = (lengthMm: number) =>
+	page(lengthMm, (x, y) => {
+		const w = lengthMm * 8;
+		return y >= 8 && y < 88 && ((x >= 16 && x < 24) || (x >= w - 24 && x < w - 16) || (x === w >> 1 && y === 48));
+	});
 const framed = (lengthMm: number, from: number) =>
 	page(lengthMm, (x, y) => {
 		const w = lengthMm * 8;
@@ -116,7 +124,10 @@ const SCENARIOS: Scenario[] = [
 	{ kind: 'print', name: 'noise-multi-frame', device: E, lengthMm: 60, pages: [noise(60, 0, 42)], density: 5 },
 	{ kind: 'print', name: 'continuous', device: E, lengthMm: 50, pages: [framed(50, 4)], density: 3, continuous: true },
 	{ kind: 'print', name: 'continuous-over-50', device: E, lengthMm: 51, pages: [framed(51, 4)], density: 3, continuous: true },
-	{ kind: 'print', name: 'two-full-buffers', device: E, lengthMm: 89, pages: [framed(89, 0)], density: 2 },
+	// Labels over 50 mm keep the 2 mm ends too: the ink 2..3 mm from each end must print.
+	{ kind: 'print', name: 'ends-over-50', device: E, lengthMm: 60, pages: [nearEnds(60)], density: 4 },
+	{ kind: 'print', name: 'ends-continuous-109', device: E, lengthMm: 109, pages: [nearEnds(109)], density: 4, continuous: true },
+	{ kind: 'print', name: 'two-full-buffers', device: E, lengthMm: 87, pages: [framed(87, 0)], density: 2 },
 	{ kind: 'print', name: 'offsets', device: E, lengthMm: 30, pages: [framed(30, 8)], density: 4, offsetX: 5, offsetY: -4 },
 	{ kind: 'print', name: 'dpi-7.9', device: E, lengthMm: 40, pages: [framed(40, 0)], density: 6, dpi: 790 },
 	{ kind: 'print', name: 'dpi-7.9-continuous', device: E, lengthMm: 40, pages: [framed(40, 0)], density: 6, dpi: 790, continuous: true },
@@ -125,7 +136,8 @@ const SCENARIOS: Scenario[] = [
 	{ kind: 'print', name: 'no-tape', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 4, status: [0, 0, 0, 0x01], expectError: 'No label tape installed', check: sent({ 13: 0 }) },
 	{ kind: 'print', name: 'low-battery', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 4, status: [0x40, 0, 0, 0], expectError: 'Low battery, please charge', check: sent({ 13: 0 }) },
 	{ kind: 'print', name: 'used-up', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 4, status: [0x04, 0, 0, 0], expectError: 'Labels used up', check: sent({ 13: 0 }) },
-	{ kind: 'print', name: 'unrecognized', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 4, status: [0x08, 0, 0, 0], expectError: 'Label not recognized', check: sent({ 12: 0, 38: 0 }) },
+	// The apps ask before printing on a tape the printer doesn't recognise, then print as usual.
+	{ kind: 'print', name: 'unrecognized', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 4, status: [0x08, 0, 0, 0] },
 	{ kind: 'media', name: 'media-die-cut', device: E, material: material({ sn: 25004, type: 1, height: 12, width: 40, gap: 3 }) },
 	{ kind: 'media', name: 'media-continuous', device: E, material: material({ sn: 25001, type: 0, height: 16, width: 50, gap: 9 }) },
 	{ kind: 'media', name: 'media-custom-no-chip', device: E, material: material({ sn: 21930, type: 129, height: 12, width: 30, gap: 2, code: [0, 0, 0, 0, 0, 0, 0, 0] }) },
@@ -143,6 +155,8 @@ const SCENARIOS: Scenario[] = [
 	{ kind: 'print', name: 'pacing', device: E, lengthMm: 60, pages: [noise(60, 0, 42)], density: 4, oracle: false, check: blePacing },
 	{ kind: 'print', name: 'no-acks', device: E, lengthMm: 40, pages: [framed(40, 0)], density: 4, noAcks: true, expectError: 'Printer did not acknowledge the print data', check: stopped },
 	{ kind: 'print', name: 'stopped-mid-job', device: E, lengthMm: 40, pages: [framed(40, 0)], copies: 3, density: 4, stopAfterBuffers: 1, expectError: 'Printing was stopped on the device' },
+	// Cancel while a data frame waits for its (missing) reply: no 40 s wait, and the job is stopped.
+	{ kind: 'print', name: 'cancel-during-ack', device: E, lengthMm: 40, pages: [framed(40, 0)], density: 4, noAcks: true, cancelAfterMs: 1500, expectError: 'Cancelled', check: stopped },
 	// The print settings only offer -9..9, so the driver clamps.
 	{ kind: 'print', name: 'offset-clamp', device: E, lengthMm: 30, pages: [framed(30, 2)], density: 4, offsetX: 20, offsetY: -30, oracle: false, check: sentAll({ 38: 18, 39: 0x10000 - 18 }) },
 	// The app keeps the previous tape (or 25001) for a tape without a chip; the driver reports none.
@@ -151,7 +165,7 @@ const SCENARIOS: Scenario[] = [
 	{ kind: 'state', name: 'state-a-name', device: 'T0138A2507010001', extra: [0, 0, 0, 0], batteryMv: 3850, oracle: false, expect: { errors: [], warnings: [], charging: false, batteryLevel: 2 } }
 ];
 
-const inOracle = (s: Scenario) => s.oracle !== false && (s.kind !== 'print' || (!s.noAcks && !s.stopAfterBuffers));
+const inOracle = (s: Scenario) => s.oracle !== false && (s.kind !== 'print' || (!s.noAcks && !s.stopAfterBuffers && !s.cancelAfterMs));
 
 /** BLE: commands are single 16-byte writes, data frames four 128-byte ones. */
 function blePacing(o: Outcome) {
@@ -223,19 +237,25 @@ class StoppingEmulator extends T15Emulator {
 
 async function run(s: Scenario, compress?: (buf: Uint8Array) => Uint8Array): Promise<Outcome> {
 	const emu = s.kind === 'print' && s.stopAfterBuffers ? new StoppingEmulator(s.device, s.stopAfterBuffers) : new T15Emulator(s.device);
-	const driver = new E11BtDriver(emu, s.device, { ackTimeoutMs: 300 });
+	const driver = new E11BtDriver(emu, s.device, s.kind === 'print' && s.cancelAfterMs ? {} : { ackTimeoutMs: 300 });
 	if (compress) driver.compress = compress;
 	const out: Outcome = { writes: emu.writes, events: emu.events, buffers: emu.buffers };
 	if (s.kind === 'print') {
 		emu.ackData = !s.noAcks;
 		emu.dpi = s.dpi ?? 0;
 		if (s.status) emu.extra = s.status;
+		const abort = new AbortController();
+		const t0 = Date.now();
+		const timer = s.cancelAfterMs ? setTimeout(() => abort.abort(), s.cancelAfterMs) : undefined;
 		try {
-			await driver.print(s.pages, label(s), { density: s.density, copies: s.copies ?? 1, offsetX: s.offsetX, offsetY: s.offsetY });
+			await driver.print(s.pages, label(s), { density: s.density, copies: s.copies ?? 1, offsetX: s.offsetX, offsetY: s.offsetY, signal: abort.signal });
 		} catch (e) {
 			if (!s.expectError) throw e;
 			out.error = (e as Error).message;
+		} finally {
+			clearTimeout(timer);
 		}
+		if (s.cancelAfterMs && Date.now() - t0 > s.cancelAfterMs + 2000) throw new Error(`cancelling took ${Date.now() - t0 - s.cancelAfterMs} ms`);
 		if (s.expectError && out.error !== s.expectError) throw new Error(`expected "${s.expectError}", got ${out.error ? `"${out.error}"` : 'no error'}`);
 		if (emu.printing) throw new Error('printer still printing after the job');
 		s.check?.(out);
@@ -254,7 +274,7 @@ async function run(s: Scenario, compress?: (buf: Uint8Array) => Uint8Array): Pro
 
 /** Rebuild what each label prints from the decoded buffers and compare it with the intended dots. */
 function checkPrinted(s: PrintScenario, o: Outcome) {
-	const endDots = e11EndMarginMm(s.lengthMm) * 8;
+	const endDots = E11_END_MARGIN_MM * 8;
 	const labels = Array.from({ length: s.copies ?? 1 }, () => s.pages).flat();
 	const dpmm = s.dpi && s.dpi >= 700 && s.dpi <= 800 ? s.dpi / 100 : 8;
 	const rasters = labels.map((p) => e11Raster(p, endDots));
@@ -298,13 +318,11 @@ function scenarioFile(s: Scenario): string {
 		lines.push(`length ${s.lengthMm}`, 'height 12', `copies ${s.copies ?? 1}`, `density ${s.density}`, `paperType ${s.continuous ? 3 : 1}`);
 		lines.push(`shiftH ${s.offsetX ?? 0}`, `shiftV ${s.offsetY ?? 0}`, `dpi ${s.dpi ?? 0}`);
 		if (s.status) lines.push(`extra ${s.status.join(',')}`);
-		// The app's paint area: the label less its blank ends, 88 rows tall.
-		const endDots = e11EndMarginMm(s.lengthMm) * 8;
+		// The whole label, 88 rows tall; the harness cuts the app's own paint margin off its ends.
 		for (const p of s.pages) {
-			const w = p.width - 2 * endDots;
 			let bits = '';
-			for (let y = 4; y < 92; y++) for (let x = 0; x < w; x++) bits += p.data[y * p.width + x + endDots] ? '1' : '0';
-			lines.push(`page ${w} 88 ${bits}`);
+			for (let y = 4; y < 92; y++) for (let x = 0; x < p.width; x++) bits += p.data[y * p.width + x] ? '1' : '0';
+			lines.push(`page ${p.width} 88 ${bits}`);
 		}
 	} else if (s.kind === 'media') {
 		lines.push(`material ${hex(s.material)}`);
@@ -316,6 +334,8 @@ function scenarioFile(s: Scenario): string {
 
 interface Oracle {
 	result: string;
+	/** Dots the app's editor takes off a label's length (DensityUtil), for print scenarios. */
+	paintDots?: number;
 	writes: Uint8Array[];
 	events: string[];
 	buffers: Uint8Array[];
@@ -334,6 +354,7 @@ function readOracle(dir: string, name: string): Oracle {
 		else if (tag === 'L') o.streams.push(Buffer.from(value, 'hex'));
 		else if (tag === 'E') o.events.push(value);
 		else if (tag === 'RESULT' || tag === 'MEDIA' || tag === 'STATE') o.result = `${tag} ${value}`;
+		else if (tag === 'PAINT') o.paintDots = Number(kv(line).dots);
 	}
 	return o;
 }
@@ -353,7 +374,6 @@ const MESSAGES: Record<string, string> = {
 /** What the app's result line says, in this driver's terms. */
 function expectedFromOracle(s: Scenario, result: string): Record<string, unknown> {
 	if (s.kind === 'print') {
-		if (result === 'RESULT unrecognized') return { error: 'Label not recognized' };
 		const [, ok, msg] = result.split(' ');
 		return ok === 'true' ? { result: 'RESULT true 0' } : { error: MESSAGES[msg] ?? `app message ${msg}` };
 	}
@@ -368,8 +388,8 @@ function expectedFromOracle(s: Scenario, result: string): Record<string, unknown
 			uuid: r.uuid
 		};
 	// getE11State names one problem; with one fault per scenario that is the driver's only error.
-	const errors = [...(r.canPrint === 'false' ? [MESSAGES[r.msg]] : []), ...(r.real === 'false' ? ['Label not recognized'] : [])];
-	const warnings = r.canPrint === 'true' && r.tip === 'true' && r.msg === LOW_POWER ? ['Low battery, please charge'] : [];
+	const errors = r.canPrint === 'false' ? [MESSAGES[r.msg]] : [];
+	const warnings = [...(r.canPrint === 'true' && r.tip === 'true' && r.msg === LOW_POWER ? ['Low battery, please charge'] : []), ...(r.real === 'false' ? ['Label not recognized'] : [])];
 	return { errors, warnings, charging: r.charged === 'true', batteryLevel: Number(r.battery) };
 }
 
@@ -428,8 +448,8 @@ const UNITS: [string, () => void][] = [
 	[
 		'margins',
 		() => {
-			const got = [e11Margins(40, 288, false), e11Margins(60, 432, false), e11Margins(40, 288, true), e11Margins(51, 360, true), e11Margins(40, 288, false, 7.9), e11Margins(40, 288, true, 7.9), e11Margins(10, 80, false)];
-			const want = [[16, 16], [24, 24], [16, 16], [24, 24], [14, 14], [15, 15], [4, 4]];
+			const got = [e11Margins(40, 288, false), e11Margins(60, 448, false), e11Margins(40, 288, true), e11Margins(109, 840, true), e11Margins(40, 288, false, 7.9), e11Margins(40, 288, true, 7.9), e11Margins(10, 80, false)];
+			const want = [[16, 16], [16, 16], [16, 16], [16, 16], [14, 14], [15, 15], [4, 4]];
 			if (JSON.stringify(got) !== JSON.stringify(want)) throw new Error(JSON.stringify(got));
 		}
 	],
@@ -478,6 +498,8 @@ for (const s of SCENARIOS) {
 		}
 		if (oracleDir) {
 			const ref = readOracle(oracleDir, s.name);
+			// 0. The blank ends come from the app's editor, not from the driver.
+			if (s.kind === 'print' && ref.paintDots !== 2 * E11_END_MARGIN_MM * 8) throw new Error(`the app's paint area is ${ref.paintDots} dots short of the label, the driver drops ${2 * E11_END_MARGIN_MM * 8}`);
 			// 1. With the app's LZMA streams, every write must be the app's.
 			const strict = await run(s, (buf) => {
 				const i = ref.buffers.findIndex((b) => hex(b) === hex(buf));
