@@ -1,5 +1,5 @@
 package com.fhit.app_iprinter.globalsingleton;
-/** Answers for printer type 15 (T10/E10 series), as the real DeviceManager does. */
+/** Answers for printer types 15 (T10/E10 series) and 3601 (E11), as the real DeviceManager does. */
 public class DeviceManager {
     public static DeviceManager getInstance() { return new DeviceManager(); }
     public boolean t10CompatibleThirdPartyConsumablesPrinter(String s) { return false; }
@@ -10,7 +10,9 @@ public class DeviceManager {
     public boolean is7_15SeriesDevice(int i) { return false; }
     public boolean is80SeriesDevice(int i) { return false; }
     public boolean isBPSeriesDevice(int i) { return false; }
+    public boolean isFullCutMachine(int i) { return false; }
     public boolean isG15MaxDevice(int i) { return false; }
+    public boolean isG15MiniDevice(int i) { return false; }
     public boolean isHP220Device(int i) { return false; }
     public boolean isLPSeriesDevice(int i) { return false; }
     public boolean isMP50MaxDevice(int i) { return false; }

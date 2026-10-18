@@ -73,8 +73,8 @@ one LZMA stream per 332-column buffer, and a paper pull-back so printing starts 
   3.9.16) only has **Bluetooth LE**, and the BLE link follows it: any of five GATT services, writes
   without response where the printer allows them, a reply expected after every data frame, only
   status requests retried, and the iOS app's firmware workaround for frame markers inside a write.
-- The E12 has its own driver (see below). The E11 and E16/T16/A16 use other protocols; they are
-  refused with a message rather than taken for a T50/T80.
+- The E11 and E12 have their own drivers (see below). The E16/T16/A16 use another protocol; they
+  are refused with a message rather than taken for a T50/T80.
 - The loaded tape is read from the printer (its RFID serial is the catalog ID), so auto-detection
   follows the tape.
 - There is no USB data connection (the port only charges).
@@ -99,6 +99,42 @@ iOS app does, read from its disassembly. To redo the comparison with SUPRINT:
 ```sh
 scripts/suprint-oracle/run.sh SUPRINT_1.5.0.xapk   # needs a JDK, dex2jar and python3
 ```
+
+## Bluetooth LE (E11)
+
+The E11 (Bluetooth name `T0138…`, `T0139…`, `T0181…`–`T0184…`, `T0216…`–`T0219…`, `T0224…`–`T0227…`)
+is driven by `src/lib/printer/families/e11.ts`, a port of `G15Print`, which the Katasymbol
+(`com.supvan.katasymbol` 1.4.29) and SUPRINT (`com.supvan.IPrinterEn` 1.5.0) Android apps use for
+the E11 ("printing process" 4, always over Bluetooth LE). The two apps' E11 code is the same. It
+connects over Bluetooth LE only, through any of the services `ble.ts` knows (probably FEE7/FEC1,
+like the E12). Same `7E 5A` frames as the T50/T80, with a job much like the E10's:
+
+- one check → start for the whole job; each label opens and closes its own page, and only the job's
+  last buffer ends the job;
+- 4000-byte buffers of up to 332 columns, one LZMA stream each, committed with `BUF_FULL(0)`; the
+  printer answers every data frame;
+- the design prints 1:1 in the middle 88 dots of the 96-dot head, not turned or mirrored (as on the
+  E10), so on 12 mm tape the top and bottom 0.5 mm can't be printed; the editor shades them;
+- the first and last 2 mm of a label (3 mm above 50 mm) aren't sent: the buffer header's margins
+  have the printer feed them blank, as the app's editor doesn't draw there either;
+- density 1–7 goes in each buffer's page register (no head-rate command, no speed); the print
+  position goes to the printer (commands `0x38` / `0x39`, doubled like SUPRINT does) instead of
+  moving the dots;
+- the printer's dot pitch (`0x22`) adjusts the margins, as in the app; a tape the printer doesn't
+  recognise stops the job before it starts, as in both apps;
+- tapes are the E10's: Supvan's server lists the same 58 for the E11, so the tape list and
+  auto-detection are shared with the `t15` family.
+
+`npm run test:e11` runs the driver against the emulated printer (`scripts/t15-emulator.ts`): jobs
+with copies, several pages, continuous tape, long labels, offsets, a non-default dot pitch and
+printer errors, plus tape and status readings. It decodes every buffer and checks every dot. The
+same scenarios also ran through SUPRINT's own `G15Print` (`scripts/suprint-oracle/run.sh`, which
+now runs the E11 scenarios after the E10 ones), called the way its editor calls it: given the
+app's LZMA streams, the driver writes exactly the app's bytes, and with its own encoder the printer
+decodes exactly the app's buffers. **Not yet tested on an E11.** To check first: which end of a
+label prints first and whether text reads upright (our E12 driver, ported from supvan-e12, turns
+the design 180°, while the apps send both the same way), the GATT service, and the print-position
+units.
 
 ## Bluetooth LE (E12)
 
@@ -143,6 +179,7 @@ series from the SUPRINT Android app:
 | TP (`tp`, `tp86a`) | TP76i, TP80A, TP86A                                            | Byte-identical encoders and full-job report streams in simulation; not hardware-tested                         |
 | G (`g`)            | G11 Pro, G15 Pro, G15 MPro, G18 Pro, G21, G25, G28             | Byte-identical at 203 dpi; 300 dpi (G25/G28) geometry is a best effort because the official code crashes there |
 | E10/T10 (`t15`)    | E10, T10, T10A, T11, T12, T10 Plus, T10 Pro, T1, A10 Plus, A10 Pro (Bluetooth only) | Ported from SUPRINT 1.5.0 (classic Bluetooth) and the iOS app (BLE); same bytes as SUPRINT in emulation; printed on an E10 over BLE (macOS Chrome) and classic Bluetooth (Android Chrome) |
+| E11 (`e11`)        | E11 (Bluetooth LE only)                                        | Ported from Katasymbol 1.4.29 / SUPRINT 1.5.0 (`G15Print`); same bytes as SUPRINT in emulation; not hardware-tested |
 | E12 (`e12`)        | E12 (Bluetooth LE only)                                        | Ported from supvan-e12 (Python, tested on an E12); buffers identical to it; emulated jobs pass; not yet printed from the browser |
 
 ## How it works

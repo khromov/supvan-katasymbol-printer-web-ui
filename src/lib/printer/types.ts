@@ -1,4 +1,4 @@
-export type Family = 't5080' | 'sp' | 'tp' | 'tp86a' | 'g' | 't15' | 'e12';
+export type Family = 't5080' | 'sp' | 'tp' | 'tp86a' | 'g' | 't15' | 'e11' | 'e12';
 
 /** 1 byte per pixel, row-major, 1 = black dot. Rendered at the printer's dots-per-mm. */
 export interface Bitmap {

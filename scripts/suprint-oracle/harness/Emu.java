@@ -26,6 +26,8 @@ public class Emu {
     public int[] extra = {0, 0, 0, 0};
     public int batteryMv = 4000;
     public byte[] material = null;
+    /** READ_DPI (0x22) answer: dots per mm times 100 at [22..23] (0: no answer there). */
+    public int dpi = 0;
     public String name = "T0126E2507010001";
 
     public void clearReplies() { replies.clear(); }
@@ -66,6 +68,7 @@ public class Emu {
             case 0x10: commit(); break;
             case 0x16: { byte[] p = new byte[40]; byte[] n = name.getBytes(); System.arraycopy(n, 0, p, 12, n.length); reply(cmd, p, 18 + n.length); return; }
             case 0x30: if (material != null) { reply(cmd, material); return; } break;
+            case 0x22: { byte[] p = new byte[16]; p[12] = (byte) dpi; p[13] = (byte) (dpi >> 8); reply(cmd, p); return; }
             default: break;
         }
         reply(cmd, new byte[16]);

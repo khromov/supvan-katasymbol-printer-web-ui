@@ -15,6 +15,7 @@
     "catalog:download": "node scripts/download-catalog.mjs",
     "catalog:compare": "node scripts/compare-catalog.mjs",
     "test:t15": "tsx scripts/test-t15.ts",
+    "test:e11": "tsx scripts/test-e11.ts",
     "test:e12": "tsx scripts/test-e12.ts"
   },
   "devDependencies": {

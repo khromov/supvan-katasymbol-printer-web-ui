@@ -1,0 +1,254 @@
+{
+	"basic": {
+		"writes": 21,
+		"sha256": "14aaf682a04be363dcf7e26904a1e84269eda407d313995a4b10a341725f8686",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"long-copies": {
+		"writes": 57,
+		"sha256": "5502d19ebdff7361d28d6bc189ab994f5000148fab1ee3cd894f69c71d6a143d",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"two-pages-copies": {
+		"writes": 77,
+		"sha256": "6a6ebc8af5cbd344157d2d31846813605e8af9475423ff3b49588f3ea666d61c",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"noise-multi-frame": {
+		"writes": 84,
+		"sha256": "3bb1eec9eb876db276f637b779c23341edcb49537276539db028743087c6cb5c",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"continuous": {
+		"writes": 28,
+		"sha256": "ed7bcf88aad77666238099c111a25129086b0af3070a36d72ab1da3af04676a5",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"continuous-over-50": {
+		"writes": 28,
+		"sha256": "f140f3163faf63df193b8d63d32e0ea5c2e67d28cfc1afe67f37a26c8a861483",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"two-full-buffers": {
+		"writes": 28,
+		"sha256": "92a22e128ad9952a25f7ca88a18393d268b9267d73c13f02c3ba4a41f726148c",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"offsets": {
+		"writes": 21,
+		"sha256": "319e837a7db6e55c5c1c0ad61568e04445870e70a994945eed8acdb50cd19c27",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"dpi-7.9": {
+		"writes": 21,
+		"sha256": "ff405c78862d8ee25e66ed2a54ca9dce8814d6507534ae701bf09705fd864006",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"dpi-7.9-continuous": {
+		"writes": 21,
+		"sha256": "12559765d835def3b002e80a3547c13cd3f49079aee503c2a6c55eaafb805522",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"blank": {
+		"writes": 21,
+		"sha256": "3fc0a06f79140893f5fcb7cdde1c3a11e56b2dcfd199a8042bbe10fd505ff51e",
+		"expect": {
+			"result": "RESULT true 0"
+		}
+	},
+	"cover-open": {
+		"writes": 9,
+		"sha256": "0d3fe6c2d515ec72cfa6f8ec1262e4debccd4a9e431023f3c037254327833403",
+		"expect": {
+			"error": "Cover is open"
+		}
+	},
+	"no-tape": {
+		"writes": 9,
+		"sha256": "0d3fe6c2d515ec72cfa6f8ec1262e4debccd4a9e431023f3c037254327833403",
+		"expect": {
+			"error": "No label tape installed"
+		}
+	},
+	"low-battery": {
+		"writes": 9,
+		"sha256": "0d3fe6c2d515ec72cfa6f8ec1262e4debccd4a9e431023f3c037254327833403",
+		"expect": {
+			"error": "Low battery, please charge"
+		}
+	},
+	"used-up": {
+		"writes": 9,
+		"sha256": "0d3fe6c2d515ec72cfa6f8ec1262e4debccd4a9e431023f3c037254327833403",
+		"expect": {
+			"error": "Labels used up"
+		}
+	},
+	"unrecognized": {
+		"writes": 4,
+		"sha256": "b874473b79d4d8bdf2fedf89d5e6473aa5092e78247b55ba00628a04b35ac7ff",
+		"expect": {
+			"error": "Label not recognized"
+		}
+	},
+	"media-die-cut": {
+		"writes": 2,
+		"sha256": "8eb2b8bba8b489bb76a6f7a9ce628ea73e5805583b216eb708a39822b28b2c47",
+		"expect": {
+			"labelId": 25004,
+			"paperType": 1,
+			"widthMm": 12,
+			"lengthMm": 40,
+			"gap": 3,
+			"uuid": "049A3B12C45E80"
+		}
+	},
+	"media-continuous": {
+		"writes": 2,
+		"sha256": "8eb2b8bba8b489bb76a6f7a9ce628ea73e5805583b216eb708a39822b28b2c47",
+		"expect": {
+			"labelId": 25001,
+			"paperType": 0,
+			"widthMm": 15,
+			"lengthMm": 50,
+			"gap": 3,
+			"uuid": "049A3B12C45E80"
+		}
+	},
+	"media-custom-no-chip": {
+		"writes": 2,
+		"sha256": "8eb2b8bba8b489bb76a6f7a9ce628ea73e5805583b216eb708a39822b28b2c47",
+		"expect": {
+			"labelId": 21930,
+			"paperType": 1,
+			"widthMm": 12,
+			"lengthMm": 30,
+			"gap": 2,
+			"uuid": "049A3B12C45E80"
+		}
+	},
+	"state-ok": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 4
+		}
+	},
+	"state-one-bar": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [],
+			"warnings": [
+				"Low battery, please charge"
+			],
+			"charging": false,
+			"batteryLevel": 1
+		}
+	},
+	"state-low-battery-flag": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"Low battery, please charge"
+			],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 0
+		}
+	},
+	"state-cover": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"Cover is open"
+			],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 3
+		}
+	},
+	"state-no-tape": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"No label tape installed"
+			],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 2
+		}
+	},
+	"state-read-error": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"No label tape installed"
+			],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 2
+		}
+	},
+	"state-used-up-charging": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"Labels used up"
+			],
+			"warnings": [],
+			"charging": true,
+			"batteryLevel": 2
+		}
+	},
+	"state-unrecognized": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [
+				"Label not recognized"
+			],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 4
+		}
+	},
+	"state-ignored-bits": {
+		"writes": 1,
+		"sha256": "c43d1c172ef316eef1222dc574c93a67b452f0751f23ad6e206079bc55b1c17a",
+		"expect": {
+			"errors": [],
+			"warnings": [],
+			"charging": false,
+			"batteryLevel": 4
+		}
+	}
+}

@@ -1,7 +1,9 @@
 package harness;
 
 import android.graphics.Bitmap;
+import com.fhit.app_iprinter.communication.bluetooth.BLEUtils;
 import com.fhit.app_iprinter.communication.bluetooth.BluetoothUtils;
+import com.fhit.app_iprinter.communication.print.G15Print;
 import com.fhit.app_iprinter.communication.print.T15Print;
 import com.fhit.app_iprinter.dal.models.PrintPageData;
 import com.fhit.app_iprinter.dal.models.PrinterStateInfo;
@@ -48,10 +50,17 @@ public class Main {
         if (kv.containsKey("battery")) emu.batteryMv = Integer.parseInt(kv.get("battery"));
         if (kv.containsKey("extra")) { String[] e = kv.get("extra").split(","); for (int i = 0; i < 4; i++) emu.extra[i] = Integer.parseInt(e[i]); }
         if (kv.containsKey("material")) emu.material = unhex(kv.get("material"));
-        T15Print t = new T15Print();
-        t.bluetoothUtils = new BluetoothUtils(emu);
+        if (kv.containsKey("dpi")) emu.dpi = Integer.parseInt(kv.get("dpi"));
         StringBuilder out = new StringBuilder();
         String mode = kv.getOrDefault("mode", "print");
+        if (kv.getOrDefault("printer", "t15").equals("e11")) {
+            runE11(kv, pages, emu, mode, out);
+            write(f, out, emu);
+            return;
+        }
+        PrintManager.device.setPrinterType(15);
+        T15Print t = new T15Print();
+        t.bluetoothUtils = new BluetoothUtils(emu);
         if (mode.equals("print")) {
             if (kv.containsKey("paperGap")) { Field g = T15Print.class.getDeclaredField("paperGap"); g.setAccessible(true); g.setInt(t, Integer.parseInt(kv.get("paperGap"))); }
             PrintPageData pd = new PrintPageData();
@@ -79,6 +88,63 @@ public class Main {
             out.append("STATE msg=").append(info.Message).append(" canPrint=").append(info.IsCanPrint).append(" tip=").append(info.IsNeedTip)
                 .append(" real=").append(info.IsReal).append(" charged=").append(info.IsCharged).append(" battery=").append(info.BatteryVal).append('\n');
         }
+        write(f, out, emu);
+    }
+
+    /**
+     * The E11 (printer type 3601, printing process 4): G15Print over BLE, called like SUPRINT's
+     * EditTemplateActivity does. Before the job the editor reads the tape (getMaterial), sends BLT
+     * control (0x37), checks the tape is recognised (from the status probe, getE11State) and sends the
+     * print position doubled (0x38 / 0x39); its paint area is the label less 2 mm at each end (3 mm
+     * above 50 mm), 88 rows tall.
+     */
+    static void runE11(Map<String, String> kv, List<Bitmap> pages, Emu emu, String mode, StringBuilder out) throws Exception {
+        PrintManager.device.setPrinterType(3601);
+        PrintManager.device.setPrintingProcess(4);
+        G15Print g = new G15Print();
+        g.bleUtils = new BLEUtils(emu);
+        g.setPrintChannel(g.BLE_BLUETOOTH);
+        if (mode.equals("print")) {
+            g.getMaterial();
+            g.setBltControl();
+            PrinterStateInfo info = new PrinterStateInfo();
+            g.getE11State(info);
+            if (!info.IsReal) {
+                out.append("RESULT unrecognized\n");
+                return;
+            }
+            int paperType = Integer.parseInt(kv.getOrDefault("paperType", "1"));
+            g.writeLeftRight(Integer.parseInt(kv.getOrDefault("shiftH", "0")) * 2, paperType);
+            g.writeTopBottom(Integer.parseInt(kv.getOrDefault("shiftV", "0")) * 2);
+            PrintPageData pd = new PrintPageData();
+            pd.getPrintBitmap().addAll(pages);
+            int length = Integer.parseInt(kv.get("length"));
+            pd.setCopy(Integer.parseInt(kv.getOrDefault("copies", "1")));
+            pd.setRepeat(1);
+            pd.setOneByOne(true);
+            pd.setWidth(length);
+            pd.setAuto(false);
+            List<PrintPageData> list = new ArrayList<>();
+            list.add(pd);
+            // Cut type 1 (the default halfCutting) becomes Cut 0; first cut is the setting (0) minus 1.
+            boolean ok = g.doPrint(false, Float.parseFloat(kv.getOrDefault("height", "12")), length, 0, 0, 0, 1, 3601,
+                Integer.parseInt(kv.getOrDefault("density", "4")), 1, 420f, 0, 0, false, -1, false, 204, 0, paperType,
+                length > 50 ? 3 : 2, 1, list);
+            out.append("RESULT ").append(ok).append(' ').append(g.printError).append('\n');
+        } else if (mode.equals("media")) {
+            com.fhit.app_iprinter.dal.models.Unverified u = g.getMaterial();
+            Field gap = G15Print.class.getDeclaredField("paperGap");
+            gap.setAccessible(true);
+            out.append("MEDIA uuid=" + u.getUuid() + " code=" + u.getCode() + " sn=" + u.getSn() + " type=" + u.getType() + " height=" + u.getHeight() + " width=" + u.getWidth()).append(" gap=").append(gap.getInt(g)).append('\n');
+        } else if (mode.equals("state")) {
+            PrinterStateInfo info = new PrinterStateInfo();
+            g.getE11State(info);
+            out.append("STATE msg=").append(info.Message).append(" canPrint=").append(info.IsCanPrint).append(" tip=").append(info.IsNeedTip)
+                .append(" real=").append(info.IsReal).append(" charged=").append(info.IsCharged).append(" battery=").append(info.BatteryVal).append('\n');
+        }
+    }
+
+    static void write(File f, StringBuilder out, Emu emu) throws IOException {
         for (String e : emu.events) out.append("E ").append(e).append('\n');
         for (byte[] w : emu.writes) out.append("W ").append(hex(w)).append('\n');
         for (byte[] z : emu.streams) out.append("Z ").append(hex(z)).append('\n');

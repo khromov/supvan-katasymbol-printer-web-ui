@@ -89,7 +89,7 @@ const MATERIAL = hex('7e5a380010035530780a0000000000000000000000001ddfccda141080
 
 check('E12 by Bluetooth name', familyFromBluetoothName('T0195A260420I470') === 'e12' && modelNameFromBluetoothName('T0195A260420I470') === 'E12' && !unsupportedBluetoothModel('T0195A260420I470'));
 check('E12 by RD_DEV_NAME "G15"', familyFromBluetoothName('G15') === 'e12');
-check('E11 still refused', unsupportedBluetoothModel('T0138A123') === 'E11');
+check('E11 has its own driver', familyFromBluetoothName('T0138A123') === 'e11' && !unsupportedBluetoothModel('T0138A123'));
 check('E10 unchanged', familyFromBluetoothName('T0179G2507010001') === 't15');
 check('T50 unchanged', familyFromBluetoothName('T0148B2507018663') === 't5080');
 

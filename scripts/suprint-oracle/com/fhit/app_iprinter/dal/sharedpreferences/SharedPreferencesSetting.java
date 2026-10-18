@@ -8,4 +8,5 @@ public class SharedPreferencesSetting {
     public static int getLanguageType(String k, int d) { return d; }
     public static void set(String k, String v) {}
     public static void set(String k, int v) {}
+    public static void setDeviceType(String k, int v) {}
 }

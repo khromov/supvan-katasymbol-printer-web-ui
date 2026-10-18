@@ -5,6 +5,7 @@ import { probeSpInterface, SpDriver } from './families/sp';
 import { T5080Driver } from './families/t5080';
 import { T5080BtDriver } from './families/t5080-bt';
 import { T15BtDriver, T15_HEAD_DOTS } from './families/t15';
+import { E11BtDriver, E11_HEAD_DOTS } from './families/e11';
 import { E12BtDriver, E12_HEAD_DOTS } from './families/e12';
 import { SPP_UUID, WebSerialTransport } from './serial';
 import { Tp86aDriver, TpDriver } from './families/tp';
@@ -27,13 +28,14 @@ export function createDriver(model: DeviceModel, transport: Transport): PrinterD
 		case 'g':
 			return new GDriver(transport, { dpmm: model.dpmm, headDots: model.headDots });
 		case 't15':
+		case 'e11':
 		case 'e12':
 			throw new PrinterError(`${model.name} connects over Bluetooth only`, 'unsupported');
 	}
 }
 
 /** A driver for a printer on a Bluetooth link. */
-export type BluetoothDriver = T5080BtDriver | T15BtDriver | E12BtDriver;
+export type BluetoothDriver = T5080BtDriver | T15BtDriver | E11BtDriver | E12BtDriver;
 
 /** Refuse Supvan printers whose protocol this app doesn't speak, rather than drive them as a T50/T80. */
 function assertSupported(devName: string | undefined) {
@@ -47,6 +49,15 @@ const t15Model = (devName: string): DeviceModel => ({
 	family: 't15',
 	dpmm: 8,
 	headDots: T15_HEAD_DOTS,
+	listed: false
+});
+
+const e11Model = (): DeviceModel => ({
+	productId: 0,
+	name: 'E11 (Bluetooth)',
+	family: 'e11',
+	dpmm: 8,
+	headDots: E11_HEAD_DOTS,
 	listed: false
 });
 
@@ -135,6 +146,12 @@ export async function openBluetoothPrinter(port: SerialPort, debug = false): Pro
 			t15.channel.debug = debug;
 			return { model: t15Model(devName), driver: t15, transport };
 		}
+		if (family === 'e11') {
+			driver.channel.dispose();
+			const e11 = new E11BtDriver(transport, devName);
+			e11.channel.debug = debug;
+			return { model: e11Model(), driver: e11, transport };
+		}
 		if (family === 'e12') {
 			driver.channel.dispose();
 			const e12 = new E12BtDriver(transport, devName);
@@ -166,10 +183,11 @@ export async function bluetoothAvailable(): Promise<boolean | undefined> {
 export const requestBlePrinter = () => WebBluetoothTransport.request();
 
 /**
- * Open a printer over BLE, by its advertised name: E10/T10 series, E12 or T50/T80. The T50/T80
+ * Open a printer over BLE, by its advertised name: E10/T10 series, E11, E12 or T50/T80. The T50/T80
  * doesn't answer data frames there. The E10/T10 are driven like the iOS app drives them: writes
  * without response where the printer allows it, and a reply expected for every data frame. The E12
- * only takes writes without response and also answers every data frame.
+ * only takes writes without response and also answers every data frame; the E11 is driven like the
+ * Android apps drive it, which is how they drive the E12 too.
  */
 export async function openBlePrinter(device: BluetoothDevice, debug = false): Promise<{ model: DeviceModel; driver: BluetoothDriver; transport: WebBluetoothTransport }> {
 	assertSupported(device.name);
@@ -177,6 +195,12 @@ export async function openBlePrinter(device: BluetoothDevice, debug = false): Pr
 	const isT15 = family === 't15';
 	const transport = await WebBluetoothTransport.open(device, { preferWithoutResponse: family !== 't5080' });
 	try {
+		if (family === 'e11') {
+			const e11 = new E11BtDriver(transport, device.name ?? '');
+			e11.channel.debug = debug;
+			await e11.handshake();
+			return { model: e11Model(), driver: e11, transport };
+		}
 		if (family === 'e12') {
 			const e12 = new E12BtDriver(transport, device.name ?? '');
 			e12.channel.debug = debug;

@@ -396,7 +396,7 @@ const UNITS: [string, () => void][] = [
 				['T0141B2401010001', 't15', 'A10 Pro', undefined],
 				['T0140A2401010001', 't15', 'T10 Pro', undefined],
 				['T0053B2408080014', 't5080', undefined, 'E16'],
-				['T0138A2401010001', 't5080', undefined, 'E11'],
+				['T0138A2401010001', 'e11', 'E11', undefined],
 				['T0148B2507018663', 't5080', 'T50M Pro', undefined],
 				// RD_DEV_NAME over classic Bluetooth, as a T0179G… E10 answers it.
 				['E10pro', 't15', undefined, undefined],

@@ -70,10 +70,12 @@ export interface FrameChannelOptions {
 	/** Reply timeout for commands (default 2000 ms like the app over SPP; the app uses 4 s on BLE). */
 	commandTimeoutMs?: number;
 	/**
-	 * Fail the transfer when a data frame gets no reply within 2 s, taking any received bytes as
-	 * the reply (the E10/T10 apps do both; the T50/T80 driver carries on).
+	 * Fail the transfer when a data frame gets no reply within `ackTimeoutMs`, taking any received
+	 * bytes as the reply (the E10/T10 apps do both; the T50/T80 driver carries on).
 	 */
 	strictAcks?: boolean;
+	/** How long to wait for each data frame's reply (default 2000 ms). */
+	ackTimeoutMs?: number;
 }
 
 /**
@@ -99,6 +101,7 @@ export class FrameChannel {
 	readonly acksDataFrames: boolean;
 	readonly commandTimeoutMs: number;
 	readonly strictAcks: boolean;
+	readonly ackTimeoutMs: number;
 	/** Bytes received so far (never reset), to tell whether anything arrived. */
 	private received = 0;
 
@@ -109,6 +112,7 @@ export class FrameChannel {
 		this.acksDataFrames = opts.acksDataFrames ?? true;
 		this.commandTimeoutMs = opts.commandTimeoutMs ?? 2000;
 		this.strictAcks = opts.strictAcks ?? false;
+		this.ackTimeoutMs = opts.ackTimeoutMs ?? 2000;
 		this.unsubscribe = transport.onData((chunk) => this.receive(chunk));
 	}
 
@@ -228,8 +232,8 @@ export class FrameChannel {
 				await sleep(10);
 			}
 			if (this.strictAcks) {
-				if (!(await this.input(before, 2000))) throw new PrinterError('Printer did not acknowledge the print data', 'timeout');
-			} else if (this.acksDataFrames) await this.next(() => true, 2000);
+				if (!(await this.input(before, this.ackTimeoutMs))) throw new PrinterError('Printer did not acknowledge the print data', 'timeout');
+			} else if (this.acksDataFrames) await this.next(() => true, this.ackTimeoutMs);
 		}
 	}
 

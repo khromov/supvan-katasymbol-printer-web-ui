@@ -1,6 +1,7 @@
 // A stand-in E10/T10-series printer on a byte transport, for testing the T15 driver without
-// hardware. Mirrors scripts/suprint-oracle/harness/Emu.java, which runs the SUPRINT app's own print
-// code, byte for byte: both answer the same way, so both sides must send the same bytes.
+// hardware (and the E11 and E12 drivers, whose printers answer the same frames). Mirrors
+// scripts/suprint-oracle/harness/Emu.java, which runs the SUPRINT app's own print code, byte for
+// byte: both answer the same way, so both sides must send the same bytes.
 //
 // State only changes on commands, never on time: never busy, START sets printing, the buffer is
 // never full, and the BUF_FULL that commits a buffer with the job-end flag clears printing.
@@ -29,6 +30,8 @@ export class T15Emulator implements ByteTransport {
 	extra = [0, 0, 0, 0];
 	batteryMv = 4000;
 	material: Uint8Array | null = null;
+	/** READ_DPI (0x22) answer: dots per mm times 100 at [22..23] (0: no answer there). */
+	dpi = 0;
 	/** Commands to ignore, without a reply (fault injection). */
 	silent = new Set<number>();
 	/** Answer every data frame (both apps expect it). */
@@ -102,6 +105,12 @@ export class T15Emulator implements ByteTransport {
 			case 0x30:
 				if (this.material) return this.reply(cmd, this.material);
 				break;
+			case 0x22: {
+				const p = new Uint8Array(16);
+				p[12] = this.dpi & 0xff;
+				p[13] = this.dpi >> 8;
+				return this.reply(cmd, p);
+			}
 		}
 		this.reply(cmd, new Uint8Array(16));
 	}

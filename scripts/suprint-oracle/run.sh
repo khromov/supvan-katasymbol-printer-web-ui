@@ -1,6 +1,7 @@
 #!/bin/sh
-# Runs the E10/T10 test scenarios (scripts/test-t15.ts) through the SUPRINT app's own print code
-# and records the result as the golden digests the plain test run checks.
+# Runs the E10/T10 and E11 test scenarios (scripts/test-t15.ts, scripts/test-e11.ts) through the
+# SUPRINT app's own print code (T15Print, G15Print) and records the results as the golden digests
+# the plain test runs check.
 #
 # Usage: scripts/suprint-oracle/run.sh <SUPRINT .xapk or .apk>   (tested with SUPRINT 1.5.0)
 # Needs a JDK, dex2jar (brew install dex2jar) and python3 (the emulator decodes LZMA with it).
@@ -22,9 +23,12 @@ case "$apk" in
 	;;
 esac
 d2j-dex2jar -f -o "$work/app.jar" "$apk" >/dev/null
-rm -rf "$work/classes" "$work/scenarios"
+rm -rf "$work/classes" "$work/scenarios" "$work/scenarios-e11"
 mkdir -p "$work/classes"
 javac -nowarn -cp "$work/app.jar" -d "$work/classes" $(find "$here" -name '*.java')
 npx tsx "$here/../test-t15.ts" --scenarios "$work/scenarios"
 java -cp "$work/classes:$work/app.jar" harness.Main "$work/scenarios"
 npx tsx "$here/../test-t15.ts" --oracle "$work/scenarios"
+npx tsx "$here/../test-e11.ts" --scenarios "$work/scenarios-e11"
+java -cp "$work/classes:$work/app.jar" harness.Main "$work/scenarios-e11"
+npx tsx "$here/../test-e11.ts" --oracle "$work/scenarios-e11"
