@@ -170,15 +170,16 @@ browsers (Chrome, Edge, Opera, Arc). Designing works everywhere; only printing n
 
 ## Supported printers
 
-Every model KatasymbolEditor 1.1.1 knows about (`src/lib/printer/devices.ts`), plus the E10/T10
-series from the SUPRINT Android app:
+Every model KatasymbolEditor 1.1.1 knows about (`src/lib/printer/devices.ts`), the newer USB
+models of the same families from SupvanEditor 2.4.24 (Windows), plus the E10/T10 series from the
+SUPRINT Android app. Models listed only in SupvanEditor are not hardware-tested:
 
 | Family             | Models                                                         | Status                                                                                                         |
 | ------------------ | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| T50/T80 (`t5080`)  | T50M Plus, T50M Pro (incl. the 2026 `1820:207f` revision), T50S, T50i, T50 Max, T80M, T80M Pro, A80 Pro, T80 Max | Encoder byte-identical to the official app; printed on a real T50M Pro (USB `1820:2076`)                       |
-| SP (`sp`)          | SP650                                                          | Byte-identical encoder; not hardware-tested                                                                    |
-| TP (`tp`, `tp86a`) | TP76i, TP80A, TP86A                                            | Byte-identical encoders and full-job report streams in simulation; not hardware-tested                         |
-| G (`g`)            | G11 Pro, G15 Pro, G15 MPro, G18 Pro, G21, G25, G28             | Byte-identical at 203 dpi; 300 dpi (G25/G28) geometry is a best effort because the official code crashes there |
+| T50/T80 (`t5080`)  | T50M, T50M Plus, T50M Pro (incl. the 2026 `1820:207f` revision), T50S, T50i, T50 Max, T80M, T80M Pro, A80 Pro, T80 Max | Encoder byte-identical to the official app; printed on a real T50M Pro (USB `1820:2076`)                       |
+| SP (`sp`)          | SP650, SP650E, SP350, SP750, K68, CS603, XS606                  | Byte-identical encoder; not hardware-tested                                                                    |
+| TP (`tp`, `tp86a`) | TP76i, TP80A, TP86A, TP96, TP56, TP66i, TP76E, TP86E, TP90, XT/CT variants | Byte-identical encoders and full-job report streams in simulation; not hardware-tested                         |
+| G (`g`)            | G11 Pro, G15 Pro, G15 MPro, G15 Max, Q15 Pro, G18 Pro, G21, G21 Pro/Plus, G25, G25M, G25 Plus, Q25, G28, G28 Pro/Plus, CG/XG variants | Byte-identical at 203 dpi; 300 dpi (G25/G28) geometry is a best effort because the official code crashes there |
 | E10/T10 (`t15`)    | E10, T10, T10A, T11, T12, T10 Plus, T10 Pro, T1, A10 Plus, A10 Pro (Bluetooth only) | Ported from SUPRINT 1.5.0 (classic Bluetooth) and the iOS app (BLE); same bytes as SUPRINT in emulation; printed on an E10 over BLE (macOS Chrome) and classic Bluetooth (Android Chrome) |
 | E11 (`e11`)        | E11 (Bluetooth LE only)                                        | Ported from Katasymbol 1.4.29 / SUPRINT 1.5.0 (`G15Print`); same bytes as SUPRINT in emulation; not hardware-tested |
 | E12 (`e12`)        | E12 (Bluetooth LE only)                                        | Ported from supvan-e12 (Python, tested on an E12); buffers identical to it; emulated jobs pass; not yet printed from the browser |

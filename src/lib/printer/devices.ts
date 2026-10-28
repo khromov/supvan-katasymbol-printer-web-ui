@@ -32,22 +32,56 @@ export const DEVICE_MODELS: DeviceModel[] = [
 	// Newer T50/T80 revisions KatasymbolEditor 1.1.1 predates, from SupvanEditor 2.4.24
 	// (Supvan.UsbDev.UsbCtrlFunc.GetDevType / GetDevName) and the Sep 2026 Windows T50 driver
 	// (SupvanT50.dll), which drive them exactly like 0x2073 / 0x2075. 0x207f is the 2026 T50M Pro
-	// (Supvan calls it "T50 Pro"; USB 1820:207f reported by a user). The 300 dpi T80 Pro+ (0x207b)
-	// and T50 Plus+ (0x207c) are left out as the T50/T80 driver assumes 8 dots/mm, and the T50M
-	// (0x2070) because SupvanEditor sends it one 40000-byte buffer instead of 8 × 4096.
+	// (Supvan calls it "T50 Pro"; USB 1820:207f reported by a user). Only SupvanEditor prints to the
+	// T50M (0x2070, "T50A" in Chinese), sending it one 40000-byte buffer per transfer instead of up
+	// to 8 × 4096, and the T50/T80 driver does the same (T50M_PRODUCT_ID). The 300 dpi T80 Pro+
+	// (0x207b) and T50 Plus+ (0x207c) are left out as the T50/T80 driver assumes 8 dots/mm.
 	{ productId: 0x207f, name: 'T50M Pro', family: 't5080', dpmm: 8, headDots: 384, listed: false },
 	{ productId: 0x207d, name: 'T50 Max', family: 't5080', dpmm: 8, headDots: 384, listed: false },
 	{ productId: 0x2170, name: 'T50 Max', family: 't5080', dpmm: 8, headDots: 384, listed: false },
+	{ productId: 0x2070, name: 'T50M', family: 't5080', dpmm: 8, headDots: 384, listed: false },
 	{ productId: 0x2079, name: 'A80 Pro', family: 't5080', dpmm: 8, headDots: 576, listed: false },
 	{ productId: 0x207e, name: 'T80 Max', family: 't5080', dpmm: 8, headDots: 576, listed: false },
 	// SP sign printers, 300 dpi.
 	{ productId: 0x203e, name: 'SP650', family: 'sp', dpmm: 11.8, headDots: 672, listed: true },
+	// SP models only SupvanEditor 2.4.24 knows (frmLibUsbPrintCrt's HID SP path, which has no
+	// per-model branches). Its older SP PIDs (0x2025-0x2037) bind to Supvan's kernel driver per the
+	// bundled SupUsbDriv.inf, so they are no HID devices and are left out. Not hardware-tested.
+	{ productId: 0x203d, name: 'SP350', family: 'sp', dpmm: 11.8, headDots: 672, listed: false },
+	{ productId: 0x203f, name: 'SP650E', family: 'sp', dpmm: 11.8, headDots: 672, listed: false },
+	{ productId: 0x20a0, name: 'SP750', family: 'sp', dpmm: 11.8, headDots: 672, listed: false },
+	{ productId: 0x4011, name: 'CS603 (SP650)', family: 'sp', dpmm: 11.8, headDots: 672, listed: false },
+	{ productId: 0x4012, name: 'XS606 (SP650)', family: 'sp', dpmm: 11.8, headDots: 672, listed: false },
+	{ productId: 0x3103, name: 'K68', family: 'sp', dpmm: 11.8, headDots: 672, listed: false },
 	// TP tube/wire marker printers.
 	{ productId: 0x202f, name: 'TP86A', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: true },
 	{ productId: 0x2081, name: 'TP86A', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: true },
 	{ productId: 0x202e, name: 'TP80A', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: true },
 	{ productId: 0x2080, name: 'TP80A', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: true },
 	{ productId: 0x202c, name: 'TP76i', family: 'tp', dpmm: 11.3, headDots: 144, listed: true },
+	// TP models only SupvanEditor 2.4.24 knows. Its TPDoPrint sends these devtypes LZMA streams
+	// with 0x5C and no read-back, like the TP86A (tp86a); not hardware-tested.
+	{ productId: 0x208a, name: 'TP96', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x400b, name: 'XT806 (TP96)', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x400e, name: 'CT803 (TP96)', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x402a, name: 'XT807 (TP96)', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x2085, name: 'TP56', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x2086, name: 'TP66i', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x2063, name: 'TP76E', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x209c, name: 'TP76E', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x2062, name: 'TP86E', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x2087, name: 'TP76i', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x2088, name: 'TP76i', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x400a, name: 'XT706 (TP76i)', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x400d, name: 'CT703 (TP76i)', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x402b, name: 'XT707 (TP76i)', family: 'tp86a', dpmm: 11.3, headDots: 144, listed: false },
+	// These share the TP76i's devtype 8235: raw frames with 0x5A and no read-back (tp).
+	// Left out: TP20/TP20M (own feed-dpi and cut-line handling), the P-series 0x3101-0x3107 (0x3101
+	// and 0x3102 expect a 4-byte ack per frame), and TP80 / 0x202b, which bind to the kernel driver.
+	{ productId: 0x202d, name: 'TP76i', family: 'tp', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x2082, name: 'TP76E', family: 'tp', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x2083, name: 'TP66i', family: 'tp', dpmm: 11.3, headDots: 144, listed: false },
+	{ productId: 0x2084, name: 'TP90', family: 'tp', dpmm: 11.3, headDots: 144, listed: false },
 	// G series, 203 dpi (G11/G15/G18/G21) and 300 dpi (G25/G28).
 	{ productId: 0x2090, name: 'G11 Pro', family: 'g', dpmm: 8, headDots: 96, listed: true },
 	{ productId: 0x2096, name: 'G11 Pro', family: 'g', dpmm: 8, headDots: 96, listed: false },
@@ -59,7 +93,36 @@ export const DEVICE_MODELS: DeviceModel[] = [
 	{ productId: 0x4009, name: 'XG116 (G18 Pro)', family: 'g', dpmm: 8, headDots: 96, listed: false },
 	{ productId: 0x2094, name: 'G21', family: 'g', dpmm: 8, headDots: 176, listed: false },
 	{ productId: 0x2095, name: 'G28', family: 'g', dpmm: 11.8, headDots: 246, listed: false },
-	{ productId: 0x2098, name: 'G25', family: 'g', dpmm: 11.8, headDots: 288, listed: false }
+	{ productId: 0x2098, name: 'G25', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	// G models only SupvanEditor 2.4.24 knows (GDoPrint by devtype: 8336-8339 96 dots at 8 dpmm,
+	// 8340 192 dots at 8 dpmm, 8344 288 dots at 11.8 dpmm). Not hardware-tested. SupvanEditor also
+	// gives the G21 (0x2094) 192 dots where KatasymbolEditor has 176; that entry is left as is. The
+	// CG113 0x401e is left out: SupvanEditor reaches it as a USB printer-class device, not over HID.
+	{ productId: 0x209a, name: 'Q15 Pro', family: 'g', dpmm: 8, headDots: 96, listed: false },
+	{ productId: 0x20a2, name: 'G15 Max', family: 'g', dpmm: 8, headDots: 96, listed: false },
+	{ productId: 0x20a1, name: 'G15 MPro', family: 'g', dpmm: 8, headDots: 96, listed: false }, // devtype of the G15M Pro, unnamed
+	{ productId: 0x4000, name: 'CG103 (G15 Pro)', family: 'g', dpmm: 8, headDots: 96, listed: false },
+	{ productId: 0x4001, name: 'XG106 (G15 Pro)', family: 'g', dpmm: 8, headDots: 96, listed: false },
+	{ productId: 0x401f, name: 'XG116 (G11 Pro)', family: 'g', dpmm: 8, headDots: 96, listed: false },
+	{ productId: 0x4023, name: 'XG107 (G18 Pro)', family: 'g', dpmm: 8, headDots: 96, listed: false },
+	{ productId: 0x4024, name: 'XG117 (G15 Pro)', family: 'g', dpmm: 8, headDots: 96, listed: false },
+	{ productId: 0x4019, name: 'CG213 (G21)', family: 'g', dpmm: 8, headDots: 192, listed: false },
+	{ productId: 0x401a, name: 'XG216 (G21)', family: 'g', dpmm: 8, headDots: 192, listed: false },
+	{ productId: 0x4025, name: 'XG217 (G21)', family: 'g', dpmm: 8, headDots: 192, listed: false },
+	{ productId: 0x2099, name: 'G25M', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x209d, name: 'G21 Pro', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x209e, name: 'G28 Pro', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x209f, name: 'G21 Plus', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x20a3, name: 'G28 Plus', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x20a4, name: 'Q25', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x20a5, name: 'G25 Plus', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x20a6, name: 'Q25 Plus', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x20a7, name: 'G25 Plus', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x20a8, name: 'Q25 Plus', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x20a9, name: 'G25M Plus', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x4020, name: 'CG203 (G25)', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x4021, name: 'XG206 (G25)', family: 'g', dpmm: 11.8, headDots: 288, listed: false },
+	{ productId: 0x4026, name: 'XG207 (G25)', family: 'g', dpmm: 11.8, headDots: 288, listed: false }
 ];
 
 export const FAMILY_NAMES: Record<Family, string> = {
