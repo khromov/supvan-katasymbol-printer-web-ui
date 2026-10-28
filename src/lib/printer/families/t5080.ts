@@ -1,6 +1,7 @@
 /**
  * T50/T80 family (T50M, T50M Plus, T50M Pro, T50s, T80M, T80M Pro).
- * Port of t5080PrintUtils / t5080imageEncodeUtils / t5080ImageDataUtils from KatasymbolEditor.
+ * Port of t5080PrintUtils / t5080imageEncodeUtils / t5080ImageDataUtils from KatasymbolEditor,
+ * plus SupvanEditor's buffer layout for the T50M, which KatasymbolEditor doesn't know.
  */
 import { CommandChannel, sleep, vendorCommand } from '../channel';
 import { cropRowsCentered, fromBitmap, offset, packColumns, rotate, type Grid } from '../bitmap';
@@ -28,6 +29,16 @@ export const CMD = {
 } as const;
 
 const BUF_LENGTH = 4096;
+/**
+ * USB product id of the T50M (SupvanEditor devtype 50), the one T50/T80 that SupvanEditor 2.4.24
+ * sends one 40000-byte print buffer per LZMA stream instead of up to 8 buffers of 4096 bytes:
+ * frmLibUsbPrintCrt::TDoPrint sets bufferMAXCount = 1 and _bufLength = 40000 for devtype 50, 8 and
+ * 4096 for every other model (frmOEMPrintCrt::T5080DoPrint does the same). Its commands, status,
+ * buffer header and transfer are those of the other models. Neither the T50 SDK nor the Windows
+ * T50 driver prints to it.
+ */
+export const T50M_PRODUCT_ID = 0x2070;
+const T50M_BUF_LENGTH = 40000;
 /**
  * Labels the official app prints rotated 180 degrees: 5414/5415 by ID, and the index-tab labels
  * that matModule.buildT50PlusBook tags with ClassName1 "索引标签" at runtime (the tag is not in the
@@ -83,7 +94,7 @@ function pageRegister(opts: { pageStart: boolean; pageEnd: boolean; printEnd: bo
 export interface EncodedPage {
 	/** LZMA streams, each sent with one NEXTFRM_BULK/BUF_FULL round. */
 	chunks: Uint8Array[];
-	/** Raw 4096-byte buffers before compression (for tests/debugging). */
+	/** Raw buffers before compression (for tests/debugging). */
 	buffers: Uint8Array[];
 	columns: number;
 	bytesPerColumn: number;
@@ -102,29 +113,37 @@ export function t5080Raster(page: Bitmap, label: LabelSpec, headDots: number, op
 }
 
 export interface T5080Buffers {
-	/** Raw 4096-byte buffers (header + column data) for one page. */
+	/** Raw print buffers (header + column data) for one page. */
 	buffers: Uint8Array[];
 	columns: number;
 	bytesPerColumn: number;
 }
 
-/** Rasterize a page and split it into checksummed 4096-byte print buffers. */
+/**
+ * Rasterize a page and split it into checksummed print buffers of 4096 bytes, or `bufferLength`
+ * (40000 on the T50M). SupvanEditor's TGenerateBufferList lays out a buffer of either length the
+ * same way: up to (length - 22) / bytesPerColumn columns, zero filled after them, behind a header
+ * of [0..1] checksum, [2..3] page register, [4..5] column count, [6] bytes per column, [8..9]
+ * leading margin (1 for none), [10..11] 1, [12..13] red density (two-colour labels only, else 0).
+ * Its 16-bit length and checksum arithmetic doesn't overflow at 40000 bytes.
+ */
 export function buildT5080Buffers(
 	page: Bitmap,
 	label: LabelSpec,
-	opts: { density: number; headDots: number; printEnd: boolean; offsetX?: number; offsetY?: number }
+	opts: { density: number; headDots: number; printEnd: boolean; offsetX?: number; offsetY?: number; bufferLength?: number }
 ): T5080Buffers {
+	const bufferLength = opts.bufferLength ?? BUF_LENGTH;
 	const g = t5080Raster(page, label, opts.headDots, opts);
 	const { bytes, bytesPerColumn } = packColumns(g);
 	const columns = g.cols;
-	const maxCols = Math.floor((BUF_LENGTH - 22) / bytesPerColumn);
+	const maxCols = Math.floor((bufferLength - 22) / bytesPerColumn);
 	const bufferCount = Math.ceil(columns / maxCols);
 	const buffers: Uint8Array[] = [];
 
 	for (let i = 0; i < bufferCount; i++) {
 		const last = i === bufferCount - 1;
 		const cols = last ? columns - maxCols * i : maxCols;
-		const buf = new Uint8Array(BUF_LENGTH);
+		const buf = new Uint8Array(bufferLength);
 		const reg = pageRegister({
 			pageStart: i === 0,
 			pageEnd: last,
@@ -159,12 +178,22 @@ const concat = (buffers: Uint8Array[]) => {
 	return all;
 };
 
-/** USB (KatasymbolEditor) chunking of one page. */
+/**
+ * USB chunking of one page: KatasymbolEditor's, or with `t50m` SupvanEditor's for the T50M, one
+ * LZMA stream per 40000-byte buffer (GenerateLZMAData with bufferMAXCount = 1).
+ */
 export function encodeT5080Page(
 	page: Bitmap,
 	label: LabelSpec,
-	opts: { density: number; headDots: number; printEnd: boolean; offsetX?: number; offsetY?: number }
+	opts: { density: number; headDots: number; printEnd: boolean; offsetX?: number; offsetY?: number; t50m?: boolean }
 ): EncodedPage {
+	if (opts.t50m) {
+		const { buffers, columns, bytesPerColumn } = buildT5080Buffers(page, label, { ...opts, bufferLength: T50M_BUF_LENGTH });
+		const chunks = buffers.map(compress);
+		// SupvanEditor can only shrink a stream by dropping buffers, so it would retry such a buffer forever.
+		if (chunks.some((c) => c.length > T50M_BUF_LENGTH)) throw new PrinterError('This design is too detailed for the T50M to take in one transfer', 'label');
+		return { chunks, buffers, columns, bytesPerColumn };
+	}
 	const { buffers, columns, bytesPerColumn } = buildT5080Buffers(page, label, opts);
 	// Small pages go out as one LZMA stream holding all buffers; big ones one stream per buffer.
 	const separate = buffers.map(compress);
@@ -207,7 +236,9 @@ export class T5080Driver implements PrinterDriver {
 
 	constructor(
 		transport: Transport,
-		readonly headDots = 384
+		readonly headDots = 384,
+		/** Send the T50M's single 40000-byte buffers (see T50M_PRODUCT_ID). */
+		readonly t50m = transport.productId === T50M_PRODUCT_ID
 	) {
 		this.channel = new CommandChannel(transport);
 	}
@@ -265,7 +296,7 @@ export class T5080Driver implements PrinterDriver {
 
 		report('preparing', 0);
 		const encode = (p: Bitmap, printEnd: boolean) =>
-			encodeT5080Page(p, label, { density, headDots: this.headDots, printEnd, offsetX: opts.offsetX, offsetY: opts.offsetY });
+			encodeT5080Page(p, label, { density, headDots: this.headDots, printEnd, offsetX: opts.offsetX, offsetY: opts.offsetY, t50m: this.t50m });
 		const encodedPages = pages.map((p) => encode(p, false));
 		const lastPage = encode(pages[pages.length - 1], true);
 		// Collated like the official app (anyPrint): every page of a set, then the next copy.
@@ -295,7 +326,9 @@ export class T5080Driver implements PrinterDriver {
 		try {
 			for (let p = 0; p < sequence.length; p++) {
 				const page = sequence[p];
-				const speed = page.chunks.length > 1 ? 20 : 60;
+				// KatasymbolEditor: 60 when the page is one stream, else 20. SupvanEditor, the only app that
+				// drives the T50M, sends max(its 1..10 speed setting, 20) (TDoPrint), so always 20.
+				const speed = this.t50m || page.chunks.length > 1 ? 20 : 60;
 				report('sending', p + 1);
 				if (p > 0) {
 					// Wait for the previous page to leave the buffer.
@@ -308,7 +341,8 @@ export class T5080Driver implements PrinterDriver {
 					}
 				}
 				for (const chunk of page.chunks) {
-					for (let tries = 400; ; tries--) {
+					// A T50M buffer holds ten times the print of a 4096-byte one, so give it ten times as long to drain.
+					for (let tries = this.t50m ? 4000 : 400; ; tries--) {
 						s = await this.getStatus();
 						this.assertOk(s);
 						if (!s.bufferFull) break;
@@ -317,7 +351,9 @@ export class T5080Driver implements PrinterDriver {
 					}
 					await this.cmd(CMD.NEXTFRM_BULK, chunk.length);
 					await sleep(100, signal);
-					await this.channel.request(CommandChannel.chunk(chunk), 10000);
+					// Acked once the whole stream is in: up to 625 reports on the T50M.
+					const reports = CommandChannel.chunk(chunk);
+					await this.channel.request(reports, Math.max(10000, reports.length * 20));
 					await sleep(100, signal);
 					await this.cmd(CMD.BUF_FULL, chunk.length, speed);
 					await sleep(100, signal);

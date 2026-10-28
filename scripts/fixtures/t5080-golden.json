@@ -1,0 +1,316 @@
+{
+	"40 x 30 mm die-cut, density 4": {
+		"columns": 240,
+		"bytesPerColumn": 40,
+		"buffers": 3,
+		"buffersSha256": "bd2f2d397ee84e2f475572383a9eb2462c371e3a90c7194f546e8b506a40b66b",
+		"usb": [
+			2327
+		],
+		"usbSha256": "1a5c30c02323ca78c4106e98fccfebd46f5ee4560e42945eead6d99df2959560",
+		"bt": [
+			2327
+		],
+		"btSpeed": 51,
+		"btSha256": "1a5c30c02323ca78c4106e98fccfebd46f5ee4560e42945eead6d99df2959560"
+	},
+	"40 x 30 mm die-cut, density 4, print end": {
+		"columns": 240,
+		"bytesPerColumn": 40,
+		"buffers": 3,
+		"buffersSha256": "09ed02500d2865381117bb795f7516525cb3f16665a6bd8dcb0036f18671a19e",
+		"usb": [
+			2327
+		],
+		"usbSha256": "24a9905d7e3c524c50eb296a0f33dbeed9aa4147e21ca3c166f8b4f61fadaf7d",
+		"bt": [
+			2327
+		],
+		"btSpeed": 51,
+		"btSha256": "24a9905d7e3c524c50eb296a0f33dbeed9aa4147e21ca3c166f8b4f61fadaf7d"
+	},
+	"48 x 104 mm, 832 columns": {
+		"columns": 832,
+		"bytesPerColumn": 48,
+		"buffers": 10,
+		"buffersSha256": "be575b4d2cb6618c5900ee20ab16d04e234469191dcdc2e2dfd7b09813edfa92",
+		"usb": [
+			1430,
+			800,
+			782,
+			748,
+			586,
+			579,
+			582,
+			586,
+			573,
+			552
+		],
+		"usbSha256": "ed1cbc34bc51d7c53026338c48dadc54fe14bdf2c918a7302ded5b23a21353c5",
+		"bt": [
+			3470,
+			800
+		],
+		"btSpeed": 51,
+		"btSha256": "ba06bbf5ed77467ae260f3aca07c97c67d6c7318dfcf932892299963c4dd2c03"
+	},
+	"48 x 104 mm, 832 columns, print end": {
+		"columns": 832,
+		"bytesPerColumn": 48,
+		"buffers": 10,
+		"buffersSha256": "035d69369f09fbc160726dabf27b2a6a98f9928ba2344b46570f57048a6806d5",
+		"usb": [
+			1430,
+			800,
+			782,
+			748,
+			586,
+			579,
+			582,
+			586,
+			573,
+			552
+		],
+		"usbSha256": "affbb4a7b0b099080e0a211ab3961404e0a431a939bdc11f9aba73a391c48168",
+		"bt": [
+			3470,
+			800
+		],
+		"btSpeed": 51,
+		"btSha256": "dbed809d61a93d3b604814f4c9efb67367e8af3e8791018f34d7c3c27cd6728c"
+	},
+	"48 x 105 mm, 840 columns": {
+		"columns": 840,
+		"bytesPerColumn": 48,
+		"buffers": 10,
+		"buffersSha256": "2eb18440fb19112d1d911ce20f34f6507eb464e0394c434e19bc77f556831b19",
+		"usb": [
+			982,
+			765,
+			785,
+			753,
+			597,
+			584,
+			575,
+			590,
+			582,
+			587
+		],
+		"usbSha256": "78350c08bd2688a6eddc049597525f55514885b6252f4cdec54b21a7437b51cc",
+		"bt": [
+			3171,
+			818
+		],
+		"btSpeed": 51,
+		"btSha256": "eba88cdffd2dd80982dc7c78da0e4539b05b1ced42cf04802ad01958594bade5"
+	},
+	"48 x 105 mm, 840 columns, print end": {
+		"columns": 840,
+		"bytesPerColumn": 48,
+		"buffers": 10,
+		"buffersSha256": "c10d14faac095f721c6f07be7cc2210e027eb131660e396d30f3b3efcc933e71",
+		"usb": [
+			982,
+			765,
+			785,
+			753,
+			597,
+			584,
+			575,
+			590,
+			582,
+			576
+		],
+		"usbSha256": "8f9a759e08175974a27a449fa2b1aba35ff418de41ba156f82f088b584db0033",
+		"bt": [
+			3171,
+			818
+		],
+		"btSpeed": 51,
+		"btSha256": "e7909160060791a1f316157f997ccc1c038630608a1d63ffbc680bab96e26943"
+	},
+	"50 x 200 mm dense noise cropped to the head, density 7": {
+		"columns": 1600,
+		"bytesPerColumn": 48,
+		"buffers": 20,
+		"buffersSha256": "39ea09840a52a5baccae5fe2b5ecf206568e49ebb2b4ed8daee3f7bc7be81343",
+		"usb": [
+			4027,
+			4117,
+			4114,
+			4118,
+			4115,
+			4118,
+			4118,
+			4116,
+			4118,
+			4115,
+			4115,
+			4115,
+			4116,
+			4117,
+			4116,
+			4114,
+			4120,
+			4115,
+			4117,
+			209
+		],
+		"usbSha256": "70d297ecff83608e467a1b26d54bc27dc80c3a820c8db5702f2d572cf5bb224f",
+		"bt": [
+			4027,
+			4117,
+			4114,
+			4118,
+			4115,
+			4118,
+			4118,
+			4116,
+			4118,
+			4115,
+			4115,
+			4115,
+			4116,
+			4117,
+			4116,
+			4114,
+			4120,
+			4115,
+			4117,
+			209
+		],
+		"btSpeed": 9,
+		"btSha256": "70d297ecff83608e467a1b26d54bc27dc80c3a820c8db5702f2d572cf5bb224f"
+	},
+	"50 x 200 mm dense noise cropped to the head, density 7, print end": {
+		"columns": 1600,
+		"bytesPerColumn": 48,
+		"buffers": 20,
+		"buffersSha256": "e4e24bc770896fc71b13bc64a3201382b36b5234768a0aa6ffa0163030a31e12",
+		"usb": [
+			4027,
+			4117,
+			4114,
+			4118,
+			4115,
+			4118,
+			4118,
+			4116,
+			4118,
+			4115,
+			4115,
+			4115,
+			4116,
+			4117,
+			4116,
+			4114,
+			4120,
+			4115,
+			4117,
+			209
+		],
+		"usbSha256": "06325467b631ea4b19857b4d3c107351ccd57530ba395437077beeae998aa582",
+		"bt": [
+			4027,
+			4117,
+			4114,
+			4118,
+			4115,
+			4118,
+			4118,
+			4116,
+			4118,
+			4115,
+			4115,
+			4115,
+			4116,
+			4117,
+			4116,
+			4114,
+			4120,
+			4115,
+			4117,
+			209
+		],
+		"btSpeed": 9,
+		"btSha256": "06325467b631ea4b19857b4d3c107351ccd57530ba395437077beeae998aa582"
+	},
+	"rotated 5414 label, paper direction 0, offsets": {
+		"columns": 240,
+		"bytesPerColumn": 40,
+		"buffers": 3,
+		"buffersSha256": "b56f82abc5d4c0973279834a5f533f496a4a75361dcd8b1156c38fa7bb87eef3",
+		"usb": [
+			1857
+		],
+		"usbSha256": "bfd0dab16f3c8e66394fb4055aa9fbb9184c1ea334670195439586fab275e44e",
+		"bt": [
+			1857
+		],
+		"btSpeed": 51,
+		"btSha256": "bfd0dab16f3c8e66394fb4055aa9fbb9184c1ea334670195439586fab275e44e"
+	},
+	"rotated 5414 label, paper direction 0, offsets, print end": {
+		"columns": 240,
+		"bytesPerColumn": 40,
+		"buffers": 3,
+		"buffersSha256": "1695b5ce1fe6a332d10427187cce58488a004bb4fb630d79cf276e37c020df0f",
+		"usb": [
+			1857
+		],
+		"usbSha256": "5def85f5826ee63a5c2730c78a8a2a1e4fb6998219acdd1b4b2dc7df2f979dc5",
+		"bt": [
+			1857
+		],
+		"btSpeed": 51,
+		"btSha256": "5def85f5826ee63a5c2730c78a8a2a1e4fb6998219acdd1b4b2dc7df2f979dc5"
+	},
+	"T80 72 x 60 mm, 576-dot head": {
+		"columns": 480,
+		"bytesPerColumn": 72,
+		"buffers": 9,
+		"buffersSha256": "531f365e969cb2b5d8e3a1e6810a73b864083eae049363a971491dc99432d5a6",
+		"usb": [
+			1867,
+			733,
+			775,
+			751,
+			749,
+			759,
+			747,
+			755,
+			579
+		],
+		"usbSha256": "18b4e722f57a238cd03546c1abcdd25ba86828b4b5a9297272baefb6d9f0f9e8",
+		"bt": [
+			4044,
+			579
+		],
+		"btSpeed": 51,
+		"btSha256": "e17ee24230a5051556d75504dad6c2088fb58525dc780b34fb933d449c50496f"
+	},
+	"T80 72 x 60 mm, 576-dot head, print end": {
+		"columns": 480,
+		"bytesPerColumn": 72,
+		"buffers": 9,
+		"buffersSha256": "928425195abdf5fffef40b2daf51c168e17d4aed3d44b591325ca0bbdec7db22",
+		"usb": [
+			1867,
+			733,
+			775,
+			751,
+			749,
+			759,
+			747,
+			755,
+			579
+		],
+		"usbSha256": "a7070bf26a7ee67d59dce9bd09cc078ece13402b8e05f6ef6da8ce167efedd03",
+		"bt": [
+			4044,
+			579
+		],
+		"btSpeed": 51,
+		"btSha256": "3513929477477cb0b8ac331f35152e158b2bc1ee516aea66a049fc51afbb3d7d"
+	}
+}
