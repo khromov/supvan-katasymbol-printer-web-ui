@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { Battery, BatteryFull, BatteryLow, BatteryMedium, BatteryCharging, Bluetooth, CircleAlert, Loader, Tag, Unplug, TriangleAlert, Usb, X, Zap } from 'lucide-static';
+	import { Battery, BatteryFull, BatteryLow, BatteryMedium, BatteryCharging, Bluetooth, CircleAlert, FolderOpen, Loader, Tag, Unplug, TriangleAlert, Usb, X, Zap } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import { printer } from '../stores/printer.svelte';
 	import { mode } from '../stores/mode.svelte';
+	import { templates } from '../stores/templates.svelte';
 	import { detectPlatform } from '../platform';
 
 	const platform = detectPlatform();
@@ -37,6 +38,7 @@
 	</div>
 
 	<div class="conn">
+		<button class="btn sm" onclick={() => (templates.open = true)} title="Save this design or open a saved one"><Icon svg={FolderOpen} size={14} /> Templates</button>
 		<button class="btn sm" onclick={() => mode.choose('quick')} title="Switch to the quick label maker"><Icon svg={Zap} size={14} /> Quick label</button>
 		{#if !printer.supported && !printer.bluetoothSupported}
 			<span class="pill err unsupported" title="USB and Bluetooth printing need Chrome or Edge (or Bluefy on iPhone/iPad)">

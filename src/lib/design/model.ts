@@ -64,9 +64,38 @@ export interface ImageElement extends Base {
 	/** 0..255 threshold, or dithering. */
 	threshold: number;
 	dither: boolean;
+	/** Count colour by its saturation as dark, so light colours (yellow, orange) print solid. */
+	colorAsBlack?: boolean;
 }
 
-export type DesignElement = TextElement | IconElement | ShapeElement | QrElement | ImageElement;
+export interface TableCell {
+	text: string;
+	align: 'left' | 'center' | 'right';
+	/** Merged cells: this cell spans `colSpan` x `rowSpan` grid cells; the cells it covers are ignored. */
+	colSpan?: number;
+	rowSpan?: number;
+}
+
+export interface TableElement extends Base {
+	type: 'table';
+	/** Relative column widths and row heights; they are scaled to fill the element box. */
+	colWidths: number[];
+	rowHeights: number[];
+	/** cells[row][col]. */
+	cells: TableCell[][];
+	border: boolean;
+	/** Border line thickness in mm. */
+	borderWidth: number;
+	/** Space between the cell border and its text, in mm. */
+	padding: number;
+	font: string;
+	/** Font size in points. */
+	size: number;
+	bold: boolean;
+	valign: 'top' | 'middle' | 'bottom';
+}
+
+export type DesignElement = TextElement | IconElement | ShapeElement | QrElement | ImageElement | TableElement;
 
 export interface Design {
 	elements: DesignElement[];
@@ -152,6 +181,120 @@ export function makeImage(labelW: number, labelH: number, src: string, aspect: n
 		w = h * aspect;
 	}
 	return { id: newId(), type: 'image', x: (labelW - w) / 2, y: (labelH - h) / 2, w, h, rotation: 0, src, threshold: 128, dither: true };
+}
+
+export function makeTable(labelW: number, labelH: number, rows = 3, cols = 2): TableElement {
+	const w = Math.max(10, labelW * 0.85);
+	const h = Math.max(6, labelH * 0.7);
+	return {
+		id: newId(),
+		type: 'table',
+		x: (labelW - w) / 2,
+		y: (labelH - h) / 2,
+		w,
+		h,
+		rotation: 0,
+		colWidths: Array(cols).fill(w / cols),
+		rowHeights: Array(rows).fill(h / rows),
+		cells: Array.from({ length: rows }, () => Array.from({ length: cols }, (): TableCell => ({ text: '', align: 'left' }))),
+		border: true,
+		borderWidth: 0.3,
+		padding: 0.6,
+		font: 'Inter',
+		size: 7,
+		bold: false,
+		valign: 'middle'
+	};
+}
+
+/** Width/height of the element's unrotated content box (w/h are the box on the label). */
+export const contentSize = (el: DesignElement) => (el.rotation === 90 || el.rotation === 270 ? { w: el.h, h: el.w } : { w: el.w, h: el.h });
+
+/** Cumulative edges (0..total) of `sizes` scaled to fill `total`. */
+export function tableEdges(sizes: number[], total: number): number[] {
+	const sum = sizes.reduce((a, b) => a + b, 0) || 1;
+	const out = [0];
+	for (const s of sizes) out.push(out[out.length - 1] + (s / sum) * total);
+	out[out.length - 1] = total;
+	return out;
+}
+
+/** Anchor cells that are drawn, in reading order (cells covered by a merge are skipped). */
+export function tableCells(el: TableElement) {
+	const out: { r: number; c: number; rs: number; cs: number; cell: TableCell }[] = [];
+	const rows = el.rowHeights.length;
+	const cols = el.colWidths.length;
+	const covered = new Uint8Array(rows * cols);
+	for (let r = 0; r < rows; r++) {
+		for (let c = 0; c < cols; c++) {
+			if (covered[r * cols + c]) continue;
+			const cell = el.cells[r]?.[c] ?? { text: '', align: 'left' };
+			const rs = Math.max(1, Math.min(cell.rowSpan ?? 1, rows - r));
+			const cs = Math.max(1, Math.min(cell.colSpan ?? 1, cols - c));
+			for (let i = r; i < r + rs; i++) for (let j = c; j < c + cs; j++) covered[i * cols + j] = 1;
+			out.push({ r, c, rs, cs, cell });
+		}
+	}
+	return out;
+}
+
+/** The drawn (possibly merged) cell covering grid cell (r, c). */
+export function cellAt(el: TableElement, r: number, c: number) {
+	return tableCells(el).find((t) => r >= t.r && r < t.r + t.rs && c >= t.c && c < t.c + t.cs);
+}
+
+const cloneCells = (cells: TableCell[][]) => cells.map((row) => row.map((cell) => ({ ...cell })));
+
+/**
+ * Change the number of rows/columns. Rows and columns are added or removed at the end, new ones
+ * get the average size, and merges are cut back to the new grid.
+ */
+export function resizeTableGrid(el: TableElement, rows: number, cols: number): Pick<TableElement, 'rowHeights' | 'colWidths' | 'cells'> {
+	const grow = (sizes: number[], n: number) => {
+		const avg = sizes.reduce((a, b) => a + b, 0) / (sizes.length || 1) || 1;
+		return Array.from({ length: n }, (_, i) => sizes[i] ?? avg);
+	};
+	const cells = Array.from({ length: rows }, (_, r) =>
+		Array.from({ length: cols }, (_, c): TableCell => {
+			const cell = { ...(el.cells[r]?.[c] ?? { text: '', align: 'left' }) };
+			if (cell.rowSpan) cell.rowSpan = Math.min(cell.rowSpan, rows - r);
+			if (cell.colSpan) cell.colSpan = Math.min(cell.colSpan, cols - c);
+			return cell;
+		})
+	);
+	return { rowHeights: grow(el.rowHeights, rows), colWidths: grow(el.colWidths, cols), cells };
+}
+
+/**
+ * Merge the cell at (r, c) with its neighbour to the right or below. Null when that would cut
+ * through another merged cell or leave the table. Text of the absorbed cells is appended.
+ */
+export function mergeCells(el: TableElement, r: number, c: number, dir: 'right' | 'down'): TableCell[][] | null {
+	const a = cellAt(el, r, c);
+	if (!a) return null;
+	const nr = dir === 'down' ? a.rs + 1 : a.rs;
+	const nc = dir === 'right' ? a.cs + 1 : a.cs;
+	if (a.r + nr > el.rowHeights.length || a.c + nc > el.colWidths.length) return null;
+	const inside = (t: { r: number; c: number; rs: number; cs: number }) => t.r >= a.r && t.c >= a.c && t.r + t.rs <= a.r + nr && t.c + t.cs <= a.c + nc;
+	const touches = (t: { r: number; c: number; rs: number; cs: number }) => t.r < a.r + nr && t.r + t.rs > a.r && t.c < a.c + nc && t.c + t.cs > a.c;
+	const parts = tableCells(el).filter(touches);
+	if (!parts.every(inside)) return null;
+	const cells = cloneCells(el.cells);
+	const anchor = cells[a.r][a.c];
+	const texts = parts.map((t) => t.cell.text).filter((t) => t.trim());
+	for (const t of parts) cells[t.r][t.c] = { text: '', align: t.cell.align };
+	cells[a.r][a.c] = { ...anchor, text: texts.join(' '), rowSpan: nr > 1 ? nr : undefined, colSpan: nc > 1 ? nc : undefined };
+	return cells;
+}
+
+/** Undo a merge: the cell at (r, c) goes back to one grid cell, the others reappear empty. */
+export function splitCell(el: TableElement, r: number, c: number): TableCell[][] | null {
+	const a = cellAt(el, r, c);
+	if (!a || (a.rs === 1 && a.cs === 1)) return null;
+	const cells = cloneCells(el.cells);
+	delete cells[a.r][a.c].rowSpan;
+	delete cells[a.r][a.c].colSpan;
+	return cells;
 }
 
 const overlap = (a: Base, b: Base) =>

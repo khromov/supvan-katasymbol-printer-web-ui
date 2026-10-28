@@ -1,12 +1,13 @@
 <script lang="ts">
-	import { Maximize, Minus, Plus, Redo2, Undo2, Grid3x3, Sparkles } from 'lucide-static';
+	import { Maximize, Minus, Plus, Redo2, Undo2, Grid3x3, Sparkles, RectangleHorizontal, RectangleVertical } from 'lucide-static';
 	import { onMount } from 'svelte';
 	import Icon from './Icon.svelte';
 	import { editor } from '../stores/editor.svelte';
 	import { printer } from '../stores/printer.svelte';
 	import { bitmapToCanvas, prepareAssets, renderBitmap, renderDesign } from '../design/render';
 	import { labelShape } from '../catalog';
-	import type { DesignElement } from '../design/model';
+	import { cellAt, contentSize, tableEdges, type DesignElement, type TableElement } from '../design/model';
+	import type { LabelSpec } from '../printer/types';
 
 	type Mode = 'dots' | 'smooth';
 	const MODE_KEY = 'katasymbol-web:stage-mode';
@@ -16,6 +17,7 @@
 	let zoom = $state<number | 'fit'>('fit');
 	let mode = $state<Mode>(readMode());
 	let canvas: HTMLCanvasElement;
+	let paper: HTMLDivElement;
 	let guides = $state<{ v: number[]; h: number[] }>({ v: [], h: [] });
 
 	function readMode(): Mode {
@@ -35,27 +37,31 @@
 		}
 	}
 
-	const W = $derived(editor.label.lengthMm);
-	const H = $derived(editor.label.widthMm);
+	// Everything on the stage is in the editor's frame, which may be the label turned (orientation).
+	const W = $derived(editor.view.lengthMm);
+	const H = $derived(editor.view.widthMm);
 	const fitScale = $derived.by(() => {
 		const small = cw < 640;
 		return Math.max(1, Math.min((cw - (small ? 40 : 96)) / W, (ch - (small ? 96 : 120)) / H));
 	});
 	const scale = $derived(zoom === 'fit' ? fitScale : zoom);
 	const shape = $derived(labelShape(editor.label));
-	const pad = $derived(editor.label.padding);
+	const pad = $derived(editor.view.padding);
 
 	/** Strips the print head cannot reach, shaded on the label. */
-	const deadZones = $derived(printer.unprintable(editor.label));
+	const deadZones = $derived(printer.unprintable(editor.view));
 
 	// Render whenever the design, label, mode or zoom changes.
 	let token = 0;
 	$effect(() => {
 		const design = { elements: $state.snapshot(editor.elements) as DesignElement[] };
-		const label = $state.snapshot(editor.label);
+		const label = $state.snapshot(editor.view) as LabelSpec;
+		const turned = editor.turned;
 		const m = mode;
 		const s = scale;
-		const size = printer.canvasSize(label);
+		const full = printer.canvasSize($state.snapshot(editor.label) as LabelSpec);
+		// The printed dots, seen in the editor's frame (PrintPanel turns them back for printing).
+		const size = turned ? { width: full.height, height: full.width } : full;
 		const dpmm = printer.dpmm;
 		const my = ++token;
 		requestAnimationFrame(async () => {
@@ -86,6 +92,93 @@
 		moved: boolean;
 	} | null = null;
 
+	/** A table column/row border being dragged: sizes in mm along the table's own axes. */
+	let divider: {
+		id: string;
+		axis: 'col' | 'row';
+		i: number;
+		startX: number;
+		startY: number;
+		rotation: number;
+		orig: number[];
+		moved: boolean;
+	} | null = null;
+
+	/** Screen movement (mm) turned into the element's unrotated axes. */
+	function toLocal(dx: number, dy: number, rotation: number) {
+		const a = (rotation * Math.PI) / 180;
+		return { x: dx * Math.cos(a) + dy * Math.sin(a), y: -dx * Math.sin(a) + dy * Math.cos(a) };
+	}
+
+	const sizes = (weights: number[], total: number) => {
+		const e = tableEdges(weights, total);
+		return weights.map((_, i) => e[i + 1] - e[i]);
+	};
+
+	function startDivider(e: PointerEvent, el: TableElement, axis: 'col' | 'row', i: number) {
+		if (e.button !== 0) return;
+		e.stopPropagation();
+		const box = contentSize(el);
+		divider = {
+			id: el.id,
+			axis,
+			i,
+			startX: e.clientX,
+			startY: e.clientY,
+			rotation: el.rotation,
+			orig: axis === 'col' ? sizes(el.colWidths, box.w) : sizes(el.rowHeights, box.h),
+			moved: false
+		};
+		try {
+			(e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+		} catch {
+			// See startDrag.
+		}
+	}
+
+	function moveDivider(e: PointerEvent) {
+		const d = divider!;
+		const local = toLocal((e.clientX - d.startX) / scale, (e.clientY - d.startY) / scale, d.rotation);
+		if (!d.moved) {
+			editor.checkpoint();
+			d.moved = true;
+		}
+		const min = 1;
+		const a = d.orig[d.i - 1];
+		const b = d.orig[d.i];
+		const delta = Math.max(min - a, Math.min(b - min, d.axis === 'col' ? local.x : local.y));
+		const next = [...d.orig];
+		next[d.i - 1] = a + delta;
+		next[d.i] = b - delta;
+		editor.update(d.id, d.axis === 'col' ? { colWidths: next } : { rowHeights: next }, false);
+	}
+
+	/** Select the table cell under a click (client coordinates) and send typing to it. */
+	function pickCell(el: TableElement, clientX: number, clientY: number) {
+		const rect = paper.getBoundingClientRect();
+		const box = contentSize(el);
+		const p = toLocal((clientX - rect.left) / scale - (el.x + el.w / 2), (clientY - rect.top) / scale - (el.y + el.h / 2), el.rotation);
+		const find = (edges: number[], v: number) => Math.max(0, Math.min(edges.length - 2, edges.findIndex((x) => x > v) - 1));
+		const xs = tableEdges(el.colWidths, box.w);
+		const ys = tableEdges(el.rowHeights, box.h);
+		const hit = cellAt(el, find(ys, p.y + box.h / 2), find(xs, p.x + box.w / 2));
+		if (!hit) return;
+		editor.tableCell = { id: el.id, r: hit.r, c: hit.c };
+		editor.cellFocusRequest++;
+	}
+
+	/** The selected table cell's rect in the table's own (unrotated) frame, in mm. */
+	function cellRect(el: TableElement) {
+		const sel = editor.tableCell;
+		if (!sel || sel.id !== el.id) return null;
+		const hit = cellAt(el, sel.r, sel.c);
+		if (!hit) return null;
+		const box = contentSize(el);
+		const xs = tableEdges(el.colWidths, box.w);
+		const ys = tableEdges(el.rowHeights, box.h);
+		return { x: xs[hit.c], y: ys[hit.r], w: xs[hit.c + hit.cs] - xs[hit.c], h: ys[hit.r + hit.rs] - ys[hit.r] };
+	}
+
 	const keepsAspect = (el: DesignElement) => el.type === 'icon' || el.type === 'qr' || el.type === 'image';
 
 	function startDrag(e: PointerEvent, el: DesignElement, kind: 'move' | Handle) {
@@ -107,6 +200,7 @@
 	}
 
 	function onMove(e: PointerEvent) {
+		if (divider) return moveDivider(e);
 		if (!drag) return;
 		const el = editor.elements.find((x) => x.id === drag!.id);
 		if (!el) return;
@@ -173,7 +267,15 @@
 		guides = { v: gv, h: gh };
 	}
 
-	function endDrag() {
+	function endDrag(e?: PointerEvent) {
+		if (divider) {
+			divider = null;
+			return;
+		}
+		if (drag && !drag.moved && e?.type === 'pointerup') {
+			const el = editor.elements.find((x) => x.id === drag!.id);
+			if (el?.type === 'table' && drag.kind === 'move') pickCell(el, e.clientX, e.clientY);
+		}
 		if (drag?.moved) editor.persist();
 		drag = null;
 		guides = { v: [], h: [] };
@@ -222,6 +324,10 @@
 		} else if (e.key === 'Enter' && el.type === 'text') {
 			e.preventDefault();
 			editor.focusRequest++;
+		} else if (e.key === 'Enter' && el.type === 'table') {
+			e.preventDefault();
+			if (editor.tableCell?.id !== el.id) editor.tableCell = { id: el.id, r: 0, c: 0 };
+			editor.cellFocusRequest++;
 		}
 	}
 
@@ -242,6 +348,7 @@
 	<div class="viewport" onpointerdown={() => (editor.selectedId = null)}>
 		<div
 			class="paper"
+			bind:this={paper}
 			class:rounded={shape === 'rounded'}
 			class:round={shape === 'round'}
 			style:width="{W * scale}px"
@@ -303,6 +410,29 @@
 						aria-label="{el.type} element"
 					>
 						{#if el.id === editor.selectedId}
+							{#if el.type === 'table'}
+								{@const box = contentSize(el)}
+								{@const xs = tableEdges(el.colWidths, box.w)}
+								{@const ys = tableEdges(el.rowHeights, box.h)}
+								{@const cell = cellRect(el)}
+								<!-- The table's own frame, turned with the element, for cell and border handles. -->
+								<div
+									class="table-frame"
+									style:width="{box.w * scale}px"
+									style:height="{box.h * scale}px"
+									style:transform="translate(-50%, -50%) rotate({el.rotation}deg)"
+								>
+									{#if cell}
+										<div class="cell-sel" style:left="{cell.x * scale}px" style:top="{cell.y * scale}px" style:width="{cell.w * scale}px" style:height="{cell.h * scale}px"></div>
+									{/if}
+									{#each xs.slice(1, -1) as x, i (i)}
+										<span class="divider col" style:left="{x * scale}px" onpointerdown={(e) => startDivider(e, el, 'col', i + 1)} title="Drag to resize columns"></span>
+									{/each}
+									{#each ys.slice(1, -1) as y, i (i)}
+										<span class="divider row" style:top="{y * scale}px" onpointerdown={(e) => startDivider(e, el, 'row', i + 1)} title="Drag to resize rows"></span>
+									{/each}
+								</div>
+							{/if}
 							{#each HANDLES as hd (hd)}
 								<span class="handle {hd}" onpointerdown={(e) => startDrag(e, el, hd)}></span>
 							{/each}
@@ -321,6 +451,14 @@
 		<div class="row">
 			<button class="btn sm icon ghost" onclick={() => editor.undo()} disabled={!editor.canUndo} title="Undo (⌘Z)"><Icon svg={Undo2} size={15} /></button>
 			<button class="btn sm icon ghost" onclick={() => editor.redo()} disabled={!editor.canRedo} title="Redo (⇧⌘Z)"><Icon svg={Redo2} size={15} /></button>
+		</div>
+		<div class="segmented orient">
+			<button class:on={editor.orientation === 'portrait'} onclick={() => editor.setOrientation('portrait')} title="Edit the label upright (portrait)" aria-label="Portrait">
+				<Icon svg={RectangleVertical} size={15} />
+			</button>
+			<button class:on={editor.orientation === 'landscape'} onclick={() => editor.setOrientation('landscape')} title="Edit the label sideways (landscape)" aria-label="Landscape">
+				<Icon svg={RectangleHorizontal} size={15} />
+			</button>
 		</div>
 		<div class="segmented mode">
 			<button class:on={mode === 'dots'} onclick={() => setMode('dots')} title="Exactly the dots the printer will print">
@@ -494,8 +632,53 @@
 		padding: 3px;
 	}
 
-	.mode {
+	.mode,
+	.orient {
 		border: 0;
+	}
+
+	.orient button {
+		padding: 0 8px;
+	}
+
+	.table-frame {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		pointer-events: none;
+	}
+
+	.cell-sel {
+		position: absolute;
+		outline: 2px solid var(--select);
+		outline-offset: -2px;
+		background: color-mix(in oklab, var(--select), transparent 88%);
+	}
+
+	.divider {
+		position: absolute;
+		pointer-events: auto;
+		touch-action: none;
+	}
+
+	.divider.col {
+		top: 0;
+		bottom: 0;
+		width: 9px;
+		margin-left: -4.5px;
+		cursor: col-resize;
+	}
+
+	.divider.row {
+		left: 0;
+		right: 0;
+		height: 9px;
+		margin-top: -4.5px;
+		cursor: row-resize;
+	}
+
+	.divider:hover {
+		background: color-mix(in oklab, var(--select), transparent 60%);
 	}
 
 	.mode button {

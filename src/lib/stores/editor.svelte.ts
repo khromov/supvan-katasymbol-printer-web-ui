@@ -3,6 +3,34 @@ import type { LabelSpec } from '../printer/types';
 
 const STORAGE_KEY = 'katasymbol-web:v1';
 
+export type Orientation = 'portrait' | 'landscape';
+
+/** A complete label design: what templates save and load. */
+export interface LabelDesign {
+	label: LabelSpec;
+	orientation: Orientation;
+	elements: DesignElement[];
+}
+
+/** How a label comes in its own frame (lengthMm x widthMm); square counts as landscape. */
+export const nativeOrientation = (label: LabelSpec): Orientation => (label.lengthMm >= label.widthMm ? 'landscape' : 'portrait');
+
+/**
+ * The label turned a quarter turn, as the editor shows it in the other orientation. The editor's
+ * top-left is the label's top-right: the printed bitmap is the view turned 90 degrees clockwise.
+ * Paper direction flips too, so the design axis across the print head stays right.
+ */
+export function turnedLabel(label: LabelSpec): LabelSpec {
+	const p = label.padding;
+	return {
+		...label,
+		lengthMm: label.widthMm,
+		widthMm: label.lengthMm,
+		paperDirection: label.paperDirection === 0 ? 1 : 0,
+		padding: { left: p.top, top: p.right, right: p.bottom, bottom: p.left }
+	};
+}
+
 interface Saved {
 	label: LabelSpec;
 	labelAuto: boolean;
@@ -11,6 +39,8 @@ interface Saved {
 	copies: number;
 	offsetX?: number;
 	offsetY?: number;
+	/** Orientation chosen per label id; labels without an entry are edited as they come. */
+	orientations?: Record<string, Orientation>;
 }
 
 /** T53116, a common 40 x 30 mm T50 label, until the printer reports what is loaded. */
@@ -56,6 +86,12 @@ class EditorStore {
 	focusRequest = $state(0);
 	/** When set, the next icon picked replaces this icon element instead of adding one. */
 	iconReplaceTarget = $state<string | null>(null);
+	/** Orientation chosen per label id (see `orientation`). */
+	orientations = $state<Record<string, Orientation>>({});
+	/** Cell being edited in the selected table, as grid row/column. */
+	tableCell = $state<{ id: string; r: number; c: number } | null>(null);
+	/** Bumped when the selected table cell's text field should grab focus. */
+	cellFocusRequest = $state(0);
 
 	/** Layer copied with Ctrl/Cmd+C, kept in memory for pasting. */
 	private clipboard: DesignElement | null = null;
@@ -75,10 +111,72 @@ class EditorStore {
 		if (s.copies) this.copies = s.copies;
 		if (typeof s.offsetX === 'number') this.offsetX = s.offsetX;
 		if (typeof s.offsetY === 'number') this.offsetY = s.offsetY;
+		if (s.orientations && typeof s.orientations === 'object') this.orientations = s.orientations;
 	}
 
 	get selected(): DesignElement | undefined {
 		return this.elements.find((e) => e.id === this.selectedId);
+	}
+
+	/** Orientation the label is edited in. */
+	get orientation(): Orientation {
+		return this.orientations[this.label.id] ?? nativeOrientation(this.label);
+	}
+
+	/** The editor shows the label turned a quarter turn; the bitmap is turned back for printing. */
+	get turned(): boolean {
+		return this.isTurned(this.label);
+	}
+
+	/** The label in editor coordinates: what all element geometry is relative to. */
+	get view(): LabelSpec {
+		return this.viewOf(this.label);
+	}
+
+	private isTurned(label: LabelSpec, orientations = this.orientations) {
+		const o = orientations[label.id];
+		return !!o && o !== nativeOrientation(label);
+	}
+
+	private viewOf(label: LabelSpec, orientations = this.orientations): LabelSpec {
+		return this.isTurned(label, orientations) ? turnedLabel(label) : label;
+	}
+
+	/** The current design, detached from the store. */
+	get design(): LabelDesign {
+		return {
+			label: $state.snapshot(this.label) as LabelSpec,
+			orientation: this.orientation,
+			elements: $state.snapshot(this.elements) as DesignElement[]
+		};
+	}
+
+	/**
+	 * Replace the design with a saved one (undoable). A template for another label pins that label,
+	 * so it opens as saved instead of being refitted to the label in the printer.
+	 */
+	loadDesign(d: LabelDesign) {
+		this.checkpoint();
+		if (d.label.id !== this.label.id) this.labelAuto = false;
+		this.label = clone(d.label);
+		this.orientations = { ...this.orientations, [d.label.id]: d.orientation };
+		this.elements = clone(d.elements);
+		this.selectedId = null;
+		this.tableCell = null;
+		this.persist();
+	}
+
+	/**
+	 * Edit the label in portrait or landscape. The design is scaled to fit the turned label and
+	 * centered, like switching labels; the choice is remembered for this label.
+	 */
+	setOrientation(o: Orientation) {
+		if (o === this.orientation) return;
+		this.checkpoint();
+		const old = this.view;
+		this.orientations = { ...this.orientations, [this.label.id]: o };
+		this.fitElements(old, this.view);
+		this.persist();
 	}
 
 	persist() {
@@ -91,7 +189,8 @@ class EditorStore {
 				density: this.density,
 				copies: this.copies,
 				offsetX: this.offsetX,
-				offsetY: this.offsetY
+				offsetY: this.offsetY,
+				orientations: $state.snapshot(this.orientations)
 			};
 			try {
 				localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -101,9 +200,13 @@ class EditorStore {
 		}, 300);
 	}
 
+	private snapshot() {
+		return JSON.stringify({ elements: $state.snapshot(this.elements), label: $state.snapshot(this.label), orientations: $state.snapshot(this.orientations) });
+	}
+
 	/** Record the current state before a change, for undo. */
 	checkpoint() {
-		this.past.push(JSON.stringify({ elements: $state.snapshot(this.elements), label: $state.snapshot(this.label) }));
+		this.past.push(this.snapshot());
 		if (this.past.length > 100) this.past.shift();
 		this.future = [];
 		this.canUndo = true;
@@ -114,6 +217,7 @@ class EditorStore {
 		const s = JSON.parse(raw);
 		this.elements = s.elements;
 		this.label = s.label;
+		if (s.orientations) this.orientations = s.orientations;
 		if (this.selectedId && !this.elements.some((e) => e.id === this.selectedId)) this.selectedId = null;
 		this.persist();
 	}
@@ -121,7 +225,7 @@ class EditorStore {
 	undo() {
 		const prev = this.past.pop();
 		if (!prev) return;
-		this.future.push(JSON.stringify({ elements: $state.snapshot(this.elements), label: $state.snapshot(this.label) }));
+		this.future.push(this.snapshot());
 		this.restore(prev);
 		this.canUndo = this.past.length > 0;
 		this.canRedo = true;
@@ -130,7 +234,7 @@ class EditorStore {
 	redo() {
 		const next = this.future.pop();
 		if (!next) return;
-		this.past.push(JSON.stringify({ elements: $state.snapshot(this.elements), label: $state.snapshot(this.label) }));
+		this.past.push(this.snapshot());
 		this.restore(next);
 		this.canRedo = this.future.length > 0;
 		this.canUndo = true;
@@ -163,8 +267,8 @@ class EditorStore {
 	/** A copy of `el` with a fresh id, nudged down-right but kept on the label. */
 	private offsetCopy(el: DesignElement): DesignElement {
 		const copy = { ...clone(el), id: newId() };
-		copy.x = Math.min(copy.x + 2, this.label.lengthMm - copy.w);
-		copy.y = Math.min(copy.y + 2, this.label.widthMm - copy.h);
+		copy.x = Math.min(copy.x + 2, this.view.lengthMm - copy.w);
+		copy.y = Math.min(copy.y + 2, this.view.widthMm - copy.h);
 		return copy;
 	}
 
@@ -210,11 +314,12 @@ class EditorStore {
 	 * elements keep their size and stay centered.
 	 */
 	resizeLabel(label: LabelSpec) {
-		const old = this.label;
-		if (old.lengthMm === label.lengthMm && old.widthMm === label.widthMm) return;
+		const old = this.view;
+		const next = this.viewOf(label);
+		if (old.lengthMm === next.lengthMm && old.widthMm === next.widthMm) return;
 		this.checkpoint();
-		const dx = (label.lengthMm - old.lengthMm) / 2;
-		const dy = (label.widthMm - old.widthMm) / 2;
+		const dx = (next.lengthMm - old.lengthMm) / 2;
+		const dy = (next.widthMm - old.widthMm) / 2;
 		for (const el of this.elements) {
 			el.x += dx;
 			el.y += dy;
@@ -233,21 +338,30 @@ class EditorStore {
 			return;
 		}
 		this.checkpoint();
-		const s = Math.min(label.lengthMm / old.lengthMm, label.widthMm / old.widthMm);
-		const dx = (label.lengthMm - old.lengthMm * s) / 2;
-		const dy = (label.widthMm - old.widthMm * s) / 2;
-		if (Number.isFinite(s) && s > 0 && (Math.abs(s - 1) > 1e-6 || dx || dy)) {
-			for (const el of this.elements) {
-				el.x = el.x * s + dx;
-				el.y = el.y * s + dy;
-				el.w *= s;
-				el.h *= s;
-				if (el.type === 'text' && !el.fit) el.size = Math.max(4, Math.round(el.size * s * 2) / 2);
-				if (el.type === 'shape') el.thickness = Math.max(0.2, el.thickness * s);
-			}
-		}
+		this.fitElements(this.viewOf(old), this.viewOf(label));
 		this.label = label;
 		this.persist();
+	}
+
+	/** Scale the layout uniformly from one editor frame to another, keeping its composition. */
+	private fitElements(old: LabelSpec, next: LabelSpec) {
+		const s = Math.min(next.lengthMm / old.lengthMm, next.widthMm / old.widthMm);
+		const dx = (next.lengthMm - old.lengthMm * s) / 2;
+		const dy = (next.widthMm - old.widthMm * s) / 2;
+		if (!Number.isFinite(s) || s <= 0 || (Math.abs(s - 1) <= 1e-6 && !dx && !dy)) return;
+		for (const el of this.elements) {
+			el.x = el.x * s + dx;
+			el.y = el.y * s + dy;
+			el.w *= s;
+			el.h *= s;
+			if (el.type === 'text' && !el.fit) el.size = Math.max(4, Math.round(el.size * s * 2) / 2);
+			if (el.type === 'shape') el.thickness = Math.max(0.2, el.thickness * s);
+			if (el.type === 'table') {
+				el.size = Math.max(3, Math.round(el.size * s * 2) / 2);
+				el.borderWidth = Math.max(0.15, el.borderWidth * s);
+				el.padding *= s;
+			}
+		}
 	}
 }
 

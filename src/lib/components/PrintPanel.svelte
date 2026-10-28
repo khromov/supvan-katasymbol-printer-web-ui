@@ -7,6 +7,7 @@
 	import { printer } from '../stores/printer.svelte';
 	import { renderBitmap, bitmapToCanvas } from '../design/render';
 	import { familyOptions } from '../printer/options';
+	import { fromBitmap, rotate, toBitmap } from '../printer/bitmap';
 	import type { DesignElement } from '../design/model';
 	import type { LabelSpec } from '../printer/types';
 
@@ -34,20 +35,25 @@
 		return cuts && !cuts.some((c) => c.value === editor.cutType) ? cuts[0].value : editor.cutType;
 	});
 
+	/** `bmp` is the design as edited, `printBmp` the same dots in the label's own frame. */
 	async function render() {
 		const label = $state.snapshot(editor.label) as LabelSpec;
+		const view = $state.snapshot(editor.view) as LabelSpec;
+		const turned = editor.turned;
 		const size = printer.canvasSize(label);
 		const design = { elements: $state.snapshot(editor.elements) as DesignElement[] };
-		return { label, bmp: await renderBitmap(design, label.lengthMm, label.widthMm, size.width, size.height, printer.dpmm) };
+		const bmp = await renderBitmap(design, view.lengthMm, view.widthMm, turned ? size.height : size.width, turned ? size.width : size.height, printer.dpmm);
+		// Edited in the other orientation: turn the dots back onto the label just before printing.
+		return { view, label, bmp, printBmp: turned ? toBitmap(rotate(fromBitmap(bmp), 90)) : bmp };
 	}
 
 	async function print() {
 		done = false;
 		rendering = true;
 		try {
-			const { label, bmp } = await render();
+			const { label, printBmp } = await render();
 			rendering = false;
-			await printer.print([bmp], label, {
+			await printer.print([printBmp], label, {
 				density: opts.density ? density : 4,
 				copies: editor.copies,
 				cutType: opts.cutTypes ? cutType : undefined,
@@ -65,12 +71,12 @@
 	}
 
 	async function downloadPng() {
-		const { label, bmp } = await render();
+		const { view, bmp } = await render();
 		const c = document.createElement('canvas');
 		bitmapToCanvas(bmp, c, [0, 0, 0]);
 		const a = document.createElement('a');
 		a.href = c.toDataURL('image/png');
-		a.download = `label-${label.lengthMm}x${label.widthMm}mm.png`;
+		a.download = `label-${view.lengthMm}x${view.widthMm}mm.png`;
 		a.click();
 	}
 

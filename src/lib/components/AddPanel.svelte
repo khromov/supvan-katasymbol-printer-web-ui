@@ -1,19 +1,20 @@
 <script lang="ts">
-	import { Circle, Image, Minus, QrCode, Square, Type } from 'lucide-static';
+	import { Circle, Image, Minus, QrCode, Square, Table, Type } from 'lucide-static';
 	import Icon from './Icon.svelte';
 	import IconPicker from './IconPicker.svelte';
 	import { editor } from '../stores/editor.svelte';
-	import { makeIcon, makeImage, makeQr, makeShape, makeText, placeFree, type DesignElement } from '../design/model';
+	import { makeIcon, makeImage, makeQr, makeShape, makeTable, makeText, placeFree, type DesignElement } from '../design/model';
 
 	let picker = $state<IconPicker>();
 	let fileInput: HTMLInputElement;
 
-	const W = $derived(editor.label.lengthMm);
-	const H = $derived(editor.label.widthMm);
+	// The label as shown in the editor (turned when edited in the other orientation).
+	const W = $derived(editor.view.lengthMm);
+	const H = $derived(editor.view.widthMm);
 
 	/** Add an element in the least crowded spot of the label's safe area. */
 	function addFree(el: DesignElement, focus = false) {
-		const p = editor.label.padding;
+		const p = editor.view.padding;
 		const area = { x: p.left, y: p.top, w: W - p.left - p.right, h: H - p.top - p.bottom };
 		const others = editor.elements.filter((e) => !(e.type === 'shape' && e.shape !== 'line' && !e.fill));
 		editor.add(placeFree(el, others, area), focus);
@@ -76,6 +77,9 @@
 			</button>
 			<button class="add" onclick={() => fileInput.click()}>
 				<Icon svg={Image} size={18} /><span>Image</span>
+			</button>
+			<button class="add" onclick={() => addFree(makeTable(W, H))}>
+				<Icon svg={Table} size={18} /><span>Table</span>
 			</button>
 		</div>
 		<input type="file" accept="image/*" bind:this={fileInput} onchange={onFile} hidden />

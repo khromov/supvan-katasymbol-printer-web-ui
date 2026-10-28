@@ -1,7 +1,7 @@
 import qrcode from 'qrcode-generator';
 import type { Bitmap } from '../printer/types';
 import { drawIcon, loadIcons } from './icons';
-import { PT_TO_MM, type Design, type DesignElement, type ImageElement, type TextElement } from './model';
+import { PT_TO_MM, tableCells, tableEdges, type Design, type DesignElement, type ImageElement, type TableElement, type TextElement } from './model';
 
 const images = new Map<string, HTMLImageElement>();
 
@@ -19,7 +19,7 @@ function loadImage(src: string): Promise<HTMLImageElement> {
 	});
 }
 
-const fontSpec = (el: TextElement, px: number) =>
+const fontSpec = (el: Pick<TextElement, 'font' | 'bold'> & { italic?: boolean }, px: number) =>
 	`${el.italic ? 'italic ' : ''}${el.bold ? 700 : 400} ${px}px "${el.font}", system-ui, sans-serif`;
 
 /** Make sure fonts, icons and images used by the design are ready for synchronous drawing. */
@@ -27,6 +27,7 @@ export async function prepareAssets(design: Design): Promise<void> {
 	const jobs: Promise<unknown>[] = [];
 	for (const el of design.elements) {
 		if (el.type === 'text') jobs.push(document.fonts.load(fontSpec(el, 20), el.text || 'A'));
+		else if (el.type === 'table') jobs.push(document.fonts.load(fontSpec(el, 20), el.cells.flat().map((c) => c.text).join('') || 'A'));
 		else if (el.type === 'icon') jobs.push(loadIcons());
 		else if (el.type === 'image') jobs.push(loadImage(el.src).catch(() => {}));
 	}
@@ -201,10 +202,80 @@ function drawQr(ctx: CanvasRenderingContext2D, value: string, w: number, h: numb
 		for (let c = 0; c < n; c++) if (qr.isDark(r, c)) ctx.fillRect(ox + c * mod, oy + r * mod, mod + 0.01, mod + 0.01);
 }
 
+/**
+ * Maps local lengths to whole device pixels, so lines drawn with it print with even, crisp edges.
+ * Elements only turn in quarter turns, so each local axis runs along one device axis.
+ */
+function pixelGrid(ctx: CanvasRenderingContext2D) {
+	const t = ctx.getTransform();
+	const xOnX = Math.abs(t.a) >= Math.abs(t.b);
+	const yOnY = Math.abs(t.d) >= Math.abs(t.c);
+	const sx = xOnX ? t.a : t.b;
+	const ox = xOnX ? t.e : t.f;
+	const sy = yOnY ? t.d : t.c;
+	const oy = yOnY ? t.f : t.e;
+	return {
+		x: (v: number) => (Math.round(ox + v * sx) - ox) / sx,
+		y: (v: number) => (Math.round(oy + v * sy) - oy) / sy,
+		/** A line thickness, at least one device pixel. */
+		thickness: (v: number) => Math.max(1, Math.round(v * Math.abs(sx))) / Math.abs(sx)
+	};
+}
+
+function drawTable(ctx: CanvasRenderingContext2D, el: TableElement, w: number, h: number, scale: number, ink: string) {
+	const xs = tableEdges(el.colWidths, w);
+	const ys = tableEdges(el.rowHeights, h);
+	const grid = pixelGrid(ctx);
+	const t = el.border ? grid.thickness(Math.max(0.05, el.borderWidth) * scale) : 0;
+	// Outer lines sit inside the box; inner lines are centred on the cell edge.
+	const lineX = (v: number) => (v <= 1e-6 ? grid.x(0) : v >= w - 1e-6 ? grid.x(w) - t : grid.x(v - t / 2));
+	const lineY = (v: number) => (v <= 1e-6 ? grid.y(0) : v >= h - 1e-6 ? grid.y(h) - t : grid.y(v - t / 2));
+	const px = el.size * PT_TO_MM * scale;
+	const lineH = px * 1.15;
+	const pad = Math.max(0, el.padding) * scale;
+	ctx.fillStyle = ink;
+	for (const { r, c, rs, cs, cell } of tableCells(el)) {
+		const x0 = xs[c];
+		const x1 = xs[c + cs];
+		const y0 = ys[r];
+		const y1 = ys[r + rs];
+		if (t) {
+			const lx = lineX(x0);
+			const rx = lineX(x1);
+			const ty = lineY(y0);
+			const by = lineY(y1);
+			ctx.fillRect(lx, ty, rx + t - lx, t);
+			ctx.fillRect(lx, by, rx + t - lx, t);
+			ctx.fillRect(lx, ty, t, by + t - ty);
+			ctx.fillRect(rx, ty, t, by + t - ty);
+		}
+		if (!cell.text) continue;
+		const inset = pad + t / 2;
+		const cw = x1 - x0 - inset * 2;
+		const ch = y1 - y0 - inset * 2;
+		if (cw <= 0 || ch <= 0) continue;
+		ctx.save();
+		ctx.beginPath();
+		ctx.rect(x0 + inset, y0 + inset, cw, ch);
+		ctx.clip();
+		ctx.font = fontSpec(el, px);
+		ctx.textBaseline = 'alphabetic';
+		const { lines } = wrap(ctx, cell.text, cw);
+		let y = y0 + inset + verticalLayout(ctx, lines, px, lineH, ch, el.valign).baseline;
+		for (const line of lines) {
+			const inkX = inkExtent(ctx, line);
+			const lx = cell.align === 'left' ? inkX.left : cell.align === 'right' ? cw - inkX.right : (cw - inkX.width) / 2 + inkX.left;
+			ctx.fillText(line, x0 + inset + lx, y);
+			y += lineH;
+		}
+		ctx.restore();
+	}
+}
+
 const processedImages = new Map<string, HTMLCanvasElement>();
 
 function processImage(el: ImageElement, img: HTMLImageElement, wPx: number, hPx: number, invert: boolean) {
-	const key = `${el.src.length}:${el.src.slice(-64)}:${wPx}x${hPx}:${el.threshold}:${el.dither}:${invert}`;
+	const key = `${el.src.length}:${el.src.slice(-64)}:${wPx}x${hPx}:${el.threshold}:${el.dither}:${!!el.colorAsBlack}:${invert}`;
 	const hit = processedImages.get(key);
 	if (hit) return hit;
 	const c = document.createElement('canvas');
@@ -216,7 +287,18 @@ function processImage(el: ImageElement, img: HTMLImageElement, wPx: number, hPx:
 	cx.drawImage(img, 0, 0, c.width, c.height);
 	const d = cx.getImageData(0, 0, c.width, c.height);
 	const gray = new Float32Array(c.width * c.height);
-	for (let i = 0; i < gray.length; i++) gray[i] = d.data[i * 4] * 0.3 + d.data[i * 4 + 1] * 0.59 + d.data[i * 4 + 2] * 0.11;
+	for (let i = 0; i < gray.length; i++) {
+		const R = d.data[i * 4];
+		const G = d.data[i * 4 + 1];
+		const B = d.data[i * 4 + 2];
+		gray[i] = R * 0.3 + G * 0.59 + B * 0.11;
+		if (el.colorAsBlack) {
+			// Darken by saturation: a strong yellow lands near black, white and greys are unchanged,
+			// and pale anti-aliased edges stay light so outlines don't grow.
+			const max = Math.max(R, G, B);
+			gray[i] *= 1 - (max ? (max - Math.min(R, G, B)) / max : 0);
+		}
+	}
 	for (let y = 0; y < c.height; y++) {
 		for (let x = 0; x < c.width; x++) {
 			const i = y * c.width + x;
@@ -323,6 +405,9 @@ function drawElement(ctx: CanvasRenderingContext2D, el: DesignElement, scale: nu
 		}
 		case 'qr':
 			drawQr(ctx, el.value, w, h, ink);
+			break;
+		case 'table':
+			drawTable(ctx, el, w, h, scale, ink);
 			break;
 		case 'image': {
 			const img = images.get(el.src);

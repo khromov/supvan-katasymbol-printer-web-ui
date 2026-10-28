@@ -7,6 +7,8 @@
 	import PrintPanel from './lib/components/PrintPanel.svelte';
 	import QuickMode from './lib/components/QuickMode.svelte';
 	import ModeChooser from './lib/components/ModeChooser.svelte';
+	import Templates from './lib/components/Templates.svelte';
+	import { templates } from './lib/stores/templates.svelte';
 	import { mode } from './lib/stores/mode.svelte';
 	import { printer } from './lib/stores/printer.svelte';
 	import { editor } from './lib/stores/editor.svelte';
@@ -36,6 +38,10 @@
 			</aside>
 		</main>
 	</div>
+{/if}
+
+{#if templates.open && mode.mode === 'studio'}
+	<Templates />
 {/if}
 
 {#if mode.choosing}
